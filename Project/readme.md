@@ -250,15 +250,15 @@ SAP-ERP-AI-Agent/
 - **서비스 명칭:** Sales Order (A2X) — `CE_SALESORDER_0001`
 - **엔드포인트:** `PATCH /api_salesorder/srvd_a2x/sap/salesorder/0001/SalesOrderItem(SalesOrder='{SalesOrder}',SalesOrderItem='{SalesOrderItem}')`
 - **Base URL:** `https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap`
-- **인증:** `APIKey` 헤더 (`sandbox.api.sap.com` 발급)
+- **인증:** `APIKey` 헤더를 통해 진행
 - **목적:** 실제 SAP 데이터를 수정하지 않고 `200/204` 성공 응답만 확인하여 API 연동을 증명
-- **Payload:** `CHANGE_QTY` → `RequestedQuantity`, `CHANGE_DATE` → `RequestedDeliveryDate` (Item 레벨)
+- **Payload:** `CHANGE_QTY` → `RequestedQuantity`, `CHANGE_DATE` → `RequestedDeliveryDate`로 변경해 전달
 
 ---
 
 ### 5.3 Worker B — RAG 검색
 
-**역할:** 사내 규정/매뉴얼(SAP Learning Hub 문서)에서 관련 청크를 검색하여 근거 기반 답변 생성
+**역할:** 사내 규정/매뉴얼(구현 단계에서는 SAP Learning Hub 문서)에서 관련 청크를 검색하여 근거 기반 답변 생성
 
 #### 5.3.1 문서 인제스트 파이프라인
 
@@ -305,7 +305,7 @@ SAP-ERP-AI-Agent/
    - **✅ 승인** / **❌ 거절** 버튼 포함
 4. 담당자가 버튼 클릭
 5. FastAPI가 LangGraph 체크포인트에 `human_approved` 값 업데이트 후 그래프 재개
-6. `human_loop_node`: 승인 시 SQLite `UPDATE` 실행, 거절 시 `REJECTED` 상태 반환ㄴ
+6. `human_loop_node`: 승인 시 SQLite `UPDATE` 실행, 거절 시 `REJECTED` 상태 반환
 
 ---
 
@@ -359,7 +359,7 @@ SAP-ERP-AI-Agent/
 
 | Method | Path | 설명 |
 |--------|------|------|
-| `POST` | `/api/run` | 에이전트 실행 (이메일 텍스트 입력) |
+| `POST` | `/api/run` | 이메일 텍스트 입력 시 에이전트 실행 |
 | `GET`  | `/api/status/{thread_id}` | 실행 상태 조회 |
 | `GET`  | `/api/approve` | Slack 버튼 클릭 시 승인/거절 처리 |
 | `POST` | `/api/ingest` | RAG 문서 추가/업데이트 트리거 |

@@ -3,9 +3,7 @@
 # 모든 파일 무시
 /*
 
-# .gitignore 자체는 허용
-!/.gitignore
-
-# Project 폴더는 허용
+# Project 폴더는 허용 (예외)
 !/Project
 !/Project/**
+!/readme.md

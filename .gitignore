@@ -1,9 +1,0 @@
-# Project/ 폴더만 추적, 나머지 제외
-
-# 모든 파일 무시
-/*
-
-# Project 폴더는 허용 (예외)
-!/Project
-!/Project/**
-!/readme.md

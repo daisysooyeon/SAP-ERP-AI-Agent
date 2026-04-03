@@ -119,7 +119,7 @@ SAP-ERP-AI-Agent/
 │                                                   │
 │    ┌─────────────────────────────────────────┐    │
 │    │       Orchestrator (Router Node)        │    │
-│    │      Model: Qwen2.5-7B / Llama3-8B      │    │
+│    │      Model: Qwen2.5-3B-Instruct         │    │
 │    │    Output: ACTION_ONLY / QA / BOTH      │    │
 │    └───────────┬─────────────────┬───────────┘    │
 │                │                 │                │
@@ -196,7 +196,7 @@ SAP-ERP-AI-Agent/
 
 | 항목 | 내용 |
 |------|------|
-| **모델** | `Qwen2.5-7B-Instruct` 또는 `Llama-3.1-8B-Instruct` |
+| **모델** | `Qwen2.5-3(7)B-Instruct` |
 | **출력 형식** | Pydantic `RouterOutput` — `intent` + `reasoning` (Chain-of-Thought) |
 | **구현 방식** | LLM Structured Output (JSON mode) + Few-shot 10개 이상 |
 | **목표 정확도** | 99% 이상 |
@@ -218,7 +218,7 @@ SAP-ERP-AI-Agent/
 | 단계 | 작업 | 실패 시 |
 |------|------|----------|
 | ① Parameter Extraction | LLM으로 order_id, item_no, action_type, new_value 추출 → Pydantic 검증 | 최대 2회 재추출 후 `MISSING_PARAMS` |
-| ② Text-to-SQL | `dd03l.csv` 스키마 컨텍스트 + LLM(`Qwen2.5-Coder`)으로 검증 쿼리 생성 → SQLite 실행 | 쿼리 오류 시 에러 반환 |
+| ② Text-to-SQL | `dd03l.csv` 스키마 컨텍스트 + LLM(`Qwen2.5-Coder-3B`)으로 검증 쿼리 생성 → SQLite 실행 | 쿼리 오류 시 에러 반환 |
 | ③ Usage Check | 재고(`MARD.LABST`) / 출하상태(`VBUP.WBSTA`) / 납기일(`VBEP.EDATU`) 검증 | `BLOCKED_STOCK` / `BLOCKED_SHIPPED` / `BLOCKED_EXPIRED` |
 | ④ OData Call | SAP Sandbox `Sales Order (A2X)` API의 `SalesOrderItem` PATCH 호출 → 성공 응답(200/204) 확인 | API 오류 시 중단 |
 | ⑤ Human Approval | LangGraph `interrupt` → Slack 승인 알림 발송 → 담당자 클릭 대기 | 거절 시 `REJECTED` |
@@ -268,7 +268,7 @@ SAP-ERP-AI-Agent/
 |------|-------------|
 | PDF 로드 | `PyMuPDFLoader` |
 | 청킹 | `RecursiveCharacterTextSplitter` — chunk_size=512, overlap=64 |
-| 임베딩 | `text-embedding-3-small` (유료) 또는 `multilingual-e5-small` (무료) |
+| 임베딩 | `BAAI/bge-m3` (또는 `jina-embeddings-v3`) |
 | 저장 | `ChromaDB` — collection: `sap_manuals`, persist: `./chroma_db/` |
 | 메타데이터 | `source`(파일명), `page`(페이지), `chunk_id` |
 
@@ -281,7 +281,7 @@ SAP-ERP-AI-Agent/
 | Dense Retrieval | ChromaDB 시맨틱 검색 | weight 0.6, top-10 |
 | Sparse Retrieval | BM25 키워드 검색 | weight 0.4, top-10 |
 | 앙상블 | `EnsembleRetriever` 점수 합산 | — |
-| Reranking | `BAAI/bge-reranker-base` (fp16) | 최종 top-3 선별 |
+| Reranking | `BAAI/bge-reranker-v2-m3` (fp16) | 최종 top-3 선별 |
 
 #### 5.3.3 Worker B 처리 흐름
 
@@ -346,7 +346,7 @@ SAP-ERP-AI-Agent/
 | 항목 | 설정 |
 |------|------|
 | **Collection 이름** | `sap_manuals` |
-| **임베딩 모델** | `text-embedding-3-small` (유료) 또는 `multilingual-e5-small` (무료) |
+| **임베딩 모델** | `BAAI/bge-m3` (또는 `jina-embeddings-v3`) |
 | **청크 크기** | 512 tokens, overlap 64 |
 | **메타데이터** | `source`(파일명), `page`(페이지), `chunk_id` |
 | **영구 저장 경로** | `./chroma_db/` |
@@ -382,10 +382,10 @@ SAP-ERP-AI-Agent/
 
 | 노드 | 모델 | Few-shot 예시 수 |
 |------|------|------------------|
-| Router | Qwen2.5-7B | 10개 이상 (3 클래스 균형) |
-| 파라미터 추출 | Qwen2.5-7B | 5개 이상 |
-| Text-to-SQL | Qwen2.5-Coder | 3~5개 (스키마 포함) |
-| RAG 답변 생성 | Qwen2.5-7B | 3개 |
+| Router | Qwen2.5-3B | 10개 이상 (3 클래스 균형) |
+| 파라미터 추출 | Qwen2.5-3B | 5개 이상 |
+| Text-to-SQL | Qwen2.5-Coder-3B | 3~5개 (스키마 포함) |
+| RAG 답변 생성 | Qwen2.5-3B | 3개 |
 | 최종 합성 | GPT-4o | 2개 (포맷 예시) |
 
 ### 공통 프롬프트 원칙
@@ -484,7 +484,8 @@ pymupdf>=1.24.0            # PDF 파싱
 
 ```bash
 # LLM API
-OPENAI_API_KEY=sk-...
+# (로컬 임베딩 사용으로 API 키 생략 가능)
+# OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
 
 # SAP Sandbox

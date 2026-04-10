@@ -1,0 +1,61 @@
+# =============================================================================
+# configs.yaml — SAP ERP AI Agent 중앙 설정 파일
+#
+# 규칙:
+#   - 코드 동작을 제어하는 모든 설정은 이 파일에서 관리합니다.
+#   - 민감한 비밀값 (API 키, Webhook URL 등)은 .env 파일에 유지합니다.
+#   - 환경별 오버라이드는 YAML 값 수정 또는 .env 변수 추가로 처리합니다.
+# =============================================================================
+
+# ── Ollama (로컬 LLM 서버) ────────────────────────────────────────────────────
+ollama:
+  base_url: "http://localhost:11434"
+
+# ── 노드별 모델 설정 ─────────────────────────────────────────────────────────
+models:
+  router:
+    name: "qwen3:4b"
+    temperature: 0.0          # 분류 태스크 → 결정론적 출력
+  worker_a:
+    name: "qwen3:4b"          # Phase 3 구현 시 사용
+    temperature: 0.0
+  worker_a_sql:
+    name: "qwen2.5-coder:3b"  # Text-to-SQL 전용
+    temperature: 0.0
+  worker_b:
+    name: "qwen3:4b"          # Phase 4 구현 시 사용
+    temperature: 0.1
+  synthesizer:
+    name: "gpt-4o"            # Phase 6 구현 시 사용 (또는 claude-3-5-sonnet)
+    temperature: 0.3
+
+# ── 데이터 경로 ──────────────────────────────────────────────────────────────
+paths:
+  erp_db: "data/sap_erp.db"
+  checkpoint_db: "data/checkpoints.db"
+  chroma_db: "./chroma_db"
+  docs_dir: "data/docs"
+  eval_test_cases: "data/eval/router_test_cases.json"
+  reports_dir: "reports"
+
+# ── 로깅 ─────────────────────────────────────────────────────────────────────
+logging:
+  level: "DEBUG"              # 파일 저장 레벨 (DEBUG / INFO / WARNING)
+  console_level: "INFO"       # 터미널 출력 레벨
+  dir: "logs"                 # 로그 디렉토리 (프로젝트 루트 기준 상대 경로)
+  max_bytes: 10485760         # 로그 파일 최대 크기 (10 MB)
+  backup_count: 5             # 최대 백업 파일 수
+
+# ── RAG 설정 ─────────────────────────────────────────────────────────────────
+rag:
+  chunk_size: 512
+  chunk_overlap: 64
+  collection_name: "sap_manuals"
+  dense_weight: 0.6           # ChromaDB 시맨틱 검색 가중치
+  sparse_weight: 0.4          # BM25 키워드 검색 가중치
+  top_k_retrieval: 10         # Retriever 후보 수
+  top_k_rerank: 3             # Reranker 최종 선별 수
+
+# ── Feature Flags ─────────────────────────────────────────────────────────────
+feature_flags:
+  human_in_the_loop: true     # false로 변경 시 Slack 승인 스킵 (개발용)

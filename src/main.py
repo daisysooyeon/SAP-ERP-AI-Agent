@@ -2,10 +2,13 @@
 src/main.py
 LangGraph 그래프 진입점 — StateGraph 빌드 및 실행
 """
+from src.logging_config import setup_logging
+setup_logging()  # Must be called before any other src.* imports
 
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.sqlite import SqliteSaver
 
+from src.config import get_config
 from src.graph.state import AgentState
 from src.graph.router import router_node
 from src.graph.worker_a import worker_a_node
@@ -65,7 +68,8 @@ def build_graph():
     builder.add_edge("synthesizer", END)
 
     # 영속 체크포인트 (interrupt 복구용)
-    memory = SqliteSaver.from_conn_string("data/checkpoints.db")
+    checkpoint_db = get_config().paths.checkpoint_db
+    memory = SqliteSaver.from_conn_string(checkpoint_db)
     graph = builder.compile(checkpointer=memory, interrupt_before=["human_loop"])
     return graph
 

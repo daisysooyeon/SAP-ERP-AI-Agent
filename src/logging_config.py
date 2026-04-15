@@ -56,7 +56,7 @@ def setup_logging(
         "formatters": {
             # Concise format for the console
             "console": {
-                "format": "%(asctime)s  %(levelname)-8s  %(name)s — %(message)s",
+                "format": "%(asctime)s  %(levelname)-8s  %(name)s - %(message)s",
                 "datefmt": "%H:%M:%S",
             },
             # Detailed format for the log file
@@ -96,10 +96,13 @@ def setup_logging(
             "langchain":      {"level": "WARNING", "propagate": True},
             "langchain_core": {"level": "WARNING", "propagate": True},
             "ollama":         {"level": "WARNING", "propagate": True},
+            "openai":         {"level": "WARNING", "propagate": True},
         },
     }
 
     logging.config.dictConfig(LOGGING_CONFIG)
     logging.getLogger(__name__).info(
-        "Logging initialised — level=%s  file=%s", level_str.upper(), log_file
+        "Logging initialised - level=%s  file=%s",
+        level_str.upper(),
+        log_file,
     )

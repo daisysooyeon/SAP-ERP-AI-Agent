@@ -1,0 +1,33 @@
+# Environments
+sap/
+erp/
+.venv/
+venv/
+env/
+
+# Logs
+logs/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Configuration
+.env
+.env.local
+
+# Databases and data
+*.db
+chroma_db/
+data/raw/
+data/docs/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+__MACOSX/

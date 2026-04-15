@@ -5,7 +5,7 @@ SAP Learning Hub PDF 문서 파싱 → ChromaDB 인제스트
 
 from pathlib import Path
 from langchain_community.document_loaders import PyMuPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import Chroma
 

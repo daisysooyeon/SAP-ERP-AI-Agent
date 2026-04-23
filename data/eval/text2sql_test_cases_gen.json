@@ -1,0 +1,1227 @@
+[
+  {
+    "id": "tc_001",
+    "description": "Order with WBSTA=A (goods movement not yet processed)",
+    "order_id": "70000166",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Special Wine Acc",
+      "delivery_status": "A"
+    },
+    "notes": "WBSTA=A means goods movement not yet started"
+  },
+  {
+    "id": "tc_002",
+    "description": "Order with WBSTA=B (partially processed)",
+    "order_id": "40",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "quantity": 1.0,
+      "delivery_status": "B",
+      "delivery_date": "2022-01-12"
+    },
+    "notes": "WBSTA=B means goods movement partially processed"
+  },
+  {
+    "id": "tc_003",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "6459",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "W Nettop Desktop",
+      "quantity": 4.0,
+      "delivery_date": "2000-10-02",
+      "available_stock": 3909.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_004",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "4602",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Pure Fresh Juice",
+      "quantity": 4.0,
+      "delivery_date": "2022-03-28",
+      "available_stock": 2395.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_005",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "5243",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Pure Fresh Juice",
+      "quantity": 4.0,
+      "delivery_date": "2022-03-28",
+      "available_stock": 1971.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_006",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "6550",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Super Saop Bar",
+      "quantity": 30.0,
+      "delivery_date": "2022-03-31",
+      "available_stock": 2009.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_007",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "5230",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plant Based Clothes liquid  Detergent 5L",
+      "quantity": 4.0,
+      "delivery_date": "2022-03-28",
+      "available_stock": 2232.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_008",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "6426",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Curved LED TV",
+      "quantity": 3.0,
+      "delivery_date": "2000-08-16",
+      "available_stock": 2281.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_009",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "5396",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Cool Hand wash",
+      "quantity": 3.0,
+      "delivery_date": "1998-04-20",
+      "available_stock": 2225.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_010",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "1556",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plain non flavored Yogurt",
+      "quantity": 3.0,
+      "delivery_date": "2022-01-01",
+      "available_stock": 2212.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_011",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "2415",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Pur Juice from Concentrate",
+      "quantity": 3.0,
+      "delivery_date": "2022-03-22",
+      "available_stock": 2218.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_012",
+    "description": "Order with available stock via MARD JOIN",
+    "order_id": "6713",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "W Tower Desktop",
+      "quantity": 5.0,
+      "delivery_date": "2022-04-14",
+      "available_stock": 1542.0
+    },
+    "notes": "MARD.LABST (unrestricted stock) should be present"
+  },
+  {
+    "id": "tc_013",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "178",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "L Gaming laptop",
+      "quantity": 5.0,
+      "delivery_date": "2022-02-28"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_014",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "18131",
+    "item_no": 70,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Fries",
+      "quantity": 10.0,
+      "delivery_date": "2016-01-15"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_015",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "1426",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Pure Fresh Juice",
+      "quantity": 4.0,
+      "delivery_date": "2022-03-17"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_016",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "2082",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Flat LED TV",
+      "quantity": 5.0,
+      "delivery_date": "2022-03-21"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_017",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "5137",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "W Tower Desktop",
+      "quantity": 5.0,
+      "delivery_date": "2022-03-28"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_018",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "4972",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Cool Hand wash",
+      "quantity": 5.0,
+      "delivery_date": "1997-01-22"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_019",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "5002456",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Notebook Pro 15",
+      "quantity": 300.0,
+      "delivery_date": "2014-04-11"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_020",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "4065",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plain non flavored Yogurt",
+      "quantity": 4.0,
+      "delivery_date": "2022-03-28"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_021",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "10274",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "TFT Monitor, 17\"",
+      "quantity": 33.0,
+      "delivery_date": "2004-08-03"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_022",
+    "description": "Order with delivery date only (no stock join)",
+    "order_id": "15752",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Napkin Cloth",
+      "quantity": 1.0,
+      "delivery_date": "2014-02-14"
+    },
+    "notes": "MARD join yields NULL — delivery_date must be from VBEP"
+  },
+  {
+    "id": "tc_023",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "175",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plant Based Clothes liquid  Detergent 5L",
+      "quantity": 2.0,
+      "delivery_date": "2022-02-25",
+      "available_stock": 2203.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_024",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "84",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plant Based Clothes liquid  Detergent 5L",
+      "quantity": 10.0,
+      "delivery_date": "2022-01-25",
+      "available_stock": 2093.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_025",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "6549",
+    "item_no": 30,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Cool Hand wash",
+      "quantity": 20.0,
+      "delivery_date": "2000-11-11",
+      "available_stock": 1896.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_026",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "5000551",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Ergo Screen",
+      "quantity": 91.0,
+      "delivery_date": "2002-03-25"
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_027",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "5002309",
+    "item_no": 1300,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Napkin Cloth",
+      "quantity": 1.0,
+      "delivery_date": "2012-07-23",
+      "available_stock": 7841.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_028",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "2375",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "W Nettop Desktop",
+      "quantity": 4.0,
+      "delivery_date": "2022-03-22",
+      "available_stock": 1725.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_029",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "712",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plant Based Clothes liquid  Detergent 5L",
+      "quantity": 4.0,
+      "delivery_date": "2022-03-10",
+      "available_stock": 2330.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_030",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "176",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plant Based Clothes liquid  Detergent 5L",
+      "quantity": 3.0,
+      "delivery_date": "2022-02-25",
+      "available_stock": 2241.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_031",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "641",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plant Based Clothes liquid  Detergent 5L",
+      "quantity": 2.0,
+      "delivery_date": "2022-03-09",
+      "available_stock": 2361.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_032",
+    "description": "Order item with non-default POSNR (item number != 10)",
+    "order_id": "3392",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plant Based Clothes liquid  Detergent 5L",
+      "quantity": 3.0,
+      "delivery_date": "2022-03-24",
+      "available_stock": 2224.0
+    },
+    "notes": "Tests that POSNR is handled correctly for non-standard line items"
+  },
+  {
+    "id": "tc_033",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "6922",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plain non flavored Yogurt",
+      "quantity": 5.0,
+      "delivery_date": "2001-05-25",
+      "available_stock": 2236.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_034",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "5432",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Super Saop Bar",
+      "quantity": 4.0,
+      "delivery_date": "1998-05-13",
+      "available_stock": 2415.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_035",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "1796",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Super Saop Bar",
+      "quantity": 2.0,
+      "delivery_date": "2022-03-18",
+      "available_stock": 2011.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_036",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "2012",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Synthetic Clothes liquid  Detergent  5 L",
+      "quantity": 1.0,
+      "delivery_date": "2022-01-05",
+      "available_stock": 2446.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_037",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "8590",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Avocado",
+      "quantity": 353.0,
+      "delivery_date": "2003-02-06",
+      "available_stock": 1929.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_038",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "5100",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Curved LED TV",
+      "quantity": 4.0,
+      "delivery_date": "2022-03-28",
+      "available_stock": 2390.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_039",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "2929",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Super Saop Bar",
+      "quantity": 5.0,
+      "delivery_date": "2022-01-05",
+      "available_stock": 2153.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_040",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "6412",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plain non flavored Yogurt",
+      "quantity": 3.0,
+      "delivery_date": "2000-08-08",
+      "available_stock": 2300.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_041",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "4976",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Flavored Yogurt",
+      "quantity": 2.0,
+      "delivery_date": "2022-03-28",
+      "available_stock": 2035.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_042",
+    "description": "Order where available stock exceeds ordered quantity",
+    "order_id": "6119",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plain non flavored Yogurt",
+      "quantity": 1.0,
+      "delivery_date": "1999-11-24",
+      "available_stock": 2371.0
+    },
+    "notes": "MARD.LABST > VBAP.KWMENG — tests stock-vs-quantity comparison logic"
+  },
+  {
+    "id": "tc_043",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "8330",
+    "item_no": 20,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Flatscreen LE 64P",
+      "quantity": 10.0,
+      "delivery_date": "2002-12-13"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_044",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "70000316",
+    "item_no": 60,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "TRAVEL_EXP"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_045",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "70000330",
+    "item_no": 110,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Peach pie"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_046",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "70000102",
+    "item_no": 700004,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Cupcake"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_047",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "4974",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Plain non flavored Yogurt",
+      "quantity": 1.0,
+      "delivery_date": "2022-03-28"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_048",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "5092",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "W Tower Desktop",
+      "quantity": 5.0,
+      "delivery_date": "2022-03-28"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_049",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "5752",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Flatscreen LE 64P",
+      "quantity": 30.0,
+      "delivery_date": "2022-03-29"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_050",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "4997",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Cookie cutter - Cat",
+      "quantity": 6.0,
+      "delivery_date": "2022-03-28"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_051",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "5198",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Flavored Yogurt",
+      "quantity": 2.0,
+      "delivery_date": "1997-09-17"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_052",
+    "description": "Multi-line order — sales order containing more than one item",
+    "order_id": "4996",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Flavored Yogurt",
+      "quantity": 2.0,
+      "delivery_date": "2022-03-28"
+    },
+    "notes": "Tests item disambiguation when VBELN has multiple POSNRs"
+  },
+  {
+    "id": "tc_053",
+    "description": "Order with zero or no available stock",
+    "order_id": "11572",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Ramen broth",
+      "quantity": 25.0,
+      "delivery_date": "2005-11-01",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_054",
+    "description": "Order with zero or no available stock",
+    "order_id": "990",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Flat LED TV",
+      "quantity": 1.0,
+      "delivery_date": "2022-03-15",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_055",
+    "description": "Order with zero or no available stock",
+    "order_id": "5255",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "SEC Multisync XV15",
+      "quantity": 8.0,
+      "delivery_date": "1997-11-11",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_056",
+    "description": "Order with zero or no available stock",
+    "order_id": "3339",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "L Gaming laptop",
+      "quantity": 5.0,
+      "delivery_date": "2022-03-24",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_057",
+    "description": "Order with zero or no available stock",
+    "order_id": "6152",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "TFT Monitor, 17\"",
+      "quantity": 2.0,
+      "delivery_date": "2022-03-30",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_058",
+    "description": "Order with zero or no available stock",
+    "order_id": "5002727",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Notebook Pro 15",
+      "quantity": 200.0,
+      "delivery_date": "2013-02-26",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_059",
+    "description": "Order with zero or no available stock",
+    "order_id": "9227",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Flatscreen MS 1575P",
+      "quantity": 1.0,
+      "delivery_date": "2003-08-14",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_060",
+    "description": "Order with zero or no available stock",
+    "order_id": "20000133",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Napkin Cloth",
+      "quantity": 10.0,
+      "delivery_date": "2014-09-18",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_061",
+    "description": "Order with zero or no available stock",
+    "order_id": "20000119",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Notebook Pro 15",
+      "quantity": 15.0,
+      "delivery_date": "2014-08-22",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_062",
+    "description": "Order with zero or no available stock",
+    "order_id": "10000039",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": {
+      "material_name": "Notebook Pro 15",
+      "quantity": 10.0,
+      "delivery_date": "2014-08-21",
+      "available_stock": 0.0
+    },
+    "notes": "MARD.LABST = 0 or NULL — tests zero-stock edge case handling"
+  },
+  {
+    "id": "tc_063",
+    "description": "Non-existent order — should return no row (None result)",
+    "order_id": "9999999999",
+    "item_no": 10,
+    "expected_columns": [
+      "material_name",
+      "quantity",
+      "delivery_status",
+      "delivery_date",
+      "available_stock"
+    ],
+    "expected_values": null,
+    "notes": "SQL must execute without error even if no rows returned"
+  }
+]

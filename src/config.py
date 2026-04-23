@@ -30,15 +30,23 @@ import yaml
 class ModelConfig:
     name: str
     temperature: float = 0.0
+    provider: str = "ollama"  # "ollama" | "openrouter"
+
+
+@dataclass
+class OpenRouterConfig:
+    base_url: str = "https://openrouter.ai/api/v1"
 
 
 @dataclass
 class ModelsConfig:
-    router:       ModelConfig = field(default_factory=lambda: ModelConfig("qwen3:4b"))
-    worker_a:     ModelConfig = field(default_factory=lambda: ModelConfig("qwen3:4b"))
-    worker_a_sql: ModelConfig = field(default_factory=lambda: ModelConfig("qwen2.5-coder:3b"))
-    worker_b:     ModelConfig = field(default_factory=lambda: ModelConfig("qwen3:4b", 0.1))
-    synthesizer:  ModelConfig = field(default_factory=lambda: ModelConfig("gpt-4o", 0.3))
+    router:               ModelConfig = field(default_factory=lambda: ModelConfig("qwen3:4b"))
+    worker_a:             ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-8b", provider="openrouter"))
+    worker_a_sql:         ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-coder:free", provider="openrouter"))
+    worker_a_sql_fallback:ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-coder-30b-a3b-instruct", provider="openrouter"))
+    worker_b:             ModelConfig = field(default_factory=lambda: ModelConfig("qwen3:4b", 0.1))
+    synthesizer:          ModelConfig = field(default_factory=lambda: ModelConfig("gpt-4o", 0.3))
+    data_gen:             ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-8b", 0.5, provider="openrouter"))
 
 
 @dataclass
@@ -84,6 +92,7 @@ class FeatureFlagsConfig:
 @dataclass
 class AppConfig:
     ollama:        OllamaConfig       = field(default_factory=OllamaConfig)
+    openrouter:    OpenRouterConfig   = field(default_factory=OpenRouterConfig)
     models:        ModelsConfig       = field(default_factory=ModelsConfig)
     paths:         PathsConfig        = field(default_factory=PathsConfig)
     logging:       LoggingConfig      = field(default_factory=LoggingConfig)
@@ -102,6 +111,7 @@ def _parse_model(raw: dict) -> ModelConfig:
     return ModelConfig(
         name=raw.get("name", "qwen3:4b"),
         temperature=float(raw.get("temperature", 0.0)),
+        provider=raw.get("provider", "ollama"),
     )
 
 
@@ -110,20 +120,28 @@ def _load_from_yaml(path: Path) -> AppConfig:
     with open(path, encoding="utf-8") as f:
         raw: dict = yaml.safe_load(f) or {}
 
-    # ── ollama ──────────────────────────────────────────────────────────────
+    # ── ollama ───────────────────────────────────────────────────────
     o = raw.get("ollama", {})
     ollama = OllamaConfig(
         base_url=o.get("base_url", "http://localhost:11434"),
     )
 
+    # ── openrouter ────────────────────────────────────────────────
+    or_ = raw.get("openrouter", {})
+    openrouter = OpenRouterConfig(
+        base_url=or_.get("base_url", "https://openrouter.ai/api/v1"),
+    )
+
     # ── models ──────────────────────────────────────────────────────────────
     m = raw.get("models", {})
     models = ModelsConfig(
-        router=      _parse_model(m.get("router",       {"name": "qwen3:4b"})),
-        worker_a=    _parse_model(m.get("worker_a",     {"name": "qwen3:4b"})),
-        worker_a_sql=_parse_model(m.get("worker_a_sql", {"name": "qwen2.5-coder:3b"})),
-        worker_b=    _parse_model(m.get("worker_b",     {"name": "qwen3:4b", "temperature": 0.1})),
-        synthesizer= _parse_model(m.get("synthesizer",  {"name": "gpt-4o",   "temperature": 0.3})),
+        router=               _parse_model(m.get("router",               {"name": "qwen3:4b"})),
+        worker_a=             _parse_model(m.get("worker_a",             {"name": "qwen/qwen3-8b",                     "provider": "openrouter"})),
+        worker_a_sql=         _parse_model(m.get("worker_a_sql",         {"name": "qwen/qwen3-coder:free",            "provider": "openrouter"})),
+        worker_a_sql_fallback=_parse_model(m.get("worker_a_sql_fallback",{"name": "qwen/qwen3-coder-30b-a3b-instruct","provider": "openrouter"})),
+        worker_b=             _parse_model(m.get("worker_b",             {"name": "qwen3:4b",  "temperature": 0.1})),
+        synthesizer=          _parse_model(m.get("synthesizer",          {"name": "gpt-4o",    "temperature": 0.3})),
+        data_gen=             _parse_model(m.get("data_gen",             {"name": "qwen/qwen3-8b", "temperature": 0.5, "provider": "openrouter"})),
     )
 
     # ── paths ────────────────────────────────────────────────────────────────
@@ -167,6 +185,7 @@ def _load_from_yaml(path: Path) -> AppConfig:
 
     return AppConfig(
         ollama=ollama,
+        openrouter=openrouter,
         models=models,
         paths=paths,
         logging=logging,

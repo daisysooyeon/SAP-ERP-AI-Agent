@@ -1,0 +1,1647 @@
+[
+  {
+    "id": "r_001",
+    "input": "Subject: Clarification on Accessing Enterprise Structures in SAP S/4HANA Sales  \n\nDear Support Team, I hope this message finds you well. While reviewing the documentation on enterprise structures in SAP S/4HANA Sales, I'm seeking guidance on the most efficient method to navigate and view these structures within the system. Could you please outline the standard transaction code or path used to access this information? Additionally, are there any specific prerequisites or permissions required to ensure full visibility? Thank you for your assistance. Best regards, [Name]",
+    "user_input": "Subject: Clarification on Accessing Enterprise Structures in SAP S/4HANA Sales  \n\nDear Support Team, I hope this message finds you well. While reviewing the documentation on enterprise structures in SAP S/4HANA Sales, I'm seeking guidance on the most efficient method to navigate and view these structures within the system. Could you please outline the standard transaction code or path used to access this information? Additionally, are there any specific prerequisites or permissions required to ensure full visibility? Thank you for your assistance. Best regards, [Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "UNIT 2\nEnterprise Structures\nLesson 1\nIdentifying Enterprise Structures in SAP S/4HANA Sales\n15\nUNIT OBJECTIVES\n●\nIdentify the enterprise structures in SAP S/4HANA Sales\n© Copyright. All rights reserved.\n13",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Accessing Enterprise Structures in SAP S/4HANA Sales  \n\nDear Support Team, I hope this message finds you well. While reviewing the documentation on enterprise structures in SAP S/4HANA Sales, I'm seeking guidance on the most efficient method to navigate and view these struc"
+  },
+  {
+    "id": "r_002",
+    "input": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the structure of company codes impacts the tracking of presales data, such as inquiries and quotations, which are essential for evaluating sales strategies?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the structure of company codes impacts the tracking of presales data, such as inquiries and quotations, which are essential for evaluating sales strategies?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "Organizational Units – Company Code\nA company code is the smallest organizational unit of financial accounting for which a \ncomplete, self-contained set of accounts can be drawn up for purposes of external \naccounting. This includes recording all the relevant transactions and generating all the \nsupporting documents required for financial statements.\nA company code can represent a company within a corporate group, or a subsidiary, for",
+      "a quotation. Inquiries and quotations help you to determine important sales-related data and \ncan be saved as documents. If the customer places an order, you can then access this data.\nUse this presales information to plan and evaluate your marketing and sales strategies, and as \na basis for establishing long-term business relationships with your customers, for example, \nby:\n●\nTracking lost sales\n●\nRecording presales data to help negotiate large contracts\n●"
+    ],
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the struc"
+  },
+  {
+    "id": "r_003",
+    "input": "Subject: Clarification on Sales Order Status Tracking in SAP S/4HANA  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales process documentation, I’m seeking clarification on how to track the status of a sales order after it has been released for processing. Could you outline the steps or system indicators to monitor its progression through the workflow?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Sales Order Status Tracking in SAP S/4HANA  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales process documentation, I’m seeking clarification on how to track the status of a sales order after it has been released for processing. Could you outline the steps or system indicators to monitor its progression through the workflow?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Lesson: Executing SAP S/4HANA Sales Processes\n© Copyright. All rights reserved.\n33",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Sales Order Status Tracking in SAP S/4HANA  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales process documentation, I’m seeking clarification on how to track the status of a sales order after it has been released for processing. Could yo"
+  },
+  {
+    "id": "r_004",
+    "input": "Subject: Clarification on Automatic Data Determination Process  \n\nDear Support Team,  \n\nI am reviewing the section on automatic data determination and would appreciate guidance on how the system utilizes master data to populate fields in billing documents. Specifically, how are customer-material info records and condition master data integrated into this process?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Automatic Data Determination Process  \n\nDear Support Team,  \n\nI am reviewing the section on automatic data determination and would appreciate guidance on how the system utilizes master data to populate fields in billing documents. Specifically, how are customer-material info records and condition master data integrated into this process?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Lesson: Processing Billing Documents\n59\nUnit 4:\nMaster Data\n61\nLesson: Maintaining Business Partner Master Data\n67\nLesson: Maintaining Material Master Data\n71\nLesson: Maintaining Customer-Material Info Records\n73\nLesson: Maintaining Condition Master Data for Pricing\n77\nLesson: Explaining Additional Master Data Topics\n87\nUnit 5:\nAutomatic Data Determination and Scheduling\n89\nLesson: Analyzing the Results of Automatic Data Determination\n95\nLesson: Analyzing the Results of Delivery and Transportation",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Automatic Data Determination Process  \n\nDear Support Team,  \n\nI am reviewing the section on automatic data determination and would appreciate guidance on how the system utilizes master data to populate fields in billing documents. Specifically, how are customer-material inf"
+  },
+  {
+    "id": "r_005",
+    "input": "Dear Support Team,  \n\nCould you clarify how the recommended organizational structure for master data maintenance (as outlined in the Sales Area section) interacts with the warranty terms stated in the disclaimer? Specifically, does the complexity of the organizational setup impact the applicability of the express warranty statements mentioned?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Dear Support Team,  \n\nCould you clarify how the recommended organizational structure for master data maintenance (as outlined in the Sales Area section) interacts with the warranty terms stated in the disclaimer? Specifically, does the complexity of the organizational setup impact the applicability of the express warranty statements mentioned?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "without representation or warranty of any kind, and SAP SE or its affiliated companies shall not be liable \nfor errors or omissions with respect to the materials. The only warranties for SAP SE or SAP affiliate \ncompany products and services are those that are set forth in the express warranty statements \naccompanying such products and services, if any. Nothing herein should be construed as constituting an \nadditional warranty.",
+      "Figure 16: Organizational Unit – Sales Area\nHint:\nA simple organizational structure often has more advantages than a complex \nstructure. For example, it simplifies master data maintenance. You should not \ndefine complex organizational structures in your system to provide detailed \nreporting options. We advise you to use the different fields in the master data \nrecords and documents for this purpose.\nOrganizational Units – Distribution\nOrganizational Units – Plant and Storage Location"
+    ],
+    "action_description": null,
+    "qa_question": "Dear Support Team,  \n\nCould you clarify how the recommended organizational structure for master data maintenance (as outlined in the Sales Area section) interacts with the warranty terms stated in the disclaimer? Specifically, does the complexity of the organizational setup impact the applicability "
+  },
+  {
+    "id": "r_006",
+    "input": "Subject: Clarification on Sales Organization and Company Code Assignment  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the organizational structure documentation, I would like to clarify how the assignment of a sales organization to a single company code functions. Specifically, how does the regional subdivision defined in the sales organization impact the alignment with the company code? Your guidance on this process would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Sales Organization and Company Code Assignment  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the organizational structure documentation, I would like to clarify how the assignment of a sales organization to a single company code functions. Specifically, how does the regional subdivision defined in the sales organization impact the alignment with the company code? Your guidance on this process would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "organization can be assigned to a single company code.\nThe sales organization is also used to take, for example, a regional, national, or international \nsubdivision of the market into account. More information about the sales organization is \nshown in the figure, Organizational Unit – Sales Organization.\nUnit 2: Enterprise Structures\n16\n© Copyright. All rights reserved.",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Sales Organization and Company Code Assignment  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the organizational structure documentation, I would like to clarify how the assignment of a sales organization to a single company code functions. Spe"
+  },
+  {
+    "id": "r_007",
+    "input": "Subject: Integration of Sales Orders with Warehouse Management Functions  \n\nDear Support Team,  \n\nCould you clarify how the data from sales orders, as described in the sales order creation process, integrates with the activation of warehouse management functions, particularly in tracking materials within storage bins and controlling movements? We aim to ensure alignment between order processing and warehouse operations.  \n\nBest regards,  \n[Name]",
+    "user_input": "Subject: Integration of Sales Orders with Warehouse Management Functions  \n\nDear Support Team,  \n\nCould you clarify how the data from sales orders, as described in the sales order creation process, integrates with the activation of warehouse management functions, particularly in tracking materials within storage bins and controlling movements? We aim to ensure alignment between order processing and warehouse operations.  \n\nBest regards,  \n[Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "Figure 18: Organizational Unit – Shipping Point\nOrganizational Units – Activation of Warehouse Management\nWarehouse management functions are often needed in addition to the functions of inventory \nmanagement. For example, a company wants to track the amount of materials in every \nstorage bin, and wants to control and record all movements of goods and materials in the \nwarehouse.\nTo support this, SAP Extended Warehouse Management (EWM) is embedded in SAP S/",
+      "If the presales activities have been successful, the customer(s) will order the corresponding \ngoods and/or services. A sales order is then created to represent this process step in SAP S/\n4HANA. The sales order contains all the relevant information to process the customer’s \nrequest throughout the whole process cycle.\nThe system automatically copies data from master records and control tables that have been \npreviously prepared. As a result, you avoid input errors during sales order creation and entry"
+    ],
+    "action_description": null,
+    "qa_question": "Subject: Integration of Sales Orders with Warehouse Management Functions  \n\nDear Support Team,  \n\nCould you clarify how the data from sales orders, as described in the sales order creation process, integrates with the activation of warehouse management functions, particularly in tracking materials w"
+  },
+  {
+    "id": "r_008",
+    "input": "Subject: Clarification on Identifying Storage Bins in Warehouse Structure  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA documentation on enterprise structures, I’m seeking clarification on how to identify storage bins within the warehouse hierarchy. Specifically, how does the system determine the assignment of storage bins to storage types and sections? Could you outline the steps or criteria used for this process?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Identifying Storage Bins in Warehouse Structure  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA documentation on enterprise structures, I’m seeking clarification on how to identify storage bins within the warehouse hierarchy. Specifically, how does the system determine the assignment of storage bins to storage types and sections? Could you outline the steps or criteria used for this process?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Storage bins are the lowest level of the organizational structure. They are assigned to a \nstorage type and a storage section (if one exists). Storage bins represent the physical \nlocations where goods are stored in the warehouse.\nLesson: Identifying Enterprise Structures in SAP S/4HANA Sales\n© Copyright. All rights reserved.\n23",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Identifying Storage Bins in Warehouse Structure  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA documentation on enterprise structures, I’m seeking clarification on how to identify storage bins within the warehouse hierarchy. S"
+  },
+  {
+    "id": "r_009",
+    "input": "Subject: Clarification on Navigating SAP Fiori Apps  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori navigation guide, I’m seeking clarification on how to efficiently access specific apps when multiple tiles are available in the launchpad. Could you explain the recommended steps to locate and open a particular Fiori app using the tile menu?  \n\nThank you for your guidance.  \nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Navigating SAP Fiori Apps  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori navigation guide, I’m seeking clarification on how to efficiently access specific apps when multiple tiles are available in the launchpad. Could you explain the recommended steps to locate and open a particular Fiori app using the tile menu?  \n\nThank you for your guidance.  \nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Unit 1: Navigation with SAP Fiori\n2\n© Copyright. All rights reserved.",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Navigating SAP Fiori Apps  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori navigation guide, I’m seeking clarification on how to efficiently access specific apps when multiple tiles are available in the launchpad. Could you explain "
+  },
+  {
+    "id": "r_010",
+    "input": "Subject: Clarification on Fiori Launchpad Configuration for Sales Organization Access  \n\nDear [Support Team],  \n\nI hope this message finds you well. We are in the process of configuring the SAP Fiori launchpad for our sales teams and would like to understand how the distribution channel assignments under sales organizations (as outlined in Figure 13) can be integrated with the Fiori launchpad layout options described in Figure 7. Specifically, how should we structure groups or spaces to ensure users have appropriate access based on their assigned distribution channels?  \n\nThank you for your guidance.  \nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Fiori Launchpad Configuration for Sales Organization Access  \n\nDear [Support Team],  \n\nI hope this message finds you well. We are in the process of configuring the SAP Fiori launchpad for our sales teams and would like to understand how the distribution channel assignments under sales organizations (as outlined in Figure 13) can be integrated with the Fiori launchpad layout options described in Figure 7. Specifically, how should we structure groups or spaces to ensure users have appropriate access based on their assigned distribution channels?  \n\nThank you for your guidance.  \nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "Figure 13: Organizational Unit – Sales Organization\nOrganizational Unit – Distribution Channel – Distribution Chain\nThe distribution channel characterizes the way in which goods and services are distributed.\nDistribution channels have to be assigned to at least one sales organization (multiple \nassignments are possible). To use the sales and distribution functions, you need to define at \nleast one distribution channel in the system.\nYou can use different distribution channels to do the following:\n●",
+      "browse through the catalogs and choose the tiles.\nGroups define the grouping, sort order, and general appearance (tile or link) of apps that are \ninitially displayed on the SAP Fiori launchpad entry home page for a user. The user can \npersonalize the entry Fiori Page by adding or removing Applications to pre-delivered groups \nor self-defined groups..\nFigure 7: SAP Fiori Launchpad Layout Options\nThe Fiori launchpad layout can be structured by groups or by spaces and pages."
+    ],
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Fiori Launchpad Configuration for Sales Organization Access  \n\nDear [Support Team],  \n\nI hope this message finds you well. We are in the process of configuring the SAP Fiori launchpad for our sales teams and would like to understand how the distribution channel assignments "
+  },
+  {
+    "id": "r_011",
+    "input": "Subject: Clarification on Sales Document Assignment to Sales Areas  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP ERP documentation, I came across the statement that \"each sales document can be assigned to multiple sales areas.\" Could you kindly explain how this assignment is configured within the system and how it impacts the sales process? I aim to better understand the relationship between sales documents and sales areas for accurate reporting.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Sales Document Assignment to Sales Areas  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP ERP documentation, I came across the statement that \"each sales document can be assigned to multiple sales areas.\" Could you kindly explain how this assignment is configured within the system and how it impacts the sales process? I aim to better understand the relationship between sales documents and sales areas for accurate reporting.  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Unit 2\nLearning Assessment - Answers\n1.\nA company code is the smallest organizational unit of Financial Accounting.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nCorrect. A company code is the smallest organizational unit of financial accounting for \nwhich a complete, self-contained set of accounts can be drawn up for purposes of external \naccounting.\n2. Each sales document can be assigned to multiple sales areas.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Sales Document Assignment to Sales Areas  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP ERP documentation, I came across the statement that \"each sales document can be assigned to multiple sales areas.\" Could you kindly explain how this"
+  },
+  {
+    "id": "r_012",
+    "input": "Subject: Clarification on Availability Check Results Interpretation  \n\nDear [Support Team],  \n\nI hope you're well. While reviewing the availability check process in SAP ERP, I'm seeking guidance on how to interpret the results, particularly the status codes and their implications for order fulfillment. Could you provide a brief explanation of the key indicators and how they influence subsequent steps in the sales process?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Name]",
+    "user_input": "Subject: Clarification on Availability Check Results Interpretation  \n\nDear [Support Team],  \n\nI hope you're well. While reviewing the availability check process in SAP ERP, I'm seeking guidance on how to interpret the results, particularly the status codes and their implications for order fulfillment. Could you provide a brief explanation of the key indicators and how they influence subsequent steps in the sales process?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Lesson: Analyzing the Results of Delivery and Transportation \nScheduling\n103\nUnit 6:\nAvailability Check\n105\nLesson: Performing an Availability Check – Basics\n111\nLesson: Performing an Availability Check – Further Topics\n125\nUnit 7:\nCollective Processing\n127\nLesson: Executing Collective Processing\n135\nUnit 8:\nAdditional Processes in Sales\n137\nLesson: Using Presales Documents\n141\nLesson: Executing Make-to-Order Production\n145\nLesson: Selling Service Products\n© Copyright. All rights reserved.\nv",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Availability Check Results Interpretation  \n\nDear [Support Team],  \n\nI hope you're well. While reviewing the availability check process in SAP ERP, I'm seeking guidance on how to interpret the results, particularly the status codes and their implications for order fulfillme"
+  },
+  {
+    "id": "r_013",
+    "input": "Subject: Clarification on Assigning Divisions to Sales Organizations  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales and distribution setup, I’m seeking guidance on how to assign multiple divisions to a single sales organization, as mentioned in the manual. Specifically, could you explain the process for configuring this setup and how it impacts the sales structure when different product groups are managed under separate divisions? Your insight would help clarify how this affects reporting and sales processes. Thank you for your assistance.",
+    "user_input": "Subject: Clarification on Assigning Divisions to Sales Organizations  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales and distribution setup, I’m seeking guidance on how to assign multiple divisions to a single sales organization, as mentioned in the manual. Specifically, could you explain the process for configuring this setup and how it impacts the sales structure when different product groups are managed under separate divisions? Your insight would help clarify how this affects reporting and sales processes. Thank you for your assistance.",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "department are very familiar with a certain product group (for example, tools for metal \nprocessing), while others have technical knowledge about a different product group (for \nexample, tools for polymer processing). Using the corresponding divisions, you can take this \ninto account when setting up your sales structure.\nSeveral divisions can be assigned to a sales organization. To use the sales and distribution \nfunctions in the system, at least one division has to be defined in the system.",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Assigning Divisions to Sales Organizations  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales and distribution setup, I’m seeking guidance on how to assign multiple divisions to a single sales organization, as mentioned in the manual. Spe"
+  },
+  {
+    "id": "r_014",
+    "input": "Subject: Clarification on Division Structure in Organizational Units  \n\nI hope this message finds you well. While reviewing the organizational structure documentation, I'm seeking clarification on how divisions interact with other organizational units, particularly in the context of resource allocation and reporting. Could you explain the process for determining which divisions are included in specific reporting hierarchies? Additionally, how does the division structure influence user access settings within the SAP ERP system? Your guidance on this matter would be greatly appreciated.",
+    "user_input": "Subject: Clarification on Division Structure in Organizational Units  \n\nI hope this message finds you well. While reviewing the organizational structure documentation, I'm seeking clarification on how divisions interact with other organizational units, particularly in the context of resource allocation and reporting. Could you explain the process for determining which divisions are included in specific reporting hierarchies? Additionally, how does the division structure influence user access settings within the SAP ERP system? Your guidance on this matter would be greatly appreciated.",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "The figure, Organizational Unit – Division, illustrates the relevance of divisions within the \norganizational structure.\nUnit 2: Enterprise Structures\n18\n© Copyright. All rights reserved.",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Division Structure in Organizational Units  \n\nI hope this message finds you well. While reviewing the organizational structure documentation, I'm seeking clarification on how divisions interact with other organizational units, particularly in the context of resource allocat"
+  },
+  {
+    "id": "r_015",
+    "input": "Dear Support Team, I'm trying to understand how to determine the appropriate company code for a new business transaction. Could you explain the process for identifying the correct company code based on organizational structure and financial accounting requirements? Thank you for your guidance.",
+    "user_input": "Dear Support Team, I'm trying to understand how to determine the appropriate company code for a new business transaction. Could you explain the process for identifying the correct company code based on organizational structure and financial accounting requirements? Thank you for your guidance.",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Unit 2\nLearning Assessment\n1.\nA company code is the smallest organizational unit of Financial Accounting.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n2. Each sales document can be assigned to multiple sales areas.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n© Copyright. All rights reserved.\n25",
+    "action_description": null,
+    "qa_question": "Dear Support Team, I'm trying to understand how to determine the appropriate company code for a new business transaction. Could you explain the process for identifying the correct company code based on organizational structure and financial accounting requirements? Thank you for your guidance."
+  },
+  {
+    "id": "r_016",
+    "input": "Subject: Clarification on Sales Organization and Distribution Channel Configuration  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA organizational units, I’m seeking guidance on how the sales organization and distribution channel are structured within the system. Specifically, could you explain how these units interact with other entities like company codes during the sales process? Your insights would help clarify our internal understanding of the setup.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Sales Organization and Distribution Channel Configuration  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA organizational units, I’m seeking guidance on how the sales organization and distribution channel are structured within the system. Specifically, could you explain how these units interact with other entities like company codes during the sales process? Your insights would help clarify our internal understanding of the setup.  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "organizational units for all areas of your company (such as accounting, purchasing, \nproduction, and warehousing). We will focus on the elements that are relevant for sales and \ndistribution processes.\nSAP S/4HANA uses a range of organizational units designed exclusively for mapping sales \nand distribution processes, such as the sales organization and distribution channel. Other \norganizational units, such as the company code or plant, belong to other areas but are also",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Sales Organization and Distribution Channel Configuration  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA organizational units, I’m seeking guidance on how the sales organization and distribution channel are structured within the"
+  },
+  {
+    "id": "r_017",
+    "input": "Subject: Clarification on Company Code Integration with Sales Organization  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the organizational structure in SAP ERP, I would like to better understand how the company code interacts with the sales organization during revenue assignment. Specifically, could you explain the process by which revenues from sales transactions are automatically linked to the appropriate company code? Your guidance on this would help clarify our internal processes.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Company Code Integration with Sales Organization  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the organizational structure in SAP ERP, I would like to better understand how the company code interacts with the sales organization during revenue assignment. Specifically, could you explain the process by which revenues from sales transactions are automatically linked to the appropriate company code? Your guidance on this would help clarify our internal processes.  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "example. The company code is relevant for sales and distribution processes since the \nrevenues of the sales department have to be assigned to it.\nThe figure, Organizational Unit – Company Code, lists some key facts about the company \ncode as an organizational unit.\nFigure 12: Organizational Unit – Company Code\nOrganizational Units – Sales Organization\nTo use the sales and distribution functions in the system, you need at least one sales",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Company Code Integration with Sales Organization  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the organizational structure in SAP ERP, I would like to better understand how the company code interacts with the sales organization during revenue"
+  },
+  {
+    "id": "r_018",
+    "input": "Subject: Clarification on Sales Document Requirements  \n\nDear Support Team,  \n\nI am reviewing the sales document setup process and noticed that both the sales area assignment and customer/material details are mandatory. Could you clarify how the sales area’s associated master data (such as pricing and discounts) interacts with the required fields in sales documents, like customer numbers and material entries? This will help ensure compliance with both validity checks and document structure guidelines.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Sales Document Requirements  \n\nDear Support Team,  \n\nI am reviewing the sales document setup process and noticed that both the sales area assignment and customer/material details are mandatory. Could you clarify how the sales area’s associated master data (such as pricing and discounts) interacts with the required fields in sales documents, like customer numbers and material entries? This will help ensure compliance with both validity checks and document structure guidelines.  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "assignment of the corresponding sales organization to the relevant company code. At least \none sales area has to be defined in the system to execute sales and distribution processes.\nWhen processing sales and distribution documents, the system accesses various master data \ndepending on the sales area. This master data includes business partner master data, prices, \nand discounts. The system also performs a number of validity checks on certain entries based \non the sales area.",
+      "Unit 3\nLesson 2\nProcessing Sales Documents\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nProcess sales documents\nSales Processing\nWhen a sales document is created, a lot of mandatory information has to be maintained. For \nexample, each sales document, like a sales order or a quotation, must always be assigned to a \nsales area. Furthermore, most sales documents have to contain a customer number and at \nleast one item with a material number."
+    ],
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Sales Document Requirements  \n\nDear Support Team,  \n\nI am reviewing the sales document setup process and noticed that both the sales area assignment and customer/material details are mandatory. Could you clarify how the sales area’s associated master data (such as pricing a"
+  },
+  {
+    "id": "r_019",
+    "input": "Subject: Accessing Sales Processes via Fiori Launchpad  \n\nDear Support Team,  \n\nWe are in the process of configuring the SAP Fiori launchpad for our sales team and would like to clarify how to navigate to specific sales processes, such as outbound deliveries and billing documents, from the launchpad home page. Could you confirm which apps or tiles are required to access these functions and how they align with the structured sales process outlined in the S/4HANA documentation?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Accessing Sales Processes via Fiori Launchpad  \n\nDear Support Team,  \n\nWe are in the process of configuring the SAP Fiori launchpad for our sales team and would like to clarify how to navigate to specific sales processes, such as outbound deliveries and billing documents, from the launchpad home page. Could you confirm which apps or tiles are required to access these functions and how they align with the structured sales process outlined in the S/4HANA documentation?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "The SAP Fiori launchpad is a shell that hosts SAP Fiori apps, and provides services such as \nnavigation, personalization, embedded support, and application configuration.\nThe launchpad is the entry point to SAP Fiori apps on mobile and desktop devices. The SAP \nFiori launchpad home page is the first page that users see after they have signed in. The \nlaunchpad home page displays tiles and links that allow the user to launch apps. Tiles is a",
+      "UNIT 3\nOverview of Sales Processes\nLesson 1\nExecuting SAP S/4HANA Sales Processes\n29\nLesson 2\nProcessing Sales Documents\n37\nLesson 3\nProcessing Outbound Deliveries\n41\nLesson 4\nShipping Goods\n45\nLesson 5\nProcessing Billing Documents\n49\nUNIT OBJECTIVES\n●\nExecute SAP S/4HANA sales processes\n●\nProcess sales documents\n●\nProcess outbound deliveries\n●\nShip goods\n●\nProcess billing documents\n© Copyright. All rights reserved.\n27"
+    ],
+    "action_description": null,
+    "qa_question": "Subject: Accessing Sales Processes via Fiori Launchpad  \n\nDear Support Team,  \n\nWe are in the process of configuring the SAP Fiori launchpad for our sales team and would like to clarify how to navigate to specific sales processes, such as outbound deliveries and billing documents, from the launchpad"
+  },
+  {
+    "id": "r_020",
+    "input": "Subject: Clarification on Accessing Fiori Recommendations  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the Fiori Library documentation, I’m seeking guidance on the steps required to retrieve Fiori app recommendations tailored to user roles. Could you elaborate on how the system determines and displays these best-fit applications within the Fiori Library?  \n\nThank you for your assistance.  \nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Accessing Fiori Recommendations  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the Fiori Library documentation, I’m seeking guidance on the steps required to retrieve Fiori app recommendations tailored to user roles. Could you elaborate on how the system determines and displays these best-fit applications within the Fiori Library?  \n\nThank you for your assistance.  \nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Availability Matrix\n●\nGet Fiori recommendations (SAP Fiori apps with best-fit to customer usage)\nFigure 10: Fiori Library\nLESSON SUMMARY\nYou should now be able to:\n●\nIdentify key features of SAP Fiori\nLesson: Identifying Key Features of SAP Fiori\n© Copyright. All rights reserved.\n9",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Accessing Fiori Recommendations  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the Fiori Library documentation, I’m seeking guidance on the steps required to retrieve Fiori app recommendations tailored to user roles. Could you elaborate on how "
+  },
+  {
+    "id": "r_021",
+    "input": "Subject: Clarification on Customizing SAP Fiori Launchpad Groups  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori launchpad documentation, I’m seeking guidance on how to effectively customize app groups to organize tiles by function. Specifically, could you explain the process for rearranging group order or adjusting tile appearance without altering pre-delivered configurations? Additionally, how does the layout differ when using spaces versus groups for structuring the home page?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Customizing SAP Fiori Launchpad Groups  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori launchpad documentation, I’m seeking guidance on how to effectively customize app groups to organize tiles by function. Specifically, could you explain the process for rearranging group order or adjusting tile appearance without altering pre-delivered configurations? Additionally, how does the layout differ when using spaces versus groups for structuring the home page?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "browse through the catalogs and choose the tiles.\nGroups define the grouping, sort order, and general appearance (tile or link) of apps that are \ninitially displayed on the SAP Fiori launchpad entry home page for a user. The user can \npersonalize the entry Fiori Page by adding or removing Applications to pre-delivered groups \nor self-defined groups..\nFigure 7: SAP Fiori Launchpad Layout Options\nThe Fiori launchpad layout can be structured by groups or by spaces and pages.",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Customizing SAP Fiori Launchpad Groups  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori launchpad documentation, I’m seeking guidance on how to effectively customize app groups to organize tiles by function. Specifically, could you "
+  },
+  {
+    "id": "r_022",
+    "input": "Subject: Clarification on User Access for Non-Administrator Roles  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori navigation guide, I’m seeking clarification on how non-administrator users can access specific modules, such as purchasing, without requiring elevated permissions. Could you outline the standard process or steps involved for this scenario? Your guidance would help us better understand role-based navigation within the system.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on User Access for Non-Administrator Roles  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori navigation guide, I’m seeking clarification on how non-administrator users can access specific modules, such as purchasing, without requiring elevated permissions. Could you outline the standard process or steps involved for this scenario? Your guidance would help us better understand role-based navigation within the system.  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "department, as well as the degree of digitization.\nHowever, in almost every company, there are three basic user types:\nUnit 1: Navigation with SAP Fiori\n4\n© Copyright. All rights reserved.",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on User Access for Non-Administrator Roles  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori navigation guide, I’m seeking clarification on how non-administrator users can access specific modules, such as purchasing, without requiring e"
+  },
+  {
+    "id": "r_023",
+    "input": "Subject: Clarification on Navigating Pages Within a Space  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP ERP navigation structure, I’m seeking clarification on how to access and navigate between multiple pages within a single space. Specifically, after selecting a space from the top-level navigation, what is the process for switching between its associated pages? Thank you for your guidance.",
+    "user_input": "Subject: Clarification on Navigating Pages Within a Space  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP ERP navigation structure, I’m seeking clarification on how to access and navigate between multiple pages within a single space. Specifically, after selecting a space from the top-level navigation, what is the process for switching between its associated pages? Thank you for your guidance.",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "A space serves as an entry point for a business role and shows information and functions that \nare assigned to this business role. A space is represented as a navigation item in the top-level \nnavigation. A space consists of one or multiple pages that are used to further structure the \ncontent of a space.\nA page is part of a space, and a space may have one or multiple pages. Multiple pages allow \nusers to structure the space into multiple self-contained work-contexts. Business roles with",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Navigating Pages Within a Space  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP ERP navigation structure, I’m seeking clarification on how to access and navigate between multiple pages within a single space. Specifically, after selecting"
+  },
+  {
+    "id": "r_024",
+    "input": "Subject: Clarification on Fiori Recommendations and Home Page Configuration  \n\nDear Support Team,  \n\nCould you clarify how the ability to personalize the home page (as outlined in the launchpad configuration) interacts with accessing Fiori recommendations via the Fiori Library, and what role the Availability Matrix plays in this process? Additionally, are there specific prerequisites for ensuring both features function seamlessly?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Fiori Recommendations and Home Page Configuration  \n\nDear Support Team,  \n\nCould you clarify how the ability to personalize the home page (as outlined in the launchpad configuration) interacts with accessing Fiori recommendations via the Fiori Library, and what role the Availability Matrix plays in this process? Additionally, are there specific prerequisites for ensuring both features function seamlessly?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "X\nTrue\nX\nFalse\nCorrect. The ability to personalize the home page must be enabled in the launchpad \nconfiguration.\n12\n© Copyright. All rights reserved.",
+      "Availability Matrix\n●\nGet Fiori recommendations (SAP Fiori apps with best-fit to customer usage)\nFigure 10: Fiori Library\nLESSON SUMMARY\nYou should now be able to:\n●\nIdentify key features of SAP Fiori\nLesson: Identifying Key Features of SAP Fiori\n© Copyright. All rights reserved.\n9"
+    ],
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Fiori Recommendations and Home Page Configuration  \n\nDear Support Team,  \n\nCould you clarify how the ability to personalize the home page (as outlined in the launchpad configuration) interacts with accessing Fiori recommendations via the Fiori Library, and what role the Ava"
+  },
+  {
+    "id": "r_025",
+    "input": "Subject: Clarification on Automatic Data Copying in Sales Orders  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales order creation process, I would like to better understand how the system automatically copies data from master records and control tables. Specifically, could you explain the criteria the system uses to identify which master records are referenced during sales order creation? This would help clarify how the process ensures data accuracy without manual input.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Automatic Data Copying in Sales Orders  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales order creation process, I would like to better understand how the system automatically copies data from master records and control tables. Specifically, could you explain the criteria the system uses to identify which master records are referenced during sales order creation? This would help clarify how the process ensures data accuracy without manual input.  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "If the presales activities have been successful, the customer(s) will order the corresponding \ngoods and/or services. A sales order is then created to represent this process step in SAP S/\n4HANA. The sales order contains all the relevant information to process the customer’s \nrequest throughout the whole process cycle.\nThe system automatically copies data from master records and control tables that have been \npreviously prepared. As a result, you avoid input errors during sales order creation and entry",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Automatic Data Copying in Sales Orders  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the sales order creation process, I would like to better understand how the system automatically copies data from master records and control tables. Specifica"
+  },
+  {
+    "id": "r_026",
+    "input": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Recipient],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing this diagram in our internal training materials, considering the copyright and trademark disclaimers outlined in the publication?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Recipient],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing this diagram in our internal training materials, considering the copyright and trademark disclaimers outlined in the publication?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "Figure 28: Process Flow\nLESSON SUMMARY\nYou should now be able to:\n●\nExecute SAP S/4HANA sales processes\nLesson: Executing SAP S/4HANA Sales Processes\n© Copyright. All rights reserved.\n35",
+      "SAP Copyrights, Trademarks and \nDisclaimers\n© 2023 SAP SE or an SAP affiliate company. All rights reserved.\nNo part of this publication may be reproduced or transmitted in any form or for any purpose without the \nexpress permission of SAP SE or an SAP affiliate company.\nSAP and other SAP products and services mentioned herein as well as their respective logos are \ntrademarks or registered trademarks of SAP SE (or an SAP affiliate company) in Germany and other"
+    ],
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Recipient],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing"
+  },
+  {
+    "id": "r_027",
+    "input": "Subject: Clarification on Outbound Delivery Process in SAP S/4HANA  \n\nDear Team,  \n\nI hope this message finds you well. I am currently reviewing the shipping process in SAP S/4HANA and would appreciate guidance on how the system manages the sequence of steps following the creation of an outbound delivery, particularly regarding the integration of warehouse management functions like picking and packing. Could you elaborate on how these optional processes are triggered or monitored within the system?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Outbound Delivery Process in SAP S/4HANA  \n\nDear Team,  \n\nI hope this message finds you well. I am currently reviewing the shipping process in SAP S/4HANA and would appreciate guidance on how the system manages the sequence of steps following the creation of an outbound delivery, particularly regarding the integration of warehouse management functions like picking and packing. Could you elaborate on how these optional processes are triggered or monitored within the system?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "Figure 23: Sourcing\nShipping\nWhen the sourcing of the requested material is confirmed, shipping processing can begin. In \nSAP S/4HANA, the creation of outbound deliveries is the first step in the shipping process. \nThe outbound delivery controls, supports, and monitors numerous process steps, such as the \nfollowing:\n●\nPicking and confirming via warehouse management functions (optional)\n●\nPacking (optional)\n●\nTransport planning and monitoring via shipment documents (optional) or via freight orders",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Outbound Delivery Process in SAP S/4HANA  \n\nDear Team,  \n\nI hope this message finds you well. I am currently reviewing the shipping process in SAP S/4HANA and would appreciate guidance on how the system manages the sequence of steps following the creation of an outbound del"
+  },
+  {
+    "id": "r_028",
+    "input": "Subject: Clarification on Using Analytical Apps for Inventory Tracking  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori documentation, I’m seeking guidance on how to effectively utilize analytical apps to monitor inventory levels across multiple warehouses. Could you explain the steps to access these apps and interpret the visual dashboards provided? Additionally, how does the contextual navigation between related data points function in this scenario?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Using Analytical Apps for Inventory Tracking  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori documentation, I’m seeking guidance on how to effectively utilize analytical apps to monitor inventory levels across multiple warehouses. Could you explain the steps to access these apps and interpret the visual dashboards provided? Additionally, how does the contextual navigation between related data points function in this scenario?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "What is SAP Fiori?\nFigure 5: What is SAP Fiori?\nTransaction apps offer task-based access to tasks like change, create, display (documents, \nmaster records), or entire processes with guided navigation.\nAnalytical apps provide insight to action. They give you a visual overview of complex topics for \nmonitoring or tracking purposes.\nFactsheets give you the opportunity to search and explore your data. They provide a 360 \ndegree view on essential information about an object, and contextual navigation between",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on Using Analytical Apps for Inventory Tracking  \n\nDear Support Team,  \n\nI hope this message finds you well. While reviewing the SAP Fiori documentation, I’m seeking guidance on how to effectively utilize analytical apps to monitor inventory levels across multiple warehouses. "
+  },
+  {
+    "id": "r_029",
+    "input": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fiori interface supports the configuration of sales organizations and company codes, as outlined in the enterprise structures section? Specifically, how does the Fiori UI facilitate the management of market subdivisions through these organizational units?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fiori interface supports the configuration of sales organizations and company codes, as outlined in the enterprise structures section? Specifically, how does the Fiori UI facilitate the management of market subdivisions through these organizational units?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": [
+      "Unit 1\nLesson 1\nIdentifying Key Features of SAP Fiori\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nIdentify key features of SAP Fiori\nSAP Fiori User Experience\nYour enterprise plans to implement SAP S/4HANA and you want some insights into the SAP \nuser experience strategy.\nYou are particularly interested in the SAP Fiori user interface (UI).\nConcepts and Influence Factors\nFigure 1: Concepts and Influence Factors",
+      "organization can be assigned to a single company code.\nThe sales organization is also used to take, for example, a regional, national, or international \nsubdivision of the market into account. More information about the sales organization is \nshown in the figure, Organizational Unit – Sales Organization.\nUnit 2: Enterprise Structures\n16\n© Copyright. All rights reserved."
+    ],
+    "action_description": null,
+    "qa_question": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fi"
+  },
+  {
+    "id": "r_030",
+    "input": "Subject: Clarification on SAP Fiori Launchpad Page Structure  \n\nDear Support Team,  \n\nI’m trying to understand how sections and tiles function within the SAP Fiori Launchpad. Could you explain how sections help organize content on a page, and how users can adjust the layout to suit different business roles? Additionally, how does the user actions menu facilitate switching between layout options?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on SAP Fiori Launchpad Page Structure  \n\nDear Support Team,  \n\nI’m trying to understand how sections and tiles function within the SAP Fiori Launchpad. Could you explain how sections help organize content on a page, and how users can adjust the layout to suit different business roles? Additionally, how does the user actions menu facilitate switching between layout options?  \n\nBest regards,  \n[Your Name]",
+    "label": "QA_ONLY",
+    "expected_intent": "QA_ONLY",
+    "erp_evidence": null,
+    "rag_evidence": "fewer apps may use one page per space, whereas business roles with more apps may use \nmultiple pages per space. A page consists of sections that are used to further structure the \ncontent.\nA section structures the content of a page semantically. A section consists of tiles that \nvisualize the content of a space. A section title is optional.\nUsers can switch between both the layouts with the user actions menu.\nSAP Fiori Launchpad User Personalization\nFigure 9: SAP Fiori Launchpad User Personalization",
+    "action_description": null,
+    "qa_question": "Subject: Clarification on SAP Fiori Launchpad Page Structure  \n\nDear Support Team,  \n\nI’m trying to understand how sections and tiles function within the SAP Fiori Launchpad. Could you explain how sections help organize content on a page, and how users can adjust the layout to suit different busines"
+  },
+  {
+    "id": "r_031",
+    "input": "Subject: Request to Unblock Delivery for Order 15336, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 15336, Item 10, which is an order with a specified delivery date and no stock join. Please confirm the action to proceed with the delivery release as per the provided details.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 15336, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 15336, Item 10, which is an order with a specified delivery date and no stock join. Please confirm the action to proceed with the delivery release as per the provided details.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "15336",
+      "item_no": 10,
+      "action": "Unblock the delivery for this order.",
+      "description": "Order with delivery date only (no stock join)",
+      "expected_values": {
+        "material_name": "Ribs",
+        "quantity": 100.0,
+        "delivery_date": "2013-05-13"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_032",
+    "input": "Subject: Request to Assign Batch Number B-36158 to Order 117, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the assignment of batch number B-36158 to item 10 of order 117. This order has a delivery date only and no stock join, so please ensure the batch is allocated accordingly. Kindly confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Assign Batch Number B-36158 to Order 117, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the assignment of batch number B-36158 to item 10 of order 117. This order has a delivery date only and no stock join, so please ensure the batch is allocated accordingly. Kindly confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "117",
+      "item_no": 10,
+      "action": "Assign batch number B-36158 to this item.",
+      "description": "Order with delivery date only (no stock join)",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 10.0,
+        "delivery_date": "2022-01-31"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Assign batch number B-36158 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_033",
+    "input": "Subject: Request to Assign Batch Number B-50001 to Order 5572 Item 10  \n\nDear [Recipient],  \n\nI am writing to request the assignment of batch number B-50001 to item 10 of order 5572, as this order currently has zero available stock and requires batch-specific processing. Please confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Assign Batch Number B-50001 to Order 5572 Item 10  \n\nDear [Recipient],  \n\nI am writing to request the assignment of batch number B-50001 to item 10 of order 5572, as this order currently has zero available stock and requires batch-specific processing. Please confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "5572",
+      "item_no": 10,
+      "action": "Assign batch number B-50001 to this item.",
+      "description": "Order with zero or no available stock",
+      "expected_values": {
+        "material_name": "SIM-Modul M8M x 32, 128MB  DDR-RAM",
+        "quantity": 119.0,
+        "delivery_date": "2022-03-29",
+        "available_stock": 0.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Assign batch number B-50001 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_034",
+    "input": "Subject: Request to Update Shipping Address for Order 40, Item 10  \n\nDear [Recipient],  \n\nPlease update the shipping address for Order 40, Item 10, as the order is currently partially processed (WBSTA=B). The revised address is required to ensure timely delivery. Kindly confirm the update is completed and notify us at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address for Order 40, Item 10  \n\nDear [Recipient],  \n\nPlease update the shipping address for Order 40, Item 10, as the order is currently partially processed (WBSTA=B). The revised address is required to ensure timely delivery. Kindly confirm the update is completed and notify us at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with WBSTA=B (partially processed)",
+      "expected_values": {
+        "quantity": 1.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_035",
+    "input": "Subject: Request to Update Shipping Address for Order 20972, Item 10  \n\nWe would like to request an update to the shipping address for Order 20972, Item 10. This order currently has zero or no available stock, and we need the revised address to ensure proper delivery coordination. Please confirm the update is processed at your earliest convenience.",
+    "user_input": "Subject: Request to Update Shipping Address for Order 20972, Item 10  \n\nWe would like to request an update to the shipping address for Order 20972, Item 10. This order currently has zero or no available stock, and we need the revised address to ensure proper delivery coordination. Please confirm the update is processed at your earliest convenience.",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "20972",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with zero or no available stock",
+      "expected_values": {
+        "material_name": "Blu-Ray Player AX-500000",
+        "quantity": 80.0,
+        "delivery_date": "2017-03-01",
+        "available_stock": 0.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_036",
+    "input": "Subject: Request to Adjust Order Quantity for Order #40, Item #10  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #40 within the SAP ERP system. Please confirm the adjustment is processed promptly to align with our current inventory requirements.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "user_input": "Subject: Request to Adjust Order Quantity for Order #40, Item #10  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #40 within the SAP ERP system. Please confirm the adjustment is processed promptly to align with our current inventory requirements.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Reduce the order quantity by 50 units.",
+      "description": "Standard order — baseline with all joins present",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Reduce the order quantity by 50 units.",
+    "qa_question": null
+  },
+  {
+    "id": "r_037",
+    "input": "Subject: Request to Adjust Order Quantity for Order 6190, Item No. 10  \n\nDear [Recipient],  \n\nPlease reduce the quantity of Item No. 10 in Order 6190 by 50 units, as the order is being processed against available stock via MARD JOIN.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity for Order 6190, Item No. 10  \n\nDear [Recipient],  \n\nPlease reduce the quantity of Item No. 10 in Order 6190 by 50 units, as the order is being processed against available stock via MARD JOIN.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "6190",
+      "item_no": 10,
+      "action": "Reduce the order quantity by 50 units.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "W Nettop Desktop",
+        "quantity": 4.0,
+        "delivery_date": "2000-02-01",
+        "available_stock": 1625.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Reduce the order quantity by 50 units.",
+    "qa_question": null
+  },
+  {
+    "id": "r_038",
+    "input": "Subject: Request to Update Payment Terms for Order 6255, Item 10  \n\nDear [Recipient's Name],  \n\nKindly set the payment terms to Net 60 for Order ID 6255, Item No 10, as the order is processed via MARD JOIN with available stock. Please confirm the update at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Payment Terms for Order 6255, Item 10  \n\nDear [Recipient's Name],  \n\nKindly set the payment terms to Net 60 for Order ID 6255, Item No 10, as the order is processed via MARD JOIN with available stock. Please confirm the update at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "6255",
+      "item_no": 10,
+      "action": "Please set the payment terms to Net 60.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "Cool Hand wash",
+        "quantity": 3.0,
+        "delivery_date": "2000-03-24",
+        "available_stock": 1899.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please set the payment terms to Net 60.",
+    "qa_question": null
+  },
+  {
+    "id": "r_039",
+    "input": "Subject: Request to Update Payment Terms for Order 40  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you please update the payment terms for Order 40, Item No. 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this partially processed order.  \n\nThank you for your prompt attention to this matter.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Payment Terms for Order 40  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you please update the payment terms for Order 40, Item No. 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this partially processed order.  \n\nThank you for your prompt attention to this matter.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Please set the payment terms to Net 60.",
+      "description": "Order with WBSTA=B (partially processed)",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please set the payment terms to Net 60.",
+    "qa_question": null
+  },
+  {
+    "id": "r_040",
+    "input": "Subject: Request to Update Delivery Date for Order 3330, Item 10  \n\nDear [Recipient],  \n\nKindly update the delivery date for Order 3330, Item 10, as the available stock exceeds the ordered quantity. Please adjust the date to reflect the earliest possible shipment timeline.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Delivery Date for Order 3330, Item 10  \n\nDear [Recipient],  \n\nKindly update the delivery date for Order 3330, Item 10, as the available stock exceeds the ordered quantity. Please adjust the date to reflect the earliest possible shipment timeline.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "3330",
+      "item_no": 10,
+      "action": "Kindly update the delivery date for this order.",
+      "description": "Order where available stock exceeds ordered quantity",
+      "expected_values": {
+        "material_name": "L Gaming laptop",
+        "quantity": 5.0,
+        "delivery_date": "2022-02-25",
+        "available_stock": 1705.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Kindly update the delivery date for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_041",
+    "input": "Subject: Request to Cancel Order Item 10 from Order 5838  \n\nDear [Recipient's Name],  \n\nWe would like to formally request the cancellation of item number 10 from sales order 5838. This item is part of a multi-line order, and we are proceeding with the cancellation to adjust our procurement plan. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "user_input": "Subject: Request to Cancel Order Item 10 from Order 5838  \n\nDear [Recipient's Name],  \n\nWe would like to formally request the cancellation of item number 10 from sales order 5838. This item is part of a multi-line order, and we are proceeding with the cancellation to adjust our procurement plan. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "5838",
+      "item_no": 10,
+      "action": "We would like to cancel this order item.",
+      "description": "Multi-line order — sales order containing more than one item",
+      "expected_values": {
+        "material_name": "Curved LED TV",
+        "quantity": 3.0,
+        "delivery_date": "2022-03-29"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "We would like to cancel this order item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_042",
+    "input": "Subject: Request to Update Quantity for Order 5184, Item 10  \n\nDear [Recipient],  \nI am writing to request an update to the quantity for Order 5184, Item 10, changing it from the current value to 105 units. The order is currently facing zero available stock, so this adjustment is necessary. Kindly process this change at your earliest convenience. Thank you for your attention to this matter.",
+    "user_input": "Subject: Request to Update Quantity for Order 5184, Item 10  \n\nDear [Recipient],  \nI am writing to request an update to the quantity for Order 5184, Item 10, changing it from the current value to 105 units. The order is currently facing zero available stock, so this adjustment is necessary. Kindly process this change at your earliest convenience. Thank you for your attention to this matter.",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "5184",
+      "item_no": 10,
+      "action": "Please change the quantity to 105 units.",
+      "description": "Order with zero or no available stock",
+      "expected_values": {
+        "material_name": "Pure Fresh Juice",
+        "quantity": 4.0,
+        "delivery_date": "2022-03-29",
+        "available_stock": 0.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please change the quantity to 105 units.",
+    "qa_question": null
+  },
+  {
+    "id": "r_043",
+    "input": "Subject: Request to Unblock Delivery for Order 6340, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 6340, Item 10, which was placed with a delivery date only and no stock join. Please confirm the necessary action to proceed with the release of this item.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 6340, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 6340, Item 10, which was placed with a delivery date only and no stock join. Please confirm the necessary action to proceed with the release of this item.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "6340",
+      "item_no": 10,
+      "action": "Unblock the delivery for this order.",
+      "description": "Order with delivery date only (no stock join)",
+      "expected_values": {
+        "material_name": "Cool Hand wash",
+        "quantity": 3.0,
+        "delivery_date": "2000-06-13"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_044",
+    "input": "Subject: Request to Unblock Delivery for Order 40, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 40, Item 10, which is currently overdue with a past delivery date and incomplete goods movement. Please confirm the necessary steps to proceed with releasing the delivery block in SAP ERP.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 40, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 40, Item 10, which is currently overdue with a past delivery date and incomplete goods movement. Please confirm the necessary steps to proceed with releasing the delivery block in SAP ERP.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Unblock the delivery for this order.",
+      "description": "Overdue order — delivery date in the past, goods movement incomplete",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-12"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_045",
+    "input": "I hope this message finds you well. Could you kindly update the delivery date for Order ID 40, Item No 10, as this order with WBSTA=B requires adjustment to its scheduled shipment. Your prompt attention to this matter would be greatly appreciated. Please confirm the revised delivery date at your earliest convenience.",
+    "user_input": "I hope this message finds you well. Could you kindly update the delivery date for Order ID 40, Item No 10, as this order with WBSTA=B requires adjustment to its scheduled shipment. Your prompt attention to this matter would be greatly appreciated. Please confirm the revised delivery date at your earliest convenience.",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Kindly update the delivery date for this order.",
+      "description": "Order with WBSTA=B (partially processed)",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "1994-11-29"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Kindly update the delivery date for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_046",
+    "input": "Subject: Request to Update Shipping Address for Order 1079, Item 10  \n\nDear [Recipient], I am writing to request an update to the shipping address for Order 1079, Item 10. The order is currently in a status where stock is available via MARD JOIN, and we need the address updated to ensure timely delivery. Please confirm the necessary changes in SAP ERP at your earliest convenience. Thank you for your prompt attention to this matter.",
+    "user_input": "Subject: Request to Update Shipping Address for Order 1079, Item 10  \n\nDear [Recipient], I am writing to request an update to the shipping address for Order 1079, Item 10. The order is currently in a status where stock is available via MARD JOIN, and we need the address updated to ensure timely delivery. Please confirm the necessary changes in SAP ERP at your earliest convenience. Thank you for your prompt attention to this matter.",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "1079",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "W Slimline Desktop",
+        "quantity": 1.0,
+        "delivery_date": "2022-01-17",
+        "available_stock": 2517.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_047",
+    "input": "Subject: Request to Unblock Delivery for Order 17216 - Item 20  \n\nDear [Recipient's Name],  \n\nI am writing to request the unblocking of delivery for Order 17216, specifically for Item No. 20. This is a multi-line order, and the unblock should be applied solely to the referenced item. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 17216 - Item 20  \n\nDear [Recipient's Name],  \n\nI am writing to request the unblocking of delivery for Order 17216, specifically for Item No. 20. This is a multi-line order, and the unblock should be applied solely to the referenced item. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "17216",
+      "item_no": 20,
+      "action": "Unblock the delivery for this order.",
+      "description": "Multi-line order — sales order containing more than one item",
+      "expected_values": {
+        "material_name": "Tires",
+        "quantity": 10.0,
+        "delivery_date": "2015-08-10"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_048",
+    "input": "Subject: Request to Update Payment Terms for Order 40, Item 10  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Order 40, Item 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this standard order. Please confirm the change at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Contact Information]",
+    "user_input": "Subject: Request to Update Payment Terms for Order 40, Item 10  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Order 40, Item 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this standard order. Please confirm the change at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Contact Information]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Please set the payment terms to Net 60.",
+      "description": "Standard order — baseline with all joins present",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please set the payment terms to Net 60.",
+    "qa_question": null
+  },
+  {
+    "id": "r_049",
+    "input": "Subject: Request to Update Shipping Address for Order ID 40, Item No. 10  \n\nRegarding Order ID 40, Item No. 10, please update the shipping address as this order is currently in a partially processed state (WBSTA=B). The revised address details are required to ensure accurate fulfillment. Kindly confirm the update is completed by the next business day.",
+    "user_input": "Subject: Request to Update Shipping Address for Order ID 40, Item No. 10  \n\nRegarding Order ID 40, Item No. 10, please update the shipping address as this order is currently in a partially processed state (WBSTA=B). The revised address details are required to ensure accurate fulfillment. Kindly confirm the update is completed by the next business day.",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with WBSTA=B (partially processed)",
+      "expected_values": {
+        "quantity": 1.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-12"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_050",
+    "input": "Subject: Request to Update Delivery Date for Order 70000166, Item No. 10  \n\nDear [Recipient's Name],  \n\nKindly update the delivery date for Order 70000166, Item No. 10, as the goods movement has not yet been processed (WBSTA=A). Please confirm the revised date at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Delivery Date for Order 70000166, Item No. 10  \n\nDear [Recipient's Name],  \n\nKindly update the delivery date for Order 70000166, Item No. 10, as the goods movement has not yet been processed (WBSTA=A). Please confirm the revised date at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "70000166",
+      "item_no": 10,
+      "action": "Kindly update the delivery date for this order.",
+      "description": "Order with WBSTA=A (goods movement not yet processed)",
+      "expected_values": {
+        "material_name": "Special Wine Acc",
+        "delivery_status": "A"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Kindly update the delivery date for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_051",
+    "input": "Subject: Request to Update Shipping Method for Order Item  \n\nDear [Recipient's Name],  \n\nI am writing to request that the shipping method for Order ID 70000101, Item No. 700001 (POSNR: 20) be changed to express courier. Please confirm the update in SAP ERP at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method for Order Item  \n\nDear [Recipient's Name],  \n\nI am writing to request that the shipping method for Order ID 70000101, Item No. 700001 (POSNR: 20) be changed to express courier. Please confirm the update in SAP ERP at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "70000101",
+      "item_no": 700001,
+      "action": "Change the shipping method to express courier.",
+      "description": "Order item with non-default POSNR (item number != 10)",
+      "expected_values": {
+        "material_name": "Cupcake"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Change the shipping method to express courier.",
+    "qa_question": null
+  },
+  {
+    "id": "r_052",
+    "input": "Dear [Recipient's Name], I hope this message finds you well. We are following up on Order ID 40, Item No 10, which is currently overdue with a delivery date in the past and incomplete goods movement. Kindly update the delivery date to reflect the revised schedule as per our latest agreement. Your prompt attention to this matter is greatly appreciated.",
+    "user_input": "Dear [Recipient's Name], I hope this message finds you well. We are following up on Order ID 40, Item No 10, which is currently overdue with a delivery date in the past and incomplete goods movement. Kindly update the delivery date to reflect the revised schedule as per our latest agreement. Your prompt attention to this matter is greatly appreciated.",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Kindly update the delivery date for this order.",
+      "description": "Overdue order — delivery date in the past, goods movement incomplete",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Kindly update the delivery date for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_053",
+    "input": "Subject: Request to Update Payment Terms for Order 6155  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Item No. 10 in Order ID 6155 to Net 60? This adjustment applies to the multi-line order containing multiple items. Your prompt attention to this request is greatly appreciated.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "user_input": "Subject: Request to Update Payment Terms for Order 6155  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Item No. 10 in Order ID 6155 to Net 60? This adjustment applies to the multi-line order containing multiple items. Your prompt attention to this request is greatly appreciated.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "6155",
+      "item_no": 10,
+      "action": "Please set the payment terms to Net 60.",
+      "description": "Multi-line order — sales order containing more than one item",
+      "expected_values": {
+        "material_name": "Flatscreen LE 64P",
+        "quantity": 5.0,
+        "delivery_date": "1999-12-28"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please set the payment terms to Net 60.",
+    "qa_question": null
+  },
+  {
+    "id": "r_054",
+    "input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Recipient's Name],  \n\nWe are writing to request the unblocking of delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary steps to proceed with shipment.  \n\nKindly respond at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Recipient's Name],  \n\nWe are writing to request the unblocking of delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary steps to proceed with shipment.  \n\nKindly respond at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "1785",
+      "item_no": 10,
+      "action": "Unblock the delivery for this order.",
+      "description": "Order where available stock exceeds ordered quantity",
+      "expected_values": {
+        "material_name": "Synthetic Clothes liquid  Detergent  5 L",
+        "quantity": 2.0,
+        "delivery_date": "2022-01-05",
+        "available_stock": 2505.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_055",
+    "input": "Subject: Request to Adjust Order Quantity for Order ID 2717  \n\nDear [Recipient's Name],  \n\nRegarding Order ID 2717, Item No. 10, kindly reduce the order quantity by 50 units, as the available stock exceeds the ordered quantity. Please confirm the adjustment at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity for Order ID 2717  \n\nDear [Recipient's Name],  \n\nRegarding Order ID 2717, Item No. 10, kindly reduce the order quantity by 50 units, as the available stock exceeds the ordered quantity. Please confirm the adjustment at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "2717",
+      "item_no": 10,
+      "action": "Reduce the order quantity by 50 units.",
+      "description": "Order where available stock exceeds ordered quantity",
+      "expected_values": {
+        "material_name": "Cool Hand wash",
+        "quantity": 3.0,
+        "delivery_date": "2022-03-23",
+        "available_stock": 2099.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Reduce the order quantity by 50 units.",
+    "qa_question": null
+  },
+  {
+    "id": "r_056",
+    "input": "Subject: Request to Update Shipping Address for Order 70000166, Item 10  \n\nDear [Recipient],  \n\nPlease update the shipping address for order 70000166, item 10 in SAP ERP. The goods movement has not yet been processed (WBSTA=A), so the address change can be implemented prior to shipment.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address for Order 70000166, Item 10  \n\nDear [Recipient],  \n\nPlease update the shipping address for order 70000166, item 10 in SAP ERP. The goods movement has not yet been processed (WBSTA=A), so the address change can be implemented prior to shipment.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "70000166",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with WBSTA=A (goods movement not yet processed)",
+      "expected_values": {
+        "material_name": "Special Wine Acc",
+        "delivery_status": "A"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_057",
+    "input": "Subject: Request to Unblock Delivery for Order 2845, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 2845, Item 10, as the stock is now available via MARD JOIN. Please confirm the action to proceed with the release of the blocked delivery.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 2845, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 2845, Item 10, as the stock is now available via MARD JOIN. Please confirm the action to proceed with the release of the blocked delivery.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "2845",
+      "item_no": 10,
+      "action": "Unblock the delivery for this order.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "Flavored Yogurt",
+        "quantity": 4.0,
+        "delivery_date": "2022-03-23",
+        "available_stock": 2329.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_058",
+    "input": "Subject: Request to Update Shipping Method for Order 15774, Item 10  \n\nWe would like to request a change to the shipping method for Order 15774, Item 10 to Express Courier. The order is set up with a delivery date only and does not include a stock join. Please confirm if this adjustment can be made and provide any additional instructions.",
+    "user_input": "Subject: Request to Update Shipping Method for Order 15774, Item 10  \n\nWe would like to request a change to the shipping method for Order 15774, Item 10 to Express Courier. The order is set up with a delivery date only and does not include a stock join. Please confirm if this adjustment can be made and provide any additional instructions.",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "15774",
+      "item_no": 10,
+      "action": "Change the shipping method to express courier.",
+      "description": "Order with delivery date only (no stock join)",
+      "expected_values": {
+        "material_name": "Napkin Cloth",
+        "quantity": 1.0,
+        "delivery_date": "2014-02-19"
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Change the shipping method to express courier.",
+    "qa_question": null
+  },
+  {
+    "id": "r_059",
+    "input": "Subject: Request to Unblock Delivery for Order 1228, Item 10  \n\nDear [Recipient],  \n\nWe would like to request the unblocking of delivery for Order 1228, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary action to proceed with shipment.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 1228, Item 10  \n\nDear [Recipient],  \n\nWe would like to request the unblocking of delivery for Order 1228, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary action to proceed with shipment.  \n\nBest regards,  \n[Your Name]",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "1228",
+      "item_no": 10,
+      "action": "Unblock the delivery for this order.",
+      "description": "Order where available stock exceeds ordered quantity",
+      "expected_values": {
+        "material_name": "Flavored Yogurt",
+        "quantity": 4.0,
+        "delivery_date": "2022-03-16",
+        "available_stock": 2417.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_060",
+    "input": "Subject: Request to Reduce Order Quantity for Order #1049, Item #10  \n\nDear [Recipient],  \nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #1049, as the order is based on available stock via MARD JOIN. Please process this adjustment at your earliest convenience. Thank you for your prompt attention to this matter.",
+    "user_input": "Subject: Request to Reduce Order Quantity for Order #1049, Item #10  \n\nDear [Recipient],  \nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #1049, as the order is based on available stock via MARD JOIN. Please process this adjustment at your earliest convenience. Thank you for your prompt attention to this matter.",
+    "label": "ACTION_ONLY",
+    "expected_intent": "ACTION_ONLY",
+    "erp_evidence": {
+      "order_id": "1049",
+      "item_no": 10,
+      "action": "Reduce the order quantity by 50 units.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "W Nettop Desktop",
+        "quantity": 1.0,
+        "delivery_date": "2022-01-17",
+        "available_stock": 2368.0
+      }
+    },
+    "rag_evidence": null,
+    "action_description": "Reduce the order quantity by 50 units.",
+    "qa_question": null
+  },
+  {
+    "id": "r_061",
+    "input": "Subject: Request to Unblock Delivery and Query on SAP Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order ID 15336, Item No. 10, which is an order with a delivery date only and no stock join? Additionally, I have a quick question regarding SAP Fiori: can users personalize the home page by default, as mentioned in the learning assessment? Your guidance on this would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery and Query on SAP Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order ID 15336, Item No. 10, which is an order with a delivery date only and no stock join? Additionally, I have a quick question regarding SAP Fiori: can users personalize the home page by default, as mentioned in the learning assessment? Your guidance on this would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "15336",
+      "item_no": 10,
+      "action": "Unblock the delivery for this order.",
+      "description": "Order with delivery date only (no stock join)",
+      "expected_values": {
+        "material_name": "Ribs",
+        "quantity": 100.0,
+        "delivery_date": "2013-05-13"
+      }
+    },
+    "rag_evidence": "Unit 1\nLearning Assessment\n1.\nWhich of the following apps gives you a visual overview of complex topics for monitoring \nor tracking purposes?\nChoose the correct answer.\nX\nA Transaction apps\nX\nB Analytical apps\nX\nC Factsheets\n2. A user can personalize the home page in SAP Fiori launchpad by default.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n© Copyright. All rights reserved.\n11",
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_062",
+    "input": "Subject: Request to Update Shipping Method and Inquiry on Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping method for Order ID 117, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’d appreciate guidance on how to personalize the SAP Fiori launchpad home page to better organize my frequently used apps. Thank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method and Inquiry on Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping method for Order ID 117, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’d appreciate guidance on how to personalize the SAP Fiori launchpad home page to better organize my frequently used apps. Thank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "117",
+      "item_no": 10,
+      "action": "Change the shipping method to express courier.",
+      "description": "Order with delivery date only (no stock join)",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 10.0,
+        "delivery_date": "2022-01-31"
+      }
+    },
+    "rag_evidence": "Unit 1\nLearning Assessment - Answers\n1.\nWhich of the following apps gives you a visual overview of complex topics for monitoring \nor tracking purposes?\nChoose the correct answer.\nX\nA Transaction apps\nX\nB Analytical apps\nX\nC Factsheets\nCorrect. Analytical apps give you a visual overview of complex topics for monitoring or \ntracking purposes.\n2. A user can personalize the home page in SAP Fiori launchpad by default.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse",
+    "action_description": "Change the shipping method to express courier.",
+    "qa_question": null
+  },
+  {
+    "id": "r_063",
+    "input": "Subject: Request to Assign Batch Number and Inquiry on User Experience  \n\nDear [Recipient],  \n\nI would like to request the assignment of batch number B-67954 to order 5572, item 10, as this order involves zero or no available stock. Additionally, could you clarify how to configure the SAP ERP system to prioritize user experience when navigating inventory management workflows, as mentioned in the recent documentation?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Assign Batch Number and Inquiry on User Experience  \n\nDear [Recipient],  \n\nI would like to request the assignment of batch number B-67954 to order 5572, item 10, as this order involves zero or no available stock. Additionally, could you clarify how to configure the SAP ERP system to prioritize user experience when navigating inventory management workflows, as mentioned in the recent documentation?  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "5572",
+      "item_no": 10,
+      "action": "Assign batch number B-67954 to this item.",
+      "description": "Order with zero or no available stock",
+      "expected_values": {
+        "material_name": "SIM-Modul M8M x 32, 128MB  DDR-RAM",
+        "quantity": 119.0,
+        "delivery_date": "2022-03-29",
+        "available_stock": 0.0
+      }
+    },
+    "rag_evidence": "functionality, but rather a comfortable user experience, which puts the focus on the \nconsumer.\n© Copyright. All rights reserved.\n3",
+    "action_description": "Assign batch number B-67954 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_064",
+    "input": "Subject: Request to Update Shipping Address and EWM Configuration Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 40, Item No. 10, as the order is partially processed (WBSTA=B)? Additionally, I’d appreciate guidance on modifying shipping points within SAP Extended Warehouse Management (EWM) after activating the organizational unit for warehouse management.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address and EWM Configuration Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 40, Item No. 10, as the order is partially processed (WBSTA=B)? Additionally, I’d appreciate guidance on modifying shipping points within SAP Extended Warehouse Management (EWM) after activating the organizational unit for warehouse management.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with WBSTA=B (partially processed)",
+      "expected_values": {
+        "quantity": 1.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": "Figure 18: Organizational Unit – Shipping Point\nOrganizational Units – Activation of Warehouse Management\nWarehouse management functions are often needed in addition to the functions of inventory \nmanagement. For example, a company wants to track the amount of materials in every \nstorage bin, and wants to control and record all movements of goods and materials in the \nwarehouse.\nTo support this, SAP Extended Warehouse Management (EWM) is embedded in SAP S/",
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_065",
+    "input": "Subject: Request to Cancel Order 20972 Item 10 and Clarification on Storage Location Configuration  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of Order 20972, Item 10, as the order was placed with zero available stock. Could you confirm the process for updating the storage location assignment for this plant to prevent similar issues in the future?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Cancel Order 20972 Item 10 and Clarification on Storage Location Configuration  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of Order 20972, Item 10, as the order was placed with zero available stock. Could you confirm the process for updating the storage location assignment for this plant to prevent similar issues in the future?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "20972",
+      "item_no": 10,
+      "action": "We would like to cancel this order item.",
+      "description": "Order with zero or no available stock",
+      "expected_values": {
+        "material_name": "Blu-Ray Player AX-500000",
+        "quantity": 80.0,
+        "delivery_date": "2017-03-01",
+        "available_stock": 0.0
+      }
+    },
+    "rag_evidence": "Organizational Units – Plant and Storage Location\nA plant is a location where material stock is kept, and could represent a manufacturing site or \ndistribution center, for example. Different storage locations can be used to separate the stock \nwithin a plant.\nThe plant and storage location are organizational units that can be used by all logistics areas \nin the system. In sales and distribution, a plant represents the location from which materials \nare delivered to a customer.\nNote:",
+    "action_description": "We would like to cancel this order item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_066",
+    "input": "Subject: Request to Adjust Order Quantity and Clarification on Organizational Structure  \n\nDear [Recipient],  \n\nI would like to request a reduction of 50 units for Order ID 40, Item No. 10, to align with updated requirements. Additionally, could you clarify how to configure the sales area organizational unit in SAP ERP to simplify master data maintenance, as outlined in the provided content? This would help ensure consistency across our reporting processes.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity and Clarification on Organizational Structure  \n\nDear [Recipient],  \n\nI would like to request a reduction of 50 units for Order ID 40, Item No. 10, to align with updated requirements. Additionally, could you clarify how to configure the sales area organizational unit in SAP ERP to simplify master data maintenance, as outlined in the provided content? This would help ensure consistency across our reporting processes.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Reduce the order quantity by 50 units.",
+      "description": "Standard order — baseline with all joins present",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": "Figure 16: Organizational Unit – Sales Area\nHint:\nA simple organizational structure often has more advantages than a complex \nstructure. For example, it simplifies master data maintenance. You should not \ndefine complex organizational structures in your system to provide detailed \nreporting options. We advise you to use the different fields in the master data \nrecords and documents for this purpose.\nOrganizational Units – Distribution\nOrganizational Units – Plant and Storage Location",
+    "action_description": "Reduce the order quantity by 50 units.",
+    "qa_question": null
+  },
+  {
+    "id": "r_067",
+    "input": "Subject: Request to Update Shipping Method and Clarification on ERP Display Conventions  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. I am reaching out to request that the shipping method for Order 6190, Item No. 10, be updated to express courier, as the order has available stock via MARD JOIN. Additionally, could you clarify how to distinguish between window titles and example text in the SAP ERP interface, as outlined in the typographic conventions section of the handbook? This would help ensure accurate interpretation of system displays during order processing.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method and Clarification on ERP Display Conventions  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. I am reaching out to request that the shipping method for Order 6190, Item No. 10, be updated to express courier, as the order has available stock via MARD JOIN. Additionally, could you clarify how to distinguish between window titles and example text in the SAP ERP interface, as outlined in the typographic conventions section of the handbook? This would help ensure accurate interpretation of system displays during order processing.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "6190",
+      "item_no": 10,
+      "action": "Change the shipping method to express courier.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "W Nettop Desktop",
+        "quantity": 4.0,
+        "delivery_date": "2000-02-01",
+        "available_stock": 1625.0
+      }
+    },
+    "rag_evidence": "Typographic Conventions\nAmerican English is the standard used in this handbook.\nThe following typographic conventions are also used.\nThis information is displayed in the instructor’s presentation\nDemonstration\nProcedure\nWarning or Caution\nHint\nRelated or Additional Information\nFacilitated Discussion\nUser interface control\nExample text\nWindow title\nExample text\niv\n© Copyright. All rights reserved.",
+    "action_description": "Change the shipping method to express courier.",
+    "qa_question": null
+  },
+  {
+    "id": "r_068",
+    "input": "Subject: Request to Update Shipping Address and Query on Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 6255, Item No. 10, as the current details do not align with the customer’s latest requirements? Additionally, I would appreciate guidance on personalizing the SAP Fiori Launchpad to create a filtered report application for specific regional data, such as the German cash position mentioned in the documentation. Your assistance in both matters would be greatly valued.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address and Query on Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 6255, Item No. 10, as the current details do not align with the customer’s latest requirements? Additionally, I would appreciate guidance on personalizing the SAP Fiori Launchpad to create a filtered report application for specific regional data, such as the German cash position mentioned in the documentation. Your assistance in both matters would be greatly valued.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "6255",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "Cool Hand wash",
+        "quantity": 3.0,
+        "delivery_date": "2000-03-24",
+        "available_stock": 1899.0
+      }
+    },
+    "rag_evidence": "Figure 9: SAP Fiori Launchpad User Personalization\nThe following personalization options are available in the SAP Fiori launchpad:\n●\nAdding applications from the catalogs assigned to them\n●\nRemoving applications that you do not want to use\n●\nModifying and adding applications for filtered report results\nFor example, if the user is a group cash manager who is interested in the German market, the \nuser can create an application to take them directly to the cash position of the German",
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_069",
+    "input": "Subject: Request to Update Shipping Address for Order 40 Item 10  \n\nDear [Recipient],  \n\nCould you please update the shipping address for Order 40, Item 10, as the current details do not align with the customer’s requirements? The order is partially processed (WBSTA=B), so timely adjustments are critical to avoid delays.  \n\nAdditionally, I’d appreciate clarification on whether the shipping address is stored at the header or item level in the sales document structure, as this will help ensure consistency across related transactions.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address for Order 40 Item 10  \n\nDear [Recipient],  \n\nCould you please update the shipping address for Order 40, Item 10, as the current details do not align with the customer’s requirements? The order is partially processed (WBSTA=B), so timely adjustments are critical to avoid delays.  \n\nAdditionally, I’d appreciate clarification on whether the shipping address is stored at the header or item level in the sales document structure, as this will help ensure consistency across related transactions.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with WBSTA=B (partially processed)",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": "Structure of Sales Documents\nA sales document is divided into three levels: header, item, and schedule line. The data is \ndistributed across these levels as follows:\n●\nHeader level:\nThe data for the document header is valid for the entire document. This includes, for \nexample, the document number and customer-related data, such as the relevant sold-to \nparty.\n●\nItem level:\nEach item in the sales document contains its own data. This includes, for example, data",
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_070",
+    "input": "Subject: Request to Cancel Order Item and Clarification on Organizational Units  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of order 3330, item 10, as the available stock exceeds the ordered quantity. Could you confirm the steps required to proceed with this action in the SAP ERP system? Additionally, could you clarify which organizational units from Figure 11 are most relevant for initiating such a cancellation in the sales and distribution process?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Cancel Order Item and Clarification on Organizational Units  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of order 3330, item 10, as the available stock exceeds the ordered quantity. Could you confirm the steps required to proceed with this action in the SAP ERP system? Additionally, could you clarify which organizational units from Figure 11 are most relevant for initiating such a cancellation in the sales and distribution process?  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "3330",
+      "item_no": 10,
+      "action": "We would like to cancel this order item.",
+      "description": "Order where available stock exceeds ordered quantity",
+      "expected_values": {
+        "material_name": "L Gaming laptop",
+        "quantity": 5.0,
+        "delivery_date": "2022-02-25",
+        "available_stock": 1705.0
+      }
+    },
+    "rag_evidence": "used for order fulfillment processes.\nThe organizational units outlined in the figure are the most important ones for sales and \ndistribution processes in the system.\nFigure 11: Organizational Units for Sales and Distribution Processes\n© Copyright. All rights reserved.\n15",
+    "action_description": "We would like to cancel this order item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_071",
+    "input": "I hope this message finds you well. Could you please update the shipping address for Order ID 5838, Item No. 10, as the delivery address has changed? Additionally, could you clarify how the system handles national product specifications and language settings when processing multi-line orders, particularly regarding translated documentation? Thank you for your assistance.",
+    "user_input": "I hope this message finds you well. Could you please update the shipping address for Order ID 5838, Item No. 10, as the delivery address has changed? Additionally, could you clarify how the system handles national product specifications and language settings when processing multi-line orders, particularly regarding translated documentation? Thank you for your assistance.",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "5838",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Multi-line order — sales order containing more than one item",
+      "expected_values": {
+        "material_name": "Curved LED TV",
+        "quantity": 3.0,
+        "delivery_date": "2022-03-29"
+      }
+    },
+    "rag_evidence": "countries. Please see https://www.sap.com/corporate/en/legal/copyright.html for additional \ntrademark information and notices.\nSome software products marketed by SAP SE and its distributors contain proprietary software \ncomponents of other software vendors.\nNational product specifications may vary.\nThese materials may have been machine translated and may contain grammatical errors or \ninaccuracies.\nThese materials are provided by SAP SE or an SAP affiliate company for informational purposes only,",
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_072",
+    "input": "Subject: Request to Update Delivery Date and Clarification on Distribution Channel Setup  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 5184, Item No. 10, as the order is currently facing a zero-stock scenario? Additionally, I’d appreciate guidance on how to assign a distribution channel to a sales organization within the SAP ERP system, as outlined in Figure 13, to ensure proper configuration for future orders.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Delivery Date and Clarification on Distribution Channel Setup  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 5184, Item No. 10, as the order is currently facing a zero-stock scenario? Additionally, I’d appreciate guidance on how to assign a distribution channel to a sales organization within the SAP ERP system, as outlined in Figure 13, to ensure proper configuration for future orders.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "5184",
+      "item_no": 10,
+      "action": "Kindly update the delivery date for this order.",
+      "description": "Order with zero or no available stock",
+      "expected_values": {
+        "material_name": "Pure Fresh Juice",
+        "quantity": 4.0,
+        "delivery_date": "2022-03-29",
+        "available_stock": 0.0
+      }
+    },
+    "rag_evidence": "Figure 13: Organizational Unit – Sales Organization\nOrganizational Unit – Distribution Channel – Distribution Chain\nThe distribution channel characterizes the way in which goods and services are distributed.\nDistribution channels have to be assigned to at least one sales organization (multiple \nassignments are possible). To use the sales and distribution functions, you need to define at \nleast one distribution channel in the system.\nYou can use different distribution channels to do the following:\n●",
+    "action_description": "Kindly update the delivery date for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_073",
+    "input": "Subject: Request to Update Shipping Method and Inquiry on SAP Fiori Access  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you please update the shipping method for Order ID 6340, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’m seeking guidance on how to access SAP Fiori interfaces for order management tasks—specifically, how to ensure the Fiori launchpad is configured to display relevant transactional apps for our S/4HANA implementation.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method and Inquiry on SAP Fiori Access  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you please update the shipping method for Order ID 6340, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’m seeking guidance on how to access SAP Fiori interfaces for order management tasks—specifically, how to ensure the Fiori launchpad is configured to display relevant transactional apps for our S/4HANA implementation.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "6340",
+      "item_no": 10,
+      "action": "Change the shipping method to express courier.",
+      "description": "Order with delivery date only (no stock join)",
+      "expected_values": {
+        "material_name": "Cool Hand wash",
+        "quantity": 3.0,
+        "delivery_date": "2000-06-13"
+      }
+    },
+    "rag_evidence": "Unit 1\nLesson 1\nIdentifying Key Features of SAP Fiori\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nIdentify key features of SAP Fiori\nSAP Fiori User Experience\nYour enterprise plans to implement SAP S/4HANA and you want some insights into the SAP \nuser experience strategy.\nYou are particularly interested in the SAP Fiori user interface (UI).\nConcepts and Influence Factors\nFigure 1: Concepts and Influence Factors",
+    "action_description": "Change the shipping method to express courier.",
+    "qa_question": null
+  },
+  {
+    "id": "r_074",
+    "input": "Subject: Request to Assign Batch Number and Assistance with SAP Fiori Navigation  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-41979 to order 40, item 10, as this overdue order requires urgent processing? Additionally, I am seeking guidance on navigating the batch assignment function within SAP Fiori—specifically, which app or tile should be used to access this task efficiently. Your assistance would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Assign Batch Number and Assistance with SAP Fiori Navigation  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-41979 to order 40, item 10, as this overdue order requires urgent processing? Additionally, I am seeking guidance on navigating the batch assignment function within SAP Fiori—specifically, which app or tile should be used to access this task efficiently. Your assistance would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Assign batch number B-41979 to this item.",
+      "description": "Overdue order — delivery date in the past, goods movement incomplete",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-12"
+      }
+    },
+    "rag_evidence": "Unit 1: Navigation with SAP Fiori\n10\n© Copyright. All rights reserved.",
+    "action_description": "Assign batch number B-41979 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_075",
+    "input": "Subject: Request to Cancel Order 40 Item 10 and Clarification on Sales Area Configuration  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of Order 40, Item 10, as it is partially processed and no longer required. Could you confirm if the sales area assigned to this order is correctly configured, particularly regarding the business partner master data and validity checks? Additionally, we noticed the system requires at least one sales area per company code—could you verify that the relevant sales organization is properly linked to the company code for this transaction?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Cancel Order 40 Item 10 and Clarification on Sales Area Configuration  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of Order 40, Item 10, as it is partially processed and no longer required. Could you confirm if the sales area assigned to this order is correctly configured, particularly regarding the business partner master data and validity checks? Additionally, we noticed the system requires at least one sales area per company code—could you verify that the relevant sales organization is properly linked to the company code for this transaction?  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "We would like to cancel this order item.",
+      "description": "Order with WBSTA=B (partially processed)",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "1994-11-29"
+      }
+    },
+    "rag_evidence": "assignment of the corresponding sales organization to the relevant company code. At least \none sales area has to be defined in the system to execute sales and distribution processes.\nWhen processing sales and distribution documents, the system accesses various master data \ndepending on the sales area. This master data includes business partner master data, prices, \nand discounts. The system also performs a number of validity checks on certain entries based \non the sales area.",
+    "action_description": "We would like to cancel this order item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_076",
+    "input": "Subject: Request to Update Delivery Date and Warehouse Management Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 1079, Item No. 10, as the current schedule conflicts with our production timeline? Additionally, I’m seeking guidance on how to locate the warehouse number for a specific storage area within the ERP system, as outlined in Figure 19 regarding organizational units. Your assistance in clarifying the hierarchical structure of warehouse management would greatly aid our inventory planning.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Delivery Date and Warehouse Management Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 1079, Item No. 10, as the current schedule conflicts with our production timeline? Additionally, I’m seeking guidance on how to locate the warehouse number for a specific storage area within the ERP system, as outlined in Figure 19 regarding organizational units. Your assistance in clarifying the hierarchical structure of warehouse management would greatly aid our inventory planning.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "1079",
+      "item_no": 10,
+      "action": "Kindly update the delivery date for this order.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "W Slimline Desktop",
+        "quantity": 1.0,
+        "delivery_date": "2022-01-17",
+        "available_stock": 2517.0
+      }
+    },
+    "rag_evidence": "Figure 19: Organizational Units – Activation of Warehouse Management\nOrganizational Units – SAP EWM\nThe warehouse number is the highest level organizational unit in warehouse management. In \npractice, the warehouse number usually corresponds to a physical building or distribution \ncenter. Each warehouse number has a substructure that maps the spatial relationship in the \nwarehouse complex in detail.\nThere are different areas where products are physically stored in a warehouse. These areas,",
+    "action_description": "Kindly update the delivery date for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_077",
+    "input": "Subject: Request to Update Shipping Address and Clarification on ERP Usage  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 17216, Item No. 20, as the delivery details have changed?  \n\nAdditionally, I’d appreciate guidance on the most efficient way to handle occasional ERP tasks—specifically, are there single-step transactions recommended for users who interact with the system infrequently?  \n\nThank you for your support.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address and Clarification on ERP Usage  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 17216, Item No. 20, as the delivery details have changed?  \n\nAdditionally, I’d appreciate guidance on the most efficient way to handle occasional ERP tasks—specifically, are there single-step transactions recommended for users who interact with the system infrequently?  \n\nThank you for your support.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "17216",
+      "item_no": 20,
+      "action": "Please update the shipping address for this order.",
+      "description": "Multi-line order — sales order containing more than one item",
+      "expected_values": {
+        "material_name": "Tires",
+        "quantity": 10.0,
+        "delivery_date": "2015-08-10"
+      }
+    },
+    "rag_evidence": "●\nOccasional user\nOnly uses the system occasionally and therefore needs simple and easy-to-use \napplications. In many cases, single-step transactions are executed.\n●\nExpert or key user\nA fully trained SAP user, knows the processes, and the available applications in detail. This \nuser often uses multiple systems and different UIs.\n●\nDeveloper or programmer\nHas detailed process and system knowledge and deals with the adaptation and extension",
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_078",
+    "input": "Subject: Request for Batch Assignment and SAP ERP Clarification  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-83060 to item 10 of order 40, as per the standard order baseline? Additionally, I’d appreciate guidance on how to correctly assign a delivering plant to a sales order in SAP ERP, ensuring alignment with the company code structure outlined in the documentation.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request for Batch Assignment and SAP ERP Clarification  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-83060 to item 10 of order 40, as per the standard order baseline? Additionally, I’d appreciate guidance on how to correctly assign a delivering plant to a sales order in SAP ERP, ensuring alignment with the company code structure outlined in the documentation.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Assign batch number B-83060 to this item.",
+      "description": "Standard order — baseline with all joins present",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": "are delivered to a customer.\nNote:\nA plant that is used within a sales and distribution process is also called delivering \nplant.\nThe following information concerning the usage of plants within sales and distribution \nprocesses is important:\n●\nTo use the sales and distribution functions in the system, you need at least one plant.\n●\nEach plant is uniquely assigned to a company code.\nUnit 2: Enterprise Structures\n20\n© Copyright. All rights reserved.",
+    "action_description": "Assign batch number B-83060 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_079",
+    "input": "Subject: Order Update and Fiori Interface Clarification  \n\nCould you please update the shipping address for Order ID 40, Item No. 10, as this order is partially processed (WBSTA=B)? Additionally, I’d appreciate guidance on ensuring the Fiori interface remains responsive when accessing order details for users with limited access, as outlined in the SAP Fiori user experience paradigm. Thank you for your assistance.",
+    "user_input": "Subject: Order Update and Fiori Interface Clarification  \n\nCould you please update the shipping address for Order ID 40, Item No. 10, as this order is partially processed (WBSTA=B)? Additionally, I’d appreciate guidance on ensuring the Fiori interface remains responsive when accessing order details for users with limited access, as outlined in the SAP Fiori user experience paradigm. Thank you for your assistance.",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Please update the shipping address for this order.",
+      "description": "Order with WBSTA=B (partially processed)",
+      "expected_values": {
+        "quantity": 1.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-12"
+      }
+    },
+    "rag_evidence": "Figure 4: SAP Fiori User Experience Paradigm\nThere are five pillars to the SAP Fiori user experiences paradigm:\n●\nRole-based\nUsers have access to the applications that they need to perform their tasks. The \napplications are specific to completing these tasks.\n●\nResponsive\nThe application interface is responsive; it adapts to the size and device used by the users \naccessing it.\n●\nSimple\nSimple application scope – one user, one use case, and up to three screens for each \napplication.\n●\nCoherent",
+    "action_description": "Please update the shipping address for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_080",
+    "input": "Subject: Batch Number Assignment and System Update Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-70901 to order 70000166, item 10, as this order is currently in a WBSTA=A status with no goods movement processed? Additionally, I have a question regarding system updates: given SAP’s note that information may change without notice, what steps should users take to ensure compliance and data integrity when relying on forward-looking system functionalities?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Batch Number Assignment and System Update Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-70901 to order 70000166, item 10, as this order is currently in a WBSTA=A status with no goods movement processed? Additionally, I have a question regarding system updates: given SAP’s note that information may change without notice, what steps should users take to ensure compliance and data integrity when relying on forward-looking system functionalities?  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "70000166",
+      "item_no": 10,
+      "action": "Assign batch number B-70901 to this item.",
+      "description": "Order with WBSTA=A (goods movement not yet processed)",
+      "expected_values": {
+        "material_name": "Special Wine Acc",
+        "delivery_status": "A"
+      }
+    },
+    "rag_evidence": "all subject to change and may be changed by SAP SE or its affiliated companies at any time for any \nreason without notice. The information in this document is not a commitment, promise, or legal \nobligation to deliver any material, code, or functionality. All forward-looking statements are subject to \nvarious risks and uncertainties that could cause actual results to differ materially from expectations. \nReaders are cautioned not to place undue reliance on these forward-looking statements, which speak",
+    "action_description": "Assign batch number B-70901 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_081",
+    "input": "Subject: Request to Update Payment Terms and Clarification on POSNR Handling  \n\nDear [Recipient],  \n\nCould you please update the payment terms for Order ID 70000101, Item No 700001 to Net 60, as this item has a non-default POSNR and requires adjusted terms? Additionally, I’d appreciate guidance on how to verify the validity of dates in the ERP system when non-default POSNR values are applied, as the SAP documentation notes that such data should not be relied upon for purchasing decisions.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Payment Terms and Clarification on POSNR Handling  \n\nDear [Recipient],  \n\nCould you please update the payment terms for Order ID 70000101, Item No 700001 to Net 60, as this item has a non-default POSNR and requires adjusted terms? Additionally, I’d appreciate guidance on how to verify the validity of dates in the ERP system when non-default POSNR values are applied, as the SAP documentation notes that such data should not be relied upon for purchasing decisions.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "70000101",
+      "item_no": 700001,
+      "action": "Please set the payment terms to Net 60.",
+      "description": "Order item with non-default POSNR (item number != 10)",
+      "expected_values": {
+        "material_name": "Cupcake"
+      }
+    },
+    "rag_evidence": "only as of their dates, and they should not be relied upon in making purchasing decisions.\n© Copyright. All rights reserved.\niii",
+    "action_description": "Please set the payment terms to Net 60.",
+    "qa_question": null
+  },
+  {
+    "id": "r_082",
+    "input": "Subject: Request to Reschedule Delivery and Clarification on Warehouse Configuration  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. I am writing to request that the delivery for Order ID 40, Item No. 10 be rescheduled by two weeks, as the current delivery date has passed and goods movement remains incomplete. Additionally, could you clarify how to configure warehouse numbers in SAP ERP when linking plants and storage locations, considering the three-character requirement in Logistics Execution versus the four-character field in EWM? Your guidance on this matter would help ensure accurate system setup.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Reschedule Delivery and Clarification on Warehouse Configuration  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. I am writing to request that the delivery for Order ID 40, Item No. 10 be rescheduled by two weeks, as the current delivery date has passed and goods movement remains incomplete. Additionally, could you clarify how to configure warehouse numbers in SAP ERP when linking plants and storage locations, considering the three-character requirement in Logistics Execution versus the four-character field in EWM? Your guidance on this matter would help ensure accurate system setup.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "40",
+      "item_no": 10,
+      "action": "Please reschedule the delivery by two weeks.",
+      "description": "Overdue order — delivery date in the past, goods movement incomplete",
+      "expected_values": {
+        "material_name": "Plain non flavored Yogurt",
+        "quantity": 2.0,
+        "delivery_status": "B",
+        "delivery_date": "2022-01-25"
+      }
+    },
+    "rag_evidence": "4HANA. For the activation of the corresponding warehouse management functions, \ncombinations of plants and storage locations are linked with a warehouse number.\nNote:\nThe warehouse number is used in the two components Logistics Execution and \nEWM. However, the warehouse number is a three-character field in Logistics \nExecution, but a four-character field in EWM.\nUnit 2: Enterprise Structures\n22\n© Copyright. All rights reserved.",
+    "action_description": "Please reschedule the delivery by two weeks.",
+    "qa_question": null
+  },
+  {
+    "id": "r_083",
+    "input": "Subject: Request to Update Shipping Method for Order 6155  \n\nDear Team,  \n\nI am writing to request that the shipping method for Order 6155, Item No. 10, be changed to express courier to ensure timely delivery. Could you please confirm if this adjustment will require any updates to the sourcing configuration in the SAP ERP system, particularly regarding how material availability is integrated with the sales order process?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method for Order 6155  \n\nDear Team,  \n\nI am writing to request that the shipping method for Order 6155, Item No. 10, be changed to express courier to ensure timely delivery. Could you please confirm if this adjustment will require any updates to the sourcing configuration in the SAP ERP system, particularly regarding how material availability is integrated with the sales order process?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "6155",
+      "item_no": 10,
+      "action": "Change the shipping method to express courier.",
+      "description": "Multi-line order — sales order containing more than one item",
+      "expected_values": {
+        "material_name": "Flatscreen LE 64P",
+        "quantity": 5.0,
+        "delivery_date": "1999-12-28"
+      }
+    },
+    "rag_evidence": "The figure, Sourcing, covers the integration of materials management functions within the \nsales and distribution process.\nUnit 3: Overview of Sales Processes\n30\n© Copyright. All rights reserved.",
+    "action_description": "Change the shipping method to express courier.",
+    "qa_question": null
+  },
+  {
+    "id": "r_084",
+    "input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity? Additionally, I’d appreciate clarification on how to distinguish between user interface (UI) and user experience (UX) settings in SAP ERP, as outlined in the recent UX strategy documentation. Your guidance on this would help align our team’s approach to system navigation and reporting.  \n\nBest regards,  \n[Your",
+    "user_input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity? Additionally, I’d appreciate clarification on how to distinguish between user interface (UI) and user experience (UX) settings in SAP ERP, as outlined in the recent UX strategy documentation. Your guidance on this would help align our team’s approach to system navigation and reporting.  \n\nBest regards,  \n[Your",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "1785",
+      "item_no": 10,
+      "action": "Unblock the delivery for this order.",
+      "description": "Order where available stock exceeds ordered quantity",
+      "expected_values": {
+        "material_name": "Synthetic Clothes liquid  Detergent  5 L",
+        "quantity": 2.0,
+        "delivery_date": "2022-01-05",
+        "available_stock": 2505.0
+      }
+    },
+    "rag_evidence": "Therefore, business software must adapt and transform too, so that it provides good user \nexperiences for all roles in an enterprise. The user interface (UI) plays an important role in \nsupporting this trend. For SAP software products, the challenge is to keep a clear view and to \nunderstand the overall SAP strategy in the area of user experience.\nSAP User Experience\nFigure 2: UI Versus UX\nThe terms user interface (UI) and user experience (UX) stand for two different ways of \nthinking.",
+    "action_description": "Unblock the delivery for this order.",
+    "qa_question": null
+  },
+  {
+    "id": "r_085",
+    "input": "Subject: Batch Assignment and Presales Data Query  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly assign batch number B-72216 to order 2717, item 10, as the available stock exceeds the ordered quantity? Additionally, I would appreciate guidance on how to accurately record presales data within SAP ERP to ensure compliance with documentation requirements for large contracts.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Batch Assignment and Presales Data Query  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly assign batch number B-72216 to order 2717, item 10, as the available stock exceeds the ordered quantity? Additionally, I would appreciate guidance on how to accurately record presales data within SAP ERP to ensure compliance with documentation requirements for large contracts.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "2717",
+      "item_no": 10,
+      "action": "Assign batch number B-72216 to this item.",
+      "description": "Order where available stock exceeds ordered quantity",
+      "expected_values": {
+        "material_name": "Cool Hand wash",
+        "quantity": 3.0,
+        "delivery_date": "2022-03-23",
+        "available_stock": 2099.0
+      }
+    },
+    "rag_evidence": "●\nRecording presales data to help negotiate large contracts\n●\nSelling goods and services to large organizations that require the entire process to be \ndocumented\nThe figure, Presales Activities, names some important topics within the presales process \nphase.\nFigure 21: Presales Activities\nSales Order Processing\n© Copyright. All rights reserved.\n29",
+    "action_description": "Assign batch number B-72216 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_086",
+    "input": "Subject: Batch Number Assignment Request and System Clarification  \n\nDear [Recipient],  \n\nI am requesting the assignment of batch number B-42406 to order 70000166, item 10, which is currently in a WBSTA=A status (goods movement not yet processed). Could you also clarify how to configure the enterprise structure settings (Unit 2, page 14) to ensure batch numbers are correctly assigned for such orders?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Batch Number Assignment Request and System Clarification  \n\nDear [Recipient],  \n\nI am requesting the assignment of batch number B-42406 to order 70000166, item 10, which is currently in a WBSTA=A status (goods movement not yet processed). Could you also clarify how to configure the enterprise structure settings (Unit 2, page 14) to ensure batch numbers are correctly assigned for such orders?  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "70000166",
+      "item_no": 10,
+      "action": "Assign batch number B-42406 to this item.",
+      "description": "Order with WBSTA=A (goods movement not yet processed)",
+      "expected_values": {
+        "material_name": "Special Wine Acc",
+        "delivery_status": "A"
+      }
+    },
+    "rag_evidence": "Unit 2: Enterprise Structures\n14\n© Copyright. All rights reserved.",
+    "action_description": "Assign batch number B-42406 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_087",
+    "input": "Subject: Order Adjustment Request and System Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order 2845, Item No. 10, by 50 units, as we have available stock via MARD JOIN? Additionally, I’d appreciate guidance on how to update the goods issue document after adjusting an order quantity, as I want to ensure alignment with the relevant accounting processes.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Order Adjustment Request and System Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order 2845, Item No. 10, by 50 units, as we have available stock via MARD JOIN? Additionally, I’d appreciate guidance on how to update the goods issue document after adjusting an order quantity, as I want to ensure alignment with the relevant accounting processes.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "2845",
+      "item_no": 10,
+      "action": "Reduce the order quantity by 50 units.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "Flavored Yogurt",
+        "quantity": 4.0,
+        "delivery_date": "2022-03-23",
+        "available_stock": 2329.0
+      }
+    },
+    "rag_evidence": "documents.\n●\nOutbound deliveries and warehouse tasks are documents within shipping and warehouse \nprocessing.\n●\nThe goods issue document contains changes involving stock and is the basis for the \nrelevant accounting documents.\n●\nThe billing document is the basis for the relevant accounting documents.\nThe left and right sections of the figure represent key interfaces between the sales and \ndistribution process and other components.\nLesson: Executing SAP S/4HANA Sales Processes",
+    "action_description": "Reduce the order quantity by 50 units.",
+    "qa_question": null
+  },
+  {
+    "id": "r_088",
+    "input": "Subject: Batch Assignment Request and UI Clarification  \n\nDear [Recipient],  \n\nI need to assign batch number B-41358 to item 10 of order 15774, which is an order with a delivery date only (no stock join). Could you confirm if this action requires any additional steps in the SAP ERP system?  \n\nAdditionally, I’m reviewing the user interface documentation and would appreciate guidance on how to efficiently navigate batch assignment workflows while ensuring alignment with UX best practices for minimizing user friction.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Batch Assignment Request and UI Clarification  \n\nDear [Recipient],  \n\nI need to assign batch number B-41358 to item 10 of order 15774, which is an order with a delivery date only (no stock join). Could you confirm if this action requires any additional steps in the SAP ERP system?  \n\nAdditionally, I’m reviewing the user interface documentation and would appreciate guidance on how to efficiently navigate batch assignment workflows while ensuring alignment with UX best practices for minimizing user friction.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "15774",
+      "item_no": 10,
+      "action": "Assign batch number B-41358 to this item.",
+      "description": "Order with delivery date only (no stock join)",
+      "expected_values": {
+        "material_name": "Napkin Cloth",
+        "quantity": 1.0,
+        "delivery_date": "2014-02-19"
+      }
+    },
+    "rag_evidence": "thinking.\nUI, from a software perspective, describes the interface between the user and the device. It \naims at maximizing efficiency during use.\nUX takes on the perspective of the end user and aims at motivation and emotion, not only \nduring use, but also before and after. UX tries to create a positive and motivating experience \nfor the user.\nUser Types\nFigure 3: User Types\nVarious user types can be found, depending on the structure of the specialized area and the IT",
+    "action_description": "Assign batch number B-41358 to this item.",
+    "qa_question": null
+  },
+  {
+    "id": "r_089",
+    "input": "Subject: Request to Adjust Order Quantity and Inquiry on Training Material Access  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order ID 1228, Item No. 10 by 50 units, as the available stock exceeds the ordered quantity? Additionally, I am seeking guidance on how to access the TS460 training material (Material Number 50161882, Course Version 23) for the Sales in SAP S/4HANA Academy course, as outlined in the participant handbook. Your assistance with both matters would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity and Inquiry on Training Material Access  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order ID 1228, Item No. 10 by 50 units, as the available stock exceeds the ordered quantity? Additionally, I am seeking guidance on how to access the TS460 training material (Material Number 50161882, Course Version 23) for the Sales in SAP S/4HANA Academy course, as outlined in the participant handbook. Your assistance with both matters would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "1228",
+      "item_no": 10,
+      "action": "Reduce the order quantity by 50 units.",
+      "description": "Order where available stock exceeds ordered quantity",
+      "expected_values": {
+        "material_name": "Flavored Yogurt",
+        "quantity": 4.0,
+        "delivery_date": "2022-03-16",
+        "available_stock": 2417.0
+      }
+    },
+    "rag_evidence": "TS460\nSales in SAP S/4HANA Academy \nPart I 1/2 \n.\n.\nPARTICIPANT HANDBOOK\nINSTRUCTOR-LED TRAINING\n.\nCourse Version: 23\nCourse Duration: 9 Day(s)\nMaterial Number: 50161882",
+    "action_description": "Reduce the order quantity by 50 units.",
+    "qa_question": null
+  },
+  {
+    "id": "r_090",
+    "input": "Subject: Request to Adjust Order Quantity and Clarification on Sales Order Process  \n\nDear Team,  \n\nI hope this message finds you well. Could you kindly reduce the quantity of order 1049, item 10, by 50 units, as the available stock via MARD JOIN requires adjustment? Additionally, I’m reviewing the sales order process documentation and would appreciate guidance on how to efficiently update order quantities while maintaining data integrity during the MARD JOIN operation. Your assistance is greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity and Clarification on Sales Order Process  \n\nDear Team,  \n\nI hope this message finds you well. Could you kindly reduce the quantity of order 1049, item 10, by 50 units, as the available stock via MARD JOIN requires adjustment? Additionally, I’m reviewing the sales order process documentation and would appreciate guidance on how to efficiently update order quantities while maintaining data integrity during the MARD JOIN operation. Your assistance is greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "label": "BOTH",
+    "expected_intent": "BOTH",
+    "erp_evidence": {
+      "order_id": "1049",
+      "item_no": 10,
+      "action": "Reduce the order quantity by 50 units.",
+      "description": "Order with available stock via MARD JOIN",
+      "expected_values": {
+        "material_name": "W Nettop Desktop",
+        "quantity": 1.0,
+        "delivery_date": "2022-01-17",
+        "available_stock": 2368.0
+      }
+    },
+    "rag_evidence": "Unit 3: Overview of Sales Processes\n36\n© Copyright. All rights reserved.",
+    "action_description": "Reduce the order quantity by 50 units.",
+    "qa_question": null
+  }
+]

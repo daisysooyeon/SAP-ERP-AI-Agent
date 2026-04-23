@@ -196,7 +196,7 @@ SAP-ERP-AI-Agent/
 
 | 항목 | 내용 |
 |------|------|
-| **모델** | `Qwen2.5-3(7)B-Instruct` |
+| **모델** | `Qwen3-8B` |
 | **출력 형식** | Pydantic `RouterOutput` — `intent` + `reasoning` (Chain-of-Thought) |
 | **구현 방식** | LLM Structured Output (JSON mode) + Few-shot 10개 이상 |
 | **목표 정확도** | 99% 이상 |
@@ -382,10 +382,10 @@ SAP-ERP-AI-Agent/
 
 | 노드 | 모델 | Few-shot 예시 수 |
 |------|------|------------------|
-| Router | Qwen2.5-3B | 10개 이상 (3 클래스 균형) |
-| 파라미터 추출 | Qwen2.5-3B | 5개 이상 |
-| Text-to-SQL | Qwen2.5-Coder-3B | 3~5개 (스키마 포함) |
-| RAG 답변 생성 | Qwen2.5-3B | 3개 |
+| Router | Qwen3-8b | 10개 이상 (3 클래스 균형) |
+| 파라미터 추출 | Qwen3-8b | 5개 이상 |
+| Text-to-SQL | Qwen3-Coder, Qwen3-Coder-30B-A3B-Instruct | 3~5개 (스키마 포함) |
+| RAG 답변 생성 | Qwen3-8b | 3개 |
 | 최종 합성 | GPT-4o | 2개 (포맷 예시) |
 
 ### 공통 프롬프트 원칙

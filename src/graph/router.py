@@ -11,11 +11,16 @@ Flow:
 
 import os
 import logging
+import time
 from typing import Literal
+
+from dotenv import load_dotenv
+load_dotenv()  # .env 파일의 환경변수를 os.environ에 로드
 
 from pydantic import BaseModel, Field
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 
 from src.config import get_config
 from src.graph.state import AgentState
@@ -152,19 +157,51 @@ _PROMPT = ChatPromptTemplate.from_messages(
 # LLM factory  (swap out get_llm("router") once implemented)
 # ---------------------------------------------------------------------------
 
-def _build_llm() -> ChatOllama:
+def _build_llm():
     """
-    Instantiate the router LLM.
-    All settings are read from configs.yaml via get_config():
-      ollama.base_url          – Ollama server URL
-      models.router.name       – Ollama model tag
-      models.router.temperature – Sampling temperature
+    Instantiate the router LLM based on configs.yaml `models.router.provider`.
+
+    provider = "ollama"      → ChatOllama (local, no API key needed)
+    provider = "openrouter"  → ChatOpenAI pointed at OpenRouter endpoint
+    provider = "openai"      → ChatOpenAI pointed at OpenAI endpoint
     """
     cfg = get_config()
+    router_cfg = cfg.models.router
+
+    if router_cfg.provider == "openai":
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise EnvironmentError("OPENAI_API_KEY is not set in .env")
+        return ChatOpenAI(
+            model=router_cfg.name,
+            temperature=router_cfg.temperature,
+            openai_api_key=api_key,
+        )
+
+    if router_cfg.provider == "openrouter":
+        api_key = os.getenv("OPENROUTER_API_KEY")
+
+        if not api_key:
+            raise EnvironmentError(
+                "OPENROUTER_API_KEY is not set. "
+                "Add it to your .env file: OPENROUTER_API_KEY=sk-or-..."
+            )
+        return ChatOpenAI(
+            model=router_cfg.name,
+            temperature=router_cfg.temperature,
+            openai_api_key=api_key,
+            openai_api_base=cfg.openrouter.base_url,
+            default_headers={
+                "HTTP-Referer": "https://github.com/daisysooyeon/SAP-ERP-AI-Agent",
+                "X-Title": "SAP ERP AI Agent",
+            },
+        )
+
+    # default: Ollama
     return ChatOllama(
         base_url=cfg.ollama.base_url,
-        model=cfg.models.router.name,
-        temperature=cfg.models.router.temperature,
+        model=router_cfg.name,
+        temperature=router_cfg.temperature,
     )
 
 
@@ -196,15 +233,32 @@ def router_node(state: AgentState) -> dict:
     logger.info("[router_node] Classifying email intent …")
     logger.debug("[router_node] Input: %s", user_input[:200])
 
-    try:
-        result: RouterOutput = _chain.invoke({"user_input": user_input})
-    except Exception as exc:
-        logger.error("[router_node] LLM call failed: %s", exc, exc_info=True)
-        errors.append(f"router_node error: {exc}")
-        return {
-            "intent": None,
-            "error_messages": errors,
-        }
+    # Retry with exponential backoff on 429 Rate Limit errors
+    max_retries = 5
+    wait_secs = 5  # 5 → 10 → 20 → 40 → 80
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            result: RouterOutput = _chain.invoke({"user_input": user_input})
+            break  # 성공 시 루프 탈출
+        except Exception as exc:
+            err_str = str(exc)
+            # 429 Rate Limit인 경우 재시도
+            if "429" in err_str and attempt < max_retries:
+                logger.warning(
+                    "[router_node] Rate limited (429). Attempt %d/%d — waiting %ds …",
+                    attempt, max_retries, wait_secs,
+                )
+                time.sleep(wait_secs)
+                wait_secs *= 2  # 지수 백오프
+                continue
+            # 429 외 에러이거나 재시도 초과 시 실패 처리
+            logger.error("[router_node] LLM call failed: %s", exc, exc_info=True)
+            errors.append(f"router_node error: {exc}")
+            return {
+                "intent": None,
+                "error_messages": errors,
+            }
 
     logger.info("[router_node] intent=%s | reasoning=%s", result.intent, result.reasoning[:120])
 

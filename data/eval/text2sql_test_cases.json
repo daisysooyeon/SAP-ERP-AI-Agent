@@ -1,0 +1,248 @@
+[
+  {
+    "id": "tc_001",
+    "description": "Basic validation query — standard order with delivery date only",
+    "order_id": "0000015353",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 32.0,
+      "delivery_date": "2013-06-06"
+    },
+    "notes": "VBUP/MARD have no matching rows → NULL expected for delivery_status, available_stock"
+  },
+  {
+    "id": "tc_002",
+    "description": "Order with different quantity",
+    "order_id": "0000015146",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 137.0,
+      "delivery_date": "2013-04-19"
+    },
+    "notes": "quantity and delivery_date must match exactly"
+  },
+  {
+    "id": "tc_003",
+    "description": "Order with large quantity",
+    "order_id": "0000015141",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 180.0,
+      "delivery_date": "2013-04-19"
+    },
+    "notes": "Large quantity order"
+  },
+  {
+    "id": "tc_004",
+    "description": "Order item with WBSTA=B (partially shipped)",
+    "order_id": "40",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 1.0,
+      "delivery_status": "B"
+    },
+    "notes": "WBSTA=B means partially processed (goods movement)"
+  },
+  {
+    "id": "tc_005",
+    "description": "Order with available stock via MARD JOIN (HT-1140 material)",
+    "order_id": "5002471",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 158.0,
+      "delivery_date": "2011-08-02",
+      "available_stock": 7326.0
+    },
+    "notes": "MARD.LABST should be 7326.0 for HT-1140"
+  },
+  {
+    "id": "tc_006",
+    "description": "Order item on POSNR=20 (non-default item number)",
+    "order_id": "5002469",
+    "item_no": 20,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 22.0,
+      "delivery_date": "2011-08-02",
+      "available_stock": 7326.0
+    },
+    "notes": "Tests that POSNR=20 is handled correctly (not always 10)"
+  },
+  {
+    "id": "tc_007",
+    "description": "Order with available stock, large quantity",
+    "order_id": "5002470",
+    "item_no": 20,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 220.0,
+      "delivery_date": "2011-08-02",
+      "available_stock": 7326.0
+    },
+    "notes": "Large quantity with stock data available"
+  },
+  {
+    "id": "tc_008",
+    "description": "Order with WBSTA=A (not yet processed)",
+    "order_id": "70000166",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "delivery_status": "A"
+    },
+    "notes": "WBSTA=A means goods movement not yet processed"
+  },
+  {
+    "id": "tc_009",
+    "description": "Order with 2012 delivery date",
+    "order_id": "5002472",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 15.0,
+      "delivery_date": "2012-08-02",
+      "available_stock": 7326.0
+    },
+    "notes": "Different year delivery date check"
+  },
+  {
+    "id": "tc_010",
+    "description": "Order with quantity 150 and stock",
+    "order_id": "5002473",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 150.0,
+      "delivery_date": "2012-08-02",
+      "available_stock": 7326.0
+    },
+    "notes": "Round quantity value"
+  },
+  {
+    "id": "tc_011",
+    "description": "Non-existent order — should return no row (None result)",
+    "order_id": "9999999999",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": null,
+    "notes": "SQL must execute without error even if no rows returned"
+  },
+  {
+    "id": "tc_012",
+    "description": "Order with POSNR=10 and 60 units",
+    "order_id": "0000015135",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 60.0,
+      "delivery_date": "2013-04-18"
+    },
+    "notes": "Smaller quantity order"
+  },
+  {
+    "id": "tc_013",
+    "description": "Order with quantity 190",
+    "order_id": "0000015134",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 190.0,
+      "delivery_date": "2013-04-18"
+    },
+    "notes": "Larger quantity variation"
+  },
+  {
+    "id": "tc_014",
+    "description": "Order with delivery date 2013-04-18 and 138 units",
+    "order_id": "0000015133",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 138.0,
+      "delivery_date": "2013-04-18"
+    },
+    "notes": "Consistent date group"
+  },
+  {
+    "id": "tc_015",
+    "description": "Order with delivery date 2013-04-18 and 140 units",
+    "order_id": "0000015136",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 140.0,
+      "delivery_date": "2013-04-18"
+    },
+    "notes": "Same date group, different quantity"
+  },
+  {
+    "id": "tc_016",
+    "description": "Stock lookup via MARD JOIN — 2015 order",
+    "order_id": "16654",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 1.0,
+      "delivery_date": "2015-03-20",
+      "available_stock": 7326.0
+    },
+    "notes": "Small quantity order with full stock data"
+  },
+  {
+    "id": "tc_017",
+    "description": "Stock lookup via MARD JOIN — 2015 sibling order",
+    "order_id": "16664",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 1.0,
+      "delivery_date": "2015-03-20",
+      "available_stock": 7326.0
+    },
+    "notes": "Same material, same stock level, different order"
+  },
+  {
+    "id": "tc_018",
+    "description": "POSNR=10 with 167 units and 2012 delivery",
+    "order_id": "5002474",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 167.0,
+      "delivery_date": "2012-08-02",
+      "available_stock": 7326.0
+    },
+    "notes": "Mixed year delivery"
+  },
+  {
+    "id": "tc_019",
+    "description": "POSNR=10 with 110 units",
+    "order_id": "5002475",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 110.0,
+      "delivery_date": "2012-08-02",
+      "available_stock": 7326.0
+    },
+    "notes": "Consistent 2012-08-02 delivery group"
+  },
+  {
+    "id": "tc_020",
+    "description": "2013 order with 2015 delivery via MARD",
+    "order_id": "20000154",
+    "item_no": 10,
+    "expected_columns": ["quantity", "delivery_status", "delivery_date", "available_stock"],
+    "expected_values": {
+      "quantity": 1.0,
+      "delivery_date": "2015-03-13",
+      "available_stock": 7326.0
+    },
+    "notes": "Verifies EDATU date is read from VBEP correctly"
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "accuracy": 1.0,
+  "report": {
+    "ACTION_ONLY": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 30.0
+    },
+    "QA_ONLY": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 30.0
+    },
+    "BOTH": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 30.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 90.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 90.0
+    }
+  },
+  "errors": [],
+  "latency_s": {
+    "mean": 6.66978679333309,
+    "total": 600.2808113999781
+  }
+}

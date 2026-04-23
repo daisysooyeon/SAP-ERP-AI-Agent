@@ -1,0 +1,830 @@
+[
+  {
+    "question": "What is the field used to enter the ship-to party?",
+    "answer": "ship-to party field",
+    "source_chunk": "ship-to party in the ship-to party field.\nLesson: Source of Data – Customer Master Data - SAP Business Partner \n© Copyright. All rights reserved.\n29",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 69,
+    "question_type": "factual",
+    "id": "rag_0001"
+  },
+  {
+    "question": "If a company needs to create a business partner for a married couple, which category should they select according to the BP Category classification?",
+    "answer": "Group",
+    "source_chunk": "BP Category\nFigure 19: BP Category\nBusiness Partner Category: \nThe business partner category classifies a business partner as a natural person (private \nindividual), an organization (legal person or part of a legal person, such as a department), or a \ngroup (combination of several persons as one person, such as a married couple, family, or \nhouse-sharing group). When a business partner is created, a business partner category must",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 77,
+    "question_type": "applied",
+    "id": "rag_0002"
+  },
+  {
+    "question": "What is the instruction provided for splitting an order into multiple outbound deliveries?",
+    "answer": "Split this order into multiple outbound deliveries.",
+    "source_chunk": "split this order into multiple outbound deliveries.\n134\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 330,
+    "question_type": "factual",
+    "id": "rag_0003"
+  },
+  {
+    "question": "Is the statement 'You can only set a billing block in an order' true or false based on the provided information?",
+    "answer": "False",
+    "source_chunk": "5. You can only set a billing block in an order.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nCorrect. You can set a billing and delivery block in an order.\nUnit 4: Learning Assessment - Answers\n© Copyright. All rights reserved.\n41",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 105,
+    "question_type": "reasoning",
+    "id": "rag_0004"
+  },
+  {
+    "question": "When processing a rush order, does the system automatically generate an invoice for the customer?",
+    "answer": "False. You do not give the customer an invoice when processing the rush order. You only do this in the cash sales process.",
+    "source_chunk": "Unit 7\nLearning Assessment - Answers\n1.\nWhen you save the rush order, the system automatically creates a delivery and prints a \ndocument that can be given to the customer as an invoice.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nCorrect. You do not give the customer an invoice when processing the rush order. You \nonly do this in the cash sales process.\n2. Which statement is true in the consignment process?\nChoose the correct answer.\nX",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 209,
+    "question_type": "applied",
+    "id": "rag_0005"
+  },
+  {
+    "question": "What are outbound deliveries used for in the shipping process?",
+    "answer": "picking, packing, and posting the goods issue",
+    "source_chunk": "Unit 3\nLesson 3\nProcessing Outbound Deliveries\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nProcess outbound deliveries\nOutbound Deliveries\nOutbound deliveries are the basic documents for the different activities during the shipping \nprocess (picking, packing, and posting the goods issue). In most cases, they are created with \nreference to one or more sales orders that are ready to be shipped. Due to the reference, the",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 105,
+    "question_type": "factual",
+    "id": "rag_0006"
+  },
+  {
+    "question": "What are the key characteristics of the SAP Fiori user experience paradigm as outlined in the text?",
+    "answer": "The SAP Fiori user experience paradigm is characterized by being role-based (task-specific applications), responsive (adapts to device size), simple (one user, one use case, up to three screens), and coherent.",
+    "source_chunk": "Figure 4: SAP Fiori User Experience Paradigm\nThere are five pillars to the SAP Fiori user experiences paradigm:\n●\nRole-based\nUsers have access to the applications that they need to perform their tasks. The \napplications are specific to completing these tasks.\n●\nResponsive\nThe application interface is responsive; it adapts to the size and device used by the users \naccessing it.\n●\nSimple\nSimple application scope – one user, one use case, and up to three screens for each \napplication.\n●\nCoherent",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 24,
+    "question_type": "reasoning",
+    "id": "rag_0007"
+  },
+  {
+    "question": "When processing a consignment fill-up in SAP ERP, which order type is used to initiate the goods issue?",
+    "answer": "Order type KB",
+    "source_chunk": "Consignment Processing\nFigure 53: Consignment Processing\nIn consignment processing, goods are delivered to the customer but remain the property of \nthe company until they are actually used. An invoice is not created until the customer \nwithdraws goods from the consignment stock. Up until that point, the customer has the right \nto return consignment goods.\nYou process consignment fill-up with order type KB. The goods issue sets up a special stock",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 199,
+    "question_type": "applied",
+    "id": "rag_0008"
+  },
+  {
+    "question": "Which item category is used by document type WK2?",
+    "answer": "WKC",
+    "source_chunk": "taxes or statistical updates.\nDocument type WK1 uses item category WKN. Document type WK2 uses item category WKC. \nAccording to what you enter in the item, the system determines the item category with the \nusage indicator VCTR or the item category group VCIT. In copying control, you can decide at \nitem level if the value contract material should be copied to the release, (WKC) or not (WKN).\nIf a release exceeds the target value in a contract item, you can configure how the system",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 318,
+    "question_type": "factual",
+    "id": "rag_0009"
+  },
+  {
+    "question": "What is the purpose of the typographic conventions listed in the text?",
+    "answer": "To distinguish between different types of information such as instructions, warnings, examples, and user interface elements in the handbook.",
+    "source_chunk": "Typographic Conventions\nAmerican English is the standard used in this handbook.\nThe following typographic conventions are also used.\nThis information is displayed in the instructor’s presentation\nDemonstration\nProcedure\nWarning or Caution\nHint\nRelated or Additional Information\nFacilitated Discussion\nUser interface control\nExample text\nWindow title\nExample text\n© Copyright. All rights reserved.\niii",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 7,
+    "question_type": "reasoning",
+    "id": "rag_0010"
+  },
+  {
+    "question": "If I need to select specific SAP Fiori apps for a project based on their type and version, which filters in the SAP Fiori Apps Reference Library should I use?",
+    "answer": "Use the Application Type and Product Version filters to select the required sets of apps.",
+    "source_chunk": "SAP Fiori Library\nSAP Fiori Apps Reference Library\nSAP Fiori Apps Reference Library is a comprehensive library of all relevant SAP content for \nthe SAP Fiori launchpad. Using the library, you can:\n●\nFind filters such as Application Type and Product Version help to select the sets of apps \nneeded\n●\nFind key information for each app, including all the technical data you need for installation \nand configuration\n●\nNavigate directly to related resources, such as app documentation and the Product",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 36,
+    "question_type": "applied",
+    "id": "rag_0011"
+  },
+  {
+    "question": "What is a scheduling agreement according to the text?",
+    "answer": "An outline agreement between you and a sold-to party that is valid for a certain period of time, containing fixed delivery dates and quantities.",
+    "source_chunk": "the Service Management application module whose functions are explained in another \ncourse.\nScheduling Agreements\nFigure 72: Scheduling Agreements\nA scheduling agreement is an outline agreement between you and a sold-to party that is valid \nfor a certain period of time. The scheduling agreement contains fixed delivery dates and \nquantities.\nThese dates are contained in the schedule lines for the scheduling agreements. When the",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 284,
+    "question_type": "factual",
+    "id": "rag_0012"
+  },
+  {
+    "question": "Is the delivery date of an order always set manually? Explain.",
+    "answer": "No, because the sales document type can propose the delivery date.",
+    "source_chunk": "Unit 5\nLearning Assessment - Answers\n1.\nWhat does a sales document type control?\nIt controls the number assignment, the default billing type, and the default delivery type.\n2. The requested delivery date of an order has to be set manually.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nCorrect. You can propose the delivery date by the sales document type.\n3. The item category determines if you can change the default incoterms on item level.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 157,
+    "question_type": "reasoning",
+    "id": "rag_0013"
+  },
+  {
+    "question": "If a customer requests a delivery date earlier than in scenario 1, can the system confirm this date? Why or why not?",
+    "answer": "Yes, because the system considers the replenishment lead time in the availability check. If the material availability date is after the replenishment lead time expires, the requested delivery date can be confirmed.",
+    "source_chunk": "●\nThe requested delivery date is earlier than in scenario 1\nBecause the system now also considers the replenishment lead time as part of the availability \ncheck, and the material availability date lies after the expiration of the replenishment lead \ntime, the requested delivery date can be confirmed.\nThe figure, Availability Checks – Scenario 4, illustrates scenario 4.\nFigure 79: Availability Checks – Scenario 4\nBackorder Processing",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 288,
+    "question_type": "applied",
+    "id": "rag_0014"
+  },
+  {
+    "question": "What is automatically transferred to material requirements planning (MRP) when a sales order is created?",
+    "answer": "the material requirements arising from the material quantities of the sales order items",
+    "source_chunk": "Control of Availability Check\nFigure 69: Control of Availability Check\nTransfer of Requirements\nWhen a customer orders materials and you create the appropriate sales order, the supply of \nthe corresponding material quantities has to be ensured. To achieve this goal, the material \nrequirements arising from the material quantities of the sales order items are automatically \ntransferred and made available for material requirements planning (MRP).",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 264,
+    "question_type": "factual",
+    "id": "rag_0015"
+  },
+  {
+    "question": "How does SAP S/4HANA assist users in prioritizing important tasks within Monitoring and Sales Analytics?",
+    "answer": "SAP S/4HANA provides relevant insights, contacts, collaboration features, and notes for documenting actions to help users focus on the most important items first.",
+    "source_chunk": "in order to focus on the most important items first.\nSAP S/4HANA supports the users with the relevant insights, contacts, and collaboration \nfeatures. Users can also use notes to document their actions.\nUnit 10: Monitoring and Sales Analytics\n166\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 396,
+    "question_type": "reasoning",
+    "id": "rag_0016"
+  },
+  {
+    "question": "In SAP ERP, where can you find information about managing documents?",
+    "answer": "The 'documents' section provides information on managing documents within the system.",
+    "source_chunk": "documents.\n© Copyright. All rights reserved.\n61",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 150,
+    "question_type": "applied",
+    "id": "rag_0017"
+  },
+  {
+    "question": "What is a sales organization responsible for?",
+    "answer": "product liability and other customer rights of recourse",
+    "source_chunk": "Sales Organization\nFigure 7: Sales Organization\nA sales organization represents the organizational structures in sales and distribution. Each \nsales organization represents a selling unit. It is, for example, responsible for product liability \nand other customer rights of recourse. You can use sales organizations to subdivide markets \ninto regions. Each business transaction is processed within a sales organization.\nA sales organization is assigned to exactly one company code.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 40,
+    "question_type": "factual",
+    "id": "rag_0018"
+  },
+  {
+    "question": "How does SAP ERP allow for different business data settings in sales documents containing multiple item categories?",
+    "answer": "By defining the option to differ from business data separately for each item category, enabling some items to match the header data while others can have different business data.",
+    "source_chunk": "should be able to differ from business data at header level. You define this option separately \nfor each item category. This allows you to create documents containing both items in which \nthe business data must be identical to the sales document header and items that allow \ndifferent business data.\nOverview of Changing of Sales Documents - Fast Changes\nFast Changes\n© Copyright. All rights reserved.\n35",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 91,
+    "question_type": "reasoning",
+    "id": "rag_0019"
+  },
+  {
+    "question": "After completing Unit 9 on Complaints Processing, what specific action can a user perform related to returns processing?",
+    "answer": "Create returns",
+    "source_chunk": "Figure 101: Returns Processing\nLESSON SUMMARY\nYou should now be able to:\n●\nCreate returns\nUnit 9: Complaints Processing\n160\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 385,
+    "question_type": "applied",
+    "id": "rag_0020"
+  },
+  {
+    "question": "What is an incompleteness log in the context of SAP ERP sales documents?",
+    "answer": "An incompleteness log is a list of all data essential to a company in a sales document that has not yet been entered in the system.",
+    "source_chunk": "Unit 8\nLesson 1\nIncompletion Check and its Configuration\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nIncompletion Check and its Configuration\nIncompletion Log\nOverview on Incompletion Log\nFigure 55: Incompletion Log\nAn incompleteness log is a list of all data essential to your company in a sales document that \nhas not yet been entered in the system.\nYou can define these data fields in Customizing for the incompletion procedure.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 213,
+    "question_type": "factual",
+    "id": "rag_0021"
+  },
+  {
+    "question": "What is the title of the unit discussed in this chunk and its corresponding page number?",
+    "answer": "Unit 13: Sales Workshop, page 182",
+    "source_chunk": "Unit 13: Sales Workshop\n182\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 431,
+    "question_type": "reasoning",
+    "id": "rag_0022"
+  },
+  {
+    "question": "How does SAP S/4HANA address the challenge of stale data and disconnected analytics in real-time decision-making scenarios?",
+    "answer": "SAP S/4HANA couples transactions with analysis in real-time within a single blended environment, eliminating the need for separate transactional and analytical applications on separate platforms.",
+    "source_chunk": "makers are forced to rely on stale or insufficient data, or when they cannot connect analytic \ninsights to source data.\nSAP S/4HANA can couple transactions with analysis in real-time, within a single blended \nenvironment to determine the best way to capture live insight about a fast-breaking situation. \nRather than using separate transactional and analytical applications built on separate \nplatforms, a single data management environment for both systems of record and systems of",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 419,
+    "question_type": "applied",
+    "id": "rag_0023"
+  },
+  {
+    "question": "What does the figure 'Condition Master Records in Pricing' visualize?",
+    "answer": "an example of a condition master record.",
+    "source_chunk": "●\nCondition class (for example, price or discount)\n●\nScales (are scales allowed and is a value or quantity scale possible?)\n●\nLevel (is the data record relevant for the header and/or item level of the document?)\n●\nValidity period (a default value can be proposed)\nThe figure, Condition Master Records in Pricing, visualizes an example of a condition master \nrecord.\nFigure 51: Condition Master Records in Pricing\nPricing\nThe pricing (determination of relevant prices, taxes, discounts, and so on) is performed",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 184,
+    "question_type": "factual",
+    "id": "rag_0024"
+  },
+  {
+    "question": "How do the control parameters for item categories differ from those for schedule line categories according to the unit objectives?",
+    "answer": "The unit objectives state that item categories have important control parameters, while schedule line categories have the most important control parameters.",
+    "source_chunk": "UNIT 5\nControlling Sales Documents\nLesson 1\nControlling Sales Documents - Sales Document Type\n45\nLesson 2\nControlling Sales Documents - Item Category\n49\nLesson 3\nControlling Sales Documents - Schedule Line Categories\n57\nUNIT OBJECTIVES\n●\nIdentify the elements that control the sales documents\n●\nIdentify and explain the important control parameters for item categories\n●\nIdentify and explain the most important control parameters for schedule line categories\n© Copyright. All rights reserved.\n43",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 107,
+    "question_type": "reasoning",
+    "id": "rag_0025"
+  },
+  {
+    "question": "If you need to sell a service in SAP ERP, which material type should you use to simplify data maintenance?",
+    "answer": "DIEN",
+    "source_chunk": "Unit 8\nLesson 3\nSelling Service Products\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nSell service products\nService Products\nIf you want to sell services, you have to maintain corresponding material master records for \nyour services first. However, you only have to maintain the sales relevant data. Information \nabout warehousing, for example, is not necessary for service products.\nThe material type DIEN is the appropriate choice for service products and simplifies the data",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 350,
+    "question_type": "applied",
+    "id": "rag_0026"
+  },
+  {
+    "question": "What is the title of Unit 9 in the SAP ERP manual?",
+    "answer": "Partner Functions in SD",
+    "source_chunk": "Unit 9: Partner Functions in SD\n98\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 230,
+    "question_type": "factual",
+    "id": "rag_0027"
+  },
+  {
+    "question": "In backward scheduling, is the requested delivery date from the customer considered the relevant delivery date?",
+    "answer": "True",
+    "source_chunk": "Unit 5\nLearning Assessment\n1.\nThe plants used in sales and distribution processes are often called delivering plants.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n2. Which of the following functions are dependent on shipping points?\nChoose the correct answers.\nX\nA Delivery scheduling\nX\nB Route determination\nX\nC Delivery creation\n3. In backward scheduling, the requested delivery date from the customer is assumed to be \nthe relevant delivery date.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 247,
+    "question_type": "reasoning",
+    "id": "rag_0028"
+  },
+  {
+    "question": "If a material needs to be excluded from a specific process, which SAP ERP unit and functionality should be used?",
+    "answer": "Unit 11: Material Determination, Listing and Exclusion",
+    "source_chunk": "with a specifically defined material.\nUnit 11: Material Determination, Listing and Exclusion\n142\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 358,
+    "question_type": "applied",
+    "id": "rag_0029"
+  },
+  {
+    "question": "What is calculated in forward scheduling?",
+    "answer": "the delivery date",
+    "source_chunk": "assumed to be the relevant delivery date. In forward scheduling, the delivery date is \ncalculated.\n100\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 251,
+    "question_type": "factual",
+    "id": "rag_0030"
+  },
+  {
+    "question": "How does manual production selection (substitution reason 0005) differ from automatic product selection (reasons 0004/0006) in SAP ERP?",
+    "answer": "Manual production selection (0005) displays a list of substitution materials without automatic replacement, while automatic product selection (0004/0006) depends on availability in order and delivery for replacement.",
+    "source_chunk": "determination can support this business practice:\nSubstitution reason 0005\nManual production selection (list of default values)\nReason for substitution 0004/0006\nAutomatic product selection (depending on availabil-\nity in order and delivery)\nIn manual production selection, (reason for substitution 0005), the system does not \nautomatically replace the product. Instead, it displays a list of all of the substitution materials",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 350,
+    "question_type": "reasoning",
+    "id": "rag_0031"
+  },
+  {
+    "question": "If a customer returns goods to your company, which document type should be used to record this transaction in SAP ERP?",
+    "answer": "Returns",
+    "source_chunk": "processing. The most important of these document types are:\n●\nCredit/debit memo request\nUsed to credit/debit a certain amount to a customer.\n●\nReturns\nUsed when the customer returns goods to you.\nIn many cases, you create the particular documents with reference to an existing process. In \nthis way, you always have a complete document flow of the process, including all the relevant \ncomplaint documents. A large part of the relevant information can also be copied from the",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 366,
+    "question_type": "applied",
+    "id": "rag_0032"
+  },
+  {
+    "question": "What channels does SAP S/4HANA output management support?",
+    "answer": "print, email, XML, and IDoc (for on premise)",
+    "source_chunk": "●\nFull integration with SAP Fiori apps\n●\nState-of-the-art email support: flexible configuration, multiple recipients, and email \ntemplates\nIn contrast with classical output management based on output master data, SAP S/4HANA \noutput management supports only the print, email, XML and IDoc (for on premise) channels. \nOther channels are not available by default.\nThe figure, BRFplus Decision Table, illustrates the concept and use of typical BRFplus \ndecision tables.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 198,
+    "question_type": "factual",
+    "id": "rag_0033"
+  },
+  {
+    "question": "After a credit/debit memo request is created, what steps are required before billing documents can be generated?",
+    "answer": "The billing block must be removed to allow the creation of billing documents.",
+    "source_chunk": "When you create a credit/debit memo request, the document automatically contains a billing \nblock. This block prevents the document from being billed immediately. Once the complaint \nhas been checked by the responsible employees, the credit/debit memo request can be \nreleased by removing the billing block.\nAfter the billing block has been removed, the corresponding billing documents can be created \nand the required accounting documents are generated automatically. In this way, the correct",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 369,
+    "question_type": "applied",
+    "id": "rag_0034"
+  },
+  {
+    "question": "What is the SAP Fiori launchpad?",
+    "answer": "A shell that hosts SAP Fiori apps and provides services such as navigation, personalization, embedded support, and application configuration.",
+    "source_chunk": "The SAP Fiori launchpad is a shell that hosts SAP Fiori apps, and provides services such as \nnavigation, personalization, embedded support, and application configuration.\nThe launchpad is the entry point to SAP Fiori apps on mobile and desktop devices. The SAP \nFiori launchpad home page is the first page that users see after they have signed in. The \nlaunchpad home page displays tiles and links that allow the user to launch apps. Tiles is a",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 28,
+    "question_type": "factual",
+    "id": "rag_0035"
+  },
+  {
+    "question": "How do the organizational units specifically designed for sales and distribution processes differ from other organizational units in SAP S/4HANA?",
+    "answer": "Organizational units for sales and distribution (e.g., sales organization, distribution channel) are exclusive to these processes, while others like company code or plant belong to different areas but are still part of the overall SAP ERP structure.",
+    "source_chunk": "organizational units for all areas of your company (such as accounting, purchasing, \nproduction, and warehousing). We will focus on the elements that are relevant for sales and \ndistribution processes.\nSAP S/4HANA uses a range of organizational units designed exclusively for mapping sales \nand distribution processes, such as the sales organization and distribution channel. Other \norganizational units, such as the company code or plant, belong to other areas but are also",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 45,
+    "question_type": "reasoning",
+    "id": "rag_0036"
+  },
+  {
+    "question": "When configuring product selection in SAP ERP, how is the priority of products determined?",
+    "answer": "The priority of products is determined by the sequence in which they appear in the selection.",
+    "source_chunk": "product selection, the sequence in which they appear defines the priority that they have.\nLesson: Material Determination\n© Copyright. All rights reserved.\n141",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 354,
+    "question_type": "applied",
+    "id": "rag_0037"
+  },
+  {
+    "question": "What happens to the old item in the sales document?",
+    "answer": "It is automatically replaced.",
+    "source_chunk": "automatically replace the old one in the sales document.\n© Copyright. All rights reserved.\n177",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 422,
+    "question_type": "factual",
+    "id": "rag_0038"
+  },
+  {
+    "question": "Is the statement 'The incompleteness procedure always contain the fields: customer reference, currency, and payment terms' true or false based on the provided chunk?",
+    "answer": "The chunk does not provide sufficient information to determine the truth of the statement.",
+    "source_chunk": "X\nTrue\nX\nFalse\n3. The incompleteness procedure always contain the fields: customer reference, currency, \nand payment terms.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n© Copyright. All rights reserved.\n95",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 225,
+    "question_type": "reasoning",
+    "id": "rag_0039"
+  },
+  {
+    "question": "When setting up picking activities in SAP EWM, which document forms the basis for execution?",
+    "answer": "Outbound delivery order",
+    "source_chunk": "4. Each schedule line in the sales document can become an item in the delivery document.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nCorrect. Unlike sales documents, delivery documents do not contain schedule lines. Each \nschedule line in the sales document can become an item in the delivery document.\n5. Which of the following documents forms the basis for the execution of picking activities in \nSAP EWM?\nChoose the correct answer.\nX\nA Outbound delivery order\nX\nB Goods issue document\nX",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 140,
+    "question_type": "applied",
+    "id": "rag_0040"
+  },
+  {
+    "question": "What is the basis for defining a business partner role?",
+    "answer": "a business transaction",
+    "source_chunk": "You can use the business partner role to carry out a business classification of a business \npartner. The basis for the definition of a business partner role is a business transaction. The \nattributes of the BP role depend on the particular transaction involved. The data that is \navailable for a transaction also depends on the Business Partner Category.\nYou can create and manage your business partners centrally for different business",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 72,
+    "question_type": "factual",
+    "id": "rag_0041"
+  },
+  {
+    "question": "How does the representation of a client differ between organizational structures and financial accounting according to the text?",
+    "answer": "In organizational structures, a client is a self-contained technical unit storing general data, while in financial accounting, it is represented by company code and business area.",
+    "source_chunk": "Integration of Sales and Financial Accounting\nFigure 5: Integration of Sales and Financial Accounting\nAll organizational units within a client are subject to one business control. A client can thus be \nconsidered to be a synonym for the group.\nA client is a self-contained technical unit. General data and tables that are used for several \norganizational structures are stored at this level.\nYou can use the company code and business area to represent a group from a financial \naccounting perspective.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 34,
+    "question_type": "reasoning",
+    "id": "rag_0042"
+  },
+  {
+    "question": "When setting up free goods in SAP ERP, which objective should be prioritized to enable automatic determination of free goods?",
+    "answer": "Set up automatic free goods determination",
+    "source_chunk": "UNIT 12\nFree Goods\nLesson 1\nFree Goods\n157\nUNIT OBJECTIVES\n●\nSet up automatic free goods determination\n© Copyright. All rights reserved.\n155",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 378,
+    "question_type": "applied",
+    "id": "rag_0043"
+  },
+  {
+    "question": "What are the objectives of UNIT 10?",
+    "answer": "Utilize the Sales Order Fulfillment app, Manage sales plans, Use analytical apps",
+    "source_chunk": "UNIT 10\nMonitoring and Sales Analytics\nLesson 1\nUtilizing the Sales Order Fulfillment App\n165\nLesson 2\nManaging Sales Plans\n173\nLesson 3\nUsing Analytical Apps\n175\nUNIT OBJECTIVES\n●\nUtilize the Sales Order Fulfillment app\n●\nManage sales plans\n●\nUse analytical apps\n© Copyright. All rights reserved.\n163",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 391,
+    "question_type": "factual",
+    "id": "rag_0044"
+  },
+  {
+    "question": "What is the purpose of a distribution chain in SAP ERP?",
+    "answer": "It is a way of classifying how the sales structure is organized and a method for distributing the product.",
+    "source_chunk": "distribution channel.\nA distribution chain consists of a sales organization and a distribution channel. It is a way of \nclassifying how the sales structure is organized and a method for distributing the product.\nLesson: Enterprise Structures in Sales and Distribution\n© Copyright. All rights reserved.\n17",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 44,
+    "question_type": "reasoning",
+    "id": "rag_0045"
+  },
+  {
+    "question": "When setting up a value contract in SAP ERP, which three key areas should you configure?",
+    "answer": "Duration category, Subsequent activities, and Cancellation procedure.",
+    "source_chunk": "●\nDuration category\n●\nSubsequent activities\n●\nCancellation procedure\nLESSON SUMMARY\nYou should now be able to:\n●\nSet up and use value contracts in Customizing\nLesson: Value Contracts\n© Copyright. All rights reserved.\n131",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 329,
+    "question_type": "applied",
+    "id": "rag_0046"
+  },
+  {
+    "question": "What structures the content of a page in SAP Fiori Launchpad?",
+    "answer": "Sections",
+    "source_chunk": "fewer apps may use one page per space, whereas business roles with more apps may use \nmultiple pages per space. A page consists of sections that are used to further structure the \ncontent.\nA section structures the content of a page semantically. A section consists of tiles that \nvisualize the content of a space. A section title is optional.\nUsers can switch between both the layouts with the user actions menu.\nSAP Fiori Launchpad User Personalization\nFigure 9: SAP Fiori Launchpad User Personalization",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 33,
+    "question_type": "factual",
+    "id": "rag_0047"
+  },
+  {
+    "question": "What are the drawbacks of separating transactional and analytical workloads in data management systems according to the text?",
+    "answer": "The OLAP system does not have the most up-to-date data and only has a predefined subset of the data.",
+    "source_chunk": "master data\n●\nOLAP: Dunning, check the available quantity, operational reporting (list open sales orders)\nToday's data management systems are optimized either for daily transactional or for \nanalytical workloads. This separation leads to the following drawbacks:\n●\nThe OLAP system does not have the most up-to-date data.\n●\nThe OLAP system only has a predefined subset of the data.\n© Copyright. All rights reserved.\n175",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 415,
+    "question_type": "reasoning",
+    "id": "rag_0048"
+  },
+  {
+    "question": "What does the process flow enable users to do?",
+    "answer": "Access the history and current status of the relevant documents at any time.",
+    "source_chunk": "Figure 27: Process Overview\nProcess Flow\nThe linking of the documents within a sales and distribution process can be displayed via the \nprocess flow. This enables you to access the history and current status of the relevant \ndocuments at any time.\nDepending on the document from which you call the process flow, all the relevant preceding \nand subsequent documents are displayed. The main processing status can also be tracked in",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 92,
+    "question_type": "factual",
+    "id": "rag_0049"
+  },
+  {
+    "question": "What does a partner function procedure allow employees at your own company to do?",
+    "answer": "assume partner functions of partner type 'Personnel'",
+    "source_chunk": "Unit 9\nLearning Assessment - Answers\n1.\nIn a partner function procedure, employees at your own company can assume partner \nfunctions of partner type \"Personnel\".\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nCorrect. In a partner function procedure, employees at your own company can assume \npartner functions of partner type \"Personnel\".\n2. Which of the following statements is true for a partner function procedure?\nChoose the correct answer.\nX",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 276,
+    "question_type": "reasoning",
+    "id": "rag_0050"
+  },
+  {
+    "question": "If a mandatory partner function is missing in a sales document, what notification does the system provide?",
+    "answer": "A note will appear in the incompletion log.",
+    "source_chunk": "●\nProcedure at header level, Sales document type\n●\nProcedure at item level, Item category\n●\nProcedure at schedule line level, Schedule line cat.\nYou can also flag partner functions, texts, and condition types in pricing as mandatory. If \nthese entries are then missing, a note will appear in the incompletion log.\nUnit 8: Incompletion\n92\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 220,
+    "question_type": "applied",
+    "id": "rag_0051"
+  },
+  {
+    "question": "What is the main topic discussed in this chunk?",
+    "answer": "decision tables",
+    "source_chunk": "decision tables.\nLesson: Explaining Additional Master Data Topics\n© Copyright. All rights reserved.\n79",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 199,
+    "question_type": "factual",
+    "id": "rag_0052"
+  },
+  {
+    "question": "How does the integration of data into a single database object in SAP S/4HANA impact data redundancy and integrity compared to traditional systems?",
+    "answer": "It eliminates data redundancy and enhances data integrity by ensuring all areas (sales, purchasing, inventory, etc.) use the same stored data.",
+    "source_chunk": "integrated in one single database object, data redundancy is no longer an issue and data \nintegrity is enhanced. All areas use the same stored data, including sales, purchasing, \ninventory management, materials planning, invoice verification, finance, and human \nresources.\nBusiness Partner Master Data\nThe master data of customers and vendors is managed in SAP S/4HANA by using business \npartner master data. By using this approach, it is possible to centrally maintain the master",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 152,
+    "question_type": "reasoning",
+    "id": "rag_0053"
+  },
+  {
+    "question": "If the system is unable to schedule a sales order due to missing time components, what must be ensured first according to the provided text?",
+    "answer": "The shipping point and route for each item in the sales document must be determined before the time components can be used for scheduling.",
+    "source_chunk": "Route\nTransit time\nTime for transporting the \ngoods to the customer\nRoute\nNote:\nThe system has to determine the shipping point and the route for each item in the \nsales document before the corresponding time components can be used for \nscheduling.\nIf the necessary time components are available, the system can use two kinds of scheduling \n(backward and forward) to calculate the following dates:\n●\nMaterial availability date:",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 236,
+    "question_type": "applied",
+    "id": "rag_0054"
+  },
+  {
+    "question": "What can SAP S/4HANA do regarding the delivery document's route?",
+    "answer": "Redetermine the relevant route.",
+    "source_chunk": "partner master record of the ship-to party (general data).\nNote:\nSAP S/4HANA can redetermine the relevant route within the delivery document.\nLESSON SUMMARY\nYou should now be able to:\n●\nAnalyze the results of automatic data determination\nLesson: Analyzing the Results of Automatic Data Determination\n© Copyright. All rights reserved.\n93",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 232,
+    "question_type": "factual",
+    "id": "rag_0055"
+  },
+  {
+    "question": "How do condition master data and output master data differ in their roles within SAP ERP?",
+    "answer": "Condition master data is used for automatic pricing (e.g., material prices or discounts), while output master data is used to send customer information via media like mail, EDI, or fax.",
+    "source_chunk": "●\nMaterial master data\n●\nCustomer-material information (this master data can be used to maintain customer-\nspecific material numbers)\n●\nCondition master data (this master data is relevant for automatic pricing, such as a \nmaterial price or a customer discount)\n●\nOutput master data (outputs are used to send information to the customer via various \nmedia, such as mail, electronic data interchange (EDI), or fax. Examples include the \nprintout of a quotation or an order confirmation)\n●",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 148,
+    "question_type": "reasoning",
+    "id": "rag_0056"
+  },
+  {
+    "question": "If a company can't fulfill a sales order due to stock issues, how can they prioritize customers using backorder processing?",
+    "answer": "Adjust confirmed sales order quantities by reducing the confirmed amount for less important customers and increasing it for more important ones through backorder processing.",
+    "source_chunk": "Backorder Processing – Confirmation Strategies\nIn many cases, you will not be able to do anything to resolve the situation. Nevertheless, \nbackorder processing could be an option.\nWith backorder processing, you can change existing material confirmations. This means you \ncould reduce the confirmed sales order quantity of a material for a (less important) customer \nand increase the confirmed sales order quantity for another (more important) customer.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 290,
+    "question_type": "applied",
+    "id": "rag_0057"
+  },
+  {
+    "question": "What is an example of using existing document data?",
+    "answer": "The delivering plant is used along with other information to determine the shipping point.",
+    "source_chunk": "●\nExisting document data: Document data that has already been entered or determined \nautomatically by the system can be used to enter additional document data. For example, \nthe delivering plant is used - along with other information - to determine the shipping point.\n●\nCustomizing: Default values for creating documents can be defined in Customizing. For \nexample, you can set a default value for the delivery date or configure a delivery or billing",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 62,
+    "question_type": "factual",
+    "id": "rag_0058"
+  },
+  {
+    "question": "What is the difference between the 'Blank' and 'A/B' options when configuring the search for open outline agreements?",
+    "answer": "'Blank' performs no checks, while 'A/B' checks at the header/item level and compares customer numbers.",
+    "source_chunk": "Messages about Open Outline Agreements\nFigure 74: Messages about Open Outline Agreements\nYou can configure Customizing for the sales document type so that, when you create a \nrelease order, the system automatically searches for any open outline agreements. You can \nchoose several options for the search and determine how the system should react if the \nsearch is successful:\n●\nBlank: No checks.\n●\nA/B: Check at header/item level: The system compares the customer numbers and",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 290,
+    "question_type": "reasoning",
+    "id": "rag_0059"
+  },
+  {
+    "question": "When processing a sales order in SAP, which special features should you utilize to ensure efficient order handling?",
+    "answer": "Use the special features in the SAP system when processing a sales order as outlined in the lesson summary.",
+    "source_chunk": "LESSON SUMMARY\nYou should now be able to:\n●\nUse the special features in the SAP system when processing a sales order\nUnit 4: Sales Order Processing\n38\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 100,
+    "question_type": "applied",
+    "id": "rag_0060"
+  },
+  {
+    "question": "Is the statement 'A schedule line category can be used even if you do not deliver goods' true or false?",
+    "answer": "True",
+    "source_chunk": "7.\nA schedule line category can be used even if you do not deliver goods.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n8. A schedule line category does always \"need\" an item category.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nUnit 5: Learning Assessment\n62\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 156,
+    "question_type": "factual",
+    "id": "rag_0061"
+  },
+  {
+    "question": "What condition must be met for a sales document to be created with reference to another existing sales document?",
+    "answer": "Copying control must be set up for it.",
+    "source_chunk": "Unit 6\nLearning Assessment - Answers\n1.\nAny sales document can be created with reference to any other existing sales document.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nCorrect. A sales document can be created with reference to any other existing sales \ndocument only if copying control is set up for it.\n2. What information can you obtain from the document flow?\nA document flow contains information on what has been copied from the source",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 190,
+    "question_type": "reasoning",
+    "id": "rag_0062"
+  },
+  {
+    "question": "If step 1 fails to determine valid addresses or the addresses don't cover the full time interval from the current system date to Dec 31, 9999, what should be done next?",
+    "answer": "Determine valid addresses from the address overview as per step 2.",
+    "source_chunk": "2. Valid addresses determined from the address overview, if no address can be determined \nfrom step 1 or the addresses determined in step 1 don't fully cover the time interval \nbetween the current system date and Dec 31, 9999\nNOTE: To look up mappings between the address determination attribute and address usage \n(for example, the address determination attribute \"BBP 003 send goods\" is mapped to \n\"delivery address\" usage in BP master), check the Assign Transaction to Address Typeactivity",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 265,
+    "question_type": "applied",
+    "id": "rag_0063"
+  },
+  {
+    "question": "What is the title of Unit 3 in the SAP ERP manual?",
+    "answer": "Overview of Sales Processes",
+    "source_chunk": "Unit 3: Overview of Sales Processes\n42\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 110,
+    "question_type": "factual",
+    "id": "rag_0064"
+  },
+  {
+    "question": "What happens to the ordered quantity in the contract when there are subsequent changes in the release orders?",
+    "answer": "It is corrected.",
+    "source_chunk": "documents exist. When you are processing a release order and accidently created it without \nreference to the contract, you are able to subsequently assign it to the contract. Subsequent \nchanges in the release orders always cause a correction of the ordered quantity of the \ncontract. For example, when you place a return order with reference to a release order, the \nordered quantity in the contract will be corrected and reduced accordingly.\nDown Payment Processing for Quantity Contracts",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 294,
+    "question_type": "reasoning",
+    "id": "rag_0065"
+  },
+  {
+    "question": "If a customer has not yet paid the full down payment amount, what is the status of the contract release order in SAP ERP?",
+    "answer": "The contract release order is blocked from delivery until the customer pays the full amount of the required down payments.",
+    "source_chunk": "Down Payment Processing for Quantity Contracts\nYou can then create the down payment request, as well as the contract release order that is \nblocked from delivery until the customer pays the full amount of the required down payments. \nWhen full payment is posted for the down payment request, the system removes the delivery \nblocks on schedule lines. You can then process the contract release order for delivery and \ninvoicing.\nLesson: Scheduling Agreements and Quantity Contracts",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 295,
+    "question_type": "applied",
+    "id": "rag_0066"
+  },
+  {
+    "question": "What technique is used for free goods in SAP ERP?",
+    "answer": "The condition technique",
+    "source_chunk": "Free Goods Master Data\nFigure 102: Free Goods Master Data\nThe condition technique is used for free goods. Free goods are generally regarded as a \nsupplement to the pricing agreement for a material.\nYou maintain the free goods in the master records for sales by:\n●\nUsing a different menu entry\n●\nGoing to Prices and Discounts/surcharges when maintaining the master records\nYou can define master records for free goods at any level - for example, material, customer/",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 386,
+    "question_type": "factual",
+    "id": "rag_0067"
+  },
+  {
+    "question": "What is the basis for creating quotations in SAP ERP according to the provided text?",
+    "answer": "Inquiries and dates.",
+    "source_chunk": "dates. Based on these inquiries, you can create corresponding quotations to provide the \n© Copyright. All rights reserved.\n137",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 335,
+    "question_type": "reasoning",
+    "id": "rag_0068"
+  },
+  {
+    "question": "What is the focus of Unit 10 in the SAP ERP manual?",
+    "answer": "Monitoring and Sales Analytics",
+    "source_chunk": "Unit 10: Monitoring and Sales Analytics\n164\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 392,
+    "question_type": "applied",
+    "id": "rag_0069"
+  },
+  {
+    "question": "What is one of the unit objectives for Unit 10?",
+    "answer": "Use different types of outline agreements and their functions",
+    "source_chunk": "UNIT 10\nOutline Agreements\nLesson 1\nScheduling Agreements and Quantity Contracts\n115\nLesson 2\nValue Contracts\n123\nUNIT OBJECTIVES\n●\nUse different types of outline agreements and their functions\n●\nSet up and use value contracts in Customizing\n© Copyright. All rights reserved.\n113",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 278,
+    "question_type": "factual",
+    "id": "rag_0070"
+  },
+  {
+    "question": "What is the purpose of the address selection button in the header and item partner tabs when creating or changing sales documents?",
+    "answer": "The button allows selecting an address from the BP's master data for relevant partner functions or modifying proposed partner addresses for new or existing entries.",
+    "source_chunk": "reference, the system prompts you to select the relevant address of a BP (assuming that \nmultiple addresses have been maintained for that BP).\nThe header partner and item partner tabs in multiple apps for creating and changing sales \ndocuments have been enhanced with an address selection button. The button allows you to \nselect an address (for relevant partner functions) from the list of valid addresses maintained \nin the BP's master data, or to change the proposed partner addresses for new or existing",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 271,
+    "question_type": "reasoning",
+    "id": "rag_0071"
+  },
+  {
+    "question": "What is the focus of Unit 9 in the SAP ERP manual?",
+    "answer": "Unit 9 focuses on Complaints Processing.",
+    "source_chunk": "Unit 9: Complaints Processing\n152\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 364,
+    "question_type": "applied",
+    "id": "rag_0072"
+  },
+  {
+    "question": "Where are partner relationships usually defined according to the text?",
+    "answer": "in the customer master",
+    "source_chunk": "Partners in the Sales Process\nFigure 63: Partners in the Sales Process\nYou can maintain partner relationships both in sales documents and in the master data. \nPartner relationships are usually already defined in the customer master. These are proposed \nautomatically in the document header when you create a sales document.\n●\nProviding Customizing permits it, you can change or supplement these relationships \nmanually by going to the partner screen and changing the function assignment.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 240,
+    "question_type": "factual",
+    "id": "rag_0073"
+  },
+  {
+    "question": "What is the primary role of outline agreements in business processes according to the text?",
+    "answer": "Outline agreements play an important role in nearly all business processes by enabling customers and vendors to agree on goods to be provided under specific conditions within a defined timeframe.",
+    "source_chunk": "Unit 10\nLesson 1\nScheduling Agreements and Quantity \nContracts\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nUse different types of outline agreements and their functions\nScheduling Agreement and Quantity Contracts\nContracts – Sales Document Types\nFigure 71: Contracts – Sales Document Types\nOutline agreements play an important role in nearly all business processes. Customers and \nvendors agree on the goods to be provided under certain conditions and within a specific",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 280,
+    "question_type": "reasoning",
+    "id": "rag_0074"
+  },
+  {
+    "question": "How can you efficiently process a large number of sales orders during off-peak hours in SAP ERP?",
+    "answer": "Use a batch job to execute background processing, select relevant sales orders using criteria like shipping point and delivery creation date, sort/filter the list, and create corresponding outbound deliveries.",
+    "source_chunk": "●\nBackground processing:\nUse a batch job to be executed during off-peak hours\nThe relevant sales orders can be selected by various criteria, such as, the shipping point and \nthe delivery creation date.\nYou receive a list of orders that meet your selection criteria. In this list, you can make your \nselection more precise by using sorting and filtering. From the list, you can create the \ncorresponding outbound deliveries.\nUnit 7: Collective Processing\n128\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 312,
+    "question_type": "applied",
+    "id": "rag_0075"
+  },
+  {
+    "question": "When you use free goods, does the system create sub-items for the free goods material in the sales order?",
+    "answer": "True",
+    "source_chunk": "Unit 12\nLearning Assessment\n1.\nWhen you use free goods, the system creates sub-items for the free goods material in the \nsales order.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n2. In free goods, how can you grant the bonus quantity?\n3. When you use inclusive free goods scenario, your customer gets an extra product (good) \nthat is free of charge.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n© Copyright. All rights reserved.\n165",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 399,
+    "question_type": "factual",
+    "id": "rag_0076"
+  },
+  {
+    "question": "How do internal and external factors affect the available quantity of a material in SAP ERP?",
+    "answer": "Internal factors include production orders and on-hand stock, while external factors include sales orders, purchase orders, and delivery documents.",
+    "source_chunk": "existing sales orders for the material, purchase orders planned to replenish the material, \nand material reservations. Other potential factors include production orders (for materials \nproduced internally), delivery documents, different categories of on-hand stock, and \nwhether the replenishment lead time should be excluded.\n122\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 301,
+    "question_type": "reasoning",
+    "id": "rag_0077"
+  },
+  {
+    "question": "If I need to create a new document type with similar functions to an existing one, what should I ensure about the source document type?",
+    "answer": "The source document type should be one from the SAP standard system or should already have been tested by your company.",
+    "source_chunk": "copying an existing one with similar functions. This document type should be one \nfrom the SAP standard system or should already have been tested by your \ncompany.\nWhen you copy the document type, both the fields and the dependent entries are \ncopied. Once the system has copied the document, it automatically generates a \nlog that you can save for documentation purposes.\nOrder Types Permitted for Sales Area\nFigure 29: Order Types Permitted for Sales Area",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 118,
+    "question_type": "applied",
+    "id": "rag_0078"
+  },
+  {
+    "question": "What is the purpose of quotations in SAP ERP?",
+    "answer": "To determine important sales-related data and save them as documents.",
+    "source_chunk": "a quotation. Inquiries and quotations help you to determine important sales-related data and \ncan be saved as documents. If the customer places an order, you can then access this data.\nUse this presales information to plan and evaluate your marketing and sales strategies, and as \na basis for establishing long-term business relationships with your customers, for example, \nby:\n●\nTracking lost sales\n●\nRecording presales data to help negotiate large contracts\n●",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 78,
+    "question_type": "factual",
+    "id": "rag_0079"
+  },
+  {
+    "question": "How does the division-specific sales scenario impact the responsibilities of sales departments within an organization?",
+    "answer": "Each sales department is restricted to selling products from its own specific family or grouping, ensuring specialization and clear responsibility boundaries.",
+    "source_chunk": "sales order. This scenario typically represents an organization which has multiple sales \ndepartments, each responsible for selling only products from its own specific family or \ngrouping.\nThe figure, Division-Specific Sales, clarifies the restrictions of division-specific sales.\nFigure 47: Division-Specific Sales\nLesson: Maintaining Material Master Data\n© Copyright. All rights reserved.\n69",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 174,
+    "question_type": "reasoning",
+    "id": "rag_0080"
+  },
+  {
+    "question": "In the SD module, when setting up a sales order, how do you determine which partner is responsible for a specific business function?",
+    "answer": "The partner function determines which partner assumes specific business functions within the sales process.",
+    "source_chunk": "function determines which partner assumes specific business functions within the sales \nprocess.\nUnit 9: Partner Functions in SD\n106\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 251,
+    "question_type": "applied",
+    "id": "rag_0081"
+  },
+  {
+    "question": "What does the process flow provide for issue solving in sales orders?",
+    "answer": "A quick overview of the complete business process, a graphical overview of all documents, their relationships, and the document status, and the ability to resolve issues directly from the process flow.",
+    "source_chunk": "Figure 107: Issue Solving in Sales Orders – Resolve Billing Block\nFurther on, the process flow could also be the starting point of issue handling and offers the \nfollowing features:\n●\nProvides a quick overview of the complete business process and shows the issues in the \ncontext of the related business objects\n●\nGives a graphical overview of all documents, their relationships, and the document status\n●\nAllows resolution of the issues directly from the process flow as a starting point\n●",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 404,
+    "question_type": "factual",
+    "id": "rag_0082"
+  },
+  {
+    "question": "What advantages does the SQL-Runtime-Views approach in SAP HANA offer that enable more use cases for VDM?",
+    "answer": "Full ABAP integration, reusing existing reporting authorizations, and utilizing the analytical engine for elaborate hierarchy display.",
+    "source_chunk": "system. The system generates SQL-Runtime-Views in SAP HANA to execute the data read \nand transformation inside the SAP HANA database layer.\nThe advantages of this approach include full ABAP integration, allowing for instances to re-\nuse existing reporting authorizations, and so on. Also, SAP can make use of the analytical \nengine (embedded BW functionality) to support an elaborate hierarchy display. These \nadvantages allow for the creation of many more use cases for the VDM; SAP S/4HANA",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 423,
+    "question_type": "reasoning",
+    "id": "rag_0083"
+  },
+  {
+    "question": "When performing a goods issue, which movement type is used according to the text?",
+    "answer": "movement type 601",
+    "source_chunk": "warehouses so no movement type is needed.\nSince schedule lines from category CP generate delivery items in the sales order, the 'relevant \nto delivery' indicator is activated. The requirements transfer is active in the schedule line \ncategory. Complete Customizing for requirements transfer (for example, for requirements \nplanning) requires you to define and assign the requirements class. The goods movement is \ncontrolled by movement type 601. With this movement type, when the goods issue for the",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 149,
+    "question_type": "applied",
+    "id": "rag_0084"
+  },
+  {
+    "question": "What are the two tasks required for the BOM scenario according to the workshop to-dos?",
+    "answer": "Create bills of material and modify the sales document type.",
+    "source_chunk": "You can control the functions of each item category when you define it. The schedule line \ncategories are determined dependent on the respective item category. These settings can \nalso be customized.\nWorkshop To-Dos for the Bill Of Material Scenario\nFigure 115: Workshop: To-Do BOM Scenario\nHere, you find a list of the things you need to configure for the scenario.\nBills of Material – Tasks\nWhat do you need to do?\n●\nCreate bills of material.\n●\nModify the sales document type.\n●",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 418,
+    "question_type": "factual",
+    "id": "rag_0085"
+  },
+  {
+    "question": "What are the two primary functions covered in Unit 11, and what do they involve?",
+    "answer": "Unit 11 covers material determination and product selection, and material listing and exclusion. These functions involve explaining and using processes to determine materials, select products, and manage material listings while excluding specific items.",
+    "source_chunk": "UNIT 11\nMaterial Determination, Listing \nand Exclusion\nLesson 1\nMaterial Determination\n139\nLesson 2\nMaterial Listing and Exclusion\n149\nUNIT OBJECTIVES\n●\nExplain and use the material determination and product selection\n●\nExplain and use the material listing and exclusion functions\n© Copyright. All rights reserved.\n137",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 343,
+    "question_type": "reasoning",
+    "id": "rag_0086"
+  },
+  {
+    "question": "What can be assigned to limit the list of reasons for rejections in SAP?",
+    "answer": "document types and / or sales organization",
+    "source_chunk": "document type and / or sales organization in the SAP customizing. This functionality is also \navailable for the reason for rejections. When business users reject sales document items, they \nmust select a reason for rejection for each document item. By assigning reasons to specific \nsales document types and sales organizations, you can limit the list of reasons from which \nbusiness users can choose.\nLESSON SUMMARY\nYou should now be able to:\n●",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 99,
+    "question_type": "factual",
+    "id": "rag_0087"
+  },
+  {
+    "question": "As a sales employee creating a sales order, what information is essential to confirm the order according to the text?",
+    "answer": "The availability check provides information about the available quantity of the ordered materials, which is essential to confirm the order.",
+    "source_chunk": "Unit 6\nLesson 1\nPerforming an Availability Check – Basics\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nPerform an availability check – basics\nBasic Information About Availability Checks\nThe availability check for materials in a sales document is often a very important function for \nsales employees. When you create an order, you normally need information about the \navailable quantity of the ordered materials. Without this information, you cannot confirm a",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 256,
+    "question_type": "applied",
+    "id": "rag_0088"
+  },
+  {
+    "question": "What is one of the unit objectives in UNIT 6?",
+    "answer": "Use document flow",
+    "source_chunk": "UNIT 6\nData Flow\nLesson 1\nData Flow in the Application\n67\nLesson 2\nCopying Control\n73\nUNIT OBJECTIVES\n●\nUse document flow\n●\nUnderstand and influence how data is passed on between sales documents at header, \nitem, and schedule line levels and recognize possibilities for individual company \nadjustments\n© Copyright. All rights reserved.\n65",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 162,
+    "question_type": "factual",
+    "id": "rag_0089"
+  },
+  {
+    "question": "What are the main topics discussed in Unit 11 of the SAP ERP manual?",
+    "answer": "Material Determination, Listing, and Exclusion",
+    "source_chunk": "Unit 11: Material Determination, Listing and Exclusion\n148\n© Copyright. All rights reserved.",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 366,
+    "question_type": "reasoning",
+    "id": "rag_0090"
+  },
+  {
+    "question": "If a user wants to enable schedule lines for a specific item category in SAP ERP, what steps should they take according to the provided text?",
+    "answer": "They should access Customizing for item categories, decide to allow schedule lines for the item, and assign schedule line categories to the item category.",
+    "source_chunk": "Schedule Line Category\nFigure 38: Schedule Line Category\nSchedule lines contain delivery dates and quantities as well as information about the \nrequirements transfer and inventory management. They are a prerequisite for delivering \nmaterials.\nIn Customizing for item categories, you decide if you are going to allow schedule lines for the \nitem. You can assign schedule line categories to each item category. By defining a schedule",
+    "source_doc": "TS460_2_EN_Col23.pdf",
+    "chunk_id": 144,
+    "question_type": "applied",
+    "id": "rag_0091"
+  },
+  {
+    "question": "What types of records are mentioned as being accessed by line-of-business personnel?",
+    "answer": "sales orders, trouble tickets, journal entries, and other records of business operations.",
+    "source_chunk": "sales orders, trouble tickets, journal entries, and other records of business operations. Line-\nof-business personnel needed access to this information to decide, for example, how to price, \nplan, and set priorities. IT then built separate analytic decision support systems on \ncompletely different platforms. In theory, having separate systems for the various workloads \noffered on different platforms sounds logical. For many years, having separate platforms was",
+    "source_doc": "TS460_1_EN_Col23.pdf",
+    "chunk_id": 417,
+    "question_type": "factual",
+    "id": "rag_0092"
+  }
+]

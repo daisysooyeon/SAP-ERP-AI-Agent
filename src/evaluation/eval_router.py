@@ -14,6 +14,7 @@ Usage (from project root):
 import argparse
 import json
 import logging
+import random
 import sys
 import time
 from pathlib import Path
@@ -44,6 +45,7 @@ def eval_router(
     test_cases: list[dict],
     *,
     verbose: bool = True,
+    delay: float = 2.0,  # 요청 사이 대기 시간(초) - rate limit 방지용
 ) -> dict:
     """
     Run every test case through router_node and compute classification metrics.
@@ -56,6 +58,8 @@ def eval_router(
             "label"  : str   — ground-truth intent ("ACTION_ONLY" | "QA_ONLY" | "BOTH")
     verbose : bool
         If True, print per-sample progress and the final report to stdout.
+    delay : float
+        Seconds to sleep between each API call. Increase if hitting 429 rate limits.
 
     Returns
     -------
@@ -105,6 +109,10 @@ def eval_router(
                 f"[{i:>3}/{total}] {status}  true={true_label:<12}  pred={predicted:<12}"
                 f"  ({elapsed:.2f}s)  {user_input[:60]!r}"
             )
+
+        # 다음 요청 전 대기 (마지막 샘플은 불필요)
+        if i < total and delay > 0:
+            time.sleep(delay)
 
     # Filter out __ERROR__ entries for sklearn (it can't handle unknown labels cleanly)
     clean_true = [t for t, p in zip(labels_true, labels_pred) if p != "__ERROR__"]
@@ -179,6 +187,12 @@ def _parse_args() -> argparse.Namespace:
         action="store_true",
         help="Suppress per-sample progress output.",
     )
+    parser.add_argument(
+        "--delay",
+        type=float,
+        default=2.0,
+        help="Seconds to wait between API calls to avoid 429 rate limits (default: 2.0).",
+    )
     return parser.parse_args()
 
 
@@ -197,10 +211,16 @@ if __name__ == "__main__":
 
     with open(test_cases_path, encoding="utf-8") as f:
         test_cases: list[dict] = json.load(f)
-    logger.info("Loaded %d test cases from %s", len(test_cases), test_cases_path)
+        
+    # Shuffle the test cases to ensure mixed intent evaluation during the run
+    # Using a fixed seed guarantees reproducibility of the shuffle order
+    random.seed(42)
+    random.shuffle(test_cases)
+    
+    logger.info("Loaded and shuffled %d test cases from %s", len(test_cases), test_cases_path)
 
     # ── Run evaluation ───────────────────────────────────────────────────────
-    results = eval_router(test_cases, verbose=not args.quiet)
+    results = eval_router(test_cases, verbose=not args.quiet, delay=args.delay)
 
     # ── Optionally save report ───────────────────────────────────────────────
     if args.out:

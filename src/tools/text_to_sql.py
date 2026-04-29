@@ -3,9 +3,8 @@ src/tools/text_to_sql.py
 Text-to-SQL: dd03l 스키마 컨텍스트 기반 SQLite 검증 쿼리 생성
 
 흐름:
-  1. LLM (worker_a_sql / primary)  → SQL 생성
-  2. LLM (worker_a_sql_fallback)   → primary 실패 시 재시도
-  3. hardcoded fallback            → 양쪽 모두 실패 시
+  1. LLM (worker_a_sql)   → SQL 생성
+  2. hardcoded fallback   → LLM 실패 시
 """
 
 import logging
@@ -72,6 +71,7 @@ Rules:
 2. Always use LEFT JOIN so missing rows return NULL instead of no row.
 3. End with LIMIT 1.
 4. Use exact column and table names as shown in the schema.
+5. Use COALESCE(mard.LABST, 0) for available_stock so that items with no MARD record return 0 instead of NULL.
 
 Schema:
 {schema}
@@ -89,7 +89,7 @@ Require these columns in the result (use these exact aliases):
   - quantity         (from VBAP.KWMENG)
   - delivery_status  (from VBUP.WBSTA)
   - delivery_date    (from VBEP.EDATU)
-  - available_stock  (from MARD.LABST)
+  - available_stock  (use COALESCE(mard.LABST, 0) — items with no stock record must return 0, not NULL)
 """
 
 _PROMPT = ChatPromptTemplate.from_messages([
@@ -116,26 +116,21 @@ def _build_openrouter_llm(model_name: str, temperature: float) -> ChatOpenAI:
     )
 
 
-def _build_chains():
-    """primary / fallback LLM 체인을 lazy하게 생성"""
+def _build_chain():
+    """LLM 체인을 lazy하게 생성"""
     cfg = get_config()
-    sql_cfg      = cfg.models.worker_a_sql
-    fallback_cfg = cfg.models.worker_a_sql_fallback
-
-    primary  = _PROMPT | _build_openrouter_llm(sql_cfg.name,      sql_cfg.temperature)
-    fallback = _PROMPT | _build_openrouter_llm(fallback_cfg.name, fallback_cfg.temperature)
-    return primary, fallback
+    sql_cfg = cfg.models.worker_a_sql
+    return _PROMPT | _build_openrouter_llm(sql_cfg.name, sql_cfg.temperature)
 
 
-_primary_chain  = None
-_fallback_chain = None
+_chain = None
 
 
-def _get_chains():
-    global _primary_chain, _fallback_chain
-    if _primary_chain is None:
-        _primary_chain, _fallback_chain = _build_chains()
-    return _primary_chain, _fallback_chain
+def _get_chain():
+    global _chain
+    if _chain is None:
+        _chain = _build_chain()
+    return _chain
 
 # ---------------------------------------------------------------------------
 # SQL 정제 헬퍼
@@ -176,10 +171,10 @@ def _hardcoded_query(order_id: str, item_no: str) -> str:
 
 def build_validation_query(order_id: str, item_no: str) -> tuple[str, str]:
     """
-    LLM(primary → fallback → hardcoded) 순서로 SQLite 검증 쿼리를 생성하고 반환.
+    LLM(primary → hardcoded) 순서로 SQLite 검증 쿼리를 생성하고 반환.
 
     Returns:
-        (sql, strategy) — strategy는 "primary" | "fallback" | "hardcoded"
+        (sql, strategy) — strategy는 "primary" | "hardcoded"
     """
     invoke_input = {
         "schema":   SCHEMA_CONTEXT,
@@ -187,28 +182,19 @@ def build_validation_query(order_id: str, item_no: str) -> tuple[str, str]:
         "item_no":  item_no,
     }
 
-    primary_chain, fallback_chain = _get_chains()
+    chain = _get_chain()
 
-    # ── 1. Primary (qwen3-coder:free) ──────────────────────────────────────
+    # ── 1. Primary LLM ─────────────────────────────────────────────────────
     try:
-        response = primary_chain.invoke(invoke_input)
+        response = chain.invoke(invoke_input)
         sql = _clean_sql(response.content)
-        logger.info("[text_to_sql] primary LLM 쿼리 생성 성공")
+        logger.info("[text_to_sql] LLM 쿼리 생성 성공")
         logger.debug("[text_to_sql] SQL:\n%s", sql)
         return sql, "primary"
     except Exception as e:
-        logger.warning("[text_to_sql] primary LLM failed: %s --> trying fallback", e)
+        logger.warning("[text_to_sql] LLM failed: %s --> using hardcoded query", e)
 
-    # ── 2. Fallback (qwen3-coder-30b) ──────────────────────────────────────
-    try:
-        response = fallback_chain.invoke(invoke_input)
-        sql = _clean_sql(response.content)
-        logger.info("[text_to_sql] fallback LLM 쿼리 생성 성공")
-        return sql, "fallback"
-    except Exception as e:
-        logger.warning("[text_to_sql] fallback LLM failed: %s --> using hardcoded query", e)
-
-    # ── 3. Hardcoded fallback ───────────────────────────────────────────────
+    # ── 2. Hardcoded fallback ───────────────────────────────────────────────
     logger.warning("[text_to_sql] 하드코딩 fallback 쿼리 사용")
     return _hardcoded_query(order_id, item_no), "hardcoded"
 

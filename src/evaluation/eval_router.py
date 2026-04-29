@@ -20,6 +20,11 @@ import time
 from pathlib import Path
 from typing import Optional
 
+import sys
+# Windows 환경에서 특수문자 출력(✓, ✗, 이모지 등) 시 cp949 인코딩 에러 방지
+if sys.stdout.encoding.lower() != 'utf-8' and hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 from sklearn.metrics import classification_report, accuracy_score
 
 from src.logging_config import setup_logging
@@ -72,6 +77,7 @@ def eval_router(
     labels_true: list[str] = []
     labels_pred: list[str] = []
     errors: list[dict] = []
+    mismatches: list[dict] = []
     latencies: list[float] = []
 
     total = len(test_cases)
@@ -104,6 +110,14 @@ def eval_router(
         labels_pred.append(predicted)
 
         status = "✓" if predicted == true_label else "✗"
+        if predicted != true_label and predicted != "__ERROR__":
+            mismatches.append({
+                "index": i,
+                "id": case.get("id", f"#{i}"),
+                "input": user_input,  # 잘라내지 않고 전체 텍스트 저장
+                "true_label": true_label,
+                "predicted": predicted,
+            })
         if verbose:
             print(
                 f"[{i:>3}/{total}] {status}  true={true_label:<12}  pred={predicted:<12}"
@@ -158,6 +172,7 @@ def eval_router(
         "accuracy": accuracy,
         "report": report_dict,
         "errors": errors,
+        "mismatches": mismatches,
         "latency_s": {"mean": mean_latency, "total": total_latency},
     }
 

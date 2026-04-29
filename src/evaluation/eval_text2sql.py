@@ -80,7 +80,6 @@ class CaseResult:
 class EvalReport:
     generated_at:  str = ""
     model_primary: str = ""
-    model_fallback: str = ""
     total:         int = 0
     p1_pass:       int = 0   # syntax OK
     p2_pass:       int = 0   # timeout OK
@@ -91,7 +90,6 @@ class EvalReport:
     success_rate:  float = 0.0  # overall_pass / total
     p4_accuracy:   float = 0.0  # p4_pass / p4_total
     strategy_primary:    int = 0  # primary LLM으로 생성된 케이스 수
-    strategy_fallback:   int = 0  # fallback LLM으로 생성된 케이스 수
     strategy_hardcoded:  int = 0  # hardcoded fallback으로 생성된 케이스 수
     p4_mismatch_cases: list[dict] = field(default_factory=list)  # P4 불일치 케이스 상세
     results:       list[dict] = field(default_factory=list)
@@ -240,7 +238,6 @@ def run_eval(
     report = EvalReport(
         generated_at   = datetime.now(timezone.utc).isoformat(),
         model_primary  = cfg.models.worker_a_sql.name,
-        model_fallback = cfg.models.worker_a_sql_fallback.name,
         total          = len(test_cases),
     )
 
@@ -254,7 +251,6 @@ def run_eval(
         if cr.passed:     report.overall_pass += 1
 
         if cr.sql_strategy == "primary":    report.strategy_primary += 1
-        elif cr.sql_strategy == "fallback": report.strategy_fallback += 1
         elif cr.sql_strategy == "hardcoded": report.strategy_hardcoded += 1
 
         if cr.p4_values is not None:
@@ -281,7 +277,6 @@ def run_eval(
     print("  Text-to-SQL 평가 결과")
     print("=" * 60)
     print(f"  Primary model  : {report.model_primary}")
-    print(f"  Fallback model : {report.model_fallback}")
     print(f"  Total cases    : {n}")
     print(f"  P1 Syntax OK   : {report.p1_pass}/{n}  ({report.p1_pass/n*100:.1f}%)")
     print(f"  P2 Timeout OK  : {report.p2_pass}/{n}  ({report.p2_pass/n*100:.1f}%)")
@@ -292,7 +287,7 @@ def run_eval(
     target_met = report.success_rate >= 0.95
     print(f"  Target Met     : {'YES' if target_met else 'NO'}")
     print("-" * 60)
-    print(f"  SQL Strategy   : primary={report.strategy_primary}  fallback={report.strategy_fallback}  hardcoded={report.strategy_hardcoded}")
+    print(f"  SQL Strategy   : primary={report.strategy_primary}  hardcoded={report.strategy_hardcoded}")
     print("=" * 60)
 
     # 실패 케이스 상세 출력

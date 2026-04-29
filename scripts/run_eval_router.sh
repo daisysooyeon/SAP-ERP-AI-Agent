@@ -17,8 +17,21 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPORT_DIR="${PROJECT_ROOT}/reports"
-DEFAULT_REPORT="${REPORT_DIR}/router_eval_$(date +%Y%m%d_%H%M%S).json"
-TEST_CASES="${PROJECT_ROOT}/data/eval/router_test_cases.json"
+DEFAULT_REPORT="${REPORT_DIR}/router_eval_result.json"
+TEST_CASES="${TEST_CASES:-${PROJECT_ROOT}/data/eval/router_test_cases_gen.json}"
+
+# ── Python interpreter (Windows venv 우선, 없으면 시스템 python) ──────────────
+if [[ -f "${PROJECT_ROOT}/sap/Scripts/python.exe" ]]; then
+  PYTHON="${PROJECT_ROOT}/sap/Scripts/python.exe"
+  # Windows python.exe는 WSL 경로(/mnt/c/...)를 이해하지 못하므로 Windows 경로로 변환
+  WIN_PROJECT_ROOT="$(wslpath -w "${PROJECT_ROOT}")"
+elif command -v python3 &>/dev/null; then
+  PYTHON="python3"
+  WIN_PROJECT_ROOT="${PROJECT_ROOT}"
+else
+  PYTHON="python"
+  WIN_PROJECT_ROOT="${PROJECT_ROOT}"
+fi
 
 # ── Colours ──────────────────────────────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
@@ -48,27 +61,41 @@ log_info "Test cases   : ${TEST_CASES}"
 
 # 2. Read router model name from configs.yaml (env var override still works)
 if [[ -z "${ROUTER_MODEL:-}" ]]; then
-  ROUTER_MODEL=$(python -c "
-import sys; sys.path.insert(0, '${PROJECT_ROOT}')
+  ROUTER_MODEL=$("${PYTHON}" -c "
+import sys; sys.path.insert(0, '${WIN_PROJECT_ROOT}')
 from src.config import get_config
 print(get_config().models.router.name)
-" 2>/dev/null) || ROUTER_MODEL="qwen3:4b"
+" 2>/dev/null) || ROUTER_MODEL="qwen/qwen3-8b"
+fi
+
+# 2.5 Read router provider from configs.yaml
+if [[ -z "${ROUTER_PROVIDER:-}" ]]; then
+  ROUTER_PROVIDER=$("${PYTHON}" -c "
+import sys; sys.path.insert(0, '${WIN_PROJECT_ROOT}')
+from src.config import get_config
+print(get_config().models.router.provider)
+" 2>/dev/null) || ROUTER_PROVIDER="openrouter"
 fi
 
 # 3. Ollama running?
-if ! curl -sf http://localhost:11434 > /dev/null 2>&1; then
-  log_error "Ollama is not reachable at http://localhost:11434"
-  log_error "Start Ollama with:  ollama serve"
-  exit 1
-fi
-log_info "Ollama       : ✓ reachable"
+if [[ "${ROUTER_PROVIDER}" == "ollama" ]]; then
+  if ! curl -sf http://localhost:11434 > /dev/null 2>&1; then
+    log_error "Ollama is not reachable at http://localhost:11434"
+    log_error "Start Ollama serve or switch provider in configs.yaml"
+    exit 1
+  fi
+  log_info "Ollama       : ✓ reachable"
 
-# 4. Model available?
-if ! ollama list 2>/dev/null | grep -q "${ROUTER_MODEL}"; then
-  log_warn "Model '${ROUTER_MODEL}' not found locally — pulling now …"
-  ollama pull "${ROUTER_MODEL}"
+  # 4. Model available?
+  if ! ollama list 2>/dev/null | grep -q "${ROUTER_MODEL}"; then
+    log_warn "Model '${ROUTER_MODEL}' not found locally — pulling now …"
+    ollama pull "${ROUTER_MODEL}"
+  fi
+  log_info "Model        : ${ROUTER_MODEL}"
+else
+  log_info "Provider     : ${ROUTER_PROVIDER} (skipping Ollama checks)"
+  log_info "Model        : ${ROUTER_MODEL}"
 fi
-log_info "Model        : ${ROUTER_MODEL}"
 
 # ── Resolve --out argument (inject default if caller didn't pass one) ─────────
 EXTRA_ARGS=("$@")
@@ -87,12 +114,29 @@ echo ""
 
 # ── Run evaluation ───────────────────────────────────────────────────────────
 cd "${PROJECT_ROOT}"
-export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH:-}"
+export PYTHONPATH="${WIN_PROJECT_ROOT}:${PYTHONPATH:-}"
 export ROUTER_MODEL
 
-python -m src.evaluation.eval_router \
-  --test-cases "${TEST_CASES}" \
-  "${EXTRA_ARGS[@]}"
+# Windows python.exe용 경로 변환
+WIN_TEST_CASES="$(wslpath -w "${TEST_CASES}" 2>/dev/null || echo "${TEST_CASES}")"
+
+# --out 인자도 Windows 경로로 변환
+WIN_EXTRA_ARGS=()
+for arg in "${EXTRA_ARGS[@]}"; do
+  if [[ -n "${_NEXT_IS_PATH:-}" ]]; then
+    WIN_EXTRA_ARGS+=("$(wslpath -w "${arg}" 2>/dev/null || echo "${arg}")")
+    _NEXT_IS_PATH=""
+  elif [[ "$arg" == "--out" ]]; then
+    WIN_EXTRA_ARGS+=("${arg}")
+    _NEXT_IS_PATH=1
+  else
+    WIN_EXTRA_ARGS+=("${arg}")
+  fi
+done
+
+"${PYTHON}" -m src.evaluation.eval_router \
+  --test-cases "${WIN_TEST_CASES}" \
+  "${WIN_EXTRA_ARGS[@]}"
 
 EXIT_CODE=$?
 

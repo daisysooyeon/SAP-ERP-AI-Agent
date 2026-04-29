@@ -42,8 +42,7 @@ class OpenRouterConfig:
 class ModelsConfig:
     router:               ModelConfig = field(default_factory=lambda: ModelConfig("qwen3:4b"))
     worker_a:             ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-8b", provider="openrouter"))
-    worker_a_sql:         ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-coder:free", provider="openrouter"))
-    worker_a_sql_fallback:ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-coder-30b-a3b-instruct", provider="openrouter"))
+    worker_a_sql:         ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-coder-30b-a3b-instruct", provider="openrouter"))
     worker_b:             ModelConfig = field(default_factory=lambda: ModelConfig("qwen3:4b", 0.1))
     synthesizer:          ModelConfig = field(default_factory=lambda: ModelConfig("gpt-4o", 0.3))
     data_gen:             ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-8b", 0.5, provider="openrouter"))
@@ -135,13 +134,12 @@ def _load_from_yaml(path: Path) -> AppConfig:
     # ── models ──────────────────────────────────────────────────────────────
     m = raw.get("models", {})
     models = ModelsConfig(
-        router=               _parse_model(m.get("router",               {"name": "qwen3:4b"})),
-        worker_a=             _parse_model(m.get("worker_a",             {"name": "qwen/qwen3-8b",                     "provider": "openrouter"})),
-        worker_a_sql=         _parse_model(m.get("worker_a_sql",         {"name": "qwen/qwen3-coder:free",            "provider": "openrouter"})),
-        worker_a_sql_fallback=_parse_model(m.get("worker_a_sql_fallback",{"name": "qwen/qwen3-coder-30b-a3b-instruct","provider": "openrouter"})),
-        worker_b=             _parse_model(m.get("worker_b",             {"name": "qwen3:4b",  "temperature": 0.1})),
-        synthesizer=          _parse_model(m.get("synthesizer",          {"name": "gpt-4o",    "temperature": 0.3})),
-        data_gen=             _parse_model(m.get("data_gen",             {"name": "qwen/qwen3-8b", "temperature": 0.5, "provider": "openrouter"})),
+        router=      _parse_model(m.get("router",      {"name": "qwen3:4b"})),
+        worker_a=    _parse_model(m.get("worker_a",    {"name": "qwen/qwen3-8b",                     "provider": "openrouter"})),
+        worker_a_sql=_parse_model(m.get("worker_a_sql",{"name": "qwen/qwen3-coder-30b-a3b-instruct","provider": "openrouter"})),
+        worker_b=    _parse_model(m.get("worker_b",    {"name": "qwen3:4b",  "temperature": 0.1})),
+        synthesizer= _parse_model(m.get("synthesizer", {"name": "gpt-4o",    "temperature": 0.3})),
+        data_gen=    _parse_model(m.get("data_gen",    {"name": "qwen/qwen3-8b", "temperature": 0.5, "provider": "openrouter"})),
     )
 
     # ── paths ────────────────────────────────────────────────────────────────

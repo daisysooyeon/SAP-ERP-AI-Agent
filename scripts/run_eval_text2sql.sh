@@ -16,9 +16,22 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPORT_DIR="${PROJECT_ROOT}/reports"
-DEFAULT_REPORT="${REPORT_DIR}/text2sql_eval_$(date +%Y%m%d_%H%M%S).json"
-TEST_CASES="${PROJECT_ROOT}/data/eval/text2sql_test_cases.json"
+DEFAULT_REPORT="${REPORT_DIR}/text2sql_eval_result.json"
+TEST_CASES="${PROJECT_ROOT}/data/eval/text2sql_test_cases_gen.json"
 DB_PATH="${PROJECT_ROOT}/data/sap_erp.db"
+
+# ── Python interpreter (Windows venv 우선, 없으면 시스템 python) ──────────────
+if [[ -f "${PROJECT_ROOT}/sap/Scripts/python.exe" ]]; then
+  PYTHON="${PROJECT_ROOT}/sap/Scripts/python.exe"
+  # Windows python.exe는 WSL 경로(/mnt/c/...)를 이해하지 못하므로 Windows 경로로 변환
+  WIN_PROJECT_ROOT="$(wslpath -w "${PROJECT_ROOT}")"
+elif command -v python3 &>/dev/null; then
+  PYTHON="python3"
+  WIN_PROJECT_ROOT="${PROJECT_ROOT}"
+else
+  PYTHON="python"
+  WIN_PROJECT_ROOT="${PROJECT_ROOT}"
+fi
 
 # ── Colours ──────────────────────────────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
@@ -41,7 +54,7 @@ log_info "Project root : ${PROJECT_ROOT}"
 # 1. Test cases file
 if [[ ! -f "${TEST_CASES}" ]]; then
   log_error "Test cases file not found: ${TEST_CASES}"
-  log_error "Make sure data/eval/text2sql_test_cases.json exists."
+  log_error "Make sure data/eval/text2sql_test_cases_gen.json exists."
   exit 1
 fi
 log_info "Test cases   : ${TEST_CASES}"
@@ -71,12 +84,30 @@ echo ""
 
 # ── Run evaluation ───────────────────────────────────────────────────────────
 cd "${PROJECT_ROOT}"
-export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH:-}"
+export PYTHONPATH="${WIN_PROJECT_ROOT}:${PYTHONPATH:-}"
 
-python -m src.evaluation.eval_text2sql \
-  --test-cases "${TEST_CASES}" \
-  --db "${DB_PATH}" \
-  "${EXTRA_ARGS[@]}"
+# Windows python.exe용 경로 변환
+WIN_TEST_CASES="$(wslpath -w "${TEST_CASES}" 2>/dev/null || echo "${TEST_CASES}")"
+WIN_DB_PATH="$(wslpath -w "${DB_PATH}" 2>/dev/null || echo "${DB_PATH}")"
+
+# --report 인자도 Windows 경로로 변환
+WIN_EXTRA_ARGS=()
+for arg in "${EXTRA_ARGS[@]}"; do
+  if [[ -n "${_NEXT_IS_PATH:-}" ]]; then
+    WIN_EXTRA_ARGS+=("$(wslpath -w "${arg}" 2>/dev/null || echo "${arg}")")
+    _NEXT_IS_PATH=""
+  elif [[ "$arg" == "--report" ]]; then
+    WIN_EXTRA_ARGS+=("${arg}")
+    _NEXT_IS_PATH=1
+  else
+    WIN_EXTRA_ARGS+=("${arg}")
+  fi
+done
+
+"${PYTHON}" -m src.evaluation.eval_text2sql \
+  --test-cases "${WIN_TEST_CASES}" \
+  --db "${WIN_DB_PATH}" \
+  "${WIN_EXTRA_ARGS[@]}"
 
 EXIT_CODE=$?
 

@@ -12,8 +12,8 @@
   },
   {
     "id": "r_002",
-    "input": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the structure of company codes impacts the tracking of presales data, such as inquiries and quotations, which are essential for evaluating sales strategies?  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the structure of company codes impacts the tracking of presales data, such as inquiries and quotations, which are essential for evaluating sales strategies?  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the structure of company codes impacts the tracking of presales data, such as inquiries and quotations, which are essential for evaluating sales strategies?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the structure of company codes impacts the tracking of presales data, such as inquiries and quotations, which are essential for evaluating sales strategies?  \n\nBest regards,  \n[Your Name]",
     "label": "QA_ONLY",
     "expected_intent": "QA_ONLY",
     "erp_evidence": null,
@@ -22,7 +22,7 @@
       "a quotation. Inquiries and quotations help you to determine important sales-related data and \ncan be saved as documents. If the customer places an order, you can then access this data.\nUse this presales information to plan and evaluate your marketing and sales strategies, and as \na basis for establishing long-term business relationships with your customers, for example, \nby:\n●\nTracking lost sales\n●\nRecording presales data to help negotiate large contracts\n●"
     ],
     "action_description": null,
-    "qa_question": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the struc"
+    "qa_question": "Subject: Clarification on Company Code Integration with Sales Data  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing our sales processes, I noticed that company codes are critical for financial reporting, as outlined in the SAP manual. Could you clarify how the struc"
   },
   {
     "id": "r_003",
@@ -297,8 +297,8 @@
   },
   {
     "id": "r_026",
-    "input": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Recipient],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing this diagram in our internal training materials, considering the copyright and trademark disclaimers outlined in the publication?  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Recipient],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing this diagram in our internal training materials, considering the copyright and trademark disclaimers outlined in the publication?  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing this diagram in our internal training materials, considering the copyright and trademark disclaimers outlined in the publication?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing this diagram in our internal training materials, considering the copyright and trademark disclaimers outlined in the publication?  \n\nBest regards,  \n[Your Name]",
     "label": "QA_ONLY",
     "expected_intent": "QA_ONLY",
     "erp_evidence": null,
@@ -307,7 +307,7 @@
       "SAP Copyrights, Trademarks and \nDisclaimers\n© 2023 SAP SE or an SAP affiliate company. All rights reserved.\nNo part of this publication may be reproduced or transmitted in any form or for any purpose without the \nexpress permission of SAP SE or an SAP affiliate company.\nSAP and other SAP products and services mentioned herein as well as their respective logos are \ntrademarks or registered trademarks of SAP SE (or an SAP affiliate company) in Germany and other"
     ],
     "action_description": null,
-    "qa_question": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Recipient],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing"
+    "qa_question": "Subject: Clarification on Usage of Process Flow Diagram  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP S/4HANA sales process documentation, I noticed Figure 28 referenced in the lesson summary. Could you please confirm the permissible usage rights for reproducing"
   },
   {
     "id": "r_027",
@@ -333,8 +333,8 @@
   },
   {
     "id": "r_029",
-    "input": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fiori interface supports the configuration of sales organizations and company codes, as outlined in the enterprise structures section? Specifically, how does the Fiori UI facilitate the management of market subdivisions through these organizational units?  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fiori interface supports the configuration of sales organizations and company codes, as outlined in the enterprise structures section? Specifically, how does the Fiori UI facilitate the management of market subdivisions through these organizational units?  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fiori interface supports the configuration of sales organizations and company codes, as outlined in the enterprise structures section? Specifically, how does the Fiori UI facilitate the management of market subdivisions through these organizational units?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fiori interface supports the configuration of sales organizations and company codes, as outlined in the enterprise structures section? Specifically, how does the Fiori UI facilitate the management of market subdivisions through these organizational units?  \n\nBest regards,  \n[Your Name]",
     "label": "QA_ONLY",
     "expected_intent": "QA_ONLY",
     "erp_evidence": null,
@@ -343,7 +343,7 @@
       "organization can be assigned to a single company code.\nThe sales organization is also used to take, for example, a regional, national, or international \nsubdivision of the market into account. More information about the sales organization is \nshown in the figure, Organizational Unit – Sales Organization.\nUnit 2: Enterprise Structures\n16\n© Copyright. All rights reserved."
     ],
     "action_description": null,
-    "qa_question": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fi"
+    "qa_question": "Subject: Clarification on SAP Fiori Integration with Organizational Structures  \n\nDear [Support Team],  \n\nI hope this message finds you well. While reviewing the SAP Fiori user experience documentation, I noticed the emphasis on user interface design for SAP S/4HANA. Could you clarify how the Fi"
   },
   {
     "id": "r_030",
@@ -358,8 +358,8 @@
   },
   {
     "id": "r_031",
-    "input": "Subject: Request to Unblock Delivery for Order 15336, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 15336, Item 10, which is an order with a specified delivery date and no stock join. Please confirm the action to proceed with the delivery release as per the provided details.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Unblock Delivery for Order 15336, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 15336, Item 10, which is an order with a specified delivery date and no stock join. Please confirm the action to proceed with the delivery release as per the provided details.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Unblock Delivery for Order 15336, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 15336, Item 10, which is an order with a specified delivery date and no stock join. Please confirm the action to proceed with the delivery release as per the provided details.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 15336, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 15336, Item 10, which is an order with a specified delivery date and no stock join. Please confirm the action to proceed with the delivery release as per the provided details.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -379,8 +379,8 @@
   },
   {
     "id": "r_032",
-    "input": "Subject: Request to Assign Batch Number B-36158 to Order 117, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the assignment of batch number B-36158 to item 10 of order 117. This order has a delivery date only and no stock join, so please ensure the batch is allocated accordingly. Kindly confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Assign Batch Number B-36158 to Order 117, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the assignment of batch number B-36158 to item 10 of order 117. This order has a delivery date only and no stock join, so please ensure the batch is allocated accordingly. Kindly confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Assign Batch Number B-36158 to Order 117, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the assignment of batch number B-36158 to item 10 of order 117. This order has a delivery date only and no stock join, so please ensure the batch is allocated accordingly. Kindly confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Assign Batch Number B-36158 to Order 117, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the assignment of batch number B-36158 to item 10 of order 117. This order has a delivery date only and no stock join, so please ensure the batch is allocated accordingly. Kindly confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -400,8 +400,8 @@
   },
   {
     "id": "r_033",
-    "input": "Subject: Request to Assign Batch Number B-50001 to Order 5572 Item 10  \n\nDear [Recipient],  \n\nI am writing to request the assignment of batch number B-50001 to item 10 of order 5572, as this order currently has zero available stock and requires batch-specific processing. Please confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Assign Batch Number B-50001 to Order 5572 Item 10  \n\nDear [Recipient],  \n\nI am writing to request the assignment of batch number B-50001 to item 10 of order 5572, as this order currently has zero available stock and requires batch-specific processing. Please confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Assign Batch Number B-50001 to Order 5572 Item 10  \n\nDear [Support Team],  \n\nI am writing to request the assignment of batch number B-50001 to item 10 of order 5572, as this order currently has zero available stock and requires batch-specific processing. Please confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Assign Batch Number B-50001 to Order 5572 Item 10  \n\nDear [Support Team],  \n\nI am writing to request the assignment of batch number B-50001 to item 10 of order 5572, as this order currently has zero available stock and requires batch-specific processing. Please confirm the action is completed at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -422,8 +422,8 @@
   },
   {
     "id": "r_034",
-    "input": "Subject: Request to Update Shipping Address for Order 40, Item 10  \n\nDear [Recipient],  \n\nPlease update the shipping address for Order 40, Item 10, as the order is currently partially processed (WBSTA=B). The revised address is required to ensure timely delivery. Kindly confirm the update is completed and notify us at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Address for Order 40, Item 10  \n\nDear [Recipient],  \n\nPlease update the shipping address for Order 40, Item 10, as the order is currently partially processed (WBSTA=B). The revised address is required to ensure timely delivery. Kindly confirm the update is completed and notify us at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Address for Order 40, Item 10  \n\nDear [Support Team],  \n\nPlease update the shipping address for Order 40, Item 10, as the order is currently partially processed (WBSTA=B). The revised address is required to ensure timely delivery. Kindly confirm the update is completed and notify us at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address for Order 40, Item 10  \n\nDear [Support Team],  \n\nPlease update the shipping address for Order 40, Item 10, as the order is currently partially processed (WBSTA=B). The revised address is required to ensure timely delivery. Kindly confirm the update is completed and notify us at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -465,8 +465,8 @@
   },
   {
     "id": "r_036",
-    "input": "Subject: Request to Adjust Order Quantity for Order #40, Item #10  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #40 within the SAP ERP system. Please confirm the adjustment is processed promptly to align with our current inventory requirements.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
-    "user_input": "Subject: Request to Adjust Order Quantity for Order #40, Item #10  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #40 within the SAP ERP system. Please confirm the adjustment is processed promptly to align with our current inventory requirements.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "input": "Subject: Request to Adjust Order Quantity for Order #40, Item #10  \n\nDear [Support Team],  \n\nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #40 within the SAP ERP system. Please confirm the adjustment is processed promptly to align with our current inventory requirements.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "user_input": "Subject: Request to Adjust Order Quantity for Order #40, Item #10  \n\nDear [Support Team],  \n\nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #40 within the SAP ERP system. Please confirm the adjustment is processed promptly to align with our current inventory requirements.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -487,8 +487,8 @@
   },
   {
     "id": "r_037",
-    "input": "Subject: Request to Adjust Order Quantity for Order 6190, Item No. 10  \n\nDear [Recipient],  \n\nPlease reduce the quantity of Item No. 10 in Order 6190 by 50 units, as the order is being processed against available stock via MARD JOIN.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Adjust Order Quantity for Order 6190, Item No. 10  \n\nDear [Recipient],  \n\nPlease reduce the quantity of Item No. 10 in Order 6190 by 50 units, as the order is being processed against available stock via MARD JOIN.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Adjust Order Quantity for Order 6190, Item No. 10  \n\nDear [Support Team],  \n\nPlease reduce the quantity of Item No. 10 in Order 6190 by 50 units, as the order is being processed against available stock via MARD JOIN.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity for Order 6190, Item No. 10  \n\nDear [Support Team],  \n\nPlease reduce the quantity of Item No. 10 in Order 6190 by 50 units, as the order is being processed against available stock via MARD JOIN.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -509,8 +509,8 @@
   },
   {
     "id": "r_038",
-    "input": "Subject: Request to Update Payment Terms for Order 6255, Item 10  \n\nDear [Recipient's Name],  \n\nKindly set the payment terms to Net 60 for Order ID 6255, Item No 10, as the order is processed via MARD JOIN with available stock. Please confirm the update at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Payment Terms for Order 6255, Item 10  \n\nDear [Recipient's Name],  \n\nKindly set the payment terms to Net 60 for Order ID 6255, Item No 10, as the order is processed via MARD JOIN with available stock. Please confirm the update at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Payment Terms for Order 6255, Item 10  \n\nDear [Support Team],  \n\nKindly set the payment terms to Net 60 for Order ID 6255, Item No 10, as the order is processed via MARD JOIN with available stock. Please confirm the update at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Payment Terms for Order 6255, Item 10  \n\nDear [Support Team],  \n\nKindly set the payment terms to Net 60 for Order ID 6255, Item No 10, as the order is processed via MARD JOIN with available stock. Please confirm the update at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -531,8 +531,8 @@
   },
   {
     "id": "r_039",
-    "input": "Subject: Request to Update Payment Terms for Order 40  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you please update the payment terms for Order 40, Item No. 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this partially processed order.  \n\nThank you for your prompt attention to this matter.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Payment Terms for Order 40  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you please update the payment terms for Order 40, Item No. 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this partially processed order.  \n\nThank you for your prompt attention to this matter.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Payment Terms for Order 40  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you please update the payment terms for Order 40, Item No. 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this partially processed order.  \n\nThank you for your prompt attention to this matter.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Payment Terms for Order 40  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you please update the payment terms for Order 40, Item No. 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this partially processed order.  \n\nThank you for your prompt attention to this matter.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -553,8 +553,8 @@
   },
   {
     "id": "r_040",
-    "input": "Subject: Request to Update Delivery Date for Order 3330, Item 10  \n\nDear [Recipient],  \n\nKindly update the delivery date for Order 3330, Item 10, as the available stock exceeds the ordered quantity. Please adjust the date to reflect the earliest possible shipment timeline.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Delivery Date for Order 3330, Item 10  \n\nDear [Recipient],  \n\nKindly update the delivery date for Order 3330, Item 10, as the available stock exceeds the ordered quantity. Please adjust the date to reflect the earliest possible shipment timeline.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Delivery Date for Order 3330, Item 10  \n\nDear [Support Team],  \n\nKindly update the delivery date for Order 3330, Item 10, as the available stock exceeds the ordered quantity. Please adjust the date to reflect the earliest possible shipment timeline.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Delivery Date for Order 3330, Item 10  \n\nDear [Support Team],  \n\nKindly update the delivery date for Order 3330, Item 10, as the available stock exceeds the ordered quantity. Please adjust the date to reflect the earliest possible shipment timeline.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -575,8 +575,8 @@
   },
   {
     "id": "r_041",
-    "input": "Subject: Request to Cancel Order Item 10 from Order 5838  \n\nDear [Recipient's Name],  \n\nWe would like to formally request the cancellation of item number 10 from sales order 5838. This item is part of a multi-line order, and we are proceeding with the cancellation to adjust our procurement plan. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
-    "user_input": "Subject: Request to Cancel Order Item 10 from Order 5838  \n\nDear [Recipient's Name],  \n\nWe would like to formally request the cancellation of item number 10 from sales order 5838. This item is part of a multi-line order, and we are proceeding with the cancellation to adjust our procurement plan. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "input": "Subject: Request to Cancel Order Item 10 from Order 5838  \n\nDear [Support Team],  \n\nWe would like to formally request the cancellation of item number 10 from sales order 5838. This item is part of a multi-line order, and we are proceeding with the cancellation to adjust our procurement plan. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "user_input": "Subject: Request to Cancel Order Item 10 from Order 5838  \n\nDear [Support Team],  \n\nWe would like to formally request the cancellation of item number 10 from sales order 5838. This item is part of a multi-line order, and we are proceeding with the cancellation to adjust our procurement plan. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -596,8 +596,8 @@
   },
   {
     "id": "r_042",
-    "input": "Subject: Request to Update Quantity for Order 5184, Item 10  \n\nDear [Recipient],  \nI am writing to request an update to the quantity for Order 5184, Item 10, changing it from the current value to 105 units. The order is currently facing zero available stock, so this adjustment is necessary. Kindly process this change at your earliest convenience. Thank you for your attention to this matter.",
-    "user_input": "Subject: Request to Update Quantity for Order 5184, Item 10  \n\nDear [Recipient],  \nI am writing to request an update to the quantity for Order 5184, Item 10, changing it from the current value to 105 units. The order is currently facing zero available stock, so this adjustment is necessary. Kindly process this change at your earliest convenience. Thank you for your attention to this matter.",
+    "input": "Subject: Request to Update Quantity for Order 5184, Item 10  \n\nDear [Support Team],  \nI am writing to request an update to the quantity for Order 5184, Item 10, changing it from the current value to 105 units. The order is currently facing zero available stock, so this adjustment is necessary. Kindly process this change at your earliest convenience. Thank you for your attention to this matter.",
+    "user_input": "Subject: Request to Update Quantity for Order 5184, Item 10  \n\nDear [Support Team],  \nI am writing to request an update to the quantity for Order 5184, Item 10, changing it from the current value to 105 units. The order is currently facing zero available stock, so this adjustment is necessary. Kindly process this change at your earliest convenience. Thank you for your attention to this matter.",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -618,8 +618,8 @@
   },
   {
     "id": "r_043",
-    "input": "Subject: Request to Unblock Delivery for Order 6340, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 6340, Item 10, which was placed with a delivery date only and no stock join. Please confirm the necessary action to proceed with the release of this item.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Unblock Delivery for Order 6340, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 6340, Item 10, which was placed with a delivery date only and no stock join. Please confirm the necessary action to proceed with the release of this item.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Unblock Delivery for Order 6340, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 6340, Item 10, which was placed with a delivery date only and no stock join. Please confirm the necessary action to proceed with the release of this item.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 6340, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 6340, Item 10, which was placed with a delivery date only and no stock join. Please confirm the necessary action to proceed with the release of this item.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -639,8 +639,8 @@
   },
   {
     "id": "r_044",
-    "input": "Subject: Request to Unblock Delivery for Order 40, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 40, Item 10, which is currently overdue with a past delivery date and incomplete goods movement. Please confirm the necessary steps to proceed with releasing the delivery block in SAP ERP.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Unblock Delivery for Order 40, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 40, Item 10, which is currently overdue with a past delivery date and incomplete goods movement. Please confirm the necessary steps to proceed with releasing the delivery block in SAP ERP.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Unblock Delivery for Order 40, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 40, Item 10, which is currently overdue with a past delivery date and incomplete goods movement. Please confirm the necessary steps to proceed with releasing the delivery block in SAP ERP.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 40, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 40, Item 10, which is currently overdue with a past delivery date and incomplete goods movement. Please confirm the necessary steps to proceed with releasing the delivery block in SAP ERP.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -683,8 +683,8 @@
   },
   {
     "id": "r_046",
-    "input": "Subject: Request to Update Shipping Address for Order 1079, Item 10  \n\nDear [Recipient], I am writing to request an update to the shipping address for Order 1079, Item 10. The order is currently in a status where stock is available via MARD JOIN, and we need the address updated to ensure timely delivery. Please confirm the necessary changes in SAP ERP at your earliest convenience. Thank you for your prompt attention to this matter.",
-    "user_input": "Subject: Request to Update Shipping Address for Order 1079, Item 10  \n\nDear [Recipient], I am writing to request an update to the shipping address for Order 1079, Item 10. The order is currently in a status where stock is available via MARD JOIN, and we need the address updated to ensure timely delivery. Please confirm the necessary changes in SAP ERP at your earliest convenience. Thank you for your prompt attention to this matter.",
+    "input": "Subject: Request to Update Shipping Address for Order 1079, Item 10  \n\nDear [Support Team], I am writing to request an update to the shipping address for Order 1079, Item 10. The order is currently in a status where stock is available via MARD JOIN, and we need the address updated to ensure timely delivery. Please confirm the necessary changes in SAP ERP at your earliest convenience. Thank you for your prompt attention to this matter.",
+    "user_input": "Subject: Request to Update Shipping Address for Order 1079, Item 10  \n\nDear [Support Team], I am writing to request an update to the shipping address for Order 1079, Item 10. The order is currently in a status where stock is available via MARD JOIN, and we need the address updated to ensure timely delivery. Please confirm the necessary changes in SAP ERP at your earliest convenience. Thank you for your prompt attention to this matter.",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -705,8 +705,8 @@
   },
   {
     "id": "r_047",
-    "input": "Subject: Request to Unblock Delivery for Order 17216 - Item 20  \n\nDear [Recipient's Name],  \n\nI am writing to request the unblocking of delivery for Order 17216, specifically for Item No. 20. This is a multi-line order, and the unblock should be applied solely to the referenced item. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
-    "user_input": "Subject: Request to Unblock Delivery for Order 17216 - Item 20  \n\nDear [Recipient's Name],  \n\nI am writing to request the unblocking of delivery for Order 17216, specifically for Item No. 20. This is a multi-line order, and the unblock should be applied solely to the referenced item. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "input": "Subject: Request to Unblock Delivery for Order 17216 - Item 20  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 17216, specifically for Item No. 20. This is a multi-line order, and the unblock should be applied solely to the referenced item. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 17216 - Item 20  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 17216, specifically for Item No. 20. This is a multi-line order, and the unblock should be applied solely to the referenced item. Please confirm the action is processed at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -726,8 +726,8 @@
   },
   {
     "id": "r_048",
-    "input": "Subject: Request to Update Payment Terms for Order 40, Item 10  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Order 40, Item 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this standard order. Please confirm the change at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Contact Information]",
-    "user_input": "Subject: Request to Update Payment Terms for Order 40, Item 10  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Order 40, Item 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this standard order. Please confirm the change at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Contact Information]",
+    "input": "Subject: Request to Update Payment Terms for Order 40, Item 10  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Order 40, Item 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this standard order. Please confirm the change at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Contact Information]",
+    "user_input": "Subject: Request to Update Payment Terms for Order 40, Item 10  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Order 40, Item 10 to Net 60? This adjustment is required to align with our agreed-upon terms for this standard order. Please confirm the change at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Contact Information]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -769,8 +769,8 @@
   },
   {
     "id": "r_050",
-    "input": "Subject: Request to Update Delivery Date for Order 70000166, Item No. 10  \n\nDear [Recipient's Name],  \n\nKindly update the delivery date for Order 70000166, Item No. 10, as the goods movement has not yet been processed (WBSTA=A). Please confirm the revised date at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Delivery Date for Order 70000166, Item No. 10  \n\nDear [Recipient's Name],  \n\nKindly update the delivery date for Order 70000166, Item No. 10, as the goods movement has not yet been processed (WBSTA=A). Please confirm the revised date at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Delivery Date for Order 70000166, Item No. 10  \n\nDear [Support Team],  \n\nKindly update the delivery date for Order 70000166, Item No. 10, as the goods movement has not yet been processed (WBSTA=A). Please confirm the revised date at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Delivery Date for Order 70000166, Item No. 10  \n\nDear [Support Team],  \n\nKindly update the delivery date for Order 70000166, Item No. 10, as the goods movement has not yet been processed (WBSTA=A). Please confirm the revised date at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -789,8 +789,8 @@
   },
   {
     "id": "r_051",
-    "input": "Subject: Request to Update Shipping Method for Order Item  \n\nDear [Recipient's Name],  \n\nI am writing to request that the shipping method for Order ID 70000101, Item No. 700001 (POSNR: 20) be changed to express courier. Please confirm the update in SAP ERP at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Method for Order Item  \n\nDear [Recipient's Name],  \n\nI am writing to request that the shipping method for Order ID 70000101, Item No. 700001 (POSNR: 20) be changed to express courier. Please confirm the update in SAP ERP at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Method for Order Item  \n\nDear [Support Team],  \n\nI am writing to request that the shipping method for Order ID 70000101, Item No. 700001 (POSNR: 20) be changed to express courier. Please confirm the update in SAP ERP at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method for Order Item  \n\nDear [Support Team],  \n\nI am writing to request that the shipping method for Order ID 70000101, Item No. 700001 (POSNR: 20) be changed to express courier. Please confirm the update in SAP ERP at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -808,8 +808,8 @@
   },
   {
     "id": "r_052",
-    "input": "Dear [Recipient's Name], I hope this message finds you well. We are following up on Order ID 40, Item No 10, which is currently overdue with a delivery date in the past and incomplete goods movement. Kindly update the delivery date to reflect the revised schedule as per our latest agreement. Your prompt attention to this matter is greatly appreciated.",
-    "user_input": "Dear [Recipient's Name], I hope this message finds you well. We are following up on Order ID 40, Item No 10, which is currently overdue with a delivery date in the past and incomplete goods movement. Kindly update the delivery date to reflect the revised schedule as per our latest agreement. Your prompt attention to this matter is greatly appreciated.",
+    "input": "Dear [Support Team], I hope this message finds you well. We are following up on Order ID 40, Item No 10, which is currently overdue with a delivery date in the past and incomplete goods movement. Kindly update the delivery date to reflect the revised schedule as per our latest agreement. Your prompt attention to this matter is greatly appreciated.",
+    "user_input": "Dear [Support Team], I hope this message finds you well. We are following up on Order ID 40, Item No 10, which is currently overdue with a delivery date in the past and incomplete goods movement. Kindly update the delivery date to reflect the revised schedule as per our latest agreement. Your prompt attention to this matter is greatly appreciated.",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -830,8 +830,8 @@
   },
   {
     "id": "r_053",
-    "input": "Subject: Request to Update Payment Terms for Order 6155  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Item No. 10 in Order ID 6155 to Net 60? This adjustment applies to the multi-line order containing multiple items. Your prompt attention to this request is greatly appreciated.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
-    "user_input": "Subject: Request to Update Payment Terms for Order 6155  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Item No. 10 in Order ID 6155 to Net 60? This adjustment applies to the multi-line order containing multiple items. Your prompt attention to this request is greatly appreciated.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "input": "Subject: Request to Update Payment Terms for Order 6155  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Item No. 10 in Order ID 6155 to Net 60? This adjustment applies to the multi-line order containing multiple items. Your prompt attention to this request is greatly appreciated.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
+    "user_input": "Subject: Request to Update Payment Terms for Order 6155  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the payment terms for Item No. 10 in Order ID 6155 to Net 60? This adjustment applies to the multi-line order containing multiple items. Your prompt attention to this request is greatly appreciated.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -851,8 +851,8 @@
   },
   {
     "id": "r_054",
-    "input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Recipient's Name],  \n\nWe are writing to request the unblocking of delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary steps to proceed with shipment.  \n\nKindly respond at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
-    "user_input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Recipient's Name],  \n\nWe are writing to request the unblocking of delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary steps to proceed with shipment.  \n\nKindly respond at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+    "input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Support Team],  \n\nWe are writing to request the unblocking of delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary steps to proceed with shipment.  \n\nKindly respond at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Support Team],  \n\nWe are writing to request the unblocking of delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary steps to proceed with shipment.  \n\nKindly respond at your earliest convenience.  \n\nBest regards,  \n[Your Full Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -873,8 +873,8 @@
   },
   {
     "id": "r_055",
-    "input": "Subject: Request to Adjust Order Quantity for Order ID 2717  \n\nDear [Recipient's Name],  \n\nRegarding Order ID 2717, Item No. 10, kindly reduce the order quantity by 50 units, as the available stock exceeds the ordered quantity. Please confirm the adjustment at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Adjust Order Quantity for Order ID 2717  \n\nDear [Recipient's Name],  \n\nRegarding Order ID 2717, Item No. 10, kindly reduce the order quantity by 50 units, as the available stock exceeds the ordered quantity. Please confirm the adjustment at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Adjust Order Quantity for Order ID 2717  \n\nDear [Support Team],  \n\nRegarding Order ID 2717, Item No. 10, kindly reduce the order quantity by 50 units, as the available stock exceeds the ordered quantity. Please confirm the adjustment at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity for Order ID 2717  \n\nDear [Support Team],  \n\nRegarding Order ID 2717, Item No. 10, kindly reduce the order quantity by 50 units, as the available stock exceeds the ordered quantity. Please confirm the adjustment at your earliest convenience.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -895,8 +895,8 @@
   },
   {
     "id": "r_056",
-    "input": "Subject: Request to Update Shipping Address for Order 70000166, Item 10  \n\nDear [Recipient],  \n\nPlease update the shipping address for order 70000166, item 10 in SAP ERP. The goods movement has not yet been processed (WBSTA=A), so the address change can be implemented prior to shipment.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Address for Order 70000166, Item 10  \n\nDear [Recipient],  \n\nPlease update the shipping address for order 70000166, item 10 in SAP ERP. The goods movement has not yet been processed (WBSTA=A), so the address change can be implemented prior to shipment.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Address for Order 70000166, Item 10  \n\nDear [Support Team],  \n\nPlease update the shipping address for order 70000166, item 10 in SAP ERP. The goods movement has not yet been processed (WBSTA=A), so the address change can be implemented prior to shipment.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address for Order 70000166, Item 10  \n\nDear [Support Team],  \n\nPlease update the shipping address for order 70000166, item 10 in SAP ERP. The goods movement has not yet been processed (WBSTA=A), so the address change can be implemented prior to shipment.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -915,8 +915,8 @@
   },
   {
     "id": "r_057",
-    "input": "Subject: Request to Unblock Delivery for Order 2845, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 2845, Item 10, as the stock is now available via MARD JOIN. Please confirm the action to proceed with the release of the blocked delivery.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Unblock Delivery for Order 2845, Item 10  \n\nDear [Recipient],  \n\nI am writing to request the unblocking of delivery for Order 2845, Item 10, as the stock is now available via MARD JOIN. Please confirm the action to proceed with the release of the blocked delivery.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Unblock Delivery for Order 2845, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 2845, Item 10, as the stock is now available via MARD JOIN. Please confirm the action to proceed with the release of the blocked delivery.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 2845, Item 10  \n\nDear [Support Team],  \n\nI am writing to request the unblocking of delivery for Order 2845, Item 10, as the stock is now available via MARD JOIN. Please confirm the action to proceed with the release of the blocked delivery.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -958,8 +958,8 @@
   },
   {
     "id": "r_059",
-    "input": "Subject: Request to Unblock Delivery for Order 1228, Item 10  \n\nDear [Recipient],  \n\nWe would like to request the unblocking of delivery for Order 1228, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary action to proceed with shipment.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Unblock Delivery for Order 1228, Item 10  \n\nDear [Recipient],  \n\nWe would like to request the unblocking of delivery for Order 1228, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary action to proceed with shipment.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Unblock Delivery for Order 1228, Item 10  \n\nDear [Support Team],  \n\nWe would like to request the unblocking of delivery for Order 1228, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary action to proceed with shipment.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery for Order 1228, Item 10  \n\nDear [Support Team],  \n\nWe would like to request the unblocking of delivery for Order 1228, Item 10, as the available stock exceeds the ordered quantity. Please confirm the necessary action to proceed with shipment.  \n\nBest regards,  \n[Your Name]",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -980,8 +980,8 @@
   },
   {
     "id": "r_060",
-    "input": "Subject: Request to Reduce Order Quantity for Order #1049, Item #10  \n\nDear [Recipient],  \nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #1049, as the order is based on available stock via MARD JOIN. Please process this adjustment at your earliest convenience. Thank you for your prompt attention to this matter.",
-    "user_input": "Subject: Request to Reduce Order Quantity for Order #1049, Item #10  \n\nDear [Recipient],  \nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #1049, as the order is based on available stock via MARD JOIN. Please process this adjustment at your earliest convenience. Thank you for your prompt attention to this matter.",
+    "input": "Subject: Request to Reduce Order Quantity for Order #1049, Item #10  \n\nDear [Support Team],  \nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #1049, as the order is based on available stock via MARD JOIN. Please process this adjustment at your earliest convenience. Thank you for your prompt attention to this matter.",
+    "user_input": "Subject: Request to Reduce Order Quantity for Order #1049, Item #10  \n\nDear [Support Team],  \nI hope this message finds you well. We are requesting a reduction of 50 units for Item #10 in Order #1049, as the order is based on available stock via MARD JOIN. Please process this adjustment at your earliest convenience. Thank you for your prompt attention to this matter.",
     "label": "ACTION_ONLY",
     "expected_intent": "ACTION_ONLY",
     "erp_evidence": {
@@ -1002,8 +1002,8 @@
   },
   {
     "id": "r_061",
-    "input": "Subject: Request to Unblock Delivery and Query on SAP Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order ID 15336, Item No. 10, which is an order with a delivery date only and no stock join? Additionally, I have a quick question regarding SAP Fiori: can users personalize the home page by default, as mentioned in the learning assessment? Your guidance on this would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Unblock Delivery and Query on SAP Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order ID 15336, Item No. 10, which is an order with a delivery date only and no stock join? Additionally, I have a quick question regarding SAP Fiori: can users personalize the home page by default, as mentioned in the learning assessment? Your guidance on this would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Unblock Delivery and Query on SAP Fiori Personalization  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order ID 15336, Item No. 10, which is an order with a delivery date only and no stock join? Additionally, I have a quick question regarding SAP Fiori: can users personalize the home page by default, as mentioned in the learning assessment? Your guidance on this would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Unblock Delivery and Query on SAP Fiori Personalization  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order ID 15336, Item No. 10, which is an order with a delivery date only and no stock join? Additionally, I have a quick question regarding SAP Fiori: can users personalize the home page by default, as mentioned in the learning assessment? Your guidance on this would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1023,8 +1023,8 @@
   },
   {
     "id": "r_062",
-    "input": "Subject: Request to Update Shipping Method and Inquiry on Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping method for Order ID 117, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’d appreciate guidance on how to personalize the SAP Fiori launchpad home page to better organize my frequently used apps. Thank you for your assistance.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Method and Inquiry on Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping method for Order ID 117, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’d appreciate guidance on how to personalize the SAP Fiori launchpad home page to better organize my frequently used apps. Thank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Method and Inquiry on Fiori Personalization  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the shipping method for Order ID 117, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’d appreciate guidance on how to personalize the SAP Fiori launchpad home page to better organize my frequently used apps. Thank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method and Inquiry on Fiori Personalization  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the shipping method for Order ID 117, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’d appreciate guidance on how to personalize the SAP Fiori launchpad home page to better organize my frequently used apps. Thank you for your assistance.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1044,8 +1044,8 @@
   },
   {
     "id": "r_063",
-    "input": "Subject: Request to Assign Batch Number and Inquiry on User Experience  \n\nDear [Recipient],  \n\nI would like to request the assignment of batch number B-67954 to order 5572, item 10, as this order involves zero or no available stock. Additionally, could you clarify how to configure the SAP ERP system to prioritize user experience when navigating inventory management workflows, as mentioned in the recent documentation?  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Assign Batch Number and Inquiry on User Experience  \n\nDear [Recipient],  \n\nI would like to request the assignment of batch number B-67954 to order 5572, item 10, as this order involves zero or no available stock. Additionally, could you clarify how to configure the SAP ERP system to prioritize user experience when navigating inventory management workflows, as mentioned in the recent documentation?  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Assign Batch Number and Inquiry on User Experience  \n\nDear [Support Team],  \n\nI would like to request the assignment of batch number B-67954 to order 5572, item 10, as this order involves zero or no available stock. Additionally, could you clarify how to configure the SAP ERP system to prioritize user experience when navigating inventory management workflows, as mentioned in the recent documentation?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Assign Batch Number and Inquiry on User Experience  \n\nDear [Support Team],  \n\nI would like to request the assignment of batch number B-67954 to order 5572, item 10, as this order involves zero or no available stock. Additionally, could you clarify how to configure the SAP ERP system to prioritize user experience when navigating inventory management workflows, as mentioned in the recent documentation?  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1066,8 +1066,8 @@
   },
   {
     "id": "r_064",
-    "input": "Subject: Request to Update Shipping Address and EWM Configuration Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 40, Item No. 10, as the order is partially processed (WBSTA=B)? Additionally, I’d appreciate guidance on modifying shipping points within SAP Extended Warehouse Management (EWM) after activating the organizational unit for warehouse management.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Address and EWM Configuration Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 40, Item No. 10, as the order is partially processed (WBSTA=B)? Additionally, I’d appreciate guidance on modifying shipping points within SAP Extended Warehouse Management (EWM) after activating the organizational unit for warehouse management.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Address and EWM Configuration Inquiry  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 40, Item No. 10, as the order is partially processed (WBSTA=B)? Additionally, I’d appreciate guidance on modifying shipping points within SAP Extended Warehouse Management (EWM) after activating the organizational unit for warehouse management.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address and EWM Configuration Inquiry  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 40, Item No. 10, as the order is partially processed (WBSTA=B)? Additionally, I’d appreciate guidance on modifying shipping points within SAP Extended Warehouse Management (EWM) after activating the organizational unit for warehouse management.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1087,8 +1087,8 @@
   },
   {
     "id": "r_065",
-    "input": "Subject: Request to Cancel Order 20972 Item 10 and Clarification on Storage Location Configuration  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of Order 20972, Item 10, as the order was placed with zero available stock. Could you confirm the process for updating the storage location assignment for this plant to prevent similar issues in the future?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Cancel Order 20972 Item 10 and Clarification on Storage Location Configuration  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of Order 20972, Item 10, as the order was placed with zero available stock. Could you confirm the process for updating the storage location assignment for this plant to prevent similar issues in the future?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Cancel Order 20972 Item 10 and Clarification on Storage Location Configuration  \n\nDear [Support Team],  \n\nWe would like to request the cancellation of Order 20972, Item 10, as the order was placed with zero available stock. Could you confirm the process for updating the storage location assignment for this plant to prevent similar issues in the future?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Cancel Order 20972 Item 10 and Clarification on Storage Location Configuration  \n\nDear [Support Team],  \n\nWe would like to request the cancellation of Order 20972, Item 10, as the order was placed with zero available stock. Could you confirm the process for updating the storage location assignment for this plant to prevent similar issues in the future?  \n\nThank you for your assistance.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1109,8 +1109,8 @@
   },
   {
     "id": "r_066",
-    "input": "Subject: Request to Adjust Order Quantity and Clarification on Organizational Structure  \n\nDear [Recipient],  \n\nI would like to request a reduction of 50 units for Order ID 40, Item No. 10, to align with updated requirements. Additionally, could you clarify how to configure the sales area organizational unit in SAP ERP to simplify master data maintenance, as outlined in the provided content? This would help ensure consistency across our reporting processes.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Adjust Order Quantity and Clarification on Organizational Structure  \n\nDear [Recipient],  \n\nI would like to request a reduction of 50 units for Order ID 40, Item No. 10, to align with updated requirements. Additionally, could you clarify how to configure the sales area organizational unit in SAP ERP to simplify master data maintenance, as outlined in the provided content? This would help ensure consistency across our reporting processes.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Adjust Order Quantity and Clarification on Organizational Structure  \n\nDear [Support Team],  \n\nI would like to request a reduction of 50 units for Order ID 40, Item No. 10, to align with updated requirements. Additionally, could you clarify how to configure the sales area organizational unit in SAP ERP to simplify master data maintenance, as outlined in the provided content? This would help ensure consistency across our reporting processes.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity and Clarification on Organizational Structure  \n\nDear [Support Team],  \n\nI would like to request a reduction of 50 units for Order ID 40, Item No. 10, to align with updated requirements. Additionally, could you clarify how to configure the sales area organizational unit in SAP ERP to simplify master data maintenance, as outlined in the provided content? This would help ensure consistency across our reporting processes.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1131,8 +1131,8 @@
   },
   {
     "id": "r_067",
-    "input": "Subject: Request to Update Shipping Method and Clarification on ERP Display Conventions  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. I am reaching out to request that the shipping method for Order 6190, Item No. 10, be updated to express courier, as the order has available stock via MARD JOIN. Additionally, could you clarify how to distinguish between window titles and example text in the SAP ERP interface, as outlined in the typographic conventions section of the handbook? This would help ensure accurate interpretation of system displays during order processing.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Method and Clarification on ERP Display Conventions  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. I am reaching out to request that the shipping method for Order 6190, Item No. 10, be updated to express courier, as the order has available stock via MARD JOIN. Additionally, could you clarify how to distinguish between window titles and example text in the SAP ERP interface, as outlined in the typographic conventions section of the handbook? This would help ensure accurate interpretation of system displays during order processing.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Method and Clarification on ERP Display Conventions  \n\nDear [Support Team],  \n\nI hope this message finds you well. I am reaching out to request that the shipping method for Order 6190, Item No. 10, be updated to express courier, as the order has available stock via MARD JOIN. Additionally, could you clarify how to distinguish between window titles and example text in the SAP ERP interface, as outlined in the typographic conventions section of the handbook? This would help ensure accurate interpretation of system displays during order processing.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method and Clarification on ERP Display Conventions  \n\nDear [Support Team],  \n\nI hope this message finds you well. I am reaching out to request that the shipping method for Order 6190, Item No. 10, be updated to express courier, as the order has available stock via MARD JOIN. Additionally, could you clarify how to distinguish between window titles and example text in the SAP ERP interface, as outlined in the typographic conventions section of the handbook? This would help ensure accurate interpretation of system displays during order processing.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1153,8 +1153,8 @@
   },
   {
     "id": "r_068",
-    "input": "Subject: Request to Update Shipping Address and Query on Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 6255, Item No. 10, as the current details do not align with the customer’s latest requirements? Additionally, I would appreciate guidance on personalizing the SAP Fiori Launchpad to create a filtered report application for specific regional data, such as the German cash position mentioned in the documentation. Your assistance in both matters would be greatly valued.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Address and Query on Fiori Personalization  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 6255, Item No. 10, as the current details do not align with the customer’s latest requirements? Additionally, I would appreciate guidance on personalizing the SAP Fiori Launchpad to create a filtered report application for specific regional data, such as the German cash position mentioned in the documentation. Your assistance in both matters would be greatly valued.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Address and Query on Fiori Personalization  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 6255, Item No. 10, as the current details do not align with the customer’s latest requirements? Additionally, I would appreciate guidance on personalizing the SAP Fiori Launchpad to create a filtered report application for specific regional data, such as the German cash position mentioned in the documentation. Your assistance in both matters would be greatly valued.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address and Query on Fiori Personalization  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 6255, Item No. 10, as the current details do not align with the customer’s latest requirements? Additionally, I would appreciate guidance on personalizing the SAP Fiori Launchpad to create a filtered report application for specific regional data, such as the German cash position mentioned in the documentation. Your assistance in both matters would be greatly valued.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1175,8 +1175,8 @@
   },
   {
     "id": "r_069",
-    "input": "Subject: Request to Update Shipping Address for Order 40 Item 10  \n\nDear [Recipient],  \n\nCould you please update the shipping address for Order 40, Item 10, as the current details do not align with the customer’s requirements? The order is partially processed (WBSTA=B), so timely adjustments are critical to avoid delays.  \n\nAdditionally, I’d appreciate clarification on whether the shipping address is stored at the header or item level in the sales document structure, as this will help ensure consistency across related transactions.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Address for Order 40 Item 10  \n\nDear [Recipient],  \n\nCould you please update the shipping address for Order 40, Item 10, as the current details do not align with the customer’s requirements? The order is partially processed (WBSTA=B), so timely adjustments are critical to avoid delays.  \n\nAdditionally, I’d appreciate clarification on whether the shipping address is stored at the header or item level in the sales document structure, as this will help ensure consistency across related transactions.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Address for Order 40 Item 10  \n\nDear [Support Team],  \n\nCould you please update the shipping address for Order 40, Item 10, as the current details do not align with the customer’s requirements? The order is partially processed (WBSTA=B), so timely adjustments are critical to avoid delays.  \n\nAdditionally, I’d appreciate clarification on whether the shipping address is stored at the header or item level in the sales document structure, as this will help ensure consistency across related transactions.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address for Order 40 Item 10  \n\nDear [Support Team],  \n\nCould you please update the shipping address for Order 40, Item 10, as the current details do not align with the customer’s requirements? The order is partially processed (WBSTA=B), so timely adjustments are critical to avoid delays.  \n\nAdditionally, I’d appreciate clarification on whether the shipping address is stored at the header or item level in the sales document structure, as this will help ensure consistency across related transactions.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1197,8 +1197,8 @@
   },
   {
     "id": "r_070",
-    "input": "Subject: Request to Cancel Order Item and Clarification on Organizational Units  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of order 3330, item 10, as the available stock exceeds the ordered quantity. Could you confirm the steps required to proceed with this action in the SAP ERP system? Additionally, could you clarify which organizational units from Figure 11 are most relevant for initiating such a cancellation in the sales and distribution process?  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Cancel Order Item and Clarification on Organizational Units  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of order 3330, item 10, as the available stock exceeds the ordered quantity. Could you confirm the steps required to proceed with this action in the SAP ERP system? Additionally, could you clarify which organizational units from Figure 11 are most relevant for initiating such a cancellation in the sales and distribution process?  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Cancel Order Item and Clarification on Organizational Units  \n\nDear [Support Team],  \n\nWe would like to request the cancellation of order 3330, item 10, as the available stock exceeds the ordered quantity. Could you confirm the steps required to proceed with this action in the SAP ERP system? Additionally, could you clarify which organizational units from Figure 11 are most relevant for initiating such a cancellation in the sales and distribution process?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Cancel Order Item and Clarification on Organizational Units  \n\nDear [Support Team],  \n\nWe would like to request the cancellation of order 3330, item 10, as the available stock exceeds the ordered quantity. Could you confirm the steps required to proceed with this action in the SAP ERP system? Additionally, could you clarify which organizational units from Figure 11 are most relevant for initiating such a cancellation in the sales and distribution process?  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1240,8 +1240,8 @@
   },
   {
     "id": "r_072",
-    "input": "Subject: Request to Update Delivery Date and Clarification on Distribution Channel Setup  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 5184, Item No. 10, as the order is currently facing a zero-stock scenario? Additionally, I’d appreciate guidance on how to assign a distribution channel to a sales organization within the SAP ERP system, as outlined in Figure 13, to ensure proper configuration for future orders.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Delivery Date and Clarification on Distribution Channel Setup  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 5184, Item No. 10, as the order is currently facing a zero-stock scenario? Additionally, I’d appreciate guidance on how to assign a distribution channel to a sales organization within the SAP ERP system, as outlined in Figure 13, to ensure proper configuration for future orders.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Delivery Date and Clarification on Distribution Channel Setup  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 5184, Item No. 10, as the order is currently facing a zero-stock scenario? Additionally, I’d appreciate guidance on how to assign a distribution channel to a sales organization within the SAP ERP system, as outlined in Figure 13, to ensure proper configuration for future orders.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Delivery Date and Clarification on Distribution Channel Setup  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 5184, Item No. 10, as the order is currently facing a zero-stock scenario? Additionally, I’d appreciate guidance on how to assign a distribution channel to a sales organization within the SAP ERP system, as outlined in Figure 13, to ensure proper configuration for future orders.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1262,8 +1262,8 @@
   },
   {
     "id": "r_073",
-    "input": "Subject: Request to Update Shipping Method and Inquiry on SAP Fiori Access  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you please update the shipping method for Order ID 6340, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’m seeking guidance on how to access SAP Fiori interfaces for order management tasks—specifically, how to ensure the Fiori launchpad is configured to display relevant transactional apps for our S/4HANA implementation.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Method and Inquiry on SAP Fiori Access  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you please update the shipping method for Order ID 6340, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’m seeking guidance on how to access SAP Fiori interfaces for order management tasks—specifically, how to ensure the Fiori launchpad is configured to display relevant transactional apps for our S/4HANA implementation.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Method and Inquiry on SAP Fiori Access  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you please update the shipping method for Order ID 6340, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’m seeking guidance on how to access SAP Fiori interfaces for order management tasks—specifically, how to ensure the Fiori launchpad is configured to display relevant transactional apps for our S/4HANA implementation.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Method and Inquiry on SAP Fiori Access  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you please update the shipping method for Order ID 6340, Item No. 10 to express courier, as this order has a delivery date only and no stock join? Additionally, I’m seeking guidance on how to access SAP Fiori interfaces for order management tasks—specifically, how to ensure the Fiori launchpad is configured to display relevant transactional apps for our S/4HANA implementation.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1283,8 +1283,8 @@
   },
   {
     "id": "r_074",
-    "input": "Subject: Request to Assign Batch Number and Assistance with SAP Fiori Navigation  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-41979 to order 40, item 10, as this overdue order requires urgent processing? Additionally, I am seeking guidance on navigating the batch assignment function within SAP Fiori—specifically, which app or tile should be used to access this task efficiently. Your assistance would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Assign Batch Number and Assistance with SAP Fiori Navigation  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-41979 to order 40, item 10, as this overdue order requires urgent processing? Additionally, I am seeking guidance on navigating the batch assignment function within SAP Fiori—specifically, which app or tile should be used to access this task efficiently. Your assistance would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Assign Batch Number and Assistance with SAP Fiori Navigation  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly assign batch number B-41979 to order 40, item 10, as this overdue order requires urgent processing? Additionally, I am seeking guidance on navigating the batch assignment function within SAP Fiori—specifically, which app or tile should be used to access this task efficiently. Your assistance would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Assign Batch Number and Assistance with SAP Fiori Navigation  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly assign batch number B-41979 to order 40, item 10, as this overdue order requires urgent processing? Additionally, I am seeking guidance on navigating the batch assignment function within SAP Fiori—specifically, which app or tile should be used to access this task efficiently. Your assistance would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1305,8 +1305,8 @@
   },
   {
     "id": "r_075",
-    "input": "Subject: Request to Cancel Order 40 Item 10 and Clarification on Sales Area Configuration  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of Order 40, Item 10, as it is partially processed and no longer required. Could you confirm if the sales area assigned to this order is correctly configured, particularly regarding the business partner master data and validity checks? Additionally, we noticed the system requires at least one sales area per company code—could you verify that the relevant sales organization is properly linked to the company code for this transaction?  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Cancel Order 40 Item 10 and Clarification on Sales Area Configuration  \n\nDear [Recipient],  \n\nWe would like to request the cancellation of Order 40, Item 10, as it is partially processed and no longer required. Could you confirm if the sales area assigned to this order is correctly configured, particularly regarding the business partner master data and validity checks? Additionally, we noticed the system requires at least one sales area per company code—could you verify that the relevant sales organization is properly linked to the company code for this transaction?  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Cancel Order 40 Item 10 and Clarification on Sales Area Configuration  \n\nDear [Support Team],  \n\nWe would like to request the cancellation of Order 40, Item 10, as it is partially processed and no longer required. Could you confirm if the sales area assigned to this order is correctly configured, particularly regarding the business partner master data and validity checks? Additionally, we noticed the system requires at least one sales area per company code—could you verify that the relevant sales organization is properly linked to the company code for this transaction?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Cancel Order 40 Item 10 and Clarification on Sales Area Configuration  \n\nDear [Support Team],  \n\nWe would like to request the cancellation of Order 40, Item 10, as it is partially processed and no longer required. Could you confirm if the sales area assigned to this order is correctly configured, particularly regarding the business partner master data and validity checks? Additionally, we noticed the system requires at least one sales area per company code—could you verify that the relevant sales organization is properly linked to the company code for this transaction?  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1327,8 +1327,8 @@
   },
   {
     "id": "r_076",
-    "input": "Subject: Request to Update Delivery Date and Warehouse Management Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 1079, Item No. 10, as the current schedule conflicts with our production timeline? Additionally, I’m seeking guidance on how to locate the warehouse number for a specific storage area within the ERP system, as outlined in Figure 19 regarding organizational units. Your assistance in clarifying the hierarchical structure of warehouse management would greatly aid our inventory planning.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Delivery Date and Warehouse Management Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 1079, Item No. 10, as the current schedule conflicts with our production timeline? Additionally, I’m seeking guidance on how to locate the warehouse number for a specific storage area within the ERP system, as outlined in Figure 19 regarding organizational units. Your assistance in clarifying the hierarchical structure of warehouse management would greatly aid our inventory planning.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Delivery Date and Warehouse Management Inquiry  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 1079, Item No. 10, as the current schedule conflicts with our production timeline? Additionally, I’m seeking guidance on how to locate the warehouse number for a specific storage area within the ERP system, as outlined in Figure 19 regarding organizational units. Your assistance in clarifying the hierarchical structure of warehouse management would greatly aid our inventory planning.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Delivery Date and Warehouse Management Inquiry  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the delivery date for Order ID 1079, Item No. 10, as the current schedule conflicts with our production timeline? Additionally, I’m seeking guidance on how to locate the warehouse number for a specific storage area within the ERP system, as outlined in Figure 19 regarding organizational units. Your assistance in clarifying the hierarchical structure of warehouse management would greatly aid our inventory planning.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1349,8 +1349,8 @@
   },
   {
     "id": "r_077",
-    "input": "Subject: Request to Update Shipping Address and Clarification on ERP Usage  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 17216, Item No. 20, as the delivery details have changed?  \n\nAdditionally, I’d appreciate guidance on the most efficient way to handle occasional ERP tasks—specifically, are there single-step transactions recommended for users who interact with the system infrequently?  \n\nThank you for your support.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Shipping Address and Clarification on ERP Usage  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 17216, Item No. 20, as the delivery details have changed?  \n\nAdditionally, I’d appreciate guidance on the most efficient way to handle occasional ERP tasks—specifically, are there single-step transactions recommended for users who interact with the system infrequently?  \n\nThank you for your support.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Shipping Address and Clarification on ERP Usage  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 17216, Item No. 20, as the delivery details have changed?  \n\nAdditionally, I’d appreciate guidance on the most efficient way to handle occasional ERP tasks—specifically, are there single-step transactions recommended for users who interact with the system infrequently?  \n\nThank you for your support.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Shipping Address and Clarification on ERP Usage  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly update the shipping address for Order ID 17216, Item No. 20, as the delivery details have changed?  \n\nAdditionally, I’d appreciate guidance on the most efficient way to handle occasional ERP tasks—specifically, are there single-step transactions recommended for users who interact with the system infrequently?  \n\nThank you for your support.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1370,8 +1370,8 @@
   },
   {
     "id": "r_078",
-    "input": "Subject: Request for Batch Assignment and SAP ERP Clarification  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-83060 to item 10 of order 40, as per the standard order baseline? Additionally, I’d appreciate guidance on how to correctly assign a delivering plant to a sales order in SAP ERP, ensuring alignment with the company code structure outlined in the documentation.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request for Batch Assignment and SAP ERP Clarification  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-83060 to item 10 of order 40, as per the standard order baseline? Additionally, I’d appreciate guidance on how to correctly assign a delivering plant to a sales order in SAP ERP, ensuring alignment with the company code structure outlined in the documentation.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request for Batch Assignment and SAP ERP Clarification  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly assign batch number B-83060 to item 10 of order 40, as per the standard order baseline? Additionally, I’d appreciate guidance on how to correctly assign a delivering plant to a sales order in SAP ERP, ensuring alignment with the company code structure outlined in the documentation.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request for Batch Assignment and SAP ERP Clarification  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly assign batch number B-83060 to item 10 of order 40, as per the standard order baseline? Additionally, I’d appreciate guidance on how to correctly assign a delivering plant to a sales order in SAP ERP, ensuring alignment with the company code structure outlined in the documentation.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1413,8 +1413,8 @@
   },
   {
     "id": "r_080",
-    "input": "Subject: Batch Number Assignment and System Update Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-70901 to order 70000166, item 10, as this order is currently in a WBSTA=A status with no goods movement processed? Additionally, I have a question regarding system updates: given SAP’s note that information may change without notice, what steps should users take to ensure compliance and data integrity when relying on forward-looking system functionalities?  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Batch Number Assignment and System Update Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly assign batch number B-70901 to order 70000166, item 10, as this order is currently in a WBSTA=A status with no goods movement processed? Additionally, I have a question regarding system updates: given SAP’s note that information may change without notice, what steps should users take to ensure compliance and data integrity when relying on forward-looking system functionalities?  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Batch Number Assignment and System Update Inquiry  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly assign batch number B-70901 to order 70000166, item 10, as this order is currently in a WBSTA=A status with no goods movement processed? Additionally, I have a question regarding system updates: given SAP’s note that information may change without notice, what steps should users take to ensure compliance and data integrity when relying on forward-looking system functionalities?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Batch Number Assignment and System Update Inquiry  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly assign batch number B-70901 to order 70000166, item 10, as this order is currently in a WBSTA=A status with no goods movement processed? Additionally, I have a question regarding system updates: given SAP’s note that information may change without notice, what steps should users take to ensure compliance and data integrity when relying on forward-looking system functionalities?  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1433,8 +1433,8 @@
   },
   {
     "id": "r_081",
-    "input": "Subject: Request to Update Payment Terms and Clarification on POSNR Handling  \n\nDear [Recipient],  \n\nCould you please update the payment terms for Order ID 70000101, Item No 700001 to Net 60, as this item has a non-default POSNR and requires adjusted terms? Additionally, I’d appreciate guidance on how to verify the validity of dates in the ERP system when non-default POSNR values are applied, as the SAP documentation notes that such data should not be relied upon for purchasing decisions.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Update Payment Terms and Clarification on POSNR Handling  \n\nDear [Recipient],  \n\nCould you please update the payment terms for Order ID 70000101, Item No 700001 to Net 60, as this item has a non-default POSNR and requires adjusted terms? Additionally, I’d appreciate guidance on how to verify the validity of dates in the ERP system when non-default POSNR values are applied, as the SAP documentation notes that such data should not be relied upon for purchasing decisions.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Update Payment Terms and Clarification on POSNR Handling  \n\nDear [Support Team],  \n\nCould you please update the payment terms for Order ID 70000101, Item No 700001 to Net 60, as this item has a non-default POSNR and requires adjusted terms? Additionally, I’d appreciate guidance on how to verify the validity of dates in the ERP system when non-default POSNR values are applied, as the SAP documentation notes that such data should not be relied upon for purchasing decisions.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Update Payment Terms and Clarification on POSNR Handling  \n\nDear [Support Team],  \n\nCould you please update the payment terms for Order ID 70000101, Item No 700001 to Net 60, as this item has a non-default POSNR and requires adjusted terms? Additionally, I’d appreciate guidance on how to verify the validity of dates in the ERP system when non-default POSNR values are applied, as the SAP documentation notes that such data should not be relied upon for purchasing decisions.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1452,8 +1452,8 @@
   },
   {
     "id": "r_082",
-    "input": "Subject: Request to Reschedule Delivery and Clarification on Warehouse Configuration  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. I am writing to request that the delivery for Order ID 40, Item No. 10 be rescheduled by two weeks, as the current delivery date has passed and goods movement remains incomplete. Additionally, could you clarify how to configure warehouse numbers in SAP ERP when linking plants and storage locations, considering the three-character requirement in Logistics Execution versus the four-character field in EWM? Your guidance on this matter would help ensure accurate system setup.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Reschedule Delivery and Clarification on Warehouse Configuration  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. I am writing to request that the delivery for Order ID 40, Item No. 10 be rescheduled by two weeks, as the current delivery date has passed and goods movement remains incomplete. Additionally, could you clarify how to configure warehouse numbers in SAP ERP when linking plants and storage locations, considering the three-character requirement in Logistics Execution versus the four-character field in EWM? Your guidance on this matter would help ensure accurate system setup.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Reschedule Delivery and Clarification on Warehouse Configuration  \n\nDear [Support Team],  \n\nI hope this message finds you well. I am writing to request that the delivery for Order ID 40, Item No. 10 be rescheduled by two weeks, as the current delivery date has passed and goods movement remains incomplete. Additionally, could you clarify how to configure warehouse numbers in SAP ERP when linking plants and storage locations, considering the three-character requirement in Logistics Execution versus the four-character field in EWM? Your guidance on this matter would help ensure accurate system setup.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Reschedule Delivery and Clarification on Warehouse Configuration  \n\nDear [Support Team],  \n\nI hope this message finds you well. I am writing to request that the delivery for Order ID 40, Item No. 10 be rescheduled by two weeks, as the current delivery date has passed and goods movement remains incomplete. Additionally, could you clarify how to configure warehouse numbers in SAP ERP when linking plants and storage locations, considering the three-character requirement in Logistics Execution versus the four-character field in EWM? Your guidance on this matter would help ensure accurate system setup.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1495,8 +1495,8 @@
   },
   {
     "id": "r_084",
-    "input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity? Additionally, I’d appreciate clarification on how to distinguish between user interface (UI) and user experience (UX) settings in SAP ERP, as outlined in the recent UX strategy documentation. Your guidance on this would help align our team’s approach to system navigation and reporting.  \n\nBest regards,  \n[Your",
-    "user_input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity? Additionally, I’d appreciate clarification on how to distinguish between user interface (UI) and user experience (UX) settings in SAP ERP, as outlined in the recent UX strategy documentation. Your guidance on this would help align our team’s approach to system navigation and reporting.  \n\nBest regards,  \n[Your",
+    "input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity? Additionally, I’d appreciate clarification on how to distinguish between user interface (UI) and user experience (UX) settings in SAP ERP, as outlined in the recent UX strategy documentation. Your guidance on this would help align our team’s approach to system navigation and reporting.  \n\nBest regards,  \n[Your",
+    "user_input": "Subject: Request to Unblock Delivery for Order 1785, Item 10  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly unblock the delivery for Order 1785, Item 10, as the available stock exceeds the ordered quantity? Additionally, I’d appreciate clarification on how to distinguish between user interface (UI) and user experience (UX) settings in SAP ERP, as outlined in the recent UX strategy documentation. Your guidance on this would help align our team’s approach to system navigation and reporting.  \n\nBest regards,  \n[Your",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1517,8 +1517,8 @@
   },
   {
     "id": "r_085",
-    "input": "Subject: Batch Assignment and Presales Data Query  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly assign batch number B-72216 to order 2717, item 10, as the available stock exceeds the ordered quantity? Additionally, I would appreciate guidance on how to accurately record presales data within SAP ERP to ensure compliance with documentation requirements for large contracts.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Batch Assignment and Presales Data Query  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly assign batch number B-72216 to order 2717, item 10, as the available stock exceeds the ordered quantity? Additionally, I would appreciate guidance on how to accurately record presales data within SAP ERP to ensure compliance with documentation requirements for large contracts.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Batch Assignment and Presales Data Query  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly assign batch number B-72216 to order 2717, item 10, as the available stock exceeds the ordered quantity? Additionally, I would appreciate guidance on how to accurately record presales data within SAP ERP to ensure compliance with documentation requirements for large contracts.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Batch Assignment and Presales Data Query  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly assign batch number B-72216 to order 2717, item 10, as the available stock exceeds the ordered quantity? Additionally, I would appreciate guidance on how to accurately record presales data within SAP ERP to ensure compliance with documentation requirements for large contracts.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1539,8 +1539,8 @@
   },
   {
     "id": "r_086",
-    "input": "Subject: Batch Number Assignment Request and System Clarification  \n\nDear [Recipient],  \n\nI am requesting the assignment of batch number B-42406 to order 70000166, item 10, which is currently in a WBSTA=A status (goods movement not yet processed). Could you also clarify how to configure the enterprise structure settings (Unit 2, page 14) to ensure batch numbers are correctly assigned for such orders?  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Batch Number Assignment Request and System Clarification  \n\nDear [Recipient],  \n\nI am requesting the assignment of batch number B-42406 to order 70000166, item 10, which is currently in a WBSTA=A status (goods movement not yet processed). Could you also clarify how to configure the enterprise structure settings (Unit 2, page 14) to ensure batch numbers are correctly assigned for such orders?  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Batch Number Assignment Request and System Clarification  \n\nDear [Support Team],  \n\nI am requesting the assignment of batch number B-42406 to order 70000166, item 10, which is currently in a WBSTA=A status (goods movement not yet processed). Could you also clarify how to configure the enterprise structure settings (Unit 2, page 14) to ensure batch numbers are correctly assigned for such orders?  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Batch Number Assignment Request and System Clarification  \n\nDear [Support Team],  \n\nI am requesting the assignment of batch number B-42406 to order 70000166, item 10, which is currently in a WBSTA=A status (goods movement not yet processed). Could you also clarify how to configure the enterprise structure settings (Unit 2, page 14) to ensure batch numbers are correctly assigned for such orders?  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1559,8 +1559,8 @@
   },
   {
     "id": "r_087",
-    "input": "Subject: Order Adjustment Request and System Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order 2845, Item No. 10, by 50 units, as we have available stock via MARD JOIN? Additionally, I’d appreciate guidance on how to update the goods issue document after adjusting an order quantity, as I want to ensure alignment with the relevant accounting processes.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Order Adjustment Request and System Inquiry  \n\nDear [Recipient's Name],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order 2845, Item No. 10, by 50 units, as we have available stock via MARD JOIN? Additionally, I’d appreciate guidance on how to update the goods issue document after adjusting an order quantity, as I want to ensure alignment with the relevant accounting processes.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Order Adjustment Request and System Inquiry  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order 2845, Item No. 10, by 50 units, as we have available stock via MARD JOIN? Additionally, I’d appreciate guidance on how to update the goods issue document after adjusting an order quantity, as I want to ensure alignment with the relevant accounting processes.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Order Adjustment Request and System Inquiry  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order 2845, Item No. 10, by 50 units, as we have available stock via MARD JOIN? Additionally, I’d appreciate guidance on how to update the goods issue document after adjusting an order quantity, as I want to ensure alignment with the relevant accounting processes.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1581,8 +1581,8 @@
   },
   {
     "id": "r_088",
-    "input": "Subject: Batch Assignment Request and UI Clarification  \n\nDear [Recipient],  \n\nI need to assign batch number B-41358 to item 10 of order 15774, which is an order with a delivery date only (no stock join). Could you confirm if this action requires any additional steps in the SAP ERP system?  \n\nAdditionally, I’m reviewing the user interface documentation and would appreciate guidance on how to efficiently navigate batch assignment workflows while ensuring alignment with UX best practices for minimizing user friction.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Batch Assignment Request and UI Clarification  \n\nDear [Recipient],  \n\nI need to assign batch number B-41358 to item 10 of order 15774, which is an order with a delivery date only (no stock join). Could you confirm if this action requires any additional steps in the SAP ERP system?  \n\nAdditionally, I’m reviewing the user interface documentation and would appreciate guidance on how to efficiently navigate batch assignment workflows while ensuring alignment with UX best practices for minimizing user friction.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Batch Assignment Request and UI Clarification  \n\nDear [Support Team],  \n\nI need to assign batch number B-41358 to item 10 of order 15774, which is an order with a delivery date only (no stock join). Could you confirm if this action requires any additional steps in the SAP ERP system?  \n\nAdditionally, I’m reviewing the user interface documentation and would appreciate guidance on how to efficiently navigate batch assignment workflows while ensuring alignment with UX best practices for minimizing user friction.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Batch Assignment Request and UI Clarification  \n\nDear [Support Team],  \n\nI need to assign batch number B-41358 to item 10 of order 15774, which is an order with a delivery date only (no stock join). Could you confirm if this action requires any additional steps in the SAP ERP system?  \n\nAdditionally, I’m reviewing the user interface documentation and would appreciate guidance on how to efficiently navigate batch assignment workflows while ensuring alignment with UX best practices for minimizing user friction.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {
@@ -1602,8 +1602,8 @@
   },
   {
     "id": "r_089",
-    "input": "Subject: Request to Adjust Order Quantity and Inquiry on Training Material Access  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order ID 1228, Item No. 10 by 50 units, as the available stock exceeds the ordered quantity? Additionally, I am seeking guidance on how to access the TS460 training material (Material Number 50161882, Course Version 23) for the Sales in SAP S/4HANA Academy course, as outlined in the participant handbook. Your assistance with both matters would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
-    "user_input": "Subject: Request to Adjust Order Quantity and Inquiry on Training Material Access  \n\nDear [Recipient],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order ID 1228, Item No. 10 by 50 units, as the available stock exceeds the ordered quantity? Additionally, I am seeking guidance on how to access the TS460 training material (Material Number 50161882, Course Version 23) for the Sales in SAP S/4HANA Academy course, as outlined in the participant handbook. Your assistance with both matters would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "input": "Subject: Request to Adjust Order Quantity and Inquiry on Training Material Access  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order ID 1228, Item No. 10 by 50 units, as the available stock exceeds the ordered quantity? Additionally, I am seeking guidance on how to access the TS460 training material (Material Number 50161882, Course Version 23) for the Sales in SAP S/4HANA Academy course, as outlined in the participant handbook. Your assistance with both matters would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
+    "user_input": "Subject: Request to Adjust Order Quantity and Inquiry on Training Material Access  \n\nDear [Support Team],  \n\nI hope this message finds you well. Could you kindly reduce the quantity of Order ID 1228, Item No. 10 by 50 units, as the available stock exceeds the ordered quantity? Additionally, I am seeking guidance on how to access the TS460 training material (Material Number 50161882, Course Version 23) for the Sales in SAP S/4HANA Academy course, as outlined in the participant handbook. Your assistance with both matters would be greatly appreciated.  \n\nBest regards,  \n[Your Name]",
     "label": "BOTH",
     "expected_intent": "BOTH",
     "erp_evidence": {

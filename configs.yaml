@@ -18,7 +18,7 @@ openrouter:
 # ── 노드별 모델 설정 ─────────────────────────────────────────────────────────
 models:
   router:
-    name: "qwen/qwen3-8b"
+    name: "google/gemini-2.0-flash-lite-001"
     provider: "openrouter"                          # ollama | openrouter
     temperature: 0.0          # 분류 태스크 → 결정론적 출력
   worker_a:
@@ -26,11 +26,7 @@ models:
     provider: "openrouter"
     temperature: 0.0
   worker_a_sql:
-    name: "qwen/qwen3-coder:free"                  # Text-to-SQL 전용 (primary)
-    provider: "openrouter"
-    temperature: 0.0
-  worker_a_sql_fallback:
-    name: "qwen/qwen3-coder-30b-a3b-instruct"      # Text-to-SQL fallback
+    name: "poolside/laguna-m.1:free"               # Text-to-SQL 전용
     provider: "openrouter"
     temperature: 0.0
   worker_b:
@@ -50,7 +46,7 @@ paths:
   checkpoint_db: "data/checkpoints.db"
   chroma_db: "./chroma_db"
   docs_dir: "data/docs"
-  eval_test_cases: "data/eval/router_test_cases.json"
+  eval_test_cases: "data/eval/router_test_cases_gen.json"
   reports_dir: "reports"
 
 # ── 로깅 ─────────────────────────────────────────────────────────────────────

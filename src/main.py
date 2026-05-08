@@ -58,14 +58,14 @@ def build_graph():
 
     builder.add_conditional_edges("router", route_after_router, ["worker_a", "worker_b"])
 
-    builder.add_conditional_edges(
-        "worker_a",
-        lambda state: (
-            "human_loop"
-            if state.get("erp_action_status") == "PENDING_APPROVAL"
-            else "synthesizer"
-        ),
-    )
+    _hitl_enabled = get_config().feature_flags.human_in_the_loop
+
+    def route_after_worker_a(state: AgentState) -> str:
+        if state.get("erp_action_status") == "PENDING_APPROVAL" and _hitl_enabled:
+            return "human_loop"
+        return "synthesizer"
+
+    builder.add_conditional_edges("worker_a", route_after_worker_a)
 
     builder.add_edge("worker_b", "synthesizer")
     builder.add_edge("human_loop", "synthesizer")

@@ -11,9 +11,10 @@ class ERPActionRequest(BaseModel):
     """Worker A가 LLM을 통해 추출하는 ERP 수정 요청 스키마"""
     order_id: str = Field(..., description="SAP 영업 오더 번호 (VBELN)", pattern=r"^\d{10}$")
     item_no: str = Field(..., description="오더 아이템 번호 (POSNR)", pattern=r"^\d{6}$")
-    action_type: Literal["CHANGE_QTY", "CHANGE_DATE", "CANCEL_ITEM"]
+    action_type: Literal["CHANGE_QTY", "CHANGE_DATE", "CANCEL_ITEM", "CHANGE_ADDR", "OTHER"]
     new_quantity: Optional[int] = Field(None, ge=1, description="변경 수량 (양수)")
     new_date: Optional[str] = Field(None, description="변경 납기일 (YYYY-MM-DD)")
+    new_address: Optional[str] = Field(None, description="변경 배송지 주소 (자유 텍스트)")
 
     @field_validator("new_quantity")
     @classmethod

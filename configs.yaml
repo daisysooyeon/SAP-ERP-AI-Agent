@@ -22,7 +22,7 @@ models:
     provider: "openrouter"                          # ollama | openrouter
     temperature: 0.0          # 분류 태스크 → 결정론적 출력
   worker_a:
-    name: "qwen/qwen3-8b"                          # 파라미터 추출 LLM
+    name: "qwen/qwen3-8b"                          # 파라미터 추출 LLM -> qwen/qwen3-8b
     provider: "openrouter"
     temperature: 0.0
   worker_a_sql:

@@ -23,7 +23,8 @@ from src.config import get_config
 
 logger = logging.getLogger(__name__)
 
-DB_PATH = "data/sap_erp.db"
+from pathlib import Path as _Path
+DB_PATH = str(_Path(__file__).resolve().parent.parent.parent / "data" / "sap_erp.db")
 
 # ---------------------------------------------------------------------------
 # SAP ABAP 딕셔너리 기반 스키마 컨텍스트

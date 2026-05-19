@@ -32,6 +32,7 @@ class AgentState(TypedDict):
 
     # Worker B
     rag_query: Optional[str]
+    rag_queries: Optional[List[str]]
     retrieved_docs: Optional[List[dict]]
     rag_answer: Optional[str]
 

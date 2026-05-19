@@ -8,24 +8,20 @@ from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.vectorstores import Chroma
+from src.config import get_config
 
-CHROMA_PERSIST_DIR = "./chroma_db"
-COLLECTION_NAME = "sap_manuals"
 DOCS_DIR = "data/docs"
 
 
 def ingest_documents(pdf_dir: str = DOCS_DIR) -> None:
     """
     PDF 일괄 로드 → 청킹 → 임베딩 → ChromaDB 저장
-    
-    설정:
-      - chunk_size: 512 tokens
-      - chunk_overlap: 64
-      - embedding: BAAI/bge-m3
+    chunk_size / chunk_overlap / collection_name 등은 configs.yaml에서 읽습니다.
     """
+    cfg = get_config()
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=512,
-        chunk_overlap=64,
+        chunk_size=cfg.rag.chunk_size,
+        chunk_overlap=cfg.rag.chunk_overlap,
         separators=["\n\n", "\n", ".", " "],
     )
     embedding = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-m3", encode_kwargs={"batch_size": 32})
@@ -47,8 +43,8 @@ def ingest_documents(pdf_dir: str = DOCS_DIR) -> None:
     vectorstore = Chroma.from_documents(
         documents=all_docs,
         embedding=embedding,
-        persist_directory=CHROMA_PERSIST_DIR,
-        collection_name=COLLECTION_NAME,
+        persist_directory=cfg.paths.chroma_db,
+        collection_name=cfg.rag.collection_name,
     )
     vectorstore.persist()
     print(f"[완료] 총 {len(all_docs)}개 청크 → ChromaDB 저장 완료")

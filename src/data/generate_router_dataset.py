@@ -108,7 +108,11 @@ Rules:
 1. The email must NOT contain any specific ERP data modification or action requests (e.g., do not ask to change an order).
 2. Focus ONLY on asking a "how-to" or system-related question directly inspired by the provided SAP manual chunk. Make it sound like a user trying to understand or use the system.
 3. Use formal business English.
-4. Output ONLY the email text (3-5 sentences). No labels, no JSON, no explanation.
+4. Output ONLY a valid JSON object with NO markdown formatting, using this structure:
+{{
+  "draft_knowledge_question": "The exact question you are going to ask",
+  "final_email": "The full email text (3-5 sentences)"
+}}
 """),
     ("human", "SAP Manual Chunk (for inspiration):\n\n{chunk}"),
 ])
@@ -123,7 +127,11 @@ Rules:
 1. The email must NOT contain any ERP data modification or action requests.
 2. The question should require information from BOTH passages to answer fully — not answerable from either alone.
 3. Use formal business English.
-4. Output ONLY the email text (3-5 sentences). No labels, no JSON, no explanation.
+4. Output ONLY a valid JSON object with NO markdown formatting, using this structure:
+{{
+  "draft_knowledge_question": "The exact combined question you are going to ask",
+  "final_email": "The full email text (3-5 sentences)"
+}}
 """),
     ("human", "SAP Manual Passage A:\n\n{chunk_a}\n\n---\n\nSAP Manual Passage B:\n\n{chunk_b}"),
 ])
@@ -158,7 +166,12 @@ Rules:
 2. Reference the actual order number and item number for the action request.
 3. Make the system question directly related to how a user interacts with the ERP based on the chunk.
 4. Use formal business English.
-5. Output ONLY the email text (4-7 sentences). No labels, no JSON, no explanation.
+5. Output ONLY a valid JSON object with NO markdown formatting, using this structure:
+{{
+  "draft_action_request": "The specific ERP request you are making",
+  "draft_knowledge_question": "The specific how-to question you are asking",
+  "final_email": "The full email text combining both (4-7 sentences)"
+}}
 """),
     ("human", """\
 ERP Action Request:
@@ -176,8 +189,55 @@ SAP Content (for the system usage question):
 # 데이터 로드
 # ---------------------------------------------------------------------------
 
+
+# ---------------------------------------------------------------------------
+# 청크 품질 필터
+# ---------------------------------------------------------------------------
+
+def _is_quality_chunk(text: str, min_length: int = 250) -> bool:
+    """
+    rag_evidence로 사용하기에 충분한 정보 밀도를 가진 청크인지 검사.
+    아래 케이스를 필터링:
+      - 너무 짧은 청크 (< min_length 문자)
+      - SAP 저작권 URL만 있는 청크 (법적 고지문)
+      - 학습 평가 답변/문제 청크 ("Learning Assessment")
+      - 단원 도입부 헤더 ("LESSON OBJECTIVES")
+      - TOC 패턴: "UNIT N" all-caps 또는 "Unit N\nM\n© Copyright" 형태
+    """
+    text = text.strip()
+    if len(text) < min_length:
+        return False
+    if "https://www.sap.com/corporate/en/legal/copyright.html" in text:
+        return False
+    if "Learning Assessment" in text:
+        return False
+    if "LESSON OBJECTIVES" in text:
+        return False
+    # all-caps UNIT TOC 패턴: "UNIT 5\nControlling Sales Documents\nLesson 1\n..."
+    import re
+    if re.match(r'^UNIT\s+\d+', text):
+        return False
+    # TOC 패턴: 줄 대부분이 "Unit X", "Lesson N", 숫자, copyright만으로 구성
+    lines = [l.strip() for l in text.split('\n') if l.strip()]
+    non_trivial = sum(
+        1 for l in lines
+        if len(l) > 15 and not l.isdigit()
+        and not l.startswith('Unit ')
+        and not l.startswith('Lesson')
+        and not l.startswith('©')
+        and 'All rights reserved' not in l
+    )
+    if non_trivial < 2:
+        return False
+    return True
+
+
 def _load_chunks() -> list[dict]:
-    return load_chunks()
+    chunks = load_chunks()
+    before = len(chunks)
+    chunks = [c for c in chunks if _is_quality_chunk(c["text"])]
+    logger.info("청크 품질 필터: %d → %d개 (제거 %d개)", before, len(chunks), before - len(chunks))
+    return chunks
 
 
 def _load_sql_cases(db_path: str, n: int, seed: int) -> list[dict]:
@@ -219,14 +279,14 @@ def generate_router_dataset(
     model_name: str | None = None,
     append: bool = False,
     seed: int = 42,
-    multi_chunk_ratio: float = 0.3,
+    multi_chunk_ratio: float = 0.0,
 ) -> list[dict]:
     """
     Router + E2E 통합 레이블드 이메일 데이터셋을 생성합니다.
 
     QA_ONLY, ACTION_ONLY, BOTH 각 n_per_label개씩 균등 생성합니다.
-    - QA_ONLY    : ChromaDB RAG 청크 기반 개념/정책 질문 이메일
-                   (multi_chunk_ratio 비율만큼 2-청크 복합 질문 포함)
+    - QA_ONLY    : ChromaDB RAG 단일 청크 기반 개념/정책 질문 이메일
+                   (multi_chunk_ratio > 0.0이면 해당 비율만큼 2-청크 복합 질문 포함)
     - ACTION_ONLY: SQLite DB 실제 주문 데이터 기반 ERP 액션 이메일
     - BOTH       : 실제 주문 데이터 + RAG 청크 결합 복합 이메일
 
@@ -272,6 +332,20 @@ def generate_router_dataset(
 
     dataset: list[dict] = []
 
+    def _parse_json_response(raw_text: str) -> dict:
+        if not raw_text:
+            return {}
+        text = raw_text.strip()
+        if text.startswith("```json"):
+            text = text[7:]
+        if text.endswith("```"):
+            text = text[:-3]
+        try:
+            return json.loads(text.strip())
+        except json.JSONDecodeError:
+            logger.error("JSON 파싱 실패: %s", raw_text)
+            return {}
+
     # ── QA_ONLY ──────────────────────────────────────────────────────────────
     logger.info(
         "QA_ONLY 생성 시작 (목표: %d개, 그 중 multi-chunk: %d개)",
@@ -309,9 +383,14 @@ def generate_router_dataset(
         time.sleep(delay)
         if raw is None:
             continue
-        email = raw.strip()
+            
+        parsed = _parse_json_response(raw)
+        email = parsed.get("final_email", "").strip()
         if not email:
             continue
+            
+        qa_question = parsed.get("draft_knowledge_question", "")
+            
         dataset.append({
             "id":                f"r_{len(dataset)+1:03d}",
             "input":             email,
@@ -321,7 +400,7 @@ def generate_router_dataset(
             "erp_evidence":      None,
             "rag_evidence":      rag_evidence,
             "action_description": None,
-            "qa_question":       email[:300],
+            "qa_question":       qa_question,
         })
 
     logger.info("QA_ONLY 생성 완료: %d개", sum(1 for d in dataset if d["label"] == "QA_ONLY"))
@@ -398,9 +477,14 @@ def generate_router_dataset(
         time.sleep(delay)
         if raw is None:
             continue
-        email = raw.strip()
+            
+        parsed = _parse_json_response(raw)
+        email = parsed.get("final_email", "").strip()
         if not email:
             continue
+            
+        qa_question = parsed.get("draft_knowledge_question", "")
+
         dataset.append({
             "id":              f"r_{len(dataset)+1:03d}",
             "input":           email,
@@ -416,7 +500,7 @@ def generate_router_dataset(
             },
             "rag_evidence":       chunk["text"],
             "action_description": action,
-            "qa_question":        None,
+            "qa_question":        qa_question,
         })
 
     logger.info("BOTH 생성 완료: %d개", sum(1 for d in dataset if d["label"] == "BOTH"))
@@ -502,8 +586,8 @@ def _parse_args() -> argparse.Namespace:
         help="랜덤 시드 (기본: 42)",
     )
     parser.add_argument(
-        "--multi-chunk-ratio", type=float, default=0.3,
-        help="QA_ONLY 슬롯 중 2-청크 복합 질문 비율 (0.0~1.0, 기본: 0.3)",
+        "--multi-chunk-ratio", type=float, default=0.0,
+        help="QA_ONLY 슬롯 중 2-청크 복합 질문 비율 (0.0~1.0, 기본: 0.0)",
     )
     return parser.parse_args()
 

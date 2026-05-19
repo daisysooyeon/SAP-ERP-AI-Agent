@@ -138,6 +138,16 @@ def apply_erp_update(erp_action: dict) -> dict:
                 ("ZZ", order_id, item_no),
             )
 
+        elif action_type == "CHANGE_ADDR":
+            # For shipping address changes, we only simulate the update
+            # because there is no ADRC/VBKD table in the local SQLite mock DB
+            logger.info("[human_loop] Simulated CHANGE_ADDR update for order=%s", order_id)
+            return {
+                "success": True,
+                "rowcount": 1,
+                "message": "CHANGE_ADDR applied successfully (simulated).",
+            }
+
         else:
             return {
                 "success": False,

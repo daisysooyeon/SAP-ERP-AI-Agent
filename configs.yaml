@@ -22,7 +22,7 @@ models:
     provider: "openrouter"                          # ollama | openrouter
     temperature: 0.0          # 분류 태스크 → 결정론적 출력
   worker_a:
-    name: "qwen/qwen3-8b"                          # 파라미터 추출 LLM -> qwen/qwen3-8b
+    name: "openai/gpt-4o-mini"                     # 파라미터 추출 LLM
     provider: "openrouter"
     temperature: 0.0
   worker_a_sql:
@@ -30,7 +30,8 @@ models:
     provider: "openrouter"
     temperature: 0.0
   worker_b:
-    name: "qwen3:4b"          # Phase 4 구현 시 사용
+    name: "openai/gpt-4o-mini"   # RAG 답변 생성 LLM
+    provider: "openrouter"
     temperature: 0.1
   synthesizer:
     name: "gpt-4o"            # Phase 6 구현 시 사용 (또는 claude-3-5-sonnet)
@@ -39,6 +40,11 @@ models:
     name: "qwen/qwen3-8b"     # src/data/ 데이터셋 생성 전용 모델
     provider: "openrouter"
     temperature: 0.5
+  eval_judge:
+    name: "openai/gpt-4o-mini"  # 평가 채점(LLM Judge) 전용 모델
+    provider: "openrouter"
+    temperature: 0.0
+
 
 # ── 데이터 경로 ──────────────────────────────────────────────────────────────
 paths:
@@ -60,12 +66,12 @@ logging:
 # ── RAG 설정 ─────────────────────────────────────────────────────────────────
 rag:
   chunk_size: 512
-  chunk_overlap: 64
+  chunk_overlap: 128
   collection_name: "sap_manuals"
-  dense_weight: 0.6           # ChromaDB 시맨틱 검색 가중치
-  sparse_weight: 0.4          # BM25 키워드 검색 가중치
-  top_k_retrieval: 10         # Retriever 후보 수
-  top_k_rerank: 3             # Reranker 최종 선별 수
+  dense_weight: 0.5           # ChromaDB 시맨틱 검색 가중치
+  sparse_weight: 0.5          # BM25 키워드 검색 가중치
+  top_k_retrieval: 20         # Retriever 후보 수
+  top_k_rerank: 5             # Reranker 최종 선별 수
 
 # ── Feature Flags ─────────────────────────────────────────────────────────────
 feature_flags:

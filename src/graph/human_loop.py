@@ -27,6 +27,8 @@ import logging
 import re
 import sqlite3
 
+from langgraph.types import interrupt
+
 from src.config import get_config
 from src.graph.state import AgentState
 
@@ -183,28 +185,32 @@ def human_loop_node(state: AgentState) -> dict:
     """
     LangGraph Human-in-the-Loop node.
 
-    Execution context:
-        The graph was paused by LangGraph interrupt_before=["human_loop_node"].
-        After the human reviewer clicks Approve/Reject in Slack (or via API),
-        the graph is resumed with human_approved set in the checkpoint.
+    LangGraph 1.x interrupt() 방식:
+      - 노드 실행 중 interrupt()를 호출해 일시 중단
+      - 외부에서 Command(resume=True/False)로 재개하면 interrupt() 반환값으로 결과 수신
+      - True(승인) → DB UPDATE 실행 → SUCCESS
+      - False(거절) → DB 변경 없음 → REJECTED
 
     Reads:
-        state["human_approved"]   — True (approved) | False (rejected) | None
-        state["erp_action"]       — ERPActionRequest dict from worker_a
+        state["erp_action"] — ERPActionRequest dict from worker_a
 
     Returns a partial AgentState update:
         {
             "erp_action_status": "SUCCESS" | "REJECTED" | "FAILED",
+            "human_approved":    bool,
             "error_messages":    [...],
         }
     """
-    human_approved: bool | None = state.get("human_approved")
-    erp_action: dict | None     = state.get("erp_action")
-    errors: list[str]           = list(state.get("error_messages", []))
+    erp_action: dict | None = state.get("erp_action")
+    errors: list[str]       = list(state.get("error_messages", []))
 
-    logger.info(
-        "[human_loop] ═══════════════ Human Loop START ═══════════════"
-    )
+    logger.info("[human_loop] ═══════════════ Human Loop START ═══════════════")
+
+    # ── Human decision via interrupt() ──────────────────────────────────────
+    human_approved: bool = interrupt({
+        "erp_action": erp_action,
+        "message":    "Approve or reject this ERP action? (True=Approve, False=Reject)",
+    })
     logger.info("[human_loop] human_approved=%s", human_approved)
 
     # ── Case 1: Rejected ────────────────────────────────────────────────────
@@ -212,6 +218,7 @@ def human_loop_node(state: AgentState) -> dict:
         logger.info("[human_loop] Action REJECTED by human reviewer.")
         return {
             "erp_action_status": "REJECTED",
+            "human_approved":    False,
             "error_messages":    errors,
         }
 
@@ -232,6 +239,7 @@ def human_loop_node(state: AgentState) -> dict:
         logger.info("[human_loop] ═══════════════ Human Loop END ═══════════════")
         return {
             "erp_action_status": "SUCCESS",
+            "human_approved":    True,
             "error_messages":    errors,
         }
     else:
@@ -241,5 +249,6 @@ def human_loop_node(state: AgentState) -> dict:
         logger.info("[human_loop] ═══════════════ Human Loop END ═══════════════")
         return {
             "erp_action_status": "FAILED",
+            "human_approved":    True,
             "error_messages":    errors,
         }

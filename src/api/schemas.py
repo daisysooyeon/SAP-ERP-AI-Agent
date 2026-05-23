@@ -37,3 +37,12 @@ class RunResponse(BaseModel):
     erp_status: Optional[str] = None
     final_response: Optional[str] = None
     requires_approval: bool = False
+
+
+class ApproveResponse(BaseModel):
+    """GET /api/approve 응답 스키마"""
+    thread_id: str
+    approved: bool
+    final_status: str        # SUCCESS | REJECTED | FAILED
+    message: str
+    errors: list[str] = []

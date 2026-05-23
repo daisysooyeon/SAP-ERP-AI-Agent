@@ -116,6 +116,9 @@ def extract_erp_action(user_input: str) -> ERPActionRequest | None:
     logger.info("[worker_a] ① Extracting ERP action parameters …")
     try:
         result: ERPActionRequest = _extraction_chain.invoke({"user_input": user_input})
+        # order_id 정규화: 숫자만 남기고 10자리 좌측 제로패딩 (LLM 오패딩 방지)
+        raw_id = "".join(c for c in result.order_id if c.isdigit())
+        result.order_id = str(int(raw_id)).zfill(10) if raw_id else result.order_id
         logger.info(
             "[worker_a] Extracted: order_id=%s item_no=%s action_type=%s",
             result.order_id, result.item_no, result.action_type,
@@ -273,11 +276,16 @@ def worker_a_node(state: AgentState) -> dict:
         status_code = odata_response.get("status_code", 0)
         logger.info("[worker_a] OData response: status_code=%s", status_code)
 
-        if status_code not in (200, 204):
+        if status_code in (200, 204):
+            logger.info("[worker_a] SAP OData PATCH succeeded.")
+        elif status_code == 405:
+            # SAP Business Accelerator Hub sandbox is read-only (GET only).
+            # 405 confirms the endpoint is reachable; write ops require a live S/4HANA system.
+            logger.info("[worker_a] SAP sandbox reached (405 expected — write ops not supported in sandbox).")
+        else:
             msg = f"worker_a: SAP OData PATCH returned unexpected status {status_code}."
             logger.warning("[worker_a] %s", msg)
             errors.append(msg)
-            # Still continue to human approval — agent will surface this in the response.
 
     except Exception as e:
         msg = f"worker_a: OData PATCH call failed: {e}"

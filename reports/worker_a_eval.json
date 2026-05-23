@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-08T01:43:38.794556+00:00",
-  "model_worker_a": "qwen/qwen3-8b",
+  "generated_at": "2026-05-13T08:58:28.455276+00:00",
+  "model_worker_a": "openai/gpt-4o-mini",
   "model_sql": "poolside/laguna-m.1:free",
   "total": 60,
-  "e1_pass": 59,
-  "e1_rate": 0.9833,
+  "e1_pass": 60,
+  "e1_rate": 1.0,
   "e2_pass": 60,
   "e2_rate": 1.0,
-  "e3_pass": 59,
-  "e3_rate": 0.9833,
+  "e3_pass": 60,
+  "e3_rate": 1.0,
   "action_type_breakdown": {
     "OTHER": {
       "total": 7,
@@ -22,8 +22,8 @@
     },
     "CHANGE_QTY": {
       "total": 16,
-      "e1": 15,
-      "e3": 15
+      "e1": 16,
+      "e3": 16
     },
     "CANCEL_ITEM": {
       "total": 11,
@@ -43,7 +43,7 @@
     },
     "BLOCKED_NO_STOCK": {
       "total": 16,
-      "e3": 15
+      "e3": 16
     }
   },
   "results": [
@@ -55,7 +55,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "OTHER",
-      "extracted_order_id": "0000153360",
+      "extracted_order_id": "0000015336",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -69,7 +69,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 87511.5880999947,
+      "elapsed_ms": 1862.9593001678586,
       "notes": ""
     },
     {
@@ -80,7 +80,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "OTHER",
-      "extracted_order_id": "0000001170",
+      "extracted_order_id": "0000011700",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -94,7 +94,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 68696.34799996857,
+      "elapsed_ms": 5357.453299919143,
       "notes": ""
     },
     {
@@ -105,7 +105,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "OTHER",
-      "extracted_order_id": "0000055720",
+      "extracted_order_id": "0000005572",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -119,7 +119,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 77811.25030003022,
+      "elapsed_ms": 4292.904499918222,
       "notes": ""
     },
     {
@@ -144,7 +144,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 20767.397499992512,
+      "elapsed_ms": 1967.673699837178,
       "notes": ""
     },
     {
@@ -169,7 +169,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 36135.11080003809,
+      "elapsed_ms": 1868.654599878937,
       "notes": ""
     },
     {
@@ -194,7 +194,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 65455.448399996385,
+      "elapsed_ms": 2187.8214001189917,
       "notes": ""
     },
     {
@@ -219,7 +219,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 80172.8482999606,
+      "elapsed_ms": 2028.0643000733107,
       "notes": ""
     },
     {
@@ -244,7 +244,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 26380.490400013514,
+      "elapsed_ms": 1844.3768001161516,
       "notes": ""
     },
     {
@@ -269,7 +269,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 41561.619699932635,
+      "elapsed_ms": 1612.974600167945,
       "notes": ""
     },
     {
@@ -280,7 +280,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000033300",
+      "extracted_order_id": "0000333300",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -294,7 +294,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 49943.02380003501,
+      "elapsed_ms": 1766.3641998078674,
       "notes": ""
     },
     {
@@ -319,7 +319,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 15934.965900029056,
+      "elapsed_ms": 1971.6709000058472,
       "notes": ""
     },
     {
@@ -330,7 +330,7 @@
       "expected_status": "BLOCKED_NO_STOCK",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_QTY",
-      "extracted_order_id": "0000051840",
+      "extracted_order_id": "0000005184",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -344,7 +344,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 90268.49630009383,
+      "elapsed_ms": 1790.4455999378115,
       "notes": ""
     },
     {
@@ -369,7 +369,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 41254.88220003899,
+      "elapsed_ms": 1744.8436999693513,
       "notes": ""
     },
     {
@@ -380,7 +380,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000017960",
+      "extracted_order_id": "0000001796",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -394,7 +394,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 59352.811800083145,
+      "elapsed_ms": 1856.073800008744,
       "notes": ""
     },
     {
@@ -419,7 +419,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 55400.40009992663,
+      "elapsed_ms": 1608.3543999120593,
       "notes": ""
     },
     {
@@ -430,7 +430,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_ADDR",
-      "extracted_order_id": "0000010790",
+      "extracted_order_id": "0000001079",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -444,7 +444,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 56557.81420005951,
+      "elapsed_ms": 2022.2021001391113,
       "notes": ""
     },
     {
@@ -469,7 +469,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 27411.800000001676,
+      "elapsed_ms": 1937.388899968937,
       "notes": ""
     },
     {
@@ -480,7 +480,7 @@
       "expected_status": "BLOCKED_NO_STOCK",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_QTY",
-      "extracted_order_id": "0000064590",
+      "extracted_order_id": "0000006459",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -494,7 +494,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 64492.02470004093,
+      "elapsed_ms": 1548.1949001550674,
       "notes": ""
     },
     {
@@ -519,7 +519,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 11542.348400107585,
+      "elapsed_ms": 1737.490199971944,
       "notes": ""
     },
     {
@@ -530,7 +530,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0070000166",
+      "extracted_order_id": "0700001660",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -544,7 +544,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 34454.93730006274,
+      "elapsed_ms": 1734.9109000060707,
       "notes": ""
     },
     {
@@ -555,7 +555,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "OTHER",
-      "extracted_order_id": "0070000101",
+      "extracted_order_id": "0700001010",
       "extracted_item_no": "000020",
       "extraction_error": "",
       "e2_pass": true,
@@ -569,7 +569,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 36268.31650000531,
+      "elapsed_ms": 1705.5597000289708,
       "notes": ""
     },
     {
@@ -594,7 +594,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 39418.95979992114,
+      "elapsed_ms": 1689.019599929452,
       "notes": ""
     },
     {
@@ -605,7 +605,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000069220",
+      "extracted_order_id": "0000006922",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -619,7 +619,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 71437.51160008833,
+      "elapsed_ms": 2718.3584000449628,
       "notes": ""
     },
     {
@@ -630,7 +630,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CANCEL_ITEM",
-      "extracted_order_id": "0000002929",
+      "extracted_order_id": "0000029299",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -644,7 +644,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 24424.08200004138,
+      "elapsed_ms": 1796.3733999058604,
       "notes": ""
     },
     {
@@ -669,7 +669,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 100521.36530005373,
+      "elapsed_ms": 1907.6161999255419,
       "notes": ""
     },
     {
@@ -680,7 +680,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_ADDR",
-      "extracted_order_id": "0070000166",
+      "extracted_order_id": "0700001660",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -694,7 +694,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 20897.610699990764,
+      "elapsed_ms": 1779.7163999639452,
       "notes": ""
     },
     {
@@ -705,7 +705,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000001780",
+      "extracted_order_id": "0000017800",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -719,7 +719,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 49857.46890003793,
+      "elapsed_ms": 7705.702199833468,
       "notes": ""
     },
     {
@@ -744,7 +744,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 58749.63969993405,
+      "elapsed_ms": 1712.366399820894,
       "notes": ""
     },
     {
@@ -755,7 +755,7 @@
       "expected_status": "BLOCKED_NO_STOCK",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_QTY",
-      "extracted_order_id": "0000061190",
+      "extracted_order_id": "0000006119",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -769,7 +769,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 88890.52180002909,
+      "elapsed_ms": 7442.20619997941,
       "notes": ""
     },
     {
@@ -780,7 +780,7 @@
       "expected_status": "BLOCKED_NO_STOCK",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_QTY",
-      "extracted_order_id": "0000010491",
+      "extracted_order_id": "0000104949",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -794,7 +794,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 60282.27240010165,
+      "elapsed_ms": 1427.6536998804659,
       "notes": ""
     },
     {
@@ -805,7 +805,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CANCEL_ITEM",
-      "extracted_order_id": "0000017960",
+      "extracted_order_id": "0000001796",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -819,7 +819,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 60327.26030005142,
+      "elapsed_ms": 1646.5728997718543,
       "notes": ""
     },
     {
@@ -844,7 +844,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 38176.54310003854,
+      "elapsed_ms": 2150.7055000402033,
       "notes": ""
     },
     {
@@ -855,7 +855,7 @@
       "expected_status": "BLOCKED_NO_STOCK",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_QTY",
-      "extracted_order_id": "0000014260",
+      "extracted_order_id": "0000142626",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -869,7 +869,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 59509.93920001201,
+      "elapsed_ms": 1793.5263998806477,
       "notes": ""
     },
     {
@@ -894,7 +894,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 48356.913099996746,
+      "elapsed_ms": 1774.3048998527229,
       "notes": ""
     },
     {
@@ -919,7 +919,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 58179.46900008246,
+      "elapsed_ms": 1667.129100067541,
       "notes": ""
     },
     {
@@ -944,7 +944,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 78422.50169999897,
+      "elapsed_ms": 1813.899700064212,
       "notes": ""
     },
     {
@@ -955,7 +955,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CANCEL_ITEM",
-      "extracted_order_id": "0000004996",
+      "extracted_order_id": "0000049960",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -969,7 +969,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 46404.500199947506,
+      "elapsed_ms": 2050.642600050196,
       "notes": ""
     },
     {
@@ -994,7 +994,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 40892.643700004555,
+      "elapsed_ms": 2117.017900105566,
       "notes": ""
     },
     {
@@ -1019,7 +1019,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 11841.521300026216,
+      "elapsed_ms": 1806.4580999780446,
       "notes": ""
     },
     {
@@ -1030,7 +1030,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CANCEL_ITEM",
-      "extracted_order_id": "0000003330",
+      "extracted_order_id": "0000333300",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -1044,7 +1044,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 38269.22230003402,
+      "elapsed_ms": 1744.5465000346303,
       "notes": ""
     },
     {
@@ -1069,7 +1069,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 99147.96900004148,
+      "elapsed_ms": 1731.6147999372333,
       "notes": ""
     },
     {
@@ -1080,7 +1080,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000051840",
+      "extracted_order_id": "0000005184",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -1094,7 +1094,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 114577.41220004391,
+      "elapsed_ms": 2049.038799945265,
       "notes": ""
     },
     {
@@ -1105,7 +1105,7 @@
       "expected_status": "BLOCKED_NO_STOCK",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_QTY",
-      "extracted_order_id": "0070000330",
+      "extracted_order_id": "0007000033",
       "extracted_item_no": "000110",
       "extraction_error": "",
       "e2_pass": true,
@@ -1119,7 +1119,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 53992.23750003148,
+      "elapsed_ms": 2178.579700179398,
       "notes": ""
     },
     {
@@ -1130,7 +1130,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000023750",
+      "extracted_order_id": "0000002375",
       "extracted_item_no": "000020",
       "extraction_error": "",
       "e2_pass": true,
@@ -1144,7 +1144,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 70987.82060004305,
+      "elapsed_ms": 2231.8451998289675,
       "notes": ""
     },
     {
@@ -1169,7 +1169,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 34434.88489999436,
+      "elapsed_ms": 3731.6830998752266,
       "notes": ""
     },
     {
@@ -1180,7 +1180,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000010790",
+      "extracted_order_id": "0000001079",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -1194,7 +1194,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 37220.875400002114,
+      "elapsed_ms": 1553.8905998691916,
       "notes": ""
     },
     {
@@ -1205,7 +1205,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_ADDR",
-      "extracted_order_id": "0000172160",
+      "extracted_order_id": "0000017216",
       "extracted_item_no": "000020",
       "extraction_error": "",
       "e2_pass": true,
@@ -1219,7 +1219,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 83510.97409997601,
+      "elapsed_ms": 1845.5827999860048,
       "notes": ""
     },
     {
@@ -1230,7 +1230,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CANCEL_ITEM",
-      "extracted_order_id": "0000181310",
+      "extracted_order_id": "0000018131",
       "extracted_item_no": "000070",
       "extraction_error": "",
       "e2_pass": true,
@@ -1244,7 +1244,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 51990.2768000029,
+      "elapsed_ms": 2097.4403999280185,
       "notes": ""
     },
     {
@@ -1269,7 +1269,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 19637.264899909496,
+      "elapsed_ms": 2792.822000104934,
       "notes": ""
     },
     {
@@ -1280,7 +1280,7 @@
       "expected_status": "BLOCKED_NO_STOCK",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_QTY",
-      "extracted_order_id": "0000057520",
+      "extracted_order_id": "0000575250",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -1294,7 +1294,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 60021.19210001547,
+      "elapsed_ms": 2060.113799991086,
       "notes": ""
     },
     {
@@ -1319,7 +1319,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 57655.882799997926,
+      "elapsed_ms": 2174.43020013161,
       "notes": ""
     },
     {
@@ -1344,7 +1344,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 66164.51040003449,
+      "elapsed_ms": 1692.4175000749528,
       "notes": ""
     },
     {
@@ -1355,7 +1355,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000065500",
+      "extracted_order_id": "0000655000",
       "extracted_item_no": "000020",
       "extraction_error": "",
       "e2_pass": true,
@@ -1369,7 +1369,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 107672.89119993802,
+      "elapsed_ms": 2106.304100016132,
       "notes": ""
     },
     {
@@ -1380,7 +1380,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000065490",
+      "extracted_order_id": "0000006549",
       "extracted_item_no": "000030",
       "extraction_error": "",
       "e2_pass": true,
@@ -1394,7 +1394,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 105904.32890004013,
+      "elapsed_ms": 1721.3610000908375,
       "notes": ""
     },
     {
@@ -1405,7 +1405,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_DATE",
-      "extracted_order_id": "0000052300",
+      "extracted_order_id": "0000005230",
       "extracted_item_no": "000010",
       "extraction_error": "",
       "e2_pass": true,
@@ -1419,7 +1419,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 97161.2420999445,
+      "elapsed_ms": 1920.9425000008196,
       "notes": ""
     },
     {
@@ -1430,7 +1430,7 @@
       "expected_status": "PENDING_APPROVAL",
       "e1_pass": true,
       "extracted_action_type": "CANCEL_ITEM",
-      "extracted_order_id": "0000000175",
+      "extracted_order_id": "0000017500",
       "extracted_item_no": "000020",
       "extraction_error": "",
       "e2_pass": true,
@@ -1444,7 +1444,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "PENDING_APPROVAL",
-      "elapsed_ms": 23589.048200054094,
+      "elapsed_ms": 1817.8801001049578,
       "notes": ""
     },
     {
@@ -1469,7 +1469,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 66769.18229996227,
+      "elapsed_ms": 1805.8800001163036,
       "notes": ""
     },
     {
@@ -1480,7 +1480,7 @@
       "expected_status": "BLOCKED_NO_STOCK",
       "e1_pass": true,
       "extracted_action_type": "CHANGE_QTY",
-      "extracted_order_id": "0000001750",
+      "extracted_order_id": "0000017500",
       "extracted_item_no": "000020",
       "extraction_error": "",
       "e2_pass": true,
@@ -1494,7 +1494,7 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 51319.33620001655,
+      "elapsed_ms": 1824.9619000125676,
       "notes": ""
     },
     {
@@ -1519,20 +1519,20 @@
       "validation_error": "",
       "e3_pass": true,
       "actual_status": "BLOCKED_NO_STOCK",
-      "elapsed_ms": 69075.94640005846,
+      "elapsed_ms": 1985.57939985767,
       "notes": ""
     },
     {
       "id": "r_090",
       "label": "BOTH",
-      "user_input": "Subject: Request to Adjust Order Quantity and Clarification on Sales Order Process  \n\nDear Team,  \n\nI hope this message ",
+      "user_input": "Subject: Request to Adjust Order Quantity for Order 5137, Item 10  \n\nDear Team,\n\nI hope this message finds you well. Cou",
       "expected_action_type": "CHANGE_QTY",
       "expected_status": "BLOCKED_NO_STOCK",
-      "e1_pass": false,
-      "extracted_action_type": "",
-      "extracted_order_id": "",
-      "extracted_item_no": "",
-      "extraction_error": "extract_erp_action returned None",
+      "e1_pass": true,
+      "extracted_action_type": "CHANGE_QTY",
+      "extracted_order_id": "0000051370",
+      "extracted_item_no": "000010",
+      "extraction_error": "",
       "e2_pass": true,
       "validation_result": {
         "material_name": "Jotachi SN 7000",
@@ -1542,9 +1542,9 @@
         "available_stock": null
       },
       "validation_error": "",
-      "e3_pass": false,
-      "actual_status": "BLOCKED_EXTRACTION_FAILED",
-      "elapsed_ms": 4532.042199978605,
+      "e3_pass": true,
+      "actual_status": "BLOCKED_NO_STOCK",
+      "elapsed_ms": 2065.7074998598546,
       "notes": ""
     }
   ]

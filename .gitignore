@@ -22,6 +22,8 @@ __pycache__/
 
 # Databases and data
 *.db
+*.db-shm
+*.db-wal
 chroma_db/
 data/raw/
 data/docs/

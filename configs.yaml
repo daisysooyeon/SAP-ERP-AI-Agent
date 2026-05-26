@@ -34,7 +34,8 @@ models:
     provider: "openrouter"
     temperature: 0.1
   synthesizer:
-    name: "gpt-4o"            # Phase 6 구현 시 사용 (또는 claude-3-5-sonnet)
+    name: "google/gemini-2.0-flash-lite-001"  # Phase 6: email synthesis LLM
+    provider: "openrouter"
     temperature: 0.3
   data_gen:
     name: "qwen/qwen3-8b"     # src/data/ 데이터셋 생성 전용 모델

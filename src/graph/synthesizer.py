@@ -1,69 +1,213 @@
 """
 src/graph/synthesizer.py
-최종 답변 합성기 노드
-Worker A (ERP 처리 결과)와 Worker B (RAG 답변)를 통합하여
-비즈니스 이메일 형식의 최종 답변 생성
-"""
-import logging
+Final response synthesizer node
 
+Combines Worker A (ERP processing result) and Worker B (RAG answer) into
+a professional business email reply using an LLM.
+
+Falls back to a template-based response if the LLM call fails.
+"""
+
+from __future__ import annotations
+
+import logging
+import os
+
+from dotenv import load_dotenv
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+
+from src.config import get_config
 from src.graph.state import AgentState
 
+load_dotenv()
 logger = logging.getLogger(__name__)
 
-_STATUS_MESSAGES = {
-    "SUCCESS":   "Your request has been processed successfully.",
-    "REJECTED":  "Your request has been reviewed and rejected.",
-    "BLOCKED_VALIDATION": "Your request could not be processed due to a validation error.",
-    "BLOCKED_API":        "Your request could not be processed due to a system error.",
+
+# ---------------------------------------------------------------------------
+# LLM builder (singleton)
+# ---------------------------------------------------------------------------
+
+_llm: ChatOpenAI | None = None
+
+
+def _get_llm() -> ChatOpenAI:
+    global _llm
+    if _llm is not None:
+        return _llm
+
+    cfg     = get_config()
+    api_key = os.getenv("OPENROUTER_API_KEY", "")
+    if not api_key:
+        raise EnvironmentError("OPENROUTER_API_KEY is not set.")
+
+    syn_cfg = cfg.models.synthesizer
+    _llm = ChatOpenAI(
+        model=syn_cfg.name,
+        temperature=syn_cfg.temperature,
+        openai_api_key=api_key,
+        openai_api_base=cfg.openrouter.base_url,
+        default_headers={
+            "HTTP-Referer": "https://github.com/daisysooyeon/SAP-ERP-AI-Agent",
+            "X-Title":      "SAP-ERP-AI-Agent Synthesizer",
+        },
+    )
+    return _llm
+
+
+# ---------------------------------------------------------------------------
+# Prompt
+# ---------------------------------------------------------------------------
+
+_SYSTEM = """\
+You are an SAP ERP customer service agent composing professional business email replies.
+
+Compose a concise, warm, and professional email reply based on the context below.
+
+Guidelines:
+- Start with "Dear Customer,"
+- If an ERP action was requested, clearly state what was done (or what could not be done)
+- If a knowledge question was answered, include it naturally in the email
+- Be factual — only use information provided in the context
+- End with "Best regards,\\nSAP ERP Support Team"
+- Keep the email under 200 words
+"""
+
+_HUMAN = """\
+=== CUSTOMER EMAIL ===
+{user_input}
+
+=== CONTEXT ===
+
+Intent       : {intent}
+ERP Status   : {erp_status}
+ERP Action   : {erp_action_summary}
+RAG Answer   : {rag_answer}
+Errors       : {errors}
+
+=== TASK ===
+Write the final email reply to the customer based on the context above.
+"""
+
+_PROMPT = ChatPromptTemplate.from_messages([
+    ("system", _SYSTEM),
+    ("human",  _HUMAN),
+])
+
+
+# ---------------------------------------------------------------------------
+# Context builders
+# ---------------------------------------------------------------------------
+
+_ERP_STATUS_LABELS = {
+    "SUCCESS":                  "ERP update completed successfully.",
+    "REJECTED":                 "ERP update was rejected by the approver.",
+    "PENDING_APPROVAL":         "ERP update is pending human approval.",
+    "FAILED":                   "ERP update failed due to a system error.",
+    "BLOCKED_NO_STOCK":         "Request blocked: insufficient stock.",
+    "BLOCKED_SHIPPED":          "Request blocked: item has already shipped.",
+    "BLOCKED_EXTRACTION_FAILED":"Request blocked: could not parse the order details.",
+    "BLOCKED_VALIDATION":       "Request blocked: validation error.",
+    "BLOCKED_NO_DATA":          "Request blocked: order or item not found in the system.",
 }
 
 
-def synthesizer_node(state: AgentState) -> dict:
-    """
-    LangGraph 합성기 노드.
-    Worker A/B 결과를 조합해 비즈니스 이메일 초안을 생성합니다.
-    """
-    intent          = state.get("intent", "QA_ONLY")
-    erp_status      = state.get("erp_action_status")
-    erp_action      = state.get("erp_action") or {}
-    odata_response  = state.get("odata_response") or {}
-    rag_answer      = state.get("rag_answer", "")
-    errors          = state.get("error_messages", [])
+def _erp_action_summary(erp_action: dict, erp_status: str | None) -> str:
+    if not erp_action:
+        return "None"
 
-    parts: list[str] = ["Dear Customer,\n"]
+    action_type = erp_action.get("action_type", "")
+    order_id    = erp_action.get("order_id", "")
+    item_no     = erp_action.get("item_no", "")
+    status_lbl  = _ERP_STATUS_LABELS.get(erp_status or "", f"Status: {erp_status}")
 
-    # ── ERP 처리 결과 (Worker A) ─────────────────────────────────────────────
+    base = f"Order {order_id}, Item {item_no} — {action_type} — {status_lbl}"
+
+    if action_type == "CHANGE_QTY" and erp_action.get("new_quantity"):
+        base += f" New quantity: {erp_action['new_quantity']}."
+    elif action_type == "CHANGE_DATE" and erp_action.get("new_date"):
+        base += f" New delivery date: {erp_action['new_date']}."
+    elif action_type == "CANCEL_ITEM":
+        base += " Item cancellation requested."
+
+    return base
+
+
+# ---------------------------------------------------------------------------
+# Fallback template (LLM call failed)
+# ---------------------------------------------------------------------------
+
+def _template_response(
+    intent: str,
+    erp_status: str | None,
+    erp_action: dict,
+    rag_answer: str,
+) -> str:
+    parts = ["Dear Customer,\n"]
+
     if intent in ("ACTION_ONLY", "BOTH") and erp_status:
-        status_msg = _STATUS_MESSAGES.get(erp_status, f"Status: {erp_status}.")
-        parts.append(status_msg)
+        parts.append(_ERP_STATUS_LABELS.get(erp_status, f"ERP status: {erp_status}."))
 
-        if erp_status == "SUCCESS" and odata_response:
+        if erp_status == "SUCCESS":
             order_id = erp_action.get("order_id", "")
-            field    = erp_action.get("field", "")
-            new_val  = erp_action.get("new_value", "")
             if order_id:
-                parts.append(
-                    f"Order {order_id} has been updated"
-                    + (f" — {field} set to {new_val}." if field else ".")
-                )
-
-        if erp_status == "REJECTED":
+                parts.append(f"Order {order_id} has been updated successfully.")
+        elif erp_status == "REJECTED":
             parts.append("No changes have been made to the system.")
 
-    # ── RAG 답변 (Worker B) ──────────────────────────────────────────────────
     if intent in ("QA_ONLY", "BOTH") and rag_answer:
         if intent == "BOTH":
             parts.append("\nRegarding your question:")
         parts.append(rag_answer)
 
-    # ── 오류 메시지 ──────────────────────────────────────────────────────────
-    if errors:
-        logger.warning("[synthesizer] errors in state: %s", errors)
+    parts.append("\nBest regards,\nSAP ERP Support Team")
+    return "\n".join(parts)
 
-    # ── 마무리 ───────────────────────────────────────────────────────────────
-    parts.append("\nBest regards,\nSAP ERP AI Agent")
 
-    final_response = "\n".join(parts)
-    logger.info("[synthesizer] final_response generated (%d chars)", len(final_response))
+# ---------------------------------------------------------------------------
+# LangGraph node
+# ---------------------------------------------------------------------------
+
+def synthesizer_node(state: AgentState) -> dict:
+    """
+    LangGraph synthesizer node.
+
+    Combines Worker A (ERP result) and Worker B (RAG answer) into a
+    professional business email using an LLM.
+    Falls back to a template if the LLM call fails.
+    """
+    intent     = state.get("intent", "QA_ONLY")
+    user_input = state.get("user_input") or ""
+    erp_status = state.get("erp_action_status")
+    erp_action = state.get("erp_action") or {}
+    rag_answer = state.get("rag_answer") or ""
+    errors     = state.get("error_messages", [])
+
+    logger.info(
+        "[synthesizer] intent=%s erp_status=%s rag_answer_len=%d",
+        intent, erp_status, len(rag_answer),
+    )
+
+    erp_summary = _erp_action_summary(erp_action, erp_status)
+
+    # ── LLM synthesis ────────────────────────────────────────────────────────
+    try:
+        llm    = _get_llm()
+        chain  = _PROMPT | llm
+        result = chain.invoke({
+            "user_input":         user_input or "(no email provided)",
+            "intent":             intent or "UNKNOWN",
+            "erp_status":         erp_status or "N/A",
+            "erp_action_summary": erp_summary,
+            "rag_answer":         rag_answer or "None",
+            "errors":             ", ".join(errors) if errors else "None",
+        })
+        final_response = result.content.strip()
+        logger.info("[synthesizer] LLM response generated (%d chars)", len(final_response))
+
+    except Exception as e:
+        logger.warning("[synthesizer] LLM call failed (%s) — using template fallback.", e)
+        final_response = _template_response(intent, erp_status, erp_action, rag_answer)
+        logger.info("[synthesizer] Fallback template used (%d chars)", len(final_response))
 
     return {"final_response": final_response}

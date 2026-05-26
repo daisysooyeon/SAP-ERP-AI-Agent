@@ -3,7 +3,8 @@ src/graph/state.py
 AgentState 및 ERPAction TypedDict 정의
 """
 
-from typing import TypedDict, Literal, Optional, List, Any
+import operator
+from typing import Annotated, TypedDict, Literal, Optional, List, Any
 
 
 class ERPAction(TypedDict):
@@ -40,6 +41,6 @@ class AgentState(TypedDict):
     final_response: Optional[str]
 
     # 메타
-    error_messages: List[str]
+    error_messages: Annotated[List[str], operator.add]
     requires_human_approval: bool
     human_approved: Optional[bool]

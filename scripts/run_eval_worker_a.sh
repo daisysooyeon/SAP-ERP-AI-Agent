@@ -17,7 +17,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPORT_DIR="${PROJECT_ROOT}/reports"
-DEFAULT_REPORT="${REPORT_DIR}/worker_a_eval.json"
+DEFAULT_REPORT="${REPORT_DIR}/worker_a_eval_result.json"
 TEST_CASES="${PROJECT_ROOT}/data/eval/router_test_cases_gen.json"
 DB_PATH="${PROJECT_ROOT}/data/sap_erp.db"
 
@@ -54,7 +54,7 @@ log_info "Project root : ${PROJECT_ROOT}"
 # 1. Test cases file
 if [[ ! -f "${TEST_CASES}" ]]; then
   log_error "Test cases file not found: ${TEST_CASES}"
-  log_error "Run 'python -m src.data.enrich_worker_a_labels' to generate it."
+  log_error "Run 'python -m src.data.generate_router_dataset' to generate it."
   exit 1
 fi
 log_info "Test cases   : ${TEST_CASES}"

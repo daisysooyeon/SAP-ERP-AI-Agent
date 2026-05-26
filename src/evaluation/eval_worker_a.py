@@ -14,7 +14,7 @@ Worker A 파이프라인 평가
 
 실행:
   python -m src.evaluation.eval_worker_a
-  python -m src.evaluation.eval_worker_a --report reports/worker_a_eval.json
+  python -m src.evaluation.eval_worker_a --report reports/worker_a_eval_result.json
   python -m src.evaluation.eval_worker_a --dry-run   # 첫 5개만 빠르게 테스트
 """
 
@@ -34,7 +34,7 @@ load_dotenv()
 
 from src.config import get_config
 from src.graph.worker_a import extract_erp_action
-from src.tools.text_to_sql import run_validation_query
+from src.tools.text2sql import run_validation_query
 from src.graph.worker_a import check_business_rules
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -49,7 +49,7 @@ logger = logging.getLogger(__name__)
 _ROOT = Path(__file__).resolve().parent.parent.parent
 DEFAULT_TEST_CASES = str(_ROOT / "data" / "eval" / "router_test_cases_gen.json")
 DEFAULT_DB         = str(_ROOT / "data" / "sap_erp.db")
-DEFAULT_REPORT     = str(_ROOT / "reports" / "worker_a_eval.json")
+DEFAULT_REPORT     = str(_ROOT / "reports" / "worker_a_eval_result.json")
 
 
 # ---------------------------------------------------------------------------
@@ -166,7 +166,7 @@ def _evaluate_case(tc: dict, db_path: str) -> CaseResult:
             logger.info("[%s] E2 — running validation query order=%s item=%s …",
                         cr.id, gt_order, gt_item_int)
             # Use hardcoded query directly to isolate E2 from LLM SQL generation
-            from src.tools.text_to_sql import _hardcoded_query, DB_PATH
+            from src.tools.text2sql import _hardcoded_query, DB_PATH
             import sqlite3 as _sqlite3
             sql = _hardcoded_query(gt_order, str(gt_item_int)) # 쿼리 생성 능력을 평가하려는 게 아님
             conn = _sqlite3.connect(DB_PATH)

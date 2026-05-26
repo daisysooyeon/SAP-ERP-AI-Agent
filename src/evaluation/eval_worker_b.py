@@ -1,5 +1,5 @@
 """
-src/evaluation/eval_rag.py
+src/evaluation/eval_worker_b.py
 RAG 품질 평가 — 자체 구현 메트릭 (RAGAS 대신)
 
 평가 메트릭:
@@ -9,22 +9,20 @@ RAG 품질 평가 — 자체 구현 메트릭 (RAGAS 대신)
   Context Recall: top-k 컨텍스트가 정답 생성에 필요한 정보를 포함하는지 (목표 ≥ 0.90)
   Faithfulness  : 생성 답변이 retrieved 컨텍스트에 근거하는지 LLM judge (목표 ≥ 0.85)
 
-입력 데이터셋 형식 (rag_test_cases.json):
+입력 데이터셋 형식 (router_test_cases_gen.json, QA_ONLY + BOTH 필터):
   {
-    "id": "rag_0001",
-    "question": "What is ...",
-    "answer": "ground truth short answer",
-    "source_chunk": "exact chunk text from the PDF",
-    "source_doc": "TS460_2_EN_Col23.pdf",
-    "chunk_id": 69,
-    "question_type": "factual"
+    "id": "r_001",
+    "input": "customer email text",
+    "user_input": "customer email text",
+    "label": "QA_ONLY",
+    "rag_evidence": "exact chunk text (str or list[str] for multi-chunk)",
+    "qa_question": "extracted knowledge question"
   }
 
 CLI 사용법:
-  python -m src.evaluation.eval_rag                              # 전체 평가
-  python -m src.evaluation.eval_rag --skip-llm-judge             # retrieval 메트릭만 (빠름)
-  python -m src.evaluation.eval_rag --report reports/rag_eval.json
-  python -m src.evaluation.eval_rag --limit 10                   # 처음 10개만
+  python -m src.evaluation.eval_worker_b                              # 전체 평가
+  python -m src.evaluation.eval_worker_b --skip-llm-judge             # retrieval 메트릭만 (빠름)
+  python -m src.evaluation.eval_worker_b --report reports/worker_b_eval_result.json
 """
 
 from __future__ import annotations
@@ -41,7 +39,18 @@ from langchain_openai import ChatOpenAI
 from src.config import get_config
 from src.rag.retriever import build_hybrid_retriever
 from src.rag.reranker import rerank
-from src.graph.worker_b import _serialize_docs
+
+
+def _serialize_docs(docs: list) -> list[dict]:
+    return [
+        {
+            "content":  doc.page_content,
+            "source":   doc.metadata.get("source", ""),
+            "chunk_id": doc.metadata.get("chunk_id", -1),
+            "page":     doc.metadata.get("page", -1),
+        }
+        for doc in docs
+    ]
 
 load_dotenv()
 logger = logging.getLogger(__name__)
@@ -192,19 +201,13 @@ _FAITHFULNESS_PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
-# 무효 응답 카운터 — 메트릭별 분리 (0/1 이외의 응답 횟수)
-_judge_invalid_context_recall: int = 0
-_judge_invalid_faithfulness:   int = 0
-
-
 def _llm_judge(
     prompt_template: ChatPromptTemplate,
     variables: dict,
     metric: str = "unknown",
     delay: float = 0.5,
-) -> int:
-    """LLM judge 호출 → 0 또는 1 반환. 0/1 이외 응답은 metric별 카운터에 집계."""
-    global _judge_invalid_context_recall, _judge_invalid_faithfulness
+) -> tuple[int, bool]:
+    """LLM judge 호출 → (score, is_invalid) 반환. score는 0 또는 1."""
     try:
         llm = _get_judge_llm()
         chain = prompt_template | llm
@@ -219,63 +222,64 @@ def _llm_judge(
         val = m.group() if m else val
         time.sleep(delay)
         if val.startswith("1"):
-            return 1
+            return 1, False
         elif val.startswith("0"):
-            return 0
+            return 0, False
         else:
-            if metric == "context_recall":
-                _judge_invalid_context_recall += 1
-            else:
-                _judge_invalid_faithfulness += 1
             logger.warning(
                 "[eval_rag] LLM judge [%s] unexpected response: %r",
                 metric, val[:80],
             )
-            return 0   # conservative: unexpected 응답은 0점 처리
+            return 0, True   # conservative: unexpected 응답은 0점 처리
     except Exception as e:
         logger.warning("[eval_rag] LLM judge [%s] failed: %s", metric, e)
-        return 0
+        return 0, False
 
 
 def compute_context_recall(
     cases: list[dict],
     all_retrieved: list[list[dict]],
-    rag_answers: list[str],
-) -> float:
+) -> tuple[float, int]:
     """Context Recall: retrieved context가 정답 생성에 충분한지 LLM judge (목표 >= 0.90)"""
     scores = []
+    invalid = 0
     for case, docs in zip(cases, all_retrieved):
         context = "\n\n".join(d["content"] for d in docs)
-        score = _llm_judge(
+        score, is_invalid = _llm_judge(
             _CONTEXT_RECALL_PROMPT,
             {"question": case.get("qa_question") or case.get("question"), "context": context},
             metric="context_recall",
         )
+        if is_invalid:
+            invalid += 1
         scores.append(score)
         logger.debug("[eval_rag] Context Recall [%s]: %d", case.get("id"), score)
-    return sum(scores) / len(scores) if scores else 0.0
+    return (sum(scores) / len(scores) if scores else 0.0), invalid
 
 
 def compute_faithfulness(
     cases: list[dict],
     all_retrieved: list[list[dict]],
     rag_answers: list[str],
-) -> float:
+) -> tuple[float, int]:
     """Faithfulness: 생성 답변이 컨텍스트에 근거하는지 LLM judge (목표 >= 0.85)"""
     scores = []
+    invalid = 0
     for case, docs, answer in zip(cases, all_retrieved, rag_answers):
         if not answer or not docs:
             scores.append(0)
             continue
         context = "\n\n".join(d["content"] for d in docs)
-        score = _llm_judge(
+        score, is_invalid = _llm_judge(
             _FAITHFULNESS_PROMPT,
             {"context": context, "rag_answer": answer},
             metric="faithfulness",
         )
+        if is_invalid:
+            invalid += 1
         scores.append(score)
         logger.debug("[eval_rag] Faithfulness [%s]: %d", case.get("id"), score)
-    return sum(scores) / len(scores) if scores else 0.0
+    return (sum(scores) / len(scores) if scores else 0.0), invalid
 
 
 # ---------------------------------------------------------------------------
@@ -310,33 +314,24 @@ def run_rag_evaluation(
     n = len(test_cases)
     logger.info("[eval_rag] Evaluating %d cases ...", n)
 
-    # LLM judge 실행 전 카운터 리셋
-    global _judge_invalid_context_recall, _judge_invalid_faithfulness
-    _judge_invalid_context_recall = 0
-    _judge_invalid_faithfulness   = 0
-
     hit_rate   = compute_hit_rate(test_cases, all_retrieved)
     ndcg_at_3  = compute_ndcg_at_3(test_cases, all_retrieved)
     mrr        = compute_mrr(test_cases, all_retrieved)
 
     context_recall: float | None = None
     faithfulness:   float | None = None
+    invalid_cr: int = 0
+    invalid_fa: int = 0
 
     if not skip_llm_judge and rag_answers:
         logger.info("[eval_rag] Running LLM judges (Context Recall + Faithfulness) ...")
-        context_recall = compute_context_recall(test_cases, all_retrieved, rag_answers)
-        faithfulness   = compute_faithfulness(test_cases, all_retrieved, rag_answers)
+        context_recall, invalid_cr = compute_context_recall(test_cases, all_retrieved)
+        faithfulness,   invalid_fa = compute_faithfulness(test_cases, all_retrieved, rag_answers)
 
-    if _judge_invalid_context_recall > 0:
-        logger.warning(
-            "[eval_rag] Context Recall judge invalid: %d / %d",
-            _judge_invalid_context_recall, n,
-        )
-    if _judge_invalid_faithfulness > 0:
-        logger.warning(
-            "[eval_rag] Faithfulness judge invalid: %d / %d",
-            _judge_invalid_faithfulness, n,
-        )
+    if invalid_cr > 0:
+        logger.warning("[eval_rag] Context Recall judge invalid: %d / %d", invalid_cr, n)
+    if invalid_fa > 0:
+        logger.warning("[eval_rag] Faithfulness judge invalid: %d / %d", invalid_fa, n)
 
     return {
         "hit_rate":                        round(hit_rate, 4),
@@ -345,8 +340,8 @@ def run_rag_evaluation(
         "context_recall":                  round(context_recall, 4) if context_recall is not None else None,
         "faithfulness":                    round(faithfulness, 4)   if faithfulness   is not None else None,
         "n_cases":                         n,
-        "judge_invalid_context_recall":    _judge_invalid_context_recall,
-        "judge_invalid_faithfulness":      _judge_invalid_faithfulness,
+        "judge_invalid_context_recall":    invalid_cr,
+        "judge_invalid_faithfulness":      invalid_fa,
     }
 
 
@@ -387,7 +382,7 @@ def _main():
     setup_logging()
 
     parser = argparse.ArgumentParser(description="RAG Quality Evaluation")
-    parser.add_argument("--report",  default="reports/worker_b_eval.json", help="출력 리포트 경로")
+    parser.add_argument("--report",  default="reports/worker_b_eval_result.json", help="출력 리포트 경로")
     parser.add_argument("--dataset", default="data/eval/router_test_cases_gen.json")
     parser.add_argument("--skip-llm-judge", action="store_true", help="LLM judge 메트릭 스킵")
     args = parser.parse_args()
@@ -423,7 +418,7 @@ def _main():
         from src.graph.worker_b import _extract_rag_queries
         rag_queries = _extract_rag_queries(raw_input)
         if not rag_queries:
-            rag_queries = [raw_input]  # fallback
+            rag_queries = [case.get("qa_question") or raw_input]  # qa_question이 이메일 전문보다 정확한 쿼리
         rag_query = rag_queries[0]  # 대표 쿼리 (reranking 기준)
 
         # 검색 — 쿼리별 검색 후 중복 제거 병합

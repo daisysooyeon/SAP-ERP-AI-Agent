@@ -7,11 +7,11 @@ src/data/generate_all.py
 router 단계가 e2e 데이터셋을 겸합니다 (QA_ONLY/ACTION_ONLY/BOTH 균등 생성).
 
 실행 예시:
-  # 전체 생성 (권장 실행 순서: text2sql → rag → router)
+  # 전체 생성 (권장 실행 순서: text2sql → router)
   python -m src.data.generate_all
 
   # 특정 타겟만 선택
-  python -m src.data.generate_all --text2sql --rag
+  python -m src.data.generate_all --text2sql
   python -m src.data.generate_all --router
 
   # 파라미터 조정
@@ -57,7 +57,6 @@ _ROOT = Path(__file__).resolve().parent.parent.parent
 
 OUTPUTS = {
     "text2sql": str(_ROOT / "data" / "eval" / "text2sql_test_cases_gen.json"),
-    "rag":      str(_ROOT / "data" / "eval" / "rag_test_cases.json"),
     "router":   str(_ROOT / "data" / "eval" / "router_test_cases_gen.json"),
 }
 
@@ -68,7 +67,7 @@ OUTPUTS = {
 def _step_text2sql(args: argparse.Namespace) -> bool:
     from src.data.generate_text2sql_dataset import generate_text2sql_dataset
     print("\n" + "━" * 70)
-    print("  STEP 1/3 — Text-to-SQL Dataset Generation")
+    print("  STEP 1/2 — Text-to-SQL Dataset Generation")
     print("━" * 70)
     try:
         generate_text2sql_dataset(
@@ -84,31 +83,10 @@ def _step_text2sql(args: argparse.Namespace) -> bool:
         return False
 
 
-def _step_rag(args: argparse.Namespace) -> bool:
-    from src.data.generate_rag_dataset import generate_rag_dataset
-    print("\n" + "━" * 70)
-    print("  STEP 2/3 — RAG Dataset Generation (Chunk-based Q&A)")
-    print("━" * 70)
-    try:
-        generate_rag_dataset(
-            n_per_chunk=args.n_per_chunk,
-            output_path=args.out_rag,
-            delay=args.delay,
-            verify=not args.no_verify,
-            max_chunks=args.max_chunks,
-            model_name=args.model,
-            append=args.append,
-        )
-        return True
-    except Exception as e:
-        logger.error("RAG generation failed: %s", e, exc_info=True)
-        return False
-
-
 def _step_router(args: argparse.Namespace) -> bool:
     from src.data.generate_router_dataset import generate_router_dataset
     print("\n" + "━" * 70)
-    print("  STEP 3/3 — Router + E2E Dataset Generation (QA_ONLY / ACTION_ONLY / BOTH)")
+    print("  STEP 2/2 — Router + E2E Dataset Generation (QA_ONLY / ACTION_ONLY / BOTH)")
     print("━" * 70)
     try:
         generate_router_dataset(
@@ -138,19 +116,15 @@ def main() -> None:
     if args.dry_run:
         logger.info("Dry-run mode: executing each step with a small amount of data.")
         args.n_sql       = 10
-        args.n_per_chunk = 1
         args.n_per_label = 30
         args.max_chunks  = 3
-        args.no_verify   = True
 
     # 실행할 단계 결정 (플래그 없으면 전체 실행)
-    run_all = not (args.text2sql or args.rag or args.router)
+    run_all = not (args.text2sql or args.router)
 
     steps: list[tuple[str, callable]] = []
     if run_all or args.text2sql:
         steps.append(("text2sql", _step_text2sql))
-    if run_all or args.rag:
-        steps.append(("rag",      _step_rag))
     if run_all or args.router:
         steps.append(("router",   _step_router))
 
@@ -183,7 +157,6 @@ def main() -> None:
     print("\n  Generated Files:")
     path_map = {
         "text2sql": args.out_text2sql,
-        "rag":      args.out_rag,
         "router (= e2e)": args.out_router,
     }
     for label, path in path_map.items():
@@ -206,7 +179,6 @@ def _parse_args() -> argparse.Namespace:
 예시:
   python -m src.data.generate_all                      # 전체 실행
   python -m src.data.generate_all --dry-run            # 빠른 테스트 (소량)
-  python -m src.data.generate_all --rag --n-per-chunk 5
   python -m src.data.generate_all --router --n-per-label 20
   python -m src.data.generate_all --text2sql --n-sql 30
         """,
@@ -215,15 +187,10 @@ def _parse_args() -> argparse.Namespace:
     # ── 단계 선택 ────────────────────────────────────────────────────────────
     step_group = parser.add_argument_group("실행 단계 선택 (미지정 시 전체 실행)")
     step_group.add_argument("--text2sql", action="store_true", help="Text-to-SQL 케이스 생성")
-    step_group.add_argument("--rag",      action="store_true", help="RAG Q&A 케이스 생성")
     step_group.add_argument("--router",   action="store_true", help="Router + E2E 케이스 생성")
 
     # ── 생성 파라미터 ────────────────────────────────────────────────────────
     param_group = parser.add_argument_group("생성 파라미터")
-    param_group.add_argument(
-        "--n-per-chunk", type=int, default=1,
-        help="RAG: 청크당 Q&A 생성 수 (기본: 1)",
-    )
     param_group.add_argument(
         "--n-per-label", type=int, default=30,
         help="Router: 클래스(QA/ACTION/BOTH)별 생성 수 (기본: 30, 총 ≈ 90)",
@@ -234,7 +201,7 @@ def _parse_args() -> argparse.Namespace:
     )
     param_group.add_argument(
         "--max-chunks", type=int, default=100,
-        help="RAG/Router: 최대 처리 청크 수 (기본: 100)",
+        help="Router: 최대 처리 청크 수 (기본: 100)",
     )
     param_group.add_argument(
         "--delay", type=float, default=1.5,
@@ -249,10 +216,6 @@ def _parse_args() -> argparse.Namespace:
         help="OpenRouter 모델명 오버라이드 (기본: configs.yaml worker_a)",
     )
     param_group.add_argument(
-        "--no-verify", action="store_true",
-        help="RAG Self-Verification 필터 비활성화 (빠르지만 품질 저하 가능)",
-    )
-    param_group.add_argument(
         "--append", action="store_true",
         help="기존 파일에 결과 추가 (기본: 새로 작성)",
     )
@@ -264,7 +227,6 @@ def _parse_args() -> argparse.Namespace:
     # ── 출력 경로 ────────────────────────────────────────────────────────────
     out_group = parser.add_argument_group("출력 경로 오버라이드")
     out_group.add_argument("--out-text2sql", default=OUTPUTS["text2sql"])
-    out_group.add_argument("--out-rag",      default=OUTPUTS["rag"])
     out_group.add_argument("--out-router",   default=OUTPUTS["router"])
 
     return parser.parse_args()

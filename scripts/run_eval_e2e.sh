@@ -19,7 +19,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPORT_DIR="${PROJECT_ROOT}/reports"
-DEFAULT_REPORT="${REPORT_DIR}/e2e_eval.json"
+DEFAULT_REPORT="${REPORT_DIR}/e2e_eval_result.json"
 TEST_CASES="${PROJECT_ROOT}/data/eval/router_test_cases_gen.json"
 
 # ── Python interpreter ────────────────────────────────────────────────────────

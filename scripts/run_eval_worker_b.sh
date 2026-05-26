@@ -18,8 +18,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPORT_DIR="${PROJECT_ROOT}/reports"
-DEFAULT_REPORT="${REPORT_DIR}/worker_b_eval.json"
-TEST_CASES="${PROJECT_ROOT}/data/eval/rag_test_cases.json"
+DEFAULT_REPORT="${REPORT_DIR}/worker_b_eval_result.json"
+TEST_CASES="${PROJECT_ROOT}/data/eval/router_test_cases_gen.json"
 CHROMA_DB="${PROJECT_ROOT}/chroma_db"
 
 # ── Python interpreter (Windows venv 우선, 없으면 시스템 python) ───────────────
@@ -55,7 +55,7 @@ log_info "Project root : ${PROJECT_ROOT}"
 # 1. Test cases file
 if [[ ! -f "${TEST_CASES}" ]]; then
   log_error "Test cases file not found: ${TEST_CASES}"
-  log_error "Run 'python -m src.data.generate_rag_dataset' to generate it."
+  log_error "Run 'python -m src.data.generate_all --router' to generate it."
   exit 1
 fi
 log_info "Test cases   : ${TEST_CASES}"
@@ -106,7 +106,10 @@ for arg in "${EXTRA_ARGS[@]}"; do
   fi
 done
 
+WIN_TEST_CASES="$(wslpath -w "${TEST_CASES}" 2>/dev/null || echo "${TEST_CASES}")"
+
 "${PYTHON}" -m src.evaluation.eval_worker_b \
+  --dataset "${WIN_TEST_CASES}" \
   "${WIN_EXTRA_ARGS[@]}"
 
 EXIT_CODE=$?

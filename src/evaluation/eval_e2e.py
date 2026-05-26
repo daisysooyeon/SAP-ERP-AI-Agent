@@ -12,7 +12,7 @@ response on three metrics using a Judge LLM:
 Usage:
   python -m src.evaluation.eval_e2e
   python -m src.evaluation.eval_e2e --dry-run
-  python -m src.evaluation.eval_e2e --report reports/e2e_eval.json
+  python -m src.evaluation.eval_e2e --report reports/e2e_eval_result.json
 """
 
 from __future__ import annotations
@@ -34,16 +34,11 @@ from src.config import get_config
 from dotenv import load_dotenv
 
 from langgraph.checkpoint.sqlite import SqliteSaver
-from langgraph.graph import END, StateGraph
-from langgraph.types import Send
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
-from src.graph.router import router_node
 from src.graph.state import AgentState
-from src.graph.synthesizer import synthesizer_node
-from src.graph.worker_a import worker_a_node
-from src.graph.worker_b import worker_b_node
+from src.graph_builder import _build_state_graph
 
 
 load_dotenv()
@@ -107,44 +102,11 @@ class EvalReport:
 
 
 # ---------------------------------------------------------------------------
-# Eval graph (HITL disabled — bypasses human_loop interrupt)
-# ---------------------------------------------------------------------------
-
 def _build_eval_graph():
-    """
-    Build a LangGraph graph without the human_loop node.
-    ACTION_ONLY / BOTH emails go directly to synthesizer after worker_a.
-    Uses an in-memory SQLite checkpointer (no file side-effects between runs).
-    """
-
-    builder = StateGraph(AgentState)
-    builder.add_node("router",      router_node)
-    builder.add_node("worker_a",    worker_a_node)
-    builder.add_node("worker_b",    worker_b_node)
-    builder.add_node("synthesizer", synthesizer_node)
-
-    builder.set_entry_point("router")
-
-    def route_after_router(state: AgentState):
-        intent = state["intent"]
-        if intent == "ACTION_ONLY":
-            return [Send("worker_a", state)]
-        elif intent == "QA_ONLY":
-            return [Send("worker_b", state)]
-        else:
-            return [Send("worker_a", state), Send("worker_b", state)]
-
-    builder.add_conditional_edges(
-        "router", route_after_router, ["worker_a", "worker_b"]
-    )
-    # No HITL: worker_a goes straight to synthesizer
-    builder.add_edge("worker_a",    "synthesizer")
-    builder.add_edge("worker_b",    "synthesizer")
-    builder.add_edge("synthesizer", END)
-
-    conn   = sqlite3.connect(":memory:", check_same_thread=False)
+    """HITL 없이 그래프 빌드 — 평가 중 interrupt 없이 worker_a → synthesizer 직통."""
+    conn = sqlite3.connect(":memory:", check_same_thread=False)
     memory = SqliteSaver(conn)
-    return builder.compile(checkpointer=memory)
+    return _build_state_graph(hitl=False).compile(checkpointer=memory)
 
 
 # ---------------------------------------------------------------------------

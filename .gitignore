@@ -24,9 +24,7 @@ __pycache__/
 *.db
 *.db-shm
 *.db-wal
-chroma_db/
 data/raw/
-data/docs/
 
 # IDE / OS
 .vscode/

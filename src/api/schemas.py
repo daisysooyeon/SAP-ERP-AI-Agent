@@ -9,10 +9,16 @@ from typing import Optional, Literal
 
 class ERPActionRequest(BaseModel):
     """Worker A가 LLM을 통해 추출하는 ERP 수정 요청 스키마"""
-    order_id: str = Field(..., description="SAP 영업 오더 번호 (VBELN)", pattern=r"^\d{10}$")
-    item_no: str = Field(..., description="오더 아이템 번호 (POSNR)", pattern=r"^\d{6}$")
+    # 패딩은 LLM이 아니라 worker_a 후처리 코드가 담당한다. LLM은 원본 숫자를
+    # 그대로 추출하면 되므로(예: "6105"), 1~N자리를 허용한다.
+    order_id: str = Field(..., description="SAP 영업 오더 번호 (VBELN), 원본 숫자 그대로", pattern=r"^\d{1,10}$")
+    item_no: str = Field(..., description="오더 아이템 번호 (POSNR), 원본 숫자 그대로", pattern=r"^\d{1,6}$")
     action_type: Literal["CHANGE_QTY", "CHANGE_DATE", "CANCEL_ITEM", "CHANGE_ADDR", "OTHER"]
-    new_quantity: Optional[int] = Field(None, ge=1, description="변경 수량 (양수)")
+    # 절대 수량: "set quantity to 264" → 264
+    new_quantity: Optional[int] = Field(None, ge=1, description="변경 후 절대 수량 (양수). 절대 지정일 때만 사용")
+    # 상대 수량 변화: "reduce by 50" → -50, "increase by 30" → +30.
+    # worker_a가 현재 수량(KWMENG)을 조회해 new_quantity로 환산한다.
+    quantity_change: Optional[int] = Field(None, description="상대 수량 변화 (감소=음수, 증가=양수)")
     new_date: Optional[str] = Field(None, description="변경 납기일 (YYYY-MM-DD)")
     new_address: Optional[str] = Field(None, description="변경 배송지 주소 (자유 텍스트)")
 

@@ -37,7 +37,8 @@ B2B 영업 환경에서 고객사로부터 들어오는 **복합 문의 이메�
 | **주요 출력** | ① ERP DB 업데이트 완료 확인, ② 비즈니스 이메일 답변 초안 |
 | **오케스트레이션** | LangGraph (StateGraph) |
 | **외부 ERP 연동** | SAP Business Accelerator Hub OData sandbox API |
-| **내부 ERP 연동** | 로컬 SQLite DB (Kaggle SAP dataset) |
+| **내부 ERP 연동** | 로컬 SQLite DB (Kaggle SAP dataset) — Worker A: 검증(읽기), human_loop: 승인 후 업데이트(쓰기) |
+| **LLM 공급자** | OpenRouter (모든 LLM 단일 엔드포인트로 통합) |
 
 ---
 
@@ -48,9 +49,13 @@ SAP-ERP-AI-Agent/
 ├── Project/
 │   └── readme.md                  ← 현재 문서
 ├── readme.md                      ← PRD / TRD
+├── configs.yaml                   ← 중앙 설정 파일 (모델명, 경로, RAG 파라미터 등)
 │
 ├── src/
 │   ├── main.py                    ← LangGraph 그래프 진입점
+│   ├── config.py                  ← configs.yaml 로더
+│   ├── logging_config.py          ← 로그 설정
+│   │
 │   ├── graph/
 │   │   ├── state.py               ← AgentState TypedDict 정의
 │   │   ├── router.py              ← Orchestrator (의도 분류)
@@ -60,45 +65,54 @@ SAP-ERP-AI-Agent/
 │   │   └── human_loop.py          ← Human-in-the-Loop (interrupt)
 │   │
 │   ├── tools/
-│   │   ├── erp_tools.py           ← SQLite 조회/업데이트 Tool
+│   │   ├── erp_tools.py           ← SQLite 조회 Tool
 │   │   ├── sap_odata_tools.py     ← SAP OData sandbox API Tool
-│   │   ├── text_to_sql.py         ← Text-to-SQL 생성 로직
+│   │   ├── text_to_sql.py         ← Text-to-SQL 생성 로직 (LLM + hardcoded fallback)
 │   │   └── rag_tools.py           ← ChromaDB 검색 Tool
 │   │
 │   ├── rag/
 │   │   ├── ingest.py              ← 문서 파싱 & 임베딩 → ChromaDB 저장
 │   │   ├── retriever.py           ← Hybrid Retriever (Dense + BM25)
-│   │   └── reranker.py            ← bge-reranker 적용
+│   │   └── reranker.py            ← bge-reranker 적용 (import 실패 시 점수 집계로 fallback)
 │   │
 │   ├── api/
 │   │   ├── server.py              ← FastAPI 앱 (webhook 수신, 승인 엔드포인트)
-│   │   └── schemas.py             ← Pydantic 스키마 정의
+│   │   └── schemas.py             ← Pydantic 스키마 정의 (ERPActionRequest 포함)
 │   │
 │   ├── slack/
 │   │   └── notifier.py            ← Slack 승인 알림 발송
 │   │
 │   ├── db/
 │   │   ├── setup_sqlite.py        ← Kaggle CSV → SQLite 초기화 스크립트
-│   │   └── models.py              ← SQLAlchemy 모델 (optional)
+│   │   └── models.py              ← SQLAlchemy 모델
+│   │
+│   ├── data/                      ← 데이터셋 생성 스크립트
+│   │   ├── generate_router_dataset.py
+│   │   ├── generate_rag_dataset.py
+│   │   ├── generate_text2sql_dataset.py
+│   │   └── generate_all.py
 │   │
 │   └── evaluation/
 │       ├── eval_router.py         ← 라우터 정확도 평가
 │       ├── eval_text2sql.py       ← Text-to-SQL 성공률 평가
-│       ├── eval_rag.py            ← RAG 품질 평가 (Hit Rate / NDCG)
-│       └── eval_e2e.py            ← End-to-End latency & LLM-as-a-Judge
+│       ├── eval_worker_a.py       ← Worker A 단위 평가
+│       ├── eval_worker_b.py       ← Worker B (RAG) 품질 평가
+│       └── eval_e2e.py            ← End-to-End LLM-as-a-Judge 평가
 │
 ├── data/
 │   ├── raw/                       ← Kaggle CSV 원본
-│   │   ├── dd03l.csv
-│   │   ├── vbak.csv
-│   │   ├── vbap.csv
-│   │   ├── vbep.csv
-│   │   ├── vbuk.csv
-│   │   ├── vbup.csv
-│   │   ├── makt.csv
-│   │   └── mard.csv
+│   │   ├── vbak.csv, vbap.csv, vbep.csv, vbuk.csv
+│   │   ├── vbup.csv, makt.csv, mard.csv
 │   ├── sap_erp.db                 ← 생성된 SQLite DB
-│   └── docs/                      ← SAP Learning Hub PDF 문서들
+│   ├── docs/                      ← SAP Learning Hub PDF 문서들
+│   └── eval/
+│       └── router_test_cases_gen.json  ← E2E 평가용 90개 테스트 케이스
+│
+├── reports/
+│   └── e2e_eval.json              ← E2E 평가 결과 리포트
+│
+├── scripts/
+│   └── run_eval_e2e.sh            ← E2E 평가 실행 스크립트
 │
 ├── chroma_db/                     ← ChromaDB 영구 저장소
 ├── .env                           ← API 키 및 환경변수
@@ -119,7 +133,7 @@ SAP-ERP-AI-Agent/
 │                                                   │
 │    ┌─────────────────────────────────────────┐    │
 │    │       Orchestrator (Router Node)        │    │
-│    │      Model: Qwen2.5-3B-Instruct         │    │
+│    │   Model: gemini-2.0-flash-lite-001      │    │
 │    │    Output: ACTION_ONLY / QA / BOTH      │    │
 │    └───────────┬─────────────────┬───────────┘    │
 │                │                 │                │
@@ -127,22 +141,23 @@ SAP-ERP-AI-Agent/
 │    │      Worker A      │   │      Worker B     │ │
 │    │       (ERP)        │   │       (RAG)       │ │
 │    │                    │   │                   │ │
-│    │ 1. Parameter       │   │ 1. Keyword        │ │
-│    │    Extraction      │   │    Extraction     │ │
-│    │ 2. Validation      │   │ 2. Hybrid         │ │
-│    │ 3. Text-to-SQL     │   │    Retrieval      │ │
-│    │ 4. Usage Check     │   │ 3. Reranking      │ │
-│    │ 5. OData Call      │   │ 4. Context        │ │
-│    │ 6. Human Approval  │   │    Compression    │ │
-│    │ 7. DB Update       │   └────────┬──────────┘ │
-│    └───────────┬────────┘            │            │
+│    │ 1. Parameter       │   │ 1. Multi-query    │ │
+│    │    Extraction      │   │    Expansion (×3) │ │
+│    │    (gpt-4o-mini)   │   │    (gpt-4o-mini)  │ │
+│    │ 2. Text-to-SQL     │   │ 2. Hybrid         │ │
+│    │    Validation      │   │    Retrieval      │ │
+│    │    (laguna-m.1)    │   │    (Dense+BM25)   │ │
+│    │ 3. Business Rules  │   │ 3. Reranking      │ │
+│    │ 4. OData PATCH     │   │    → top-5        │ │
+│    │ 5. Human Approval  │   │ 4. Answer Gen     │ │
+│    └───────────┬────────┘   └────────┬──────────┘ │
 │                └─────────┬───────────┘            │
 │                          ▼                        │
 │                ┌───────────────────┐              │
 │                │    Synthesizer    │              │
-│                │   Model: GPT-4o   │              │
-│                │   Output: Email   │              │
-│                │       Draft       │              │
+│                │ gemini-flash-lite │              │
+│                │  Output: Email    │              │
+│                │      Draft        │              │
 │                └───────────────────┘              │
 └───────────────────────────────────────────────────┘
         │
@@ -162,29 +177,39 @@ SAP-ERP-AI-Agent/
 |------|------|---------|
 | `user_input` | `str` | 원본 이메일 텍스트 |
 | `intent` | `ACTION_ONLY \| QA_ONLY \| BOTH` | Router가 분류한 의도 |
-| `erp_action` | `ERPAction` (dict) | 추출된 ERP 수정 요청 (order_id, item_no, field, new_value, reason) |
+| `erp_action` | `ERPAction` (dict) | 추출된 ERP 수정 요청 (order_id, item_no, action_type, new_quantity, new_date, new_address) |
 | `erp_validation_result` | `dict` | 재고·출하 상태 확인 결과 |
-| `erp_action_status` | `str` | `PENDING_APPROVAL` / `BLOCKED_*` / `SUCCESS` / `REJECTED` |
+| `erp_action_status` | `str` | `PENDING_APPROVAL` / `BLOCKED_*` / `REJECTED` |
 | `odata_response` | `dict` | SAP sandbox API 응답 |
-| `rag_query` | `str` | 정제된 검색 쿼리 |
-| `retrieved_docs` | `list[dict]` | Reranking 완료된 top-3 청크 |
+| `rag_query` | `str` | 단일 정제 쿼리 |
+| `rag_queries` | `list[str]` | Multi-query 확장 결과 (3개) |
+| `retrieved_docs` | `list[dict]` | Reranking 완료된 top-5 청크 |
 | `rag_answer` | `str` | RAG 기반 정책 답변 |
 | `final_response` | `str` | 최종 이메일 답변 초안 |
+| `error_messages` | `Annotated[list[str], operator.add]` | 에러 메시지 목록 — BOTH 병렬 실행 시 두 Worker가 동시에 쓸 수 있도록 reducer 적용 |
 | `requires_human_approval` | `bool` | Slack 승인 대기 여부 |
 | `human_approved` | `bool \| None` | 담당자 승인 결과 |
 
 ### 4.2 그래프 엣지 및 분기 규칙
+
+**메인 그래프 (HITL 활성화)**
 
 | 출발 노드 | 조건 | 도착 노드 |
 |-----------|------|-----------|
 | `router` | intent == `ACTION_ONLY` | `worker_a` |
 | `router` | intent == `QA_ONLY` | `worker_b` |
 | `router` | intent == `BOTH` | `worker_a` + `worker_b` (Send API 병렬) |
-| `worker_a` | status == `PENDING_APPROVAL` | `human_loop` (interrupt) |
-| `worker_a` | 그 외 | `synthesizer` |
+| `worker_a` | 항상 | `human_loop` (interrupt) |
 | `worker_b` | 항상 | `synthesizer` |
 | `human_loop` | 항상 | `synthesizer` |
 | `synthesizer` | 항상 | `END` |
+
+**평가 그래프 (HITL 비활성화 — `eval_e2e.py` 전용)**
+
+| 출발 노드 | 도착 노드 |
+|-----------|-----------|
+| `worker_a` | `synthesizer` (human_loop 우회) |
+| `worker_b` | `synthesizer` |
 
 ---
 
@@ -192,13 +217,13 @@ SAP-ERP-AI-Agent/
 
 ### 5.1 Orchestrator (Router)
 
-**역할:** 사용자 이메일을 분석하여 의도를 3가지로 분류(`src/graph/router.py`에 구현)
+**역할:** 사용자 이메일을 분석하여 의도를 3가지로 분류 (`src/graph/router.py`)
 
 | 항목 | 내용 |
 |------|------|
-| **모델** | `Qwen3-8B` |
+| **모델** | `google/gemini-2.0-flash-lite-001` (OpenRouter) |
 | **출력 형식** | Pydantic `RouterOutput` — `intent` + `reasoning` (Chain-of-Thought) |
-| **구현 방식** | LLM Structured Output (JSON mode) + Few-shot 10개 이상 |
+| **구현 방식** | LLM Structured Output (JSON mode) + Few-shot 예시 포함 |
 | **목표 정확도** | 99% 이상 |
 
 | 클래스(intent) | 분류 조건 | 예시 |
@@ -211,54 +236,57 @@ SAP-ERP-AI-Agent/
 
 ### 5.2 Worker A — ERP 트랜잭션 처리
 
-**역할:** 이메일에서 ERP 수정에 필요한 파라미터를 추출하고, 가용성을 검증한 뒤 SAP OData API 호출 → SQLite 업데이트
+**역할:** 이메일에서 ERP 수정 파라미터를 추출하고, 가용성을 검증한 뒤 SAP OData API 호출
 
 #### 5.2.1 처리 흐름
 
 | 단계 | 작업 | 실패 시 |
 |------|------|----------|
-| ① Parameter Extraction | LLM으로 order_id, item_no, action_type, new_value 추출 → Pydantic 검증 | 최대 2회 재추출 후 `MISSING_PARAMS` |
-| ② Text-to-SQL | `dd03l.csv` 스키마 컨텍스트 + LLM(`Qwen2.5-Coder-3B`)으로 검증 쿼리 생성 → SQLite 실행 | 쿼리 오류 시 에러 반환 |
-| ③ Usage Check | 재고(`MARD.LABST`) / 출하상태(`VBUP.WBSTA`) / 납기일(`VBEP.EDATU`) 검증 | `BLOCKED_STOCK` / `BLOCKED_SHIPPED` / `BLOCKED_EXPIRED` |
-| ④ OData Call | SAP Sandbox `Sales Order (A2X)` API의 `SalesOrderItem` PATCH 호출 → 성공 응답(200/204) 확인 | API 오류 시 중단 |
+| ① Parameter Extraction | LLM(`gpt-4o-mini`)으로 order_id, item_no, action_type, new_value 추출 → Pydantic 검증 | `BLOCKED_EXTRACTION_FAILED` |
+| ② Text-to-SQL | 스키마 컨텍스트 + LLM(`poolside/laguna-m.1:free`)으로 검증 쿼리 생성 → SQLite 실행 (LLM 실패 시 hardcoded fallback 쿼리 사용) | 하드코딩 fallback 사용 |
+| ③ Business Rules | 재고(`MARD.LABST`) / 출하상태(`VBUP.WBSTA`) 검증 | `BLOCKED_NO_STOCK` / `BLOCKED_SHIPPED` / `BLOCKED_NO_DATA` |
+| ④ OData PATCH | SAP Sandbox `SalesOrderItem` PATCH 호출 → 405 응답 (sandbox read-only, 정상 처리) | 에러 로그 후 승인 큐 진행 |
 | ⑤ Human Approval | LangGraph `interrupt` → Slack 승인 알림 발송 → 담당자 클릭 대기 | 거절 시 `REJECTED` |
-| ⑥ DB Update | 승인 확인 후 SQLite 직접 `UPDATE` | — |
+| ⑥ DB Update | 승인 확인 후 `human_loop`에서 SQLite 직접 `UPDATE` 실행 | 실패 시 `FAILED` |
+
+> **참고:** SAP OData sandbox는 write 연산 미지원(405 응답이 정상). 실제 데이터 변경은 승인 후 SQLite에 반영됨.
 
 #### 5.2.2 파라미터 추출 스키마 (`ERPActionRequest`)
 
 | 필드 | 타입 | 제약 조건 |
 |------|------|-----------|
-| `order_id` | `str` | 10자리 숫자 (`VBELN`) |
-| `item_no` | `str` | 6자리 숫자 (`POSNR`) |
-| `action_type` | `CHANGE_QTY \| CHANGE_DATE \| CANCEL_ITEM` | — |
-| `new_quantity` | `int \| None` | 양수만 허용 (`ge=1`) |
-| `new_date` | `str \| None` | `YYYY-MM-DD` 형식 |
+| `order_id` | `str` | 10자리 숫자 (`VBELN`), zero-padded |
+| `item_no` | `str` | 6자리 숫자 (`POSNR`), zero-padded |
+| `action_type` | `CHANGE_QTY \| CHANGE_DATE \| CANCEL_ITEM \| CHANGE_ADDR \| OTHER` | — |
+| `new_quantity` | `int \| None` | 양수만 허용 (`ge=1`), CHANGE_QTY 전용 |
+| `new_date` | `str \| None` | `YYYY-MM-DD` 형식, CHANGE_DATE 전용 |
+| `new_address` | `str \| None` | 자유 텍스트, CHANGE_ADDR 전용 |
 
 #### 5.2.3 Text-to-SQL 스키마 컨텍스트
 
-`dd03l.csv`에서 파싱한 스키마를 프롬프트에 삽입, 단일 `JOIN` 쿼리로 수량·출하상태·납기일·가용재고를 한 번에 조회
+하드코딩 스키마를 프롬프트에 삽입, 단일 `LEFT JOIN` 쿼리로 수량·출하상태·납기일·가용재고를 한 번에 조회
 
 | 조회 대상 | 테이블 | 컬럼 |
 |-----------|--------|------|
+| 자재명 | `MAKT` | `MAKTX` |
 | 주문 수량 | `VBAP` | `KWMENG` |
-| 출하 상태 | `VBUP` | `WBSTA` (A/B/C) |
+| 출하 상태 | `VBUP` | `WBSTA` (A=미처리, B=부분, C=완료) |
 | 납기일 | `VBEP` | `EDATU` |
-| 가용 재고 | `MARD` | `LABST` |
+| 가용 재고 | `MARD` | `LABST` (없으면 COALESCE → 0) |
 
 #### 5.2.4 SAP OData API 호출
 
 - **서비스 명칭:** Sales Order (A2X) — `CE_SALESORDER_0001`
-- **엔드포인트:** `PATCH /api_salesorder/srvd_a2x/sap/salesorder/0001/SalesOrderItem(SalesOrder='{SalesOrder}',SalesOrderItem='{SalesOrderItem}')`
-- **Base URL:** `https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap`
-- **인증:** `APIKey` 헤더를 통해 진행
-- **목적:** 실제 SAP 데이터를 수정하지 않고 `200/204` 성공 응답만 확인하여 API 연동을 증명
-- **Payload:** `CHANGE_QTY` → `RequestedQuantity`, `CHANGE_DATE` → `RequestedDeliveryDate`로 변경해 전달
+- **엔드포인트:** `PATCH /SalesOrderItem(SalesOrder='{order}',SalesOrderItem='{item}')`
+- **Base URL:** `https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_salesorder/srvd_a2x/sap/salesorder/0001`
+- **인증:** `APIKey` 헤더
+- **Sandbox 동작:** 405 Method Not Allowed 반환 → 정상 처리 (endpoint 도달 확인 목적)
 
 ---
 
 ### 5.3 Worker B — RAG 검색
 
-**역할:** 사내 규정/매뉴얼(구현 단계에서는 SAP Learning Hub 문서)에서 관련 청크를 검색하여 근거 기반 답변 생성
+**역할:** SAP Learning Hub 문서에서 관련 청크를 검색하여 근거 기반 답변 생성
 
 #### 5.3.1 문서 인제스트 파이프라인
 
@@ -267,8 +295,8 @@ SAP-ERP-AI-Agent/
 | 단계 | 도구 / 설정 |
 |------|-------------|
 | PDF 로드 | `PyMuPDFLoader` |
-| 청킹 | `RecursiveCharacterTextSplitter` — chunk_size=512, overlap=64 |
-| 임베딩 | `BAAI/bge-m3` (또는 `jina-embeddings-v3`) |
+| 청킹 | `RecursiveCharacterTextSplitter` — chunk_size=512, overlap=128 |
+| 임베딩 | `BAAI/bge-m3` (로컬, HuggingFace) |
 | 저장 | `ChromaDB` — collection: `sap_manuals`, persist: `./chroma_db/` |
 | 메타데이터 | `source`(파일명), `page`(페이지), `chunk_id` |
 
@@ -278,34 +306,36 @@ SAP-ERP-AI-Agent/
 
 | 단계 | 방식 | 설정 |
 |------|------|------|
-| Dense Retrieval | ChromaDB 시맨틱 검색 | weight 0.6, top-10 |
-| Sparse Retrieval | BM25 키워드 검색 | weight 0.4, top-10 |
-| 앙상블 | `EnsembleRetriever` 점수 합산 | — |
-| Reranking | `BAAI/bge-reranker-v2-m3` (fp16) | 최종 top-3 선별 |
+| Dense Retrieval | ChromaDB 시맨틱 검색 | weight 0.5, top-20 후보 |
+| Sparse Retrieval | BM25 키워드 검색 | weight 0.5, top-20 후보 |
+| 앙상블 | 점수 합산 deduplication | — |
+| Reranking | `BAAI/bge-reranker-v2-m3` (FlagReranker, import 실패 시 점수 집계로 fallback) | 최종 top-5 선별 |
 
 #### 5.3.3 Worker B 처리 흐름
 
-1. LLM으로 이메일에서 검색 쿼리 추출
-2. Hybrid Retriever로 후보 문서 top-10 수집
-3. bge-reranker로 top-3 재순위화
-4. LLM으로 top-3 컨텍스트 기반 답변 생성 → `rag_answer` 반환
+1. LLM(`gpt-4o-mini`)으로 이메일에서 **검색 쿼리 3개** 생성 (multi-query 확장)
+2. 3개 쿼리로 Hybrid Retrieval → 33개 내외 후보 문서 수집 (중복 제거)
+3. Reranker로 top-5 재순위화
+4. LLM(`gpt-4o-mini`)으로 top-5 컨텍스트 기반 답변 생성 → `rag_answer` 반환
 
 ---
 
 ### 5.4 Human-in-the-Loop (Slack 승인)
 
-**역할:** ERP 업데이트 직전 담당자에게 Slack 메시지 발송 → 승인 시에만 SQLite 업데이트 실행
+**역할:** ERP 액션 직전 담당자에게 Slack 메시지 발송 → 승인 시에만 트랜잭션 확정
 
 #### 동작 방식
 
-1. `worker_a`에서 OData 호출 성공 시 `erp_action_status = PENDING_APPROVAL` 설정
-2. LangGraph `interrupt_before=["human_loop"]` 설정으로 그래프 자동 일시 정지
+1. `worker_a`에서 OData 호출 완료 후 `erp_action_status = PENDING_APPROVAL` 설정
+2. LangGraph `interrupt`로 그래프 자동 일시 정지
 3. `src/slack/notifier.py`에서 Slack Webhook으로 승인 요청 메시지 발송
    - 메시지 내용: 오더번호, 아이템, 변경 내용, 사유
    - **✅ 승인** / **❌ 거절** 버튼 포함
 4. 담당자가 버튼 클릭
 5. FastAPI가 LangGraph 체크포인트에 `human_approved` 값 업데이트 후 그래프 재개
-6. `human_loop_node`: 승인 시 SQLite `UPDATE` 실행, 거절 시 `REJECTED` 상태 반환
+6. `human_loop_node`: 승인 시 SQLite `UPDATE` 실행 (`CHANGE_QTY` → `VBAP.KWMENG`, `CHANGE_DATE` → `VBEP.EDATU`, `CANCEL_ITEM` → `VBAP.ABGRU = "ZZ"`, `CHANGE_ADDR` → 시뮬레이션) → 상태 `SUCCESS`, 거절 시 `REJECTED`
+
+> **참고:** `configs.yaml`의 `feature_flags.human_in_the_loop: false` 설정으로 HITL 스킵 가능 (개발/테스트용)
 
 ---
 
@@ -315,9 +345,11 @@ SAP-ERP-AI-Agent/
 
 | 항목 | 내용 |
 |------|------|
-| **모델** | `GPT-4o` 또는 `Claude 3.5 Sonnet` |
-| **입력** | 원본 이메일 + ERP 처리 결과 + RAG 답변 |
-| **출력** | 인사말 + 각 요청별 처리 결과 + 근거 출처 + 마무리 문구가 포함된 한국어 비즈니스 이메일 초안 |
+| **모델** | `google/gemini-2.0-flash-lite-001` (OpenRouter) |
+| **입력** | 원본 이메일 + intent + ERP 상태 요약 + RAG 답변 + 에러 목록 |
+| **출력** | "Dear Customer" 인사 + 처리 결과 본문 + "Best regards, SAP ERP Support Team" 형식의 영문 이메일 초안 |
+| **ERP 상태 해석** | `_ERP_STATUS_LABELS` 딕셔너리로 상태 코드를 자연어로 변환 후 LLM에 전달 (hallucination 방지) |
+| **Fallback** | LLM 호출 실패 시 템플릿 기반 응답 자동 생성 |
 
 ---
 
@@ -325,17 +357,21 @@ SAP-ERP-AI-Agent/
 
 ### 6.1 SQLite (ERP DB)
 
+**용도:** Worker A의 비즈니스 룰 검증 전용 (읽기 전용)
+
 #### 테이블 구성 및 주요 필드
 
 | 테이블 | 설명 | 주요 필드 |
 |--------|------|-----------|
-| `VBAK` | 영업 오더 헤더 | `VBELN`(PK), `KUNNR`, `AUDAT`, `NETWR` |
-| `VBAP` | 영업 오더 아이템 | `VBELN`, `POSNR`(PK), `MATNR`, `KWMENG`, `NETPR` |
-| `VBEP` | 납품 일정 | `VBELN`, `POSNR`, `ETENR`, `EDATU`(납기일), `WMENG` |
-| `VBUK` | 오더 헤더 상태 | `VBELN`, `GBSTK`(전체상태) |
-| `VBUP` | 오더 아이템 상태 | `VBELN`, `POSNR`, `WBSTA`(출하상태) |
+| `VBAK` | 영업 오더 헤더 | `VBELN`(PK, TEXT 10자리), `KUNNR`, `AUDAT`, `NETWR` |
+| `VBAP` | 영업 오더 아이템 | `VBELN`, `POSNR`(INTEGER), `MATNR`, `KWMENG`, `NETPR` |
+| `VBEP` | 납품 일정 | `VBELN`, `POSNR`, `ETENR`, `EDATU`(TEXT YYYYMMDD), `WMENG` |
+| `VBUK` | 오더 헤더 상태 | `VBELN`, `GBSTK` |
+| `VBUP` | 오더 아이템 상태 | `VBELN`, `POSNR`, `WBSTA`(A/B/C) |
 | `MAKT` | 자재 텍스트 | `MATNR`(PK), `MAKTX`(자재명) |
 | `MARD` | 저장위치 재고 | `MATNR`, `WERKS`, `LGORT`, `LABST`(가용재고) |
+
+> **규모:** VBAP 기준 25,000개 이상의 주문 (VBELN은 10자리 zero-padded TEXT로 저장)
 
 #### DB 초기화 스크립트
 
@@ -346,10 +382,11 @@ SAP-ERP-AI-Agent/
 | 항목 | 설정 |
 |------|------|
 | **Collection 이름** | `sap_manuals` |
-| **임베딩 모델** | `BAAI/bge-m3` (또는 `jina-embeddings-v3`) |
-| **청크 크기** | 512 tokens, overlap 64 |
+| **임베딩 모델** | `BAAI/bge-m3` (로컬 HuggingFace) |
+| **청크 크기** | 512 tokens, overlap 128 |
 | **메타데이터** | `source`(파일명), `page`(페이지), `chunk_id` |
 | **영구 저장 경로** | `./chroma_db/` |
+| **총 문서 수** | 934개 청크 |
 
 ---
 
@@ -378,20 +415,22 @@ SAP-ERP-AI-Agent/
 
 ## 8. 프롬프트 설계
 
-### Few-shot 예시 수 가이드라인
+### 노드별 모델 및 설정
 
-| 노드 | 모델 | Few-shot 예시 수 |
-|------|------|------------------|
-| Router | Qwen3-8b | 10개 이상 (3 클래스 균형) |
-| 파라미터 추출 | Qwen3-8b | 5개 이상 |
-| Text-to-SQL | Qwen3-Coder, Qwen3-Coder-30B-A3B-Instruct | 3~5개 (스키마 포함) |
-| RAG 답변 생성 | Qwen3-8b | 3개 |
-| 최종 합성 | GPT-4o | 2개 (포맷 예시) |
+| 노드 | 모델 | Temperature | 비고 |
+|------|------|-------------|------|
+| Router | `gemini-2.0-flash-lite-001` | 0.0 | 결정론적 분류 |
+| Worker A 추출 | `gpt-4o-mini` | 0.0 | Pydantic structured output |
+| Text-to-SQL | `poolside/laguna-m.1:free` | 0.0 | LLM 실패 시 hardcoded fallback |
+| Worker B | `gpt-4o-mini` | 0.1 | RAG 답변 생성 |
+| Synthesizer | `gemini-2.0-flash-lite-001` | 0.3 | 이메일 초안 생성 |
+| Eval Judge | `gpt-4o-mini` | 0.0 | E2E 평가 채점 전용 |
+| Data Gen | `qwen/qwen3-8b` | 0.5 | 테스트 데이터셋 생성 전용 |
 
 ### 공통 프롬프트 원칙
 - **시스템 프롬프트**: 역할 정의 + 제약 조건 + 출력 형식 명확히 기술
 - **Chain-of-Thought**: 분류 근거(`reasoning` 필드)를 함께 출력하도록 강제
-- **언어**: 입력 및 출력은 한국어 기본 (RAG 검색 쿼리는 한/영 혼용 허용)
+- **출력 언어**: 이메일 답변은 영어 (비즈니스 이메일 형식)
 
 ---
 
@@ -399,33 +438,31 @@ SAP-ERP-AI-Agent/
 
 ### Pydantic 검증 레이어
 
-LLM이 추출한 JSON을 `ERPActionRequest.model_validate_json()`으로 검증. 실패 시 에러 메시지를 프롬프트에 피드백하여 **최대 2회 재추출**
-
-2회 모두 실패하면 `MISSING_PARAMS` 상태로 처리
+LLM이 추출한 JSON을 `ERPActionRequest`로 검증. 실패 시 `BLOCKED_EXTRACTION_FAILED` 상태 반환
 
 ### 비즈니스 룰 검증 결과 코드
 
 | 상태 코드 | 의미 | 처리 |
 |-----------|------|------|
 | `PENDING_APPROVAL` | 검증 통과, 승인 대기 | Human-in-the-Loop |
-| `BLOCKED_STOCK` | 재고 부족 | 처리 불가 메시지 |
-| `BLOCKED_SHIPPED` | 출하 완료 상태 | 처리 불가 메시지 |
-| `BLOCKED_EXPIRED` | 납기 변경 기한 초과 | 처리 불가 메시지 |
-| `MISSING_PARAMS` | 필수 파라미터 누락 | 재입력 요청 |
-| `SUCCESS` | 처리 완료 | 최종 합성으로 이동 |
+| `BLOCKED_NO_STOCK` | 재고 부족 (요청 수량 > 가용 재고) | 처리 불가 메시지 |
+| `BLOCKED_SHIPPED` | 출하 완료 상태 (`WBSTA = C`) | 처리 불가 메시지 |
+| `BLOCKED_NO_DATA` | 주문/아이템 DB 미존재 | 처리 불가 메시지 |
+| `BLOCKED_EXTRACTION_FAILED` | 파라미터 추출 실패 | 처리 불가 메시지 |
+| `BLOCKED_VALIDATION` | 기타 유효성 검사 실패 | 처리 불가 메시지 |
 | `REJECTED` | 담당자 거절 | 거절 사유 합성 |
 
 ---
 
 ## 10. 평가 파이프라인
 
-### 10.1 라우터 정확도
+### 10.1 라우터 정확도 (`eval_router.py`)
 
-- **테스트셋:** `ACTION_ONLY` 30개 + `QA_ONLY` 30개 + `BOTH` 30개 = 총 90개
+- **테스트셋:** `router_test_cases_gen.json` — `ACTION_ONLY` 30개 + `QA_ONLY` 30개 + `BOTH` 30개 = 총 90개
 - **평가 도구:** `sklearn.metrics.classification_report` (Precision / Recall / F1)
 - **목표:** 정확도 99% 이상
 
-### 10.2 Text-to-SQL 성공률
+### 10.2 Text-to-SQL 성공률 (`eval_text2sql.py`)
 
 | 판정 기준 | 합격 조건 |
 |-----------|----------|
@@ -435,38 +472,46 @@ LLM이 추출한 JSON을 `ERPActionRequest.model_validate_json()`으로 검증. 
 
 - **목표:** 성공률 95% 이상
 
-### 10.3 RAG 품질 평가
+### 10.3 Worker A 단위 평가 (`eval_worker_a.py`)
 
-`RAGAS` 라이브러리 사용
+Worker A 파이프라인(추출 → 검증 → 비즈니스 룰)의 정확도 및 상태 코드 분류 평가
+
+### 10.4 Worker B (RAG) 품질 평가 (`eval_worker_b.py`)
 
 | 지표 | 계산 방식 | 목표 |
 |------|-----------|------|
 | **Hit Rate** | 정답 청크가 top-k에 포함된 비율 | ≥ 85% |
-| **NDCG@3** | 상위 3개 청크 순위 품질 | ≥ 0.75 |
+| **NDCG@5** | 상위 5개 청크 순위 품질 | ≥ 0.75 |
 | **Context Recall** | 정답 생성에 필요한 청크 포함 비율 | ≥ 90% |
 
-### 10.4 End-to-End 평가 (LLM-as-a-Judge)
+### 10.5 End-to-End 평가 (`eval_e2e.py`)
 
-별도 Judge LLM이 최종 답변을 3가지 기준으로 1~5점 채점:
+Judge LLM(`gpt-4o-mini`)이 최종 답변을 3가지 기준으로 1~5점 채점:
 
 | 평가 항목 | 기준 |
 |-----------|------|
-| **충실성 (Faithfulness)** | 검색된 근거에 없는 정보를 지어냈는가 (환각 여부) |
-| **정확성 (Correctness)** | ERP 처리 결과와 정책 답변이 실제와 일치하는가 |
-| **형식 (Format)** | 인사말·본문·마무리를 갖춘 비즈니스 이메일 형식인가 |
+| **Faithfulness** | RAG 답변 + Ground-Truth Evidence 외 정보를 지어냈는가 (환각 여부) |
+| **Correctness** | ERP 처리 결과와 RAG 답변이 실제 컨텍스트와 일치하는가 |
+| **Format** | 인사말·본문·마무리를 갖춘 비즈니스 이메일 형식인가 |
+
+**주요 특징:**
+- `--dry-run`: 첫 3개 케이스만 실행
+- `--resume REPORT_JSON`: 기존 리포트에서 `faithfulness is None`인 케이스만 재실행 후 병합
+- Judge 프롬프트에 Ground-Truth `rag_evidence` 별도 섹션 포함 (테스트 케이스에서 제공)
+- 실행 스크립트: `bash scripts/run_eval_e2e.sh [--dry-run] [--report PATH]`
 
 ---
 
 ## 11. 환경 설정 및 실행 방법
 
-### 11.1 requirements.txt
+### 11.1 주요 의존성
 
 ```
 langgraph>=0.2.0
 langchain>=0.3.0
 langchain-openai>=0.2.0
 langchain-community>=0.3.0
-langchain-chroma>=0.1.0
+langchain-huggingface
 fastapi>=0.115.0
 uvicorn>=0.32.0
 pydantic>=2.9.0
@@ -474,28 +519,22 @@ httpx>=0.27.0
 pandas>=2.2.0
 python-dotenv>=1.0.0
 FlagEmbedding>=1.2.0       # bge-reranker
-ragas>=0.1.0               # RAG 평가
-scikit-learn>=1.5.0        # 라우터 평가
 rank-bm25>=0.2.2           # BM25 Retriever
 pymupdf>=1.24.0            # PDF 파싱
+scikit-learn>=1.5.0        # 라우터 평가
 ```
 
 ### 11.2 .env 파일
 
 ```bash
-# LLM API
-# (로컬 임베딩 사용으로 API 키 생략 가능)
-# OPENAI_API_KEY=sk-...
-ANTHROPIC_API_KEY=sk-ant-...
+# OpenRouter (모든 LLM 통합 엔드포인트)
+OPENROUTER_API_KEY=sk-or-...
 
 # SAP Sandbox
 SAP_API_KEY=...
 
-# Slack
+# Slack (HITL 승인 알림)
 SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...
-
-# 로컬 모델 (Ollama 사용 시)
-OLLAMA_BASE_URL=http://localhost:11434
 ```
 
 ### 11.3 실행 순서
@@ -514,28 +553,30 @@ python src/rag/ingest.py
 uvicorn src.api.server:app --reload --port 8000
 
 # 5. 에이전트 테스트 실행
-python src/main.py --input "PO-2024031200 건 수량을 500개로 변경해주세요. 위약금 정책도 알고 싶습니다."
+python src/main.py
 
 # 6. 평가 실행
-python src/evaluation/eval_router.py
-python src/evaluation/eval_text2sql.py
-python src/evaluation/eval_rag.py
-python src/evaluation/eval_e2e.py
+python -m src.evaluation.eval_router
+python -m src.evaluation.eval_text2sql
+python -m src.evaluation.eval_worker_b
+python -m src.evaluation.eval_e2e --dry-run
+bash scripts/run_eval_e2e.sh               # 전체 90케이스
+bash scripts/run_eval_e2e.sh --dry-run     # 첫 3케이스만
 ```
 
 ---
 
 ## 12. 마일스톤 및 구현 순서
 
-| Phase | 작업 내용 | 산출물 |
-|-------|-----------|--------|
-| **Phase 1** | 데이터 준비 (SQLite + ChromaDB 인제스트) | `sap_erp.db`, `chroma_db/` |
-| **Phase 2** | LangGraph 스켈레톤 + Router 구현 및 평가 | `graph/`, 라우터 정확도 리포트 |
-| **Phase 3** | Worker A 전체 구현 (Text-to-SQL + OData + SQLite 업데이트) | `worker_a.py`, SQL 성공률 리포트 |
-| **Phase 4** | Worker B 전체 구현 (Hybrid Retrieval + Reranking) | `worker_b.py`, RAG 품질 리포트 |
-| **Phase 5** | Human-in-the-Loop + FastAPI + Slack 연동 | `human_loop.py`, `api/`, `slack/` |
-| **Phase 6** | 최종 합성기 구현 + End-to-End 테스트 | `synthesizer.py`, E2E 평가 리포트 |
-| **Phase 7** | 전체 리팩토링, 문서 정리, 시연 준비 | 최종 시연 스크립트 |
+| Phase | 작업 내용 | 산출물 | 상태 |
+|-------|-----------|--------|------|
+| **Phase 1** | 데이터 준비 (SQLite + ChromaDB 인제스트) | `sap_erp.db`, `chroma_db/` | ✅ 완료 |
+| **Phase 2** | LangGraph 스켈레톤 + Router 구현 및 평가 | `graph/`, 라우터 평가 | ✅ 완료 |
+| **Phase 3** | Worker A 전체 구현 (Text-to-SQL + OData) | `worker_a.py`, SQL 성공률 평가 | ✅ 완료 |
+| **Phase 4** | Worker B 전체 구현 (Hybrid Retrieval + Reranking) | `worker_b.py`, RAG 품질 평가 | ✅ 완료 |
+| **Phase 5** | Human-in-the-Loop + FastAPI + Slack 연동 | `human_loop.py`, `api/`, `slack/` | ✅ 완료 |
+| **Phase 6** | 최종 합성기 구현 + End-to-End 평가 파이프라인 | `synthesizer.py`, `eval_e2e.py`, E2E 리포트 | ✅ 완료 |
+| **Phase 7** | 전체 리팩토링, 문서 정리, 시연 준비 | 최종 시연 스크립트 | 🔄 진행 중 |
 
 ---
 
@@ -543,5 +584,6 @@ python src/evaluation/eval_e2e.py
 > - [SAP Business Accelerator Hub](https://api.sap.com/) — OData API 샌드박스
 > - [LangGraph 공식 문서](https://langchain-ai.github.io/langgraph/) — interrupt, Send API
 > - [Kaggle SAP Dataset](https://www.kaggle.com/datasets/mustafakeser4/sap-dataset-bigquery-dataset)
-> - [RAGAS](https://docs.ragas.io/) — RAG 평가 프레임워크
-> - [BGE Reranker](https://huggingface.co/BAAI/bge-reranker-base) — 문서 재순위화
+> - [OpenRouter](https://openrouter.ai/) — 다중 LLM 통합 API
+> - [BGE-M3](https://huggingface.co/BAAI/bge-m3) — 임베딩 모델
+> - [BGE Reranker](https://huggingface.co/BAAI/bge-reranker-v2-m3) — 문서 재순위화

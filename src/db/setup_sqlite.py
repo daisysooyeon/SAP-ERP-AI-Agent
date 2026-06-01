@@ -29,14 +29,14 @@ def setup_db(raw_dir: str = RAW_DIR, db_path: str = DB_PATH) -> None:
     for table_name, csv_file in TABLE_CSV_MAP.items():
         csv_path = Path(raw_dir) / csv_file
         if not csv_path.exists():
-            print(f"[SKIP] {csv_file} 파일 없음")
+            print(f"[SKIP] {csv_file} not found")
             continue
         df = pd.read_csv(csv_path)
         df.to_sql(table_name, conn, if_exists="replace", index=False)
-        print(f"[OK] {table_name}: {len(df)}행 로드")
+        print(f"[OK] {table_name}: {len(df)} rows loaded")
 
     conn.close()
-    print(f"[완료] SQLite DB 생성: {db_path}")
+    print(f"[DONE] SQLite DB created: {db_path}")
 
 
 if __name__ == "__main__":

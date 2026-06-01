@@ -29,7 +29,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from src.tools.text_to_sql import build_validation_query
+from src.tools.text2sql import build_validation_query
 
 # Windows cp949 환경에서 유니코드 로그 출력 안전화
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")

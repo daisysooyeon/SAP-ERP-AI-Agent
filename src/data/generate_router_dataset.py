@@ -36,6 +36,7 @@ import argparse
 import json
 import logging
 import random
+import re
 import sys
 import time
 from pathlib import Path
@@ -92,6 +93,42 @@ _ERP_ACTIONS = [
 def _pick_action(order_id: str, item_no: int, rng: random.Random) -> str:
     template = rng.choice(_ERP_ACTIONS)
     return template.format(qty=rng.randint(50, 500), batch=rng.randint(10000, 99999))
+
+
+# ---------------------------------------------------------------------------
+# Worker A 레이블 계산 (enrich 통합)
+# ---------------------------------------------------------------------------
+
+_QTY_PATTERN    = re.compile(r"quantit|qty|units?|reduce\s+the\s+order", re.I)
+_DATE_PATTERN   = re.compile(r"deliver(y)?\s+date|reschedule", re.I)
+_CANCEL_PATTERN = re.compile(r"cancel", re.I)
+
+
+def _map_action_type(action_desc: str | None) -> str:
+    if not action_desc:
+        return "OTHER"
+    if _CANCEL_PATTERN.search(action_desc):
+        return "CANCEL_ITEM"
+    if _QTY_PATTERN.search(action_desc):
+        return "CHANGE_QTY"
+    if _DATE_PATTERN.search(action_desc):
+        return "CHANGE_DATE"
+    return "OTHER"
+
+
+def _derive_erp_status(action_type: str, expected_values: dict | None, action_desc: str | None) -> str:
+    if not expected_values:
+        return "BLOCKED_NO_DATA"
+    delivery_status = expected_values.get("delivery_status") or ""
+    available_stock = float(expected_values.get("available_stock") or 0)
+    if delivery_status == "C":
+        return "BLOCKED_SHIPPED"
+    if action_type == "CHANGE_QTY":
+        m = re.search(r"(\d+)\s*units?", action_desc or "", re.I) or \
+            re.search(r"by\s+(\d+)", action_desc or "", re.I)
+        if m and int(m.group(1)) > available_stock:
+            return "BLOCKED_NO_STOCK"
+    return "PENDING_APPROVAL"
 
 
 # ---------------------------------------------------------------------------
@@ -236,14 +273,14 @@ def _load_chunks() -> list[dict]:
     chunks = load_chunks()
     before = len(chunks)
     chunks = [c for c in chunks if _is_quality_chunk(c["text"])]
-    logger.info("청크 품질 필터: %d → %d개 (제거 %d개)", before, len(chunks), before - len(chunks))
+    logger.info("Chunk quality filter: %d → %d (removed %d)", before, len(chunks), before - len(chunks))
     return chunks
 
 
 def _load_sql_cases(db_path: str, n: int, seed: int) -> list[dict]:
     """SQLite DB에서 text2sql 케이스를 샘플링합니다."""
     if not Path(db_path).exists():
-        logger.warning("DB 파일 없음 — ACTION_ONLY/BOTH에 더미 케이스 사용: %s", db_path)
+        logger.warning("DB file not found: %s", db_path)
         return []
     try:
         per_scenario = max(2, n // 6 + 2)
@@ -252,18 +289,10 @@ def _load_sql_cases(db_path: str, n: int, seed: int) -> list[dict]:
         # negative case 제외
         return [r for r in records if r.get("order_id") and r["order_id"] != "9999999999"]
     except Exception as e:
-        logger.warning("DB 샘플링 실패: %s", e)
+        logger.warning("DB sampling failed: %s", e)
         return []
 
 
-_DUMMY_SQL_CASES = [
-    {"order_id": "4500012345", "item_no": 10,
-     "description": "Standard sales order", "expected_values": None},
-    {"order_id": "4500067890", "item_no": 20,
-     "description": "Order with partial delivery", "expected_values": None},
-    {"order_id": "4500099001", "item_no": 10,
-     "description": "Order pending goods movement", "expected_values": None},
-]
 
 
 # ---------------------------------------------------------------------------
@@ -312,7 +341,13 @@ def generate_router_dataset(
 
     rng = random.Random(seed)
 
-    sql_cases = _load_sql_cases(db_path, n_per_label * 4, seed) or _DUMMY_SQL_CASES
+    sql_cases = _load_sql_cases(db_path, n_per_label * 4, seed)
+    if not sql_cases:
+        raise RuntimeError(
+            f"No valid order cases loaded from DB: {db_path}\n"
+            "ACTION_ONLY / BOTH generation requires real DB data.\n"
+            "Run 'python -m src.db.setup_sqlite' first."
+        )
 
     # 각 슬롯에 사용할 청크/sql 케이스 미리 결정
     shuffled_chunks = list(chunks)
@@ -321,8 +356,8 @@ def generate_router_dataset(
     rng.shuffle(shuffled_sql)
 
     qa_slots     = [shuffled_chunks[i % len(shuffled_chunks)] for i in range(n_per_label)]
-    action_slots = [shuffled_sql[i % len(shuffled_sql)]       for i in range(n_per_label)]
-    both_sql     = [shuffled_sql[i % len(shuffled_sql)]        for i in range(n_per_label)]
+    action_slots = [shuffled_sql[i % len(shuffled_sql)]                      for i in range(n_per_label)]
+    both_sql     = [shuffled_sql[(i + n_per_label) % len(shuffled_sql)]      for i in range(n_per_label)]
     both_chunks  = [shuffled_chunks[(i + seed) % len(shuffled_chunks)] for i in range(n_per_label)]
 
     # QA_ONLY multi-chunk 슬롯 결정
@@ -331,6 +366,7 @@ def generate_router_dataset(
     multi_pairs   = sample_chunk_pairs(chunks, len(multi_indices), rng)
 
     dataset: list[dict] = []
+    _id_counter = 1  # skip된 케이스와 무관하게 연속 ID 보장
 
     def _parse_json_response(raw_text: str) -> dict:
         if not raw_text:
@@ -343,12 +379,12 @@ def generate_router_dataset(
         try:
             return json.loads(text.strip())
         except json.JSONDecodeError:
-            logger.error("JSON 파싱 실패: %s", raw_text)
+            logger.error("JSON parse failed: %s", raw_text)
             return {}
 
     # ── QA_ONLY ──────────────────────────────────────────────────────────────
     logger.info(
-        "QA_ONLY 생성 시작 (목표: %d개, 그 중 multi-chunk: %d개)",
+        "Generating QA_ONLY (target: %d, multi-chunk: %d)",
         n_per_label, len(multi_indices),
     )
     qa_chain       = _QA_PROMPT | llm
@@ -392,21 +428,55 @@ def generate_router_dataset(
         qa_question = parsed.get("draft_knowledge_question", "")
             
         dataset.append({
-            "id":                f"r_{len(dataset)+1:03d}",
-            "input":             email,
-            "user_input":        email,
-            "label":             "QA_ONLY",
-            "expected_intent":   "QA_ONLY",
-            "erp_evidence":      None,
-            "rag_evidence":      rag_evidence,
-            "action_description": None,
-            "qa_question":       qa_question,
+            "id":                          f"r_{_id_counter:03d}",
+            "input":                       email,
+            "user_input":                  email,
+            "label":                       "QA_ONLY",
+            "expected_intent":             "QA_ONLY",
+            "erp_evidence":                None,
+            "rag_evidence":                rag_evidence,
+            "action_description":          None,
+            "qa_question":                 qa_question,
+            "expected_action_type":        None,
+            "expected_erp_action_status":  None,
         })
+        _id_counter += 1
 
-    logger.info("QA_ONLY 생성 완료: %d개", sum(1 for d in dataset if d["label"] == "QA_ONLY"))
+    logger.info("QA_ONLY done: %d", sum(1 for d in dataset if d["label"] == "QA_ONLY"))
+
+    # ── QA_ONLY fill-up (retry failed slots) ─────────────────────────────────
+    _fill_attempts = 0
+    while sum(1 for d in dataset if d["label"] == "QA_ONLY") < n_per_label and _fill_attempts < n_per_label:
+        _fill_attempts += 1
+        chunk = rng.choice(shuffled_chunks)
+        logger.info("  QA_ONLY fill-up [%d] source=%s", _fill_attempts, chunk["source"])
+        raw = invoke_with_retry(qa_chain, {"chunk": chunk["text"]}, label="router/QA_ONLY/fill")
+        time.sleep(delay)
+        if raw is None:
+            continue
+        parsed = _parse_json_response(raw)
+        email = parsed.get("final_email", "").strip()
+        if not email:
+            continue
+        dataset.append({
+            "id":                          f"r_{_id_counter:03d}",
+            "input":                       email,
+            "user_input":                  email,
+            "label":                       "QA_ONLY",
+            "expected_intent":             "QA_ONLY",
+            "erp_evidence":                None,
+            "rag_evidence":                chunk["text"],
+            "action_description":          None,
+            "qa_question":                 parsed.get("draft_knowledge_question", ""),
+            "expected_action_type":        None,
+            "expected_erp_action_status":  None,
+        })
+        _id_counter += 1
+    if _fill_attempts:
+        logger.info("QA_ONLY after fill-up: %d (fill attempts: %d)", sum(1 for d in dataset if d["label"] == "QA_ONLY"), _fill_attempts)
 
     # ── ACTION_ONLY ───────────────────────────────────────────────────────────
-    logger.info("ACTION_ONLY 생성 시작 (목표: %d개)", n_per_label)
+    logger.info("Generating ACTION_ONLY (target: %d)", n_per_label)
     action_chain = _ACTION_PROMPT | llm
 
     for i, sql_case in enumerate(action_slots):
@@ -433,7 +503,7 @@ def generate_router_dataset(
         if not email:
             continue
         dataset.append({
-            "id":              f"r_{len(dataset)+1:03d}",
+            "id":              f"r_{_id_counter:03d}",
             "input":           email,
             "user_input":      email,
             "label":           "ACTION_ONLY",
@@ -445,15 +515,62 @@ def generate_router_dataset(
                 "description":     description,
                 "expected_values": sql_case.get("expected_values"),
             },
-            "rag_evidence":       None,
-            "action_description": action,
-            "qa_question":        None,
+            "rag_evidence":                None,
+            "action_description":          action,
+            "qa_question":                 None,
+            "expected_action_type":        _map_action_type(action),
+            "expected_erp_action_status":  _derive_erp_status(_map_action_type(action), sql_case.get("expected_values"), action),
         })
+        _id_counter += 1
 
-    logger.info("ACTION_ONLY 생성 완료: %d개", sum(1 for d in dataset if d["label"] == "ACTION_ONLY"))
+    logger.info("ACTION_ONLY done: %d", sum(1 for d in dataset if d["label"] == "ACTION_ONLY"))
+
+    # ── ACTION_ONLY fill-up (retry failed slots) ──────────────────────────────
+    _fill_attempts = 0
+    while sum(1 for d in dataset if d["label"] == "ACTION_ONLY") < n_per_label and _fill_attempts < n_per_label:
+        _fill_attempts += 1
+        sql_case    = rng.choice(shuffled_sql)
+        order_id    = str(sql_case.get("order_id"))
+        item_no     = int(sql_case.get("item_no", 10))
+        action      = _pick_action(order_id, item_no, rng)
+        description = sql_case.get("description", "Standard sales order")
+        logger.info("  ACTION_ONLY fill-up [%d] order=%s", _fill_attempts, order_id)
+        raw = invoke_with_retry(
+            action_chain,
+            {"order_id": order_id, "item_no": item_no, "action": action, "description": description},
+            label="router/ACTION_ONLY/fill",
+        )
+        time.sleep(delay)
+        if raw is None:
+            continue
+        email = raw.strip()
+        if not email:
+            continue
+        dataset.append({
+            "id":              f"r_{_id_counter:03d}",
+            "input":           email,
+            "user_input":      email,
+            "label":           "ACTION_ONLY",
+            "expected_intent": "ACTION_ONLY",
+            "erp_evidence": {
+                "order_id":        order_id,
+                "item_no":         item_no,
+                "action":          action,
+                "description":     description,
+                "expected_values": sql_case.get("expected_values"),
+            },
+            "rag_evidence":                None,
+            "action_description":          action,
+            "qa_question":                 None,
+            "expected_action_type":        _map_action_type(action),
+            "expected_erp_action_status":  _derive_erp_status(_map_action_type(action), sql_case.get("expected_values"), action),
+        })
+        _id_counter += 1
+    if _fill_attempts:
+        logger.info("ACTION_ONLY after fill-up: %d (fill attempts: %d)", sum(1 for d in dataset if d["label"] == "ACTION_ONLY"), _fill_attempts)
 
     # ── BOTH ──────────────────────────────────────────────────────────────────
-    logger.info("BOTH 생성 시작 (목표: %d개)", n_per_label)
+    logger.info("Generating BOTH (target: %d)", n_per_label)
     both_chain = _BOTH_PROMPT | llm
 
     for i, (sql_case, chunk) in enumerate(zip(both_sql, both_chunks)):
@@ -486,7 +603,53 @@ def generate_router_dataset(
         qa_question = parsed.get("draft_knowledge_question", "")
 
         dataset.append({
-            "id":              f"r_{len(dataset)+1:03d}",
+            "id":              f"r_{_id_counter:03d}",
+            "input":           email,
+            "user_input":      email,
+            "label":           "BOTH",
+            "expected_intent": "BOTH",
+            "erp_evidence": {
+                "order_id":        order_id,
+                "item_no":         item_no,
+                "action":          action,
+                "description":     description,
+                "expected_values": sql_case.get("expected_values"),
+            },
+            "rag_evidence":                chunk["text"],
+            "action_description":          action,
+            "qa_question":                 qa_question,
+            "expected_action_type":        _map_action_type(action),
+            "expected_erp_action_status":  _derive_erp_status(_map_action_type(action), sql_case.get("expected_values"), action),
+        })
+        _id_counter += 1
+
+    logger.info("BOTH done: %d", sum(1 for d in dataset if d["label"] == "BOTH"))
+
+    # ── BOTH fill-up (retry failed slots) ─────────────────────────────────────
+    _fill_attempts = 0
+    while sum(1 for d in dataset if d["label"] == "BOTH") < n_per_label and _fill_attempts < n_per_label:
+        _fill_attempts += 1
+        sql_case    = rng.choice(shuffled_sql)
+        chunk       = rng.choice(shuffled_chunks)
+        order_id    = str(sql_case.get("order_id"))
+        item_no     = int(sql_case.get("item_no", 10))
+        action      = _pick_action(order_id, item_no, rng)
+        description = sql_case.get("description", "Standard sales order")
+        logger.info("  BOTH fill-up [%d] order=%s source=%s", _fill_attempts, order_id, chunk["source"])
+        raw = invoke_with_retry(
+            both_chain,
+            {"order_id": order_id, "item_no": item_no, "action": action, "description": description, "chunk": chunk["text"]},
+            label="router/BOTH/fill",
+        )
+        time.sleep(delay)
+        if raw is None:
+            continue
+        parsed = _parse_json_response(raw)
+        email = parsed.get("final_email", "").strip()
+        if not email:
+            continue
+        dataset.append({
+            "id":              f"r_{_id_counter:03d}",
             "input":           email,
             "user_input":      email,
             "label":           "BOTH",
@@ -500,10 +663,11 @@ def generate_router_dataset(
             },
             "rag_evidence":       chunk["text"],
             "action_description": action,
-            "qa_question":        qa_question,
+            "qa_question":        parsed.get("draft_knowledge_question", ""),
         })
-
-    logger.info("BOTH 생성 완료: %d개", sum(1 for d in dataset if d["label"] == "BOTH"))
+        _id_counter += 1
+    if _fill_attempts:
+        logger.info("BOTH after fill-up: %d (fill attempts: %d)", sum(1 for d in dataset if d["label"] == "BOTH"), _fill_attempts)
 
     # ── append 처리 ───────────────────────────────────────────────────────────
     if append:
@@ -518,9 +682,9 @@ def generate_router_dataset(
                 for idx, item in enumerate(dataset, start=max_id + 1):
                     item["id"] = f"r_{idx:03d}"
                 dataset = existing + dataset
-                logger.info("기존 %d개에 %d개 추가", len(existing), len(dataset) - len(existing))
+                logger.info("Appended %d to existing %d", len(dataset) - len(existing), len(existing))
             except Exception as e:
-                logger.warning("기존 파일 읽기 실패 — 새로 작성: %s", e)
+                logger.warning("Failed to read existing file — overwriting: %s", e)
 
     # ── 저장 ──────────────────────────────────────────────────────────────────
     out = Path(output_path)
@@ -535,13 +699,13 @@ def generate_router_dataset(
         if d["label"] == "QA_ONLY" and isinstance(d.get("rag_evidence"), list)
     )
     print("\n" + "=" * 60)
-    print("  Router + E2E 데이터셋 생성 결과")
+    print("  Router + E2E Dataset Generation Results")
     print("=" * 60)
-    print(f"  QA_ONLY       : {counts.get('QA_ONLY', 0)}  (그 중 multi-chunk: {n_multi_qa})")
-    print(f"  ACTION_ONLY   : {counts.get('ACTION_ONLY', 0)}")
-    print(f"  BOTH          : {counts.get('BOTH', 0)}")
-    print(f"  합계           : {len(dataset)}")
-    print(f"  출력 파일      : {output_path}")
+    print(f"  QA_ONLY     : {counts.get('QA_ONLY', 0)}  (multi-chunk: {n_multi_qa})")
+    print(f"  ACTION_ONLY : {counts.get('ACTION_ONLY', 0)}")
+    print(f"  BOTH        : {counts.get('BOTH', 0)}")
+    print(f"  Total       : {len(dataset)}")
+    print(f"  Output      : {output_path}")
     print("=" * 60)
 
     return dataset

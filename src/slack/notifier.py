@@ -44,11 +44,18 @@ def _build_action_summary(action: dict) -> str:
     )
 
 
-def _build_message(action: dict, thread_id: str, server_base_url: str) -> dict:
-    """Build a Slack Block Kit message payload"""
-    approve_url = f"{server_base_url}/api/approve?thread_id={thread_id}&approved=true"
-    reject_url  = f"{server_base_url}/api/approve?thread_id={thread_id}&approved=false"
+def _build_message(action: dict, thread_id: str, server_base_url: str = "") -> dict:
+    """
+    Build a Slack Block Kit message payload with INTERACTIVE buttons.
 
+    The buttons carry an ``action_id`` and ``value=thread_id`` (no ``url``), so
+    clicking them triggers an interactivity callback to ``/slack/actions`` instead
+    of opening a browser link. ``erp_approve`` resumes the graph immediately;
+    ``erp_reject`` opens a modal asking for an (optional) rejection reason.
+
+    Requires the Slack App to have Interactivity enabled with the Request URL
+    pointed at ``https://<public-host>/slack/actions``.
+    """
     return {
         "blocks": [
             {
@@ -70,23 +77,139 @@ def _build_message(action: dict, thread_id: str, server_base_url: str) -> dict:
             },
             {
                 "type": "actions",
+                "block_id": "erp_approval_actions",
                 "elements": [
                     {
                         "type": "button",
                         "text": {"type": "plain_text", "text": "✅ Approve", "emoji": True},
                         "style": "primary",
-                        "url": approve_url,
+                        "action_id": "erp_approve",
+                        "value": thread_id,
                     },
                     {
                         "type": "button",
                         "text": {"type": "plain_text", "text": "❌ Reject", "emoji": True},
                         "style": "danger",
-                        "url": reject_url,
+                        "action_id": "erp_reject",
+                        "value": thread_id,
                     },
                 ],
             },
         ]
     }
+
+
+# ---------------------------------------------------------------------------
+# Slack Interactivity helpers (signature verification, modal, message update)
+# ---------------------------------------------------------------------------
+
+import hashlib
+import hmac
+import time
+
+
+def verify_slack_signature(body: bytes, timestamp: str, signature: str) -> bool:
+    """
+    Verify an incoming Slack request using the signing secret.
+
+    Slack signs each request as:
+        v0={HMAC_SHA256(signing_secret, f"v0:{timestamp}:{raw_body}")}
+
+    Returns True only if the signature matches and the timestamp is recent
+    (within 5 minutes — replay protection).
+    """
+    signing_secret = os.getenv("SLACK_SIGNING_SECRET", "")
+    if not signing_secret or not timestamp or not signature:
+        logger.warning("[slack] Signature verification skipped — missing secret/headers.")
+        return False
+
+    try:
+        if abs(time.time() - int(timestamp)) > 60 * 5:
+            logger.warning("[slack] Stale request timestamp — possible replay.")
+            return False
+    except ValueError:
+        return False
+
+    basestring = f"v0:{timestamp}:{body.decode('utf-8')}".encode("utf-8")
+    expected = "v0=" + hmac.new(
+        signing_secret.encode("utf-8"), basestring, hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(expected, signature)
+
+
+def build_reason_modal(private_metadata: str) -> dict:
+    """
+    Build the 'reject reason' modal view.
+
+    The reason input is ``optional`` — the approver can submit with the field
+    left blank to reject without providing a reason.
+    """
+    return {
+        "type": "modal",
+        "callback_id": "reject_reason_modal",
+        "private_metadata": private_metadata,
+        "title":  {"type": "plain_text", "text": "Reject ERP Update"},
+        "submit": {"type": "plain_text", "text": "Submit Rejection"},
+        "close":  {"type": "plain_text", "text": "Cancel"},
+        "blocks": [
+            {
+                "type": "input",
+                "optional": True,                       # ← blank submit allowed
+                "block_id": "reason_block",
+                "label": {"type": "plain_text", "text": "Reason for rejection (optional)"},
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "reason_input",
+                    "multiline": True,
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Leave blank to reject without a reason, then click Submit.",
+                    },
+                },
+            }
+        ],
+    }
+
+
+async def open_reason_modal(trigger_id: str, private_metadata: str) -> bool:
+    """Open the rejection-reason modal via Slack views.open (needs bot token)."""
+    token = os.getenv("SLACK_BOT_TOKEN", "")
+    if not token:
+        logger.error("[slack] SLACK_BOT_TOKEN not set — cannot open modal.")
+        return False
+
+    payload = {"trigger_id": trigger_id, "view": build_reason_modal(private_metadata)}
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            resp = await client.post(
+                "https://slack.com/api/views.open",
+                headers={"Authorization": f"Bearer {token}"},
+                json=payload,
+            )
+        data = resp.json()
+        if not data.get("ok"):
+            logger.error("[slack] views.open failed: %s", data.get("error"))
+            return False
+        return True
+    except Exception as e:
+        logger.error("[slack] views.open request failed: %s", e)
+        return False
+
+
+async def update_message_via_response_url(response_url: str, text: str) -> bool:
+    """Replace the original approval message (removing the buttons) via response_url."""
+    if not response_url:
+        return False
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            await client.post(
+                response_url,
+                json={"replace_original": True, "text": text},
+            )
+        return True
+    except Exception as e:
+        logger.error("[slack] response_url update failed: %s", e)
+        return False
 
 
 # ---------------------------------------------------------------------------

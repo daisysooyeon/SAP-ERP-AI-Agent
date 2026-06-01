@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SAP ERP AI Agent — 이메일 처리 데모</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --panel-2: #273449;
+    --border: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --qa: #22c55e;
+    --action: #f59e0b;
+    --both: #a855f7;
+    --danger: #ef4444;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 80px; }
+  header h1 { font-size: 22px; margin: 0 0 4px; }
+  header p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .config {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .config label { font-size: 13px; color: var(--muted); }
+  .config input {
+    flex: 1;
+    min-width: 260px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: ui-monospace, monospace;
+  }
+  .health-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--muted); display: inline-block;
+  }
+  .health-dot.ok { background: var(--qa); }
+  .health-dot.bad { background: var(--danger); }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .card h2 { font-size: 15px; margin: 0 0 12px; }
+
+  .samples { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .samples button {
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    color: var(--text);
+    padding: 7px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.15s;
+  }
+  .samples button:hover { border-color: var(--accent); }
+  .samples button.qa:hover     { border-color: var(--qa); }
+  .samples button.action:hover { border-color: var(--action); }
+  .samples button.both:hover   { border-color: var(--both); }
+
+  textarea {
+    width: 100%;
+    min-height: 280px;
+    resize: vertical;
+    background: #0b1220;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    font-family: ui-monospace, "SF Mono", monospace;
+    line-height: 1.55;
+  }
+  .run-btn {
+    margin-top: 12px;
+    width: 100%;
+    background: var(--accent);
+    color: #05202e;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .run-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .badge {
+    padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+  }
+  .badge.QA_ONLY     { background: rgba(34,197,94,0.15);  color: var(--qa);     border: 1px solid var(--qa); }
+  .badge.ACTION_ONLY { background: rgba(245,158,11,0.15); color: var(--action); border: 1px solid var(--action); }
+  .badge.BOTH        { background: rgba(168,85,247,0.15); color: var(--both);   border: 1px solid var(--both); }
+  .badge.status      { background: var(--panel-2); color: var(--muted); border: 1px solid var(--border); }
+
+  .reply {
+    background: #0b1220;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 16px;
+    white-space: pre-wrap;
+    font-size: 14px;
+  }
+  .notice {
+    background: rgba(245,158,11,0.12);
+    border: 1px solid var(--action);
+    color: #fcd34d;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .empty { color: var(--muted); font-size: 14px; text-align: center; padding: 60px 0; }
+  .spinner {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+    border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  details { margin-top: 14px; }
+  summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  pre {
+    background: #0b1220; border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px; overflow-x: auto; font-size: 12px; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📧 SAP ERP AI Agent — 이메일 처리 데모</h1>
+    <p>고객 이메일을 입력하면 에이전트가 의도를 분류하고(QA / ERP 작업 / 둘 다) 답변 이메일을 생성합니다.</p>
+  </header>
+
+  <div class="config">
+    <label>백엔드 URL</label>
+    <input id="backendUrl" type="text" placeholder="https://xxxx.ngrok-free.app" />
+    <span><span id="healthDot" class="health-dot"></span> <span id="healthText" style="font-size:12px;color:var(--muted)">미확인</span></span>
+  </div>
+
+  <div class="grid">
+    <!-- 입력 -->
+    <div class="card">
+      <h2>1. 이메일 입력</h2>
+      <div class="samples">
+        <button class="qa"     onclick="loadSample('QA_ONLY')">📘 QA_ONLY 샘플</button>
+        <button class="action" onclick="loadSample('ACTION_ONLY')">🛠 ACTION_ONLY 샘플</button>
+        <button class="both"   onclick="loadSample('BOTH')">🔀 BOTH 샘플</button>
+      </div>
+      <textarea id="emailInput" placeholder="여기에 고객 이메일을 입력하거나 위 샘플 버튼을 누르세요…"></textarea>
+      <button id="runBtn" class="run-btn" onclick="runAgent()">처리하기 →</button>
+    </div>
+
+    <!-- 출력 -->
+    <div class="card">
+      <h2>2. 에이전트 답변</h2>
+      <div id="output"><div class="empty">아직 처리된 이메일이 없습니다.</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- 대표 입력 샘플 (router_test_cases_gen.json: r_001 / r_011 / r_021) ----
+const SAMPLES = {
+  QA_ONLY:
+`Dear Support Team,
+
+I hope this message finds you well. While reviewing the documentation on free goods, I'm seeking clarification on how exclusive bonus quantities appear in the sales document. Specifically, could you explain the format or location where these free-of-charge items are listed in the system? Your guidance on this process would help ensure proper understanding of invoice generation. Thank you for your assistance.
+
+Best regards,
+[Your Name]`,
+
+  ACTION_ONLY:
+`Subject: Request to Cancel Order Item 20 (Order #6105)
+
+Dear [Recipient],
+We would like to request the cancellation of item 20 from order #6105. The cancellation is feasible as there is available stock indicated via the MARD JOIN. Please confirm the processing of this request at your earliest convenience. Thank you for your attention.`,
+
+  BOTH:
+`Dear SAP Team, I need to adjust order 6105, item 20 by reducing the quantity by 50 units, as the order is being fulfilled using available stock via MARD JOIN. Could you also clarify how to configure storage bins in SAP ERP to automatically assign fast-moving items to specific bins based on their storage section attributes? This will help ensure accurate putaway processes. Thank you for your assistance.`
+};
+
+const $ = (id) => document.getElementById(id);
+
+// 백엔드 URL: localStorage 저장/복원
+const urlInput = $("backendUrl");
+urlInput.value = localStorage.getItem("erp_backend_url") || "http://localhost:8000";
+urlInput.addEventListener("change", () => {
+  localStorage.setItem("erp_backend_url", baseUrl());
+  checkHealth();
+});
+
+function baseUrl() { return urlInput.value.trim().replace(/\/+$/, ""); }
+
+function loadSample(kind) { $("emailInput").value = SAMPLES[kind]; }
+
+// ---- 헬스 체크 ----
+async function checkHealth() {
+  const dot = $("healthDot"), txt = $("healthText");
+  dot.className = "health-dot"; txt.textContent = "확인 중…";
+  try {
+    const r = await fetch(baseUrl() + "/api/health");
+    if (!r.ok) throw new Error();
+    await r.json();
+    dot.className = "health-dot ok"; txt.textContent = "연결됨";
+  } catch {
+    dot.className = "health-dot bad"; txt.textContent = "연결 안 됨";
+  }
+}
+
+// ---- 메인 실행 ----
+async function runAgent() {
+  const email = $("emailInput").value.trim();
+  if (!email) { alert("이메일을 입력하세요."); return; }
+
+  const btn = $("runBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> 처리 중…';
+  $("output").innerHTML = '<div class="empty"><span class="spinner"></span> 에이전트가 이메일을 분석하고 있습니다…</div>';
+
+  const started = Date.now();
+  try {
+    const r = await fetch(baseUrl() + "/api/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email_text: email })
+    });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    const elapsed = ((Date.now() - started) / 1000).toFixed(1);
+
+    if (data.requires_approval && !data.final_response) {
+      renderPendingApproval(data, elapsed);
+      pollStatus(data.thread_id, started);
+    } else {
+      renderResult(data, elapsed);
+    }
+  } catch (e) {
+    $("output").innerHTML =
+      `<div class="notice" style="border-color:var(--danger);color:#fca5a5;background:rgba(239,68,68,0.12)">
+        ❌ 요청 실패: ${e.message}<br/>백엔드 URL과 서버 실행 상태를 확인하세요.
+      </div>`;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = "처리하기 →";
+  }
+}
+
+// ---- 결과 렌더 ----
+function metaRow(data, elapsed) {
+  const intent = data.intent || "—";
+  const status = data.erp_status ? `<span class="badge status">ERP: ${data.erp_status}</span>` : "";
+  const time = elapsed ? `<span class="badge status">⏱ ${elapsed}s</span>` : "";
+  return `<div class="meta">
+    <span class="badge ${intent}">${intent}</span>
+    ${status}${time}
+  </div>`;
+}
+
+function renderResult(data, elapsed) {
+  const reply = data.final_response || "(답변이 비어 있습니다)";
+  $("output").innerHTML =
+    metaRow(data, elapsed) +
+    `<div class="reply">${escapeHtml(reply)}</div>` +
+    debugBlock(data);
+}
+
+function renderPendingApproval(data, elapsed) {
+  $("output").innerHTML =
+    metaRow(data, elapsed) +
+    `<div class="notice">📨 ERP 변경 작업이 감지되어 <b>Slack 승인 대기 중</b>입니다.
+      Slack에서 <b>Approve</b>를 누르면 최종 답변이 여기에 표시됩니다.
+      <br/><span class="spinner"></span> 승인을 기다리는 중… (thread: ${data.thread_id.slice(0,8)})</div>` +
+    debugBlock(data);
+}
+
+// ---- 승인 후 상태 폴링 ----
+async function pollStatus(threadId, started) {
+  const deadline = Date.now() + 90_000; // 90초 타임아웃
+  while (Date.now() < deadline) {
+    await new Promise(res => setTimeout(res, 2500));
+    try {
+      const r = await fetch(baseUrl() + "/api/status/" + threadId);
+      if (!r.ok) continue;
+      const s = await r.json();
+      const done = s.final_response ||
+                   (s.erp_action_status && /SUCCESS|REJECTED|FAILED|BLOCKED/.test(s.erp_action_status) && !s.requires_approval);
+      if (done) {
+        const elapsed = ((Date.now() - started) / 1000).toFixed(1);
+        renderResult({
+          intent: s.intent,
+          erp_status: s.erp_action_status,
+          final_response: s.final_response,
+          thread_id: threadId
+        }, elapsed);
+        return;
+      }
+    } catch { /* 재시도 */ }
+  }
+  // 타임아웃
+  const out = $("output");
+  out.insertAdjacentHTML("beforeend",
+    `<div class="notice" style="margin-top:12px">⏳ 승인 대기 시간이 초과되었습니다. Slack 승인 후 다시 시도하거나 새로고침하세요.</div>`);
+}
+
+function debugBlock(data) {
+  return `<details><summary>원본 응답(JSON) 보기</summary><pre>${escapeHtml(JSON.stringify(data, null, 2))}</pre></details>`;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+// 초기 헬스 체크
+checkHealth();
+</script>
+</body>
+</html>

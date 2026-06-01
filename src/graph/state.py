@@ -30,6 +30,7 @@ class AgentState(TypedDict):
     erp_validation_result: Optional[dict]
     erp_action_status: Optional[str]   # PENDING_APPROVAL / BLOCKED_* / SUCCESS / REJECTED
     odata_response: Optional[dict]
+    rejection_reason: Optional[str]    # 승인자가 Slack에서 입력한 거절 사유 (REJECTED 시)
 
     # Worker B
     rag_query: Optional[str]

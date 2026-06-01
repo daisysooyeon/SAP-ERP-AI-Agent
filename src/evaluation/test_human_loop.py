@@ -81,7 +81,8 @@ def _run_scenario(
     """
     Run a single approve/reject scenario and return a result summary dict.
     """
-    from src.main import graph  # imported here to avoid import at module load
+    from src.graph_builder import build_graph
+    graph = build_graph()
 
     thread_id = str(uuid.uuid4())
     config    = {"configurable": {"thread_id": thread_id}}

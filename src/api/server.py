@@ -15,19 +15,28 @@ ngrok integration:
   If not set, falls back to SERVER_BASE_URL env var (default: http://localhost:8000).
 """
 
+import asyncio
+import json
 import logging
 import os
 import uuid
+from urllib.parse import parse_qs
 
 from dotenv import load_dotenv
 load_dotenv()
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 
 from src.api.schemas import ApproveResponse, RunRequest, RunResponse
-from src.slack.notifier import send_approval_request_async
+from src.slack.notifier import (
+    open_reason_modal,
+    send_approval_request_async,
+    update_message_via_response_url,
+    verify_slack_signature,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +65,13 @@ async def lifespan(app: FastAPI):
         try:
             from pyngrok import conf, ngrok as pyngrok_client
             conf.get_default().auth_token = ngrok_token
-            tunnel = pyngrok_client.connect(8000, proto="http")
+            # 고정 도메인이 지정되면 항상 같은 공개 URL로 터널을 연다.
+            # (Slack Interactivity Request URL을 매번 다시 입력할 필요가 없어짐)
+            ngrok_domain = os.getenv("NGROK_DOMAIN", "").strip()
+            if ngrok_domain:
+                tunnel = pyngrok_client.connect(8000, proto="http", domain=ngrok_domain)
+            else:
+                tunnel = pyngrok_client.connect(8000, proto="http")
             _public_url = tunnel.public_url
             logger.info("[server] ngrok tunnel active: %s", _public_url)
             print(f"\n  PUBLIC URL  : {_public_url}")
@@ -73,7 +88,7 @@ async def lifespan(app: FastAPI):
     # Build graph with AsyncSqliteSaver (required for async FastAPI endpoints)
     import aiosqlite
     from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
-    from src.main import _build_state_graph
+    from src.graph_builder import _build_state_graph
     from src.config import get_config
 
     checkpoint_db = get_config().paths.checkpoint_db
@@ -102,6 +117,15 @@ app = FastAPI(
     version="0.1.0",
     description="SAP ERP AI Agent — Human-in-the-Loop approval workflow",
     lifespan=lifespan,
+)
+
+# CORS: allow the Vercel static demo page (different origin) to call this API.
+# 시연용으로 전체 허용. 운영 시 Vercel 도메인으로 제한 가능.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -181,6 +205,8 @@ async def get_status(thread_id: str) -> dict:
         "intent":            state.values.get("intent"),
         "erp_action_status": state.values.get("erp_action_status"),
         "erp_action":        state.values.get("erp_action"),
+        "final_response":    state.values.get("final_response"),
+        "requires_approval": state.values.get("requires_human_approval", False),
         "error_messages":    state.values.get("error_messages", []),
     }
 
@@ -220,8 +246,11 @@ async def approve_action(thread_id: str, approved: bool) -> ApproveResponse:
         )
 
     # 2. Resume graph via Command(resume=...) — LangGraph 1.x interrupt() 방식
+    #    human_loop_node expects {"approved": bool, "reason": str|None}.
     from langgraph.types import Command
-    async for _ in graph.astream(Command(resume=approved), config=config):
+    async for _ in graph.astream(
+        Command(resume={"approved": approved, "reason": None}), config=config
+    ):
         pass
 
     # 4. Fetch final state
@@ -246,6 +275,150 @@ async def approve_action(thread_id: str, approved: bool) -> ApproveResponse:
         message=f"ERP update {action_label}. Final status: {final_status}",
         errors=errors,
     )
+
+
+# ---------------------------------------------------------------------------
+# Slack Interactivity (interactive buttons + rejection-reason modal)
+# ---------------------------------------------------------------------------
+
+async def _resume_graph(thread_id: str, approved: bool, reason: str | None) -> str:
+    """
+    Resume a paused graph with the human decision and return the final status.
+
+    Guards against double-processing: if the thread is no longer PENDING_APPROVAL,
+    the current status is returned without resuming again.
+    """
+    graph  = app.state.graph
+    config = {"configurable": {"thread_id": thread_id}}
+
+    state = await graph.aget_state(config)
+    if not state or not state.values:
+        logger.warning("[slack/actions] thread_id '%s' not found.", thread_id)
+        return "NOT_FOUND"
+
+    current = state.values.get("erp_action_status")
+    if current != "PENDING_APPROVAL":
+        logger.info("[slack/actions] thread_id '%s' already processed (%s).", thread_id, current)
+        return current or "UNKNOWN"
+
+    from langgraph.types import Command
+    async for _ in graph.astream(
+        Command(resume={"approved": approved, "reason": reason}), config=config
+    ):
+        pass
+
+    final = await graph.aget_state(config)
+    return (final.values.get("erp_action_status") if final and final.values else "UNKNOWN") or "UNKNOWN"
+
+
+async def _resume_and_notify(
+    thread_id: str, approved: bool, reason: str | None, response_url: str
+) -> None:
+    """
+    Background task: resume the graph (DB update + email synthesis can take a few
+    seconds — longer than Slack's 3s ack window) and then update the original Slack
+    message via response_url. Run via asyncio.create_task so the HTTP handler can
+    ack Slack immediately.
+    """
+    try:
+        status = await _resume_graph(thread_id, approved, reason)
+        if approved:
+            text = f"✅ *Approved* — final status: *{status}*\n🔑 `{thread_id}`"
+        else:
+            reason_line = f"\n> _{reason}_" if reason else "  _(no reason provided)_"
+            text = f"❌ *Rejected* — final status: *{status}*.{reason_line}\n🔑 `{thread_id}`"
+        await update_message_via_response_url(response_url, text)
+    except Exception as e:
+        logger.error("[slack/actions] resume/notify failed for %s: %s", thread_id, e)
+        await update_message_via_response_url(
+            response_url, f"⚠️ Processing error for `{thread_id}`: {e}"
+        )
+
+
+@app.post("/slack/actions")
+async def slack_actions(request: Request):
+    """
+    Slack Interactivity endpoint (Request URL = https://<host>/slack/actions).
+
+    Handles two payload types:
+      • block_actions  — Approve/Reject button clicks
+          - erp_approve → resume graph (approved) in background, ack immediately
+          - erp_reject  → open the rejection-reason modal (views.open)
+      • view_submission — modal "Submit Rejection"
+          - resume graph (rejected, with optional reason) in background, close modal
+    """
+    raw_body  = await request.body()
+    timestamp = request.headers.get("X-Slack-Request-Timestamp", "")
+    signature = request.headers.get("X-Slack-Signature", "")
+
+    if not verify_slack_signature(raw_body, timestamp, signature):
+        raise HTTPException(status_code=401, detail="Invalid Slack signature.")
+
+    # Slack sends application/x-www-form-urlencoded with a single `payload` field.
+    # Parse the raw body directly so we don't depend on python-multipart.
+    parsed = parse_qs(raw_body.decode("utf-8"))
+    payload_raw = (parsed.get("payload") or [None])[0]
+    if not payload_raw:
+        raise HTTPException(status_code=400, detail="Missing Slack payload.")
+    try:
+        payload = json.loads(payload_raw)
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Malformed Slack payload.")
+
+    ptype = payload.get("type")
+
+    # ── Button click ────────────────────────────────────────────────────────
+    if ptype == "block_actions":
+        action       = (payload.get("actions") or [{}])[0]
+        action_id    = action.get("action_id", "")
+        thread_id    = action.get("value", "")
+        response_url = payload.get("response_url", "")
+
+        if action_id == "erp_approve":
+            asyncio.create_task(
+                _resume_and_notify(thread_id, approved=True, reason=None, response_url=response_url)
+            )
+            await update_message_via_response_url(
+                response_url, f"⏳ Approving… processing ERP update for `{thread_id}`."
+            )
+            return Response(status_code=200)
+
+        if action_id == "erp_reject":
+            trigger_id = payload.get("trigger_id", "")
+            meta = json.dumps({"thread_id": thread_id, "response_url": response_url})
+            await open_reason_modal(trigger_id, meta)
+            return Response(status_code=200)
+
+        return Response(status_code=200)
+
+    # ── Modal submit (rejection reason) ───────────────────────────────────────
+    if ptype == "view_submission":
+        view = payload.get("view", {})
+        try:
+            meta = json.loads(view.get("private_metadata") or "{}")
+        except json.JSONDecodeError:
+            meta = {}
+        thread_id    = meta.get("thread_id", "")
+        response_url = meta.get("response_url", "")
+
+        reason = ""
+        try:
+            reason = (
+                view["state"]["values"]["reason_block"]["reason_input"].get("value") or ""
+            )
+        except (KeyError, TypeError):
+            reason = ""
+        reason = reason.strip()
+
+        asyncio.create_task(
+            _resume_and_notify(
+                thread_id, approved=False, reason=(reason or None), response_url=response_url
+            )
+        )
+        # Empty body → Slack closes the modal.
+        return JSONResponse(content={})
+
+    return Response(status_code=200)
 
 
 @app.post("/api/ingest")

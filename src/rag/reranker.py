@@ -2,9 +2,9 @@
 src/rag/reranker.py
 bge-reranker-v2-m3를 사용한 문서 재순위화
 
-- CPU 환경에서도 동작 (use_fp16=False)
-- 싱글턴 캐싱으로 모델 1회만 로딩
-- FlagEmbedding import 실패 시 점수 합산 방식으로 graceful fallback
+- sentence-transformers CrossEncoder 사용 (transformers 5.x 호환)
+- CPU/GPU 자동 감지, 싱글턴 캐싱으로 모델 1회만 로딩
+- 모델 로드 실패 시 hybrid 검색 순서 그대로 graceful fallback
 - top_n은 configs.yaml rag.top_k_rerank에서 읽음
 """
 
@@ -15,8 +15,9 @@ from src.config import get_config
 logger = logging.getLogger(__name__)
 
 # 싱글턴: bge-reranker 1회만 로딩
-_reranker = None          # FlagReranker 인스턴스 또는 "fallback"
+_reranker = None          # CrossEncoder 인스턴스 또는 "fallback"
 _FALLBACK_SENTINEL = "fallback"
+_MODEL_NAME = "BAAI/bge-reranker-v2-m3"
 
 
 def _get_reranker():
@@ -24,17 +25,16 @@ def _get_reranker():
     if _reranker is not None:
         return _reranker
 
+    # sentence-transformers의 CrossEncoder로 로딩한다.
+    # (구 FlagEmbedding은 transformers 5.x에서 is_torch_fx_available 제거로 import 실패)
     try:
-        from FlagEmbedding import FlagReranker
-        logger.info("[reranker] Loading BAAI/bge-reranker-v2-m3 (CPU mode) …")
-        _reranker = FlagReranker(
-            "BAAI/bge-reranker-v2-m3",
-            use_fp16=False,   # CPU 환경 안전 옵션
-        )
-        logger.info("[reranker] bge-reranker-v2-m3 loaded.")
+        from sentence_transformers import CrossEncoder
+        logger.info("[reranker] Loading %s via CrossEncoder …", _MODEL_NAME)
+        _reranker = CrossEncoder(_MODEL_NAME, max_length=512)
+        logger.info("[reranker] %s loaded.", _MODEL_NAME)
     except Exception as e:
         logger.warning(
-            "[reranker] Failed to load FlagReranker: %s. "
+            "[reranker] Failed to load CrossEncoder: %s. "
             "Falling back to score-aggregation ordering.",
             e,
         )
@@ -81,18 +81,20 @@ def rerank(
     all_queries = queries if queries else [query]
 
     # ── bge-reranker-v2-m3: 문서별 max 점수 산정 ─────────────────────────────
-    doc_scores = [0.0] * len(docs)
+    # CrossEncoder.predict는 쌍 목록에 대한 relevance 점수(높을수록 관련)를 반환한다.
+    doc_scores = [float("-inf")] * len(docs)
     for q in all_queries:
         pairs = [(q, doc.page_content) for doc in docs]
         try:
-            scores = reranker.compute_score(pairs, normalize=True)
+            scores = reranker.predict(pairs)
             if isinstance(scores, float):
                 scores = [scores]
             for i, s in enumerate(scores):
+                s = float(s)
                 if s > doc_scores[i]:
                     doc_scores[i] = s
         except Exception as e:
-            logger.warning("[reranker] compute_score failed for query %r: %s", q[:40], e)
+            logger.warning("[reranker] predict failed for query %r: %s", q[:40], e)
 
     ranked = sorted(zip(doc_scores, docs), key=lambda x: x[0], reverse=True)
     result = [doc for _, doc in ranked[:top_n]]

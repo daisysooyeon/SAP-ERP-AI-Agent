@@ -28,7 +28,7 @@ from pydantic import ValidationError
 from src.api.schemas import ERPActionRequest
 from src.config import get_config
 from src.graph.state import AgentState
-from src.tools.text_to_sql import run_validation_query
+from src.tools.text2sql import run_validation_query
 from src.tools.sap_odata_tools import call_sap_odata_patch
 
 logger = logging.getLogger(__name__)
@@ -42,10 +42,22 @@ You are an expert at parsing B2B customer emails for SAP ERP order modification 
 
 Extract the ERP action parameters from the email below.
 
+CRITICAL — reading numbers correctly:
+  A single email often contains SEVERAL numbers: the order number, the item/line
+  number, and a quantity. Map each to the correct field and copy EVERY digit
+  exactly as written — do NOT add, drop, reorder, pad, or invent any digit.
+  Do NOT zero-pad — the system pads automatically. Just return the raw digits.
+  Ignore unrelated how-to / configuration / inquiry sentences; they never change
+  the order or item number.
+
 Field rules:
-- order_id   : 10-digit SAP sales order number (VBELN). Zero-pad if fewer than 10 digits.
-               If the email references a number like "4500012345" or "45-0001-2345", normalize to exactly 10 digits.
-- item_no    : 6-digit item/line number (POSNR). Zero-pad if needed (e.g. "10" → "000010").
+- order_id   : SAP sales order number (VBELN) — introduced by "order", "order #",
+               "sales order", or "PO". Copy its digits EXACTLY as written.
+               Strip separators like "-" only. It is NOT the item number and NOT a
+               quantity. No padding.
+- item_no    : Item / line number (POSNR) — introduced by "item", "line", or "position".
+               Copy its digits exactly as written. No padding.
+               Never confuse it with the order number or a quantity.
 - action_type: One of EXACTLY FIVE values — read the definitions carefully:
                "CHANGE_QTY"  — customer wants to INCREASE or DECREASE the ordered quantity of an item.
                "CHANGE_DATE" — customer wants to RESCHEDULE or UPDATE the delivery/requested date of an item.
@@ -61,7 +73,16 @@ Field rules:
                                  • Updating payment terms or billing conditions
                                  • Any clarification, inquiry, or system question
                                  • Any action not directly mapping to qty / date / cancel / address
-- new_quantity: Integer > 0 (only for CHANGE_QTY). Omit or null for other actions.
+- Quantity (only for CHANGE_QTY) — distinguish ABSOLUTE vs RELATIVE, fill exactly ONE:
+    • new_quantity    : the ABSOLUTE target quantity, when the customer states the final
+                        value — e.g. "set quantity to 264", "change quantity to 100",
+                        "make it 80 units". Integer > 0.
+    • quantity_change : the RELATIVE change, when the customer states an adjustment rather
+                        than a final value — e.g. "reduce by 50" → -50, "decrease by 20" → -20,
+                        "increase by 30" → +30, "add 10 more units" → +10.
+                        Use a NEGATIVE number for reductions, POSITIVE for increases.
+    Never put a relative adjustment into new_quantity. "reduce by 50" is quantity_change=-50,
+    NOT new_quantity=50. Leave the other field null.
 - new_date   : ISO date string "YYYY-MM-DD" (only for CHANGE_DATE). Omit or null for other actions.
 - new_address : Free-text string with the new shipping address (only for CHANGE_ADDR).
                If the email does not specify a new address, use "[Address to be provided by customer]".
@@ -116,9 +137,13 @@ def extract_erp_action(user_input: str) -> ERPActionRequest | None:
     logger.info("[worker_a] ① Extracting ERP action parameters …")
     try:
         result: ERPActionRequest = _extraction_chain.invoke({"user_input": user_input})
-        # order_id 정규화: 숫자만 남기고 10자리 좌측 제로패딩 (LLM 오패딩 방지)
+        # 패딩은 여기(결정론적 코드)서 담당한다. LLM은 원본 숫자만 추출하므로
+        # 끝자리를 흘리는 오패딩이 발생하지 않는다.
+        # order_id → 10자리, item_no → 6자리 좌측 제로패딩.
         raw_id = "".join(c for c in result.order_id if c.isdigit())
         result.order_id = str(int(raw_id)).zfill(10) if raw_id else result.order_id
+        raw_item = "".join(c for c in result.item_no if c.isdigit())
+        result.item_no = str(int(raw_item)).zfill(6) if raw_item else result.item_no
         logger.info(
             "[worker_a] Extracted: order_id=%s item_no=%s action_type=%s",
             result.order_id, result.item_no, result.action_type,
@@ -183,6 +208,50 @@ def check_business_rules(action: ERPActionRequest, validation_result: dict | Non
         return None
 
     logger.info("[worker_a] Business rules passed.")
+    return None
+
+
+# ---------------------------------------------------------------------------
+# ③-b Relative quantity resolution
+# ---------------------------------------------------------------------------
+
+def resolve_quantity(action: ERPActionRequest, validation_result: dict | None) -> str | None:
+    """
+    For CHANGE_QTY with a RELATIVE quantity_change (e.g. "reduce by 50" → -50),
+    resolve it into an absolute new_quantity using the current DB quantity (KWMENG),
+    then write the result back into action.new_quantity.
+
+    Must run AFTER run_validation_query (needs the current quantity) and BEFORE
+    check_business_rules (which validates the absolute new_quantity against stock).
+
+    Returns:
+        None                   — nothing to resolve, or resolved successfully
+        "BLOCKED_NO_DATA"      — relative change requested but current quantity unknown
+        "BLOCKED_INVALID_QTY"  — resolved quantity would be <= 0
+    """
+    if action.action_type != "CHANGE_QTY" or action.quantity_change is None:
+        return None  # absolute path or not a qty change — nothing to do
+
+    current = validation_result.get("quantity") if validation_result else None
+    if current is None:
+        logger.warning("[worker_a] Cannot resolve relative quantity — current quantity unknown.")
+        return "BLOCKED_NO_DATA"
+
+    resolved = int(current) + action.quantity_change  # quantity_change is signed
+    logger.info(
+        "[worker_a] Relative qty resolved: current=%s change=%+d → new_quantity=%d",
+        current, action.quantity_change, resolved,
+    )
+
+    if resolved <= 0:
+        logger.warning(
+            "[worker_a] BLOCKED_INVALID_QTY: current=%s change=%+d → %d (must be > 0)",
+            current, action.quantity_change, resolved,
+        )
+        return "BLOCKED_INVALID_QTY"
+
+    action.new_quantity = resolved
+    action.quantity_change = None  # consumed — downstream uses the absolute value
     return None
 
 
@@ -255,7 +324,9 @@ def worker_a_node(state: AgentState) -> dict:
     logger.info("[worker_a] Validation result: %s", validation_result)
 
     # ── ③ Business rule checks ──────────────────────────────────────────────
-    block_reason = check_business_rules(action, validation_result)
+    # Resolve relative quantity ("reduce by 50") → absolute, then validate.
+    block_reason = resolve_quantity(action, validation_result) \
+        or check_business_rules(action, validation_result)
 
     if block_reason is not None:
         logger.warning("[worker_a] Blocked: %s", block_reason)

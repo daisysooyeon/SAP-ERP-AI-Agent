@@ -67,6 +67,9 @@ Compose a concise, warm, and professional email reply based on the context below
 Guidelines:
 - Start with "Dear Customer,"
 - If an ERP action was requested, clearly state what was done (or what could not be done)
+- If the ERP action was REJECTED and a "Rejection Reason" is provided, politely convey that
+  reason to the customer as the explanation for why the request could not be processed.
+  If it was rejected with no reason given, state that the request could not be approved at this time.
 - If a knowledge question was answered, include it naturally in the email
 - Be factual — only use information provided in the context
 - End with "Best regards,\\nSAP ERP Support Team"
@@ -79,11 +82,12 @@ _HUMAN = """\
 
 === CONTEXT ===
 
-Intent       : {intent}
-ERP Status   : {erp_status}
-ERP Action   : {erp_action_summary}
-RAG Answer   : {rag_answer}
-Errors       : {errors}
+Intent          : {intent}
+ERP Status       : {erp_status}
+ERP Action       : {erp_action_summary}
+Rejection Reason : {rejection_reason}
+RAG Answer       : {rag_answer}
+Errors           : {errors}
 
 === TASK ===
 Write the final email reply to the customer based on the context above.
@@ -105,6 +109,7 @@ _ERP_STATUS_LABELS = {
     "PENDING_APPROVAL":         "ERP update is pending human approval.",
     "FAILED":                   "ERP update failed due to a system error.",
     "BLOCKED_NO_STOCK":         "Request blocked: insufficient stock.",
+    "BLOCKED_INVALID_QTY":      "Request blocked: the resulting quantity would be zero or negative.",
     "BLOCKED_SHIPPED":          "Request blocked: item has already shipped.",
     "BLOCKED_EXTRACTION_FAILED":"Request blocked: could not parse the order details.",
     "BLOCKED_VALIDATION":       "Request blocked: validation error.",
@@ -142,6 +147,7 @@ def _template_response(
     erp_status: str | None,
     erp_action: dict,
     rag_answer: str,
+    rejection_reason: str = "",
 ) -> str:
     parts = ["Dear Customer,\n"]
 
@@ -153,6 +159,8 @@ def _template_response(
             if order_id:
                 parts.append(f"Order {order_id} has been updated successfully.")
         elif erp_status == "REJECTED":
+            if rejection_reason:
+                parts.append(f"Reason: {rejection_reason}")
             parts.append("No changes have been made to the system.")
 
     if intent in ("QA_ONLY", "BOTH") and rag_answer:
@@ -182,11 +190,21 @@ def synthesizer_node(state: AgentState) -> dict:
     erp_action = state.get("erp_action") or {}
     rag_answer = state.get("rag_answer") or ""
     errors     = state.get("error_messages", [])
+    rejection_reason = state.get("rejection_reason") or ""
 
     logger.info(
         "[synthesizer] intent=%s erp_status=%s rag_answer_len=%d",
         intent, erp_status, len(rag_answer),
     )
+
+    # ── Guard: do NOT compose the final reply while approval is still pending ──
+    # For BOTH intent, worker_b routes here directly and can trigger the
+    # synthesizer in the same superstep as human_loop's interrupt — producing a
+    # premature email before the human approves. Skip until the decision is made;
+    # the synthesizer runs again (with SUCCESS/REJECTED) once human_loop resumes.
+    if erp_status == "PENDING_APPROVAL":
+        logger.info("[synthesizer] Approval pending — skipping reply generation until resumed.")
+        return {}
 
     erp_summary = _erp_action_summary(erp_action, erp_status)
 
@@ -199,6 +217,7 @@ def synthesizer_node(state: AgentState) -> dict:
             "intent":             intent or "UNKNOWN",
             "erp_status":         erp_status or "N/A",
             "erp_action_summary": erp_summary,
+            "rejection_reason":   rejection_reason or "None",
             "rag_answer":         rag_answer or "None",
             "errors":             ", ".join(errors) if errors else "None",
         })
@@ -207,7 +226,7 @@ def synthesizer_node(state: AgentState) -> dict:
 
     except Exception as e:
         logger.warning("[synthesizer] LLM call failed (%s) — using template fallback.", e)
-        final_response = _template_response(intent, erp_status, erp_action, rag_answer)
+        final_response = _template_response(intent, erp_status, erp_action, rag_answer, rejection_reason)
         logger.info("[synthesizer] Fallback template used (%d chars)", len(final_response))
 
     return {"final_response": final_response}

@@ -100,6 +100,15 @@ def apply_erp_update(erp_action: dict) -> dict:
     item_no_raw = erp_action.get("item_no", "")
     action_type = erp_action.get("action_type", "")
 
+    # NOTE on VBELN matching:
+    #   VBAP.VBELN is stored inconsistently in the dataset — some orders are
+    #   zero-padded to 10 chars ("0000015353"), others are not ("6105").
+    #   The incoming order_id may likewise be padded or not. To match
+    #   regardless of padding, every WHERE clause below compares the numeric
+    #   value via CAST(VBELN AS INTEGER) = CAST(? AS INTEGER) instead of an
+    #   exact string match. (3 of 67,429 VBAP rows are non-numeric junk and
+    #   are intentionally unreachable this way.)
+
     # item_no may arrive as a zero-padded string ("000010") or int (10)
     try:
         item_no = int(str(item_no_raw).lstrip("0") or "0")
@@ -118,7 +127,8 @@ def apply_erp_update(erp_action: dict) -> dict:
                 return {"success": False, "rowcount": 0,
                         "message": "CHANGE_QTY requires new_quantity"}
             rowcount = _execute_update(
-                "UPDATE VBAP SET KWMENG = ? WHERE VBELN = ? AND POSNR = ?",
+                "UPDATE VBAP SET KWMENG = ? "
+                "WHERE CAST(VBELN AS INTEGER) = CAST(? AS INTEGER) AND POSNR = ?",
                 (float(new_qty), order_id, item_no),
             )
 
@@ -129,14 +139,16 @@ def apply_erp_update(erp_action: dict) -> dict:
                 return {"success": False, "rowcount": 0,
                         "message": f"CHANGE_DATE: invalid date '{new_date_raw}'"}
             rowcount = _execute_update(
-                "UPDATE VBEP SET EDATU = ? WHERE VBELN = ? AND POSNR = ?",
+                "UPDATE VBEP SET EDATU = ? "
+                "WHERE CAST(VBELN AS INTEGER) = CAST(? AS INTEGER) AND POSNR = ?",
                 (new_date_sap, order_id, item_no),
             )
 
         elif action_type == "CANCEL_ITEM":
             # Set rejection reason code "ZZ" in VBAP
             rowcount = _execute_update(
-                "UPDATE VBAP SET ABGRU = ? WHERE VBELN = ? AND POSNR = ?",
+                "UPDATE VBAP SET ABGRU = ? "
+                "WHERE CAST(VBELN AS INTEGER) = CAST(? AS INTEGER) AND POSNR = ?",
                 ("ZZ", order_id, item_no),
             )
 
@@ -207,11 +219,26 @@ def human_loop_node(state: AgentState) -> dict:
     logger.info("[human_loop] ═══════════════ Human Loop START ═══════════════")
 
     # ── Human decision via interrupt() ──────────────────────────────────────
-    human_approved: bool = interrupt({
+    # resume 값은 두 형태로 들어올 수 있다:
+    #   • bool                          — 브라우저 GET /api/approve (레거시)
+    #   • {"approved": bool,            — Slack 인터랙티브 플로우
+    #      "reason": str | None}          (거절 사유 포함 가능)
+    resume_value = interrupt({
         "erp_action": erp_action,
         "message":    "Approve or reject this ERP action? (True=Approve, False=Reject)",
     })
-    logger.info("[human_loop] human_approved=%s", human_approved)
+
+    if isinstance(resume_value, dict):
+        human_approved   = bool(resume_value.get("approved", False))
+        rejection_reason = resume_value.get("reason") or None
+    else:
+        human_approved   = bool(resume_value)
+        rejection_reason = None
+
+    logger.info(
+        "[human_loop] human_approved=%s rejection_reason=%s",
+        human_approved, rejection_reason,
+    )
 
     # ── Case 1: Rejected ────────────────────────────────────────────────────
     if not human_approved:
@@ -219,6 +246,7 @@ def human_loop_node(state: AgentState) -> dict:
         return {
             "erp_action_status": "REJECTED",
             "human_approved":    False,
+            "rejection_reason":  rejection_reason,
             "error_messages":    errors,
         }
 

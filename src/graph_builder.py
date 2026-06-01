@@ -1,6 +1,6 @@
 """
-src/main.py
-LangGraph 그래프 진입점 — StateGraph 빌드 및 실행
+src/graph_builder.py
+LangGraph StateGraph 팩토리 — 그래프 구조 정의 및 컴파일
 """
 import uuid
 import argparse
@@ -22,15 +22,20 @@ from src.graph.human_loop import human_loop_node
 from src.graph.synthesizer import synthesizer_node
 
 
-def _build_state_graph() -> StateGraph:
-    """StateGraph 구조만 빌드 (체크포인터 없음) — sync/async 공용"""
+def _build_state_graph(*, hitl: bool = True) -> StateGraph:
+    """StateGraph 구조만 빌드 (체크포인터 없음) — sync/async 공용.
+
+    hitl=False 이면 human_loop 노드를 추가하지 않고 worker_a → synthesizer 직통.
+    """
     builder = StateGraph(AgentState)
 
     builder.add_node("router", router_node)
     builder.add_node("worker_a", worker_a_node)
     builder.add_node("worker_b", worker_b_node)
-    builder.add_node("human_loop", human_loop_node)
     builder.add_node("synthesizer", synthesizer_node)
+
+    if hitl:
+        builder.add_node("human_loop", human_loop_node)
 
     builder.set_entry_point("router")
 
@@ -45,17 +50,20 @@ def _build_state_graph() -> StateGraph:
 
     builder.add_conditional_edges("router", route_after_router, ["worker_a", "worker_b"])
 
-    _hitl_enabled = get_config().feature_flags.human_in_the_loop
+    if hitl:
+        _hitl_config_enabled = get_config().feature_flags.human_in_the_loop
 
-    def route_after_worker_a(state: AgentState) -> str:
-        if state.get("erp_action_status") == "PENDING_APPROVAL" and _hitl_enabled:
-            return "human_loop"
-        return "synthesizer"
+        def route_after_worker_a(state: AgentState) -> str:
+            if state.get("erp_action_status") == "PENDING_APPROVAL" and _hitl_config_enabled:
+                return "human_loop"
+            return "synthesizer"
 
-    builder.add_conditional_edges("worker_a", route_after_worker_a)
+        builder.add_conditional_edges("worker_a", route_after_worker_a)
+        builder.add_edge("human_loop", "synthesizer")
+    else:
+        builder.add_edge("worker_a", "synthesizer")
 
     builder.add_edge("worker_b", "synthesizer")
-    builder.add_edge("human_loop", "synthesizer")
     builder.add_edge("synthesizer", END)
 
     return builder
@@ -69,14 +77,12 @@ def build_graph():
     return _build_state_graph().compile(checkpointer=memory)
 
 
-graph = build_graph()
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="SAP ERP AI Agent")
     parser.add_argument("--input", required=True, help="이메일 텍스트 입력")
     args = parser.parse_args()
 
+    graph = build_graph()
     thread_id = str(uuid.uuid4())
     config = {"configurable": {"thread_id": thread_id}}
     result = graph.invoke(

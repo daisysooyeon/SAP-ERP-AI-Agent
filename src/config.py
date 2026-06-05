@@ -40,6 +40,7 @@ class OpenRouterConfig:
 
 @dataclass
 class ModelsConfig:
+    preprocessor:         ModelConfig = field(default_factory=lambda: ModelConfig("openai/gpt-4o-mini", 0.0, provider="openrouter"))
     router:               ModelConfig = field(default_factory=lambda: ModelConfig("qwen3:4b"))
     worker_a:             ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-8b", provider="openrouter"))
     worker_a_sql:         ModelConfig = field(default_factory=lambda: ModelConfig("qwen/qwen3-coder-30b-a3b-instruct", provider="openrouter"))

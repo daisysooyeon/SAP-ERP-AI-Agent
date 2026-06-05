@@ -31,6 +31,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 
 from src.api.schemas import ApproveResponse, RunRequest, RunResponse
+from src.preprocess import preprocess_email
 from src.slack.notifier import (
     open_reason_modal,
     send_approval_request_async,
@@ -157,11 +158,17 @@ async def run_agent(request: RunRequest) -> RunResponse:
     thread_id = request.thread_id or str(uuid.uuid4())
     config = {"configurable": {"thread_id": thread_id}}
 
+    # LangGraph 진입 전 이메일 전처리 (블로킹 동기 호출 — 다른 비동기 작업과 동시에 돌릴
+    # 필요는 없으나 이벤트 루프 점유 우려가 있으면 to_thread로 옮길 것). 실패해도 흐름은
+    # 끊기지 않고 preprocess_ok=False 로 표시될 뿐이다.
+    email_ctx = await asyncio.to_thread(preprocess_email, request.email_text)
+
     initial_state = {
-        "user_input": request.email_text,
-        "error_messages": [],
+        "user_input":             request.email_text,
+        "email_context":          email_ctx.model_dump(),
+        "error_messages":         [],
         "requires_human_approval": False,
-        "human_approved": None,
+        "human_approved":         None,
     }
 
     result = await graph.ainvoke(initial_state, config=config)

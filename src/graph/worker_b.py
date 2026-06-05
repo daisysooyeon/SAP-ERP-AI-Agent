@@ -202,14 +202,34 @@ def worker_b_node(state: AgentState) -> dict:
     logger.info("[worker_b] ══════════════ Worker B START ══════════════")
 
     user_input: str = state.get("user_input", "")
+    email_context: dict | None = state.get("email_context")
     errors: list[str] = list(state.get("error_messages", []))
+
+    # 전처리 결과가 "지식 질문 없음"이라고 명확히 신호하면, 비싼 LLM 쿼리 추출 단계를
+    # 건너뛴다. preprocess_ok=False이거나 context 자체가 없으면 안전하게 기존 경로로 진행.
+    if (email_context
+            and email_context.get("preprocess_ok")
+            and email_context.get("mentions_question") is False):
+        logger.info("[worker_b] Preprocessor: mentions_question=False → RAG 단계 스킵")
+        return {
+            "rag_query":      "",
+            "retrieved_docs": [],
+            "rag_answer":     "",
+            "error_messages": errors,
+        }
+
+    # 전처리가 만든 cleaned_body가 있으면 그것을 쿼리 추출 입력으로 사용 (인사·서명 노이즈
+    # 제거 → 더 정확한 RAG query 추출). 없으면 원본 user_input 그대로.
+    query_extraction_input = user_input
+    if email_context and email_context.get("preprocess_ok") and email_context.get("cleaned_body"):
+        query_extraction_input = email_context["cleaned_body"]
 
     # ① 쿼리 추출 (Query Expansion: 최대 3개)
     cached_query: str = state.get("rag_query", "")
     if cached_query:
         rag_queries = [cached_query]
     else:
-        rag_queries = _extract_rag_queries(user_input)
+        rag_queries = _extract_rag_queries(query_extraction_input)
 
     if not rag_queries:
         logger.warning("[worker_b] No RAG query extracted — skipping retrieval.")

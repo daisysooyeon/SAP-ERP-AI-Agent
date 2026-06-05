@@ -60,20 +60,47 @@ def _get_llm() -> ChatOpenAI:
 # ---------------------------------------------------------------------------
 
 _SYSTEM = """\
-You are an SAP ERP customer service agent composing professional business email replies.
+You are a customer service agent for the Samsung SDS Logistics Team, composing
+professional B2B email replies in English.
 
-Compose a concise, warm, and professional email reply based on the context below.
+Compose a concise, warm, and professional email reply that STRICTLY follows the
+template structure below. Do NOT improvise the structure — only the body content
+between the fixed opening and closing lines is yours to author.
 
-Guidelines:
-- Start with "Dear Customer,"
-- If an ERP action was requested, clearly state what was done (or what could not be done)
-- If the ERP action was REJECTED and a "Rejection Reason" is provided, politely convey that
-  reason to the customer as the explanation for why the request could not be processed.
-  If it was rejected with no reason given, state that the request could not be approved at this time.
-- If a knowledge question was answered, include it naturally in the email
-- Be factual — only use information provided in the context
-- End with "Best regards,\\nSAP ERP Support Team"
-- Keep the email under 200 words
+═════════════ TEMPLATE — REQUIRED STRUCTURE ═════════════
+
+Dear {{Sender Name or "Customer"}},
+
+Hello,
+
+This is the Samsung SDS Logistics Team.
+
+After our internal review of the matter you raised in your email,
+{{specific content — 1 to 4 short paragraphs, see body guidance below}}
+
+Please feel free to contact us anytime for any related inquiries.
+
+Thank you.
+
+═════════════ BODY CONTENT GUIDANCE ═════════════
+
+- If an ERP action was requested, clearly state what was done (or what could not
+  be done, and why). Reference the order/item numbers concretely.
+- If the ERP action was REJECTED and a "Rejection Reason" is provided, politely
+  convey that reason to the customer as the explanation. If rejected with no
+  reason given, state that the request could not be approved at this time.
+- If a knowledge question was answered, include the answer naturally as part of
+  the review-result body. Cite the source document briefly when given
+  (e.g., "according to the SAP TS460 documentation").
+- Be factual — only use information from the provided context. Never invent
+  details, dates, or quantities.
+- Keep the entire email under 220 words.
+
+═════════════ GREETING NAME ═════════════
+
+If "Sender Name" in the context is provided and not empty, address the customer
+by their first name: "Dear {{first name}},". Otherwise use "Dear Customer,".
+Use ONLY the first name, even if a full name is provided.
 """
 
 _HUMAN = """\
@@ -82,7 +109,8 @@ _HUMAN = """\
 
 === CONTEXT ===
 
-Intent          : {intent}
+Intent           : {intent}
+Sender Name      : {sender_name}
 ERP Status       : {erp_status}
 ERP Action       : {erp_action_summary}
 Rejection Reason : {rejection_reason}
@@ -91,6 +119,9 @@ Errors           : {errors}
 
 === TASK ===
 Write the final email reply to the customer based on the context above.
+If Sender Name is provided and not empty, address the customer by name
+("Dear {{first name}},") instead of the generic "Dear Customer,". Otherwise
+use "Dear Customer,".
 """
 
 _PROMPT = ChatPromptTemplate.from_messages([
@@ -148,28 +179,53 @@ def _template_response(
     erp_action: dict,
     rag_answer: str,
     rejection_reason: str = "",
+    sender_name: str = "",
 ) -> str:
-    parts = ["Dear Customer,\n"]
+    """LLM 호출이 실패해도 Samsung SDS 물류팀 형식의 답장을 결정론적으로 생성한다.
+    구조(인사·서명)는 고정, 본문(specific content)만 컨텍스트로 채운다."""
+    # Greeting — sender_name이 있으면 first name으로 개인화
+    first_name = sender_name.strip().split()[0] if sender_name else ""
+    greeting   = f"Dear {first_name}," if first_name else "Dear Customer,"
+
+    body_lines: list[str] = []
 
     if intent in ("ACTION_ONLY", "BOTH") and erp_status:
-        parts.append(_ERP_STATUS_LABELS.get(erp_status, f"ERP status: {erp_status}."))
+        body_lines.append(_ERP_STATUS_LABELS.get(erp_status, f"ERP status: {erp_status}."))
 
         if erp_status == "SUCCESS":
             order_id = erp_action.get("order_id", "")
             if order_id:
-                parts.append(f"Order {order_id} has been updated successfully.")
+                body_lines.append(f"Order {order_id} has been updated successfully.")
         elif erp_status == "REJECTED":
             if rejection_reason:
-                parts.append(f"Reason: {rejection_reason}")
-            parts.append("No changes have been made to the system.")
+                body_lines.append(f"Reason: {rejection_reason}")
+            body_lines.append("No changes have been made to the system.")
 
     if intent in ("QA_ONLY", "BOTH") and rag_answer:
-        if intent == "BOTH":
-            parts.append("\nRegarding your question:")
-        parts.append(rag_answer)
+        if intent == "BOTH" and body_lines:
+            body_lines.append("")  # 빈 줄로 단락 구분
+            body_lines.append("Regarding your question:")
+        body_lines.append(rag_answer)
 
-    parts.append("\nBest regards,\nSAP ERP Support Team")
-    return "\n".join(parts)
+    if not body_lines:
+        body_lines.append("we have noted your request and will follow up shortly.")
+
+    body = "\n".join(body_lines)
+
+    return (
+        f"{greeting}\n"
+        f"\n"
+        f"Hello,\n"
+        f"\n"
+        f"This is the Samsung SDS Logistics Team.\n"
+        f"\n"
+        f"After our internal review of the matter you raised in your email,\n"
+        f"{body}\n"
+        f"\n"
+        f"Please feel free to contact us anytime for any related inquiries.\n"
+        f"\n"
+        f"Thank you."
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -186,15 +242,21 @@ def synthesizer_node(state: AgentState) -> dict:
     """
     intent     = state.get("intent", "QA_ONLY")
     user_input = state.get("user_input") or ""
+    email_context = state.get("email_context") or {}
     erp_status = state.get("erp_action_status")
     erp_action = state.get("erp_action") or {}
     rag_answer = state.get("rag_answer") or ""
     errors     = state.get("error_messages", [])
     rejection_reason = state.get("rejection_reason") or ""
 
+    # 전처리에서 발신자 이름이 추출됐으면 답장 인사말 개인화에 사용
+    sender_name = ""
+    if email_context.get("preprocess_ok"):
+        sender_name = email_context.get("sender_name", "") or ""
+
     logger.info(
-        "[synthesizer] intent=%s erp_status=%s rag_answer_len=%d",
-        intent, erp_status, len(rag_answer),
+        "[synthesizer] intent=%s erp_status=%s rag_answer_len=%d sender=%r",
+        intent, erp_status, len(rag_answer), sender_name,
     )
 
     # ── Guard: do NOT compose the final reply while approval is still pending ──
@@ -214,6 +276,7 @@ def synthesizer_node(state: AgentState) -> dict:
         chain  = _PROMPT | llm
         result = chain.invoke({
             "user_input":         user_input or "(no email provided)",
+            "sender_name":        sender_name or "(unknown)",
             "intent":             intent or "UNKNOWN",
             "erp_status":         erp_status or "N/A",
             "erp_action_summary": erp_summary,
@@ -226,7 +289,10 @@ def synthesizer_node(state: AgentState) -> dict:
 
     except Exception as e:
         logger.warning("[synthesizer] LLM call failed (%s) — using template fallback.", e)
-        final_response = _template_response(intent, erp_status, erp_action, rag_answer, rejection_reason)
+        final_response = _template_response(
+            intent, erp_status, erp_action, rag_answer, rejection_reason,
+            sender_name=sender_name,
+        )
         logger.info("[synthesizer] Fallback template used (%d chars)", len(final_response))
 
     return {"final_response": final_response}

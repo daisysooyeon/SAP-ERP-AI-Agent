@@ -135,9 +135,14 @@ def _evaluate_case(tc: dict, db_path: str) -> CaseResult:
     t0 = time.perf_counter()
 
     # ── E1: Parameter extraction ─────────────────────────────────────────────
+    # 운영 경로와 동일하게 진입 전 이메일 전처리 결과를 hint로 같이 넘긴다.
+    # (전처리 실패 시 email_context.preprocess_ok=False, 다운스트림이 알아서 무시)
+    from src.preprocess import preprocess_email
+    email_ctx = preprocess_email(user_input).model_dump()
+
     logger.info("[%s] E1 — extracting ERP action from email …", cr.id)
     try:
-        action = extract_erp_action(user_input)
+        action = extract_erp_action(user_input, email_context=email_ctx)
         if action is None:
             cr.extraction_error   = "extract_erp_action returned None"
             cr.extracted_action_type = ""

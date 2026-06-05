@@ -8,7 +8,8 @@
     "erp_evidence": null,
     "rag_evidence": "Free goods can also take the form of extra goods that are free of charge. These are called \nexclusive bonus quantities.\nIn exclusive bonus quantities, the extra goods are delivered free of charge and are not \nincluded in the invoice. This can either be an additional quantity of the goods ordered or it can \nbe another article.\nThe exclusive free goods appear in the sales document as a separate, free-of-charge item.\nUnit 12: Free Goods\n158\n© Copyright. All rights reserved.",
     "action_description": null,
-    "qa_question": "How are exclusive bonus quantities displayed in the sales document within SAP ERP?"
+    "qa_question": "How are exclusive bonus quantities displayed in the sales document within SAP ERP?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How are exclusive bonus quantities displayed in the sales document within SAP ERP? — please find the answer below.\n\nFree goods can also take the form of extra goods that are free of charge. These are called exclusive bonus quantities. In exclusive bonus quantities, the extra goods are delivered free of charge and are not included in the invoice. This can either be an additional quantity of the goods ordered or it can be another article. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_002",
@@ -19,7 +20,8 @@
     "erp_evidence": null,
     "rag_evidence": "If you enter an invalid value or do not enter a target value at item and schedule line level, the \nsystem determines the target from the assignment of the item or schedule line categories. \nAny value you enter must exist in the item or schedule line category assignment (as an \nalternative).\nCopying Requirements\nFigure 50: Copying Requirements\nYou can store copying requirements at every level in copying control. Copying requirements",
     "action_description": null,
-    "qa_question": "How does the system determine the target value when it's not entered at the item or schedule line level, and how do category assignments influence this process?"
+    "qa_question": "How does the system determine the target value when it's not entered at the item or schedule line level, and how do category assignments influence this process?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the system determine the target value when it's not entered at the item or schedule line level, and how do category assignments influence this process? — please find the answer below.\n\nIf you enter an invalid value or do not enter a target value at item and schedule line level, the system determines the target from the assignment of the item or schedule line categories. Any value you enter must exist in the item or schedule line category assignment (as an alternative). …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_003",
@@ -30,7 +32,8 @@
     "erp_evidence": null,
     "rag_evidence": "Unit 7\nLearning Assessment\n1.\nWhen you save the rush order, the system automatically creates a delivery and prints a \ndocument that can be given to the customer as an invoice.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n2. Which statement is true in the consignment process?\nChoose the correct answer.\nX\nA You invoice a consignment fill-up to the customer.\nX\nB The material in a consignment warehouse stock is the property of the customer.\nX",
     "action_description": null,
-    "qa_question": "Could you clarify how the system indicates that materials in a consignment warehouse are owned by the customer?"
+    "qa_question": "Could you clarify how the system indicates that materials in a consignment warehouse are owned by the customer?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — Could you clarify how the system indicates that materials in a consignment warehouse are owned by the customer? — please find the answer below.\n\nUnit 7 Learning Assessment 1. When you save the rush order, the system automatically creates a delivery and prints a document that can be given to the customer as an invoice. Determine whether this statement is true or false. X True X False 2. Which statement is true in the consignment process? Choose the correct answer. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_004",
@@ -41,7 +44,8 @@
     "erp_evidence": null,
     "rag_evidence": "billing items to which they refer. The down payment item value corresponds to the down \npayments already made.\nExample: For a sales contract of $300, you request the customer to pay $100 before goods \ndelivery.\nYou specify a delivery block in the milestone billing plan and specify the billing plan value as \n$100 in the sales contract. You further create a contract release order of $300 referencing \nthe sales contract. The system determines the delivery block reason from the milestone",
     "action_description": null,
-    "qa_question": "How does the system determine the delivery block reason when a billing plan value is specified in a sales contract?"
+    "qa_question": "How does the system determine the delivery block reason when a billing plan value is specified in a sales contract?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the system determine the delivery block reason when a billing plan value is specified in a sales contract? — please find the answer below.\n\nbilling items to which they refer. The down payment item value corresponds to the down payments already made. Example: For a sales contract of $300, you request the customer to pay $100 before goods delivery. You specify a delivery block in the milestone billing plan and specify the billing plan value as $100 in the sales contract. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_005",
@@ -52,7 +56,8 @@
     "erp_evidence": null,
     "rag_evidence": "Three calculation rules are provided in the standard system. The following example describes \nhow they work:\nYou offer to supply 20 units of free goods for a free goods quantity of 100 units.\nThe customer orders 162 units (document quantity).\n●\nRule 1 Prorated: 32 units of free goods [162*(20/100) = rounded down]\n●\nRule 2 Related to units: 20 units of free goods [100*(20/100) = rounded down]\n●\nRule 3 Whole units: 0 units free goods [162 is not a complete unit of 100]",
     "action_description": null,
-    "qa_question": "How does the SAP ERP system determine which calculation rule (Prorated, Related to units, or Whole units) is applied when the order quantity does not meet the free goods quantity criteria?"
+    "qa_question": "How does the SAP ERP system determine which calculation rule (Prorated, Related to units, or Whole units) is applied when the order quantity does not meet the free goods quantity criteria?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the SAP ERP system determine which calculation rule (Prorated, Related to units, or Whole units) is applied when the order quantity does not meet the free goods quantity criteria? — please find the answer below.\n\nThree calculation rules are provided in the standard system. The following example describes how they work: You offer to supply 20 units of free goods for a free goods quantity of 100 units. The customer orders 162 units (document quantity). …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_006",
@@ -63,7 +68,8 @@
     "erp_evidence": null,
     "rag_evidence": "Objectives of organizational structures in the SAP system:\n●\nAchieve flexibility in representing complex corporate structures\n●\nAdapt to changes in the corporate structure\n●\nDistinguish between views in logistics (sales and distribution, purchasing, and so on), cost \naccounting, and financial accounting\n●\nProcess data across company codes\n© Copyright. All rights reserved.\n13",
     "action_description": null,
-    "qa_question": "How can we configure organizational structures in SAP ERP to effectively distinguish between logistics views and financial accounting views while maintaining flexibility for corporate structure changes?"
+    "qa_question": "How can we configure organizational structures in SAP ERP to effectively distinguish between logistics views and financial accounting views while maintaining flexibility for corporate structure changes?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How can we configure organizational structures in SAP ERP to effectively distinguish between logistics views and financial accounting views while maintaining flexibility for corporate structure changes? — please find the answer below.\n\nObjectives of organizational structures in the SAP system: ● Achieve flexibility in representing complex corporate structures ● Adapt to changes in the corporate structure ● Distinguish between views in logistics (sales and distribution, purchasing, and so on), cost accounting, and financial accounting ● Process data across company codes 13\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_007",
@@ -74,7 +80,8 @@
     "erp_evidence": null,
     "rag_evidence": "Quantity Contracts\nFigure 73: Quantity Contracts\nA contract is an outline agreement between you and your customer that is valid for a certain \ntime period. The contract does not contain any schedule lines, delivery quantities, or delivery \ndates. The same functions are available in contracts as in orders. You can also agree on \nspecial price agreements or delivery times.\nThe customer fulfills the contract with individual releases. Schedule lines are created in the",
     "action_description": null,
-    "qa_question": "How are quantity contracts structured in SAP ERP when no schedule lines or delivery dates are included, and how are releases managed for fulfillment?"
+    "qa_question": "How are quantity contracts structured in SAP ERP when no schedule lines or delivery dates are included, and how are releases managed for fulfillment?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How are quantity contracts structured in SAP ERP when no schedule lines or delivery dates are included, and how are releases managed for fulfillment? — please find the answer below.\n\nQuantity Contracts Figure 73: Quantity Contracts A contract is an outline agreement between you and your customer that is valid for a certain time period. The contract does not contain any schedule lines, delivery quantities, or delivery dates. The same functions are available in contracts as in orders. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_008",
@@ -85,7 +92,8 @@
     "erp_evidence": null,
     "rag_evidence": "quantities at the same time. You only need to press a button to switch between the two types \nof discount.\nWhen you enter an exclusive bonus quantity, an extra entry line appears where you can enter \nthe goods item if it is not the same as the ordered material.\nUnit 12: Free Goods\n160\n© Copyright. All rights reserved.",
     "action_description": null,
-    "qa_question": "How do I switch between exclusive and inclusive discount types in the SAP ERP system?"
+    "qa_question": "How do I switch between exclusive and inclusive discount types in the SAP ERP system?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How do I switch between exclusive and inclusive discount types in the SAP ERP system? — please find the answer below.\n\nquantities at the same time. You only need to press a button to switch between the two types of discount. When you enter an exclusive bonus quantity, an extra entry line appears where you can enter the goods item if it is not the same as the ordered material.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_009",
@@ -96,7 +104,8 @@
     "erp_evidence": null,
     "rag_evidence": "maintenance. It includes, among other things, the item category group LEIS. By using this \nitem category group, the system can determine the right item categories for service products \nin sales documents.\nFigure 95: Service Products\nWhen you sell services (for example, consulting services), you do not have to execute any \nshipping functions during the process. The service items of sales orders can be invoiced \ndirectly, that means the corresponding billing document is created with reference to the sales",
     "action_description": null,
-    "qa_question": "How does the SAP ERP system determine the appropriate item categories for service products when using the item category group LEIS in sales documents?"
+    "qa_question": "How does the SAP ERP system determine the appropriate item categories for service products when using the item category group LEIS in sales documents?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the SAP ERP system determine the appropriate item categories for service products when using the item category group LEIS in sales documents? — please find the answer below.\n\nmaintenance. It includes, among other things, the item category group LEIS. By using this item category group, the system can determine the right item categories for service products in sales documents. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_010",
@@ -107,7 +116,8 @@
     "erp_evidence": null,
     "rag_evidence": "Figure 57: Item Proposal\nIncompleteness Check\nWhen you create documents in the sales and distribution process, some data in the \ncorresponding master records may be missing (for example, the weight of the material) and \ntherefore, cannot be copied to the document. If you are not able to maintain the respective \nfields manually because you don't know the correct values, the document remains \nincomplete. However, incomplete documents can be saved if the system is customized",
     "action_description": null,
-    "qa_question": "Could you explain how the incompleteness check identifies missing master data during document creation and how the system's customization impacts the ability to save incomplete documents?"
+    "qa_question": "Could you explain how the incompleteness check identifies missing master data during document creation and how the system's customization impacts the ability to save incomplete documents?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — Could you explain how the incompleteness check identifies missing master data during document creation and how the system's customization impacts the ability to save incomplete documents? — please find the answer below.\n\nFigure 57: Item Proposal Incompleteness Check When you create documents in the sales and distribution process, some data in the corresponding master records may be missing (for example, the weight of the material) and therefore, cannot be copied to the document. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_011",
@@ -128,7 +138,8 @@
     },
     "rag_evidence": null,
     "action_description": "We would like to cancel this order item.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: We would like to cancel this order item on order 6105, item 20.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_012",
@@ -150,7 +161,8 @@
     },
     "rag_evidence": null,
     "action_description": "We would like to cancel this order item.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: We would like to cancel this order item on order 6279, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_013",
@@ -170,7 +182,8 @@
     },
     "rag_evidence": null,
     "action_description": "We would like to cancel this order item.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: We would like to cancel this order item on order 70000166, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_014",
@@ -191,7 +204,8 @@
     },
     "rag_evidence": null,
     "action_description": "Kindly update the delivery date for this order.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Kindly update the delivery date for this order on order 6338, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_015",
@@ -213,7 +227,8 @@
     },
     "rag_evidence": null,
     "action_description": "Assign batch number B-83889 to this item.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Assign batch number B-83889 to this item on order 17431, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_016",
@@ -235,7 +250,8 @@
     },
     "rag_evidence": null,
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 5366, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_017",
@@ -257,7 +273,8 @@
     },
     "rag_evidence": null,
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_018",
@@ -279,7 +296,8 @@
     },
     "rag_evidence": null,
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 6586, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_019",
@@ -301,7 +319,8 @@
     },
     "rag_evidence": null,
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 10000082, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_020",
@@ -323,7 +342,8 @@
     },
     "rag_evidence": null,
     "action_description": "Kindly update the delivery date for this order.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Kindly update the delivery date for this order on order 3299, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_021",
@@ -344,7 +364,8 @@
     },
     "rag_evidence": "bins that have a common attribute, for example, bins that are used to store fast-moving \nitems. Storage sections are used when determining the putaway storage bin.\nStorage bins are the lowest level of the organizational structure. They are assigned to a \nstorage type and a storage section (if one exists). Storage bins represent the physical \nlocations where goods are stored in the warehouse.\nLesson: Identifying Enterprise Structures in SAP S/4HANA Sales\n© Copyright. All rights reserved.\n23",
     "action_description": "Reduce the order quantity by 50 units.",
-    "qa_question": "How can I configure storage bins in SAP ERP to automatically assign fast-moving items to specific bins based on their storage section attributes?"
+    "qa_question": "How can I configure storage bins in SAP ERP to automatically assign fast-moving items to specific bins based on their storage section attributes?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Reduce the order quantity by 50 units on order 6105, item 20.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can I configure storage bins in SAP ERP to automatically assign fast-moving items to specific bins based on their storage section attributes? — please find the answer below.\n\nbins that have a common attribute, for example, bins that are used to store fast-moving items. Storage sections are used when determining the putaway storage bin. Storage bins are the lowest level of the organizational structure. They are assigned to a storage type and a storage section (if one exists). …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_022",
@@ -366,7 +387,8 @@
     },
     "rag_evidence": "documents simultaneously by collective processing.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n3. Apart from efficiency and speed, an additional advantage of collective processing is that it \nautomatically determines whether multiple reference documents should result in fewer \n(or more) subsequent documents.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n© Copyright. All rights reserved.\n133",
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": "When using collective processing in SAP ERP, can multiple reference documents be handled simultaneously to reduce the number of subsequent documents generated?"
+    "qa_question": "When using collective processing in SAP ERP, can multiple reference documents be handled simultaneously to reduce the number of subsequent documents generated?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 6279, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — When using collective processing in SAP ERP, can multiple reference documents be handled simultaneously to reduce the number of subsequent documents generated? — please find the answer below.\n\ndocuments simultaneously by collective processing. Determine whether this statement is true or false. X True X False 3. Apart from efficiency and speed, an additional advantage of collective processing is that it automatically determines whether multiple reference documents should result in fewer (or more) subsequent documents. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_023",
@@ -386,7 +408,8 @@
     },
     "rag_evidence": "Additional documents are created for financial accounting.\n●\nBilling due list:\nThe respective delivery can now be used as basis for billing.\n●\nStatus update:\nThe status in all the associated documents is updated.\nNote:\nIn many sales and distribution processes, posting the goods issue is a prerequisite \nfor creating invoices in the next step.\nThe figure, Posting Goods Issue, shows the impact of the goods issue.\nFigure 35: Posting Goods Issue\nLESSON SUMMARY\nYou should now be able to:\n●\nShip goods",
     "action_description": "Please set the payment terms to Net 60.",
-    "qa_question": "How can I verify if the goods issue has been successfully posted to update the billing due list status?"
+    "qa_question": "How can I verify if the goods issue has been successfully posted to update the billing due list status?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please set the payment terms to Net 60 on order 70000166, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can I verify if the goods issue has been successfully posted to update the billing due list status? — please find the answer below.\n\nAdditional documents are created for financial accounting. ● Billing due list: The respective delivery can now be used as basis for billing. ● Status update: The status in all the associated documents is updated. Note: In many sales and distribution processes, posting the goods issue is a prerequisite for creating invoices in the next step. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_024",
@@ -407,7 +430,8 @@
     },
     "rag_evidence": "application.\n●\nCoherent\nThe applications are developed with a coherent structure. All apps speak the same \nlanguage, and can be implemented in multiple landscapes and environments.\n●\nInstant value\nInstant value through a low adoption barrier, both on the IT-system side and on the user-\nadoption side.\nLesson: Identifying Key Features of SAP Fiori\n© Copyright. All rights reserved.\n5",
     "action_description": "Assign batch number B-14929 to this item.",
-    "qa_question": "How can we ensure the coherent structure of SAP Fiori applications is maintained across multiple implementation landscapes while minimizing user adaptation barriers?"
+    "qa_question": "How can we ensure the coherent structure of SAP Fiori applications is maintained across multiple implementation landscapes while minimizing user adaptation barriers?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Assign batch number B-14929 to this item on order 6338, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can we ensure the coherent structure of SAP Fiori applications is maintained across multiple implementation landscapes while minimizing user adaptation barriers? — please find the answer below.\n\napplication. ● Coherent The applications are developed with a coherent structure. All apps speak the same language, and can be implemented in multiple landscapes and environments. ● Instant value Instant value through a low adoption barrier, both on the IT-system side and on the user- adoption side. Lesson: Identifying Key Features of SAP Fiori 5\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_025",
@@ -429,7 +453,8 @@
     },
     "rag_evidence": "more information, see BP Role Grouping.\nYou can use the following functions to display and edit BP roles in the dialog:\n●\nOverview of all roles assigned to a business partner\n●\nDeletion of a role assignment\n●\nTime-based validity of a role assignment\n●\nWhere-used list for a role (for example, in an application)\nLesson: Source of Data – Customer Master Data - SAP Business Partner \n© Copyright. All rights reserved.\n31",
     "action_description": "Please change the quantity to 238 units.",
-    "qa_question": "Could you clarify how to edit a BP role assignment in SAP ERP, specifically regarding time-based validity and where-used lists for role management?"
+    "qa_question": "Could you clarify how to edit a BP role assignment in SAP ERP, specifically regarding time-based validity and where-used lists for role management?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please change the quantity to 238 units on order 17431, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify how to edit a BP role assignment in SAP ERP, specifically regarding time-based validity and where-used lists for role management? — please find the answer below.\n\nmore information, see BP Role Grouping. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_026",
@@ -451,7 +476,8 @@
     },
     "rag_evidence": "Figure 31: Creating an Outbound Delivery\nStructure of Delivery Documents\nA delivery document is grouped into two levels: header and item level. The data is distributed \nacross these levels as follows:\n●\nHeader level:\nThe data for the document header is valid for the entire document. This includes, for \nexample, data for the ship-to party and deadlines for shipping processing.\n●\nItem level:\nEach item in the delivery document contains its own data. This includes, for example, data",
     "action_description": "Kindly update the delivery date for this order.",
-    "qa_question": "When creating an outbound delivery in SAP ERP, where should the delivery date be entered—header level or item level?"
+    "qa_question": "When creating an outbound delivery in SAP ERP, where should the delivery date be entered—header level or item level?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Kindly update the delivery date for this order on order 5366, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — When creating an outbound delivery in SAP ERP, where should the delivery date be entered—header level or item level? — please find the answer below.\n\nFigure 31: Creating an Outbound Delivery Structure of Delivery Documents A delivery document is grouped into two levels: header and item level. The data is distributed across these levels as follows: ● Header level: The data for the document header is valid for the entire document. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_027",
@@ -473,7 +499,8 @@
     },
     "rag_evidence": "Free-of-Charge Delivery and Subsequent Delivery Free of Charge \nYou create a delivery free-of-charge document when you want to send your customer a \nsample, for example.\nYou enter a Subsequent Delivery Free of Charge document, for example, when you need to \ndeliver material for an order due to a complaint.\nCustomizing for sales document type SD determines that this transaction requires a \npreceding document. The relevant copying controls must be set up for all preceding",
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": "When creating a Subsequent Delivery Free of Charge document in SAP ERP for an order-related complaint, how do we ensure the copying controls from the sales document type SD are properly configured to reference the preceding document?"
+    "qa_question": "When creating a Subsequent Delivery Free of Charge document in SAP ERP for an order-related complaint, how do we ensure the copying controls from the sales document type SD are properly configured to reference the preceding document?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — When creating a Subsequent Delivery Free of Charge document in SAP ERP for an order-related complaint, how do we ensure the copying controls from the sales document type SD are properly configured to reference the preceding document? — please find the answer below.\n\nFree-of-Charge Delivery and Subsequent Delivery Free of Charge You create a delivery free-of-charge document when you want to send your customer a sample, for example. You enter a Subsequent Delivery Free of Charge document, for example, when you need to deliver material for an order due to a complaint. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_028",
@@ -495,7 +522,8 @@
     },
     "rag_evidence": "Figure 95: Material Determination Condition Technique\nFigure 96: Material Determination Condition Technique\nThe condition technique provides more flexibility in modeling material determination and \nproduct selection.\nUnit 11: Material Determination, Listing and Exclusion\n146\n© Copyright. All rights reserved.",
     "action_description": "Unblock the delivery for this order.",
-    "qa_question": "Could you explain how to configure the material determination condition technique for product selection as described in Unit 11?"
+    "qa_question": "Could you explain how to configure the material determination condition technique for product selection as described in Unit 11?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Unblock the delivery for this order on order 6586, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you explain how to configure the material determination condition technique for product selection as described in Unit 11? — please find the answer below.\n\nFigure 95: Material Determination Condition Technique Figure 96: Material Determination Condition Technique The condition technique provides more flexibility in modeling material determination and product selection.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_029",
@@ -517,7 +545,8 @@
     },
     "rag_evidence": "documents of a sales document category at a time. The changes are scheduled in the form of \na job which runs in the background. You can monitor the mass change of sales document with \nthe Monitor Mass Changes of Sales Documents app.\nBlocks\nFigure 23: Blocks\nIn sales orders, you can block the following transactions:\nUnit 4: Sales Order Processing\n36\n© Copyright. All rights reserved.",
     "action_description": "Please set the payment terms to Net 60.",
-    "qa_question": "Could you clarify how to monitor the status of mass changes to sales documents after scheduling a background job in SAP ERP?"
+    "qa_question": "Could you clarify how to monitor the status of mass changes to sales documents after scheduling a background job in SAP ERP?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please set the payment terms to Net 60 on order 10000082, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify how to monitor the status of mass changes to sales documents after scheduling a background job in SAP ERP? — please find the answer below.\n\ndocuments of a sales document category at a time. The changes are scheduled in the form of a job which runs in the background. You can monitor the mass change of sales document with the Monitor Mass Changes of Sales Documents app. Blocks Figure 23: Blocks In sales orders, you can block the following transactions:\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_030",
@@ -539,7 +568,8 @@
     },
     "rag_evidence": "Figure 46: Cross-Division Sales\nDivision-Specific Sales\nUsing the Customizing parameters, you could also prevent materials with a different division \n(compared to the division in the order header) from being sold. This would enable division-\nspecific (or decentralized) sales, whereby each sales area may sell only materials assigned to \nits own division. It is then not possible to combine materials of different divisions in the same",
     "action_description": "Assign batch number B-84928 to this item.",
-    "qa_question": "How can we configure the SAP ERP system to enforce division-specific sales restrictions, preventing materials from different divisions from being combined in the same order?"
+    "qa_question": "How can we configure the SAP ERP system to enforce division-specific sales restrictions, preventing materials from different divisions from being combined in the same order?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Assign batch number B-84928 to this item on order 3299, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can we configure the SAP ERP system to enforce division-specific sales restrictions, preventing materials from different divisions from being combined in the same order? — please find the answer below.\n\nFigure 46: Cross-Division Sales Division-Specific Sales Using the Customizing parameters, you could also prevent materials with a different division (compared to the division in the order header) from being sold. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_031",
@@ -550,7 +580,8 @@
     "erp_evidence": null,
     "rag_evidence": "and bill-to party.\nAddress determination is performed when you create an SD document, or add or change a \npartner in the document. Based on the configuration and address validities in the BP master, \nthe system determines addresses valid between the current system date and Dec 31, 9999 \nfor related partner functions, and proposes the addresses in SD documents.\nThe addresses are determined from the target address usage, from the address overview, or",
     "action_description": null,
-    "qa_question": "Could you explain how the SAP ERP system determines the appropriate address for a bill-to party when creating an SD document?"
+    "qa_question": "Could you explain how the SAP ERP system determines the appropriate address for a bill-to party when creating an SD document?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — Could you explain how the SAP ERP system determines the appropriate address for a bill-to party when creating an SD document? — please find the answer below.\n\nand bill-to party. Address determination is performed when you create an SD document, or add or change a partner in the document. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_032",
@@ -561,7 +592,8 @@
     "erp_evidence": null,
     "rag_evidence": "Figure 66: Control the Availability Check in Sales Orders\nAs well as information about how the availability check should be performed in sales orders, it \nis important to know the date for which the check is carried out.\nUsing delivery and transportation scheduling (calculating backwards from the customer’s \nrequired delivery date), the system calculates several dates for each item in the sales order. \nThe relevant date for the availability check is the material availability date. On this date,",
     "action_description": null,
-    "qa_question": "Could you explain how the system determines the material availability date for availability checks in sales orders?"
+    "qa_question": "Could you explain how the system determines the material availability date for availability checks in sales orders?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — Could you explain how the system determines the material availability date for availability checks in sales orders? — please find the answer below.\n\nFigure 66: Control the Availability Check in Sales Orders As well as information about how the availability check should be performed in sales orders, it is important to know the date for which the check is carried out. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_033",
@@ -572,7 +604,8 @@
     "erp_evidence": null,
     "rag_evidence": "Figure 13: Organizational Unit – Sales Organization\nOrganizational Unit – Distribution Channel – Distribution Chain\nThe distribution channel characterizes the way in which goods and services are distributed.\nDistribution channels have to be assigned to at least one sales organization (multiple \nassignments are possible). To use the sales and distribution functions, you need to define at \nleast one distribution channel in the system.\nYou can use different distribution channels to do the following:\n●",
     "action_description": null,
-    "qa_question": "Could you clarify how distribution channels are assigned to sales organizations and how multiple assignments impact sales processes?"
+    "qa_question": "Could you clarify how distribution channels are assigned to sales organizations and how multiple assignments impact sales processes?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — Could you clarify how distribution channels are assigned to sales organizations and how multiple assignments impact sales processes? — please find the answer below.\n\nFigure 13: Organizational Unit – Sales Organization Organizational Unit – Distribution Channel – Distribution Chain The distribution channel characterizes the way in which goods and services are distributed. Distribution channels have to be assigned to at least one sales organization (multiple assignments are possible). …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_034",
@@ -583,7 +616,8 @@
     "erp_evidence": null,
     "rag_evidence": "they correspond to the legal and/or organizational units of an enterprise. SAP provides \norganizational units for all areas of your company (such as accounting, purchasing, \nproduction, and warehousing). We will focus on the elements that are relevant for sales and \ndistribution processes.\nSAP S/4HANA uses a range of organizational units designed exclusively for mapping sales \nand distribution processes, such as the sales organization and distribution channel. Other",
     "action_description": null,
-    "qa_question": "How does SAP S/4HANA determine the appropriate sales organization when creating a sales order based on customer data?"
+    "qa_question": "How does SAP S/4HANA determine the appropriate sales organization when creating a sales order based on customer data?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does SAP S/4HANA determine the appropriate sales organization when creating a sales order based on customer data? — please find the answer below.\n\nthey correspond to the legal and/or organizational units of an enterprise. SAP provides organizational units for all areas of your company (such as accounting, purchasing, production, and warehousing). We will focus on the elements that are relevant for sales and distribution processes. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_035",
@@ -594,7 +628,8 @@
     "erp_evidence": null,
     "rag_evidence": "Figure 36: Creating a Billing Document\nBilling Document Structure\nA billing document is divided into two levels: header and item level. The data is distributed \nacross these levels as follows:\n●\nHeader level:\nThe data for the document header is valid for the entire document. This includes, for \nexample, data about the payer and the billing date.\n●\nItem level:\nEach item in the billing document contains its own data. This includes, for example, details",
     "action_description": null,
-    "qa_question": "How is data distributed between the header and item levels when creating a billing document in SAP ERP?"
+    "qa_question": "How is data distributed between the header and item levels when creating a billing document in SAP ERP?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How is data distributed between the header and item levels when creating a billing document in SAP ERP? — please find the answer below.\n\nFigure 36: Creating a Billing Document Billing Document Structure A billing document is divided into two levels: header and item level. The data is distributed across these levels as follows: ● Header level: The data for the document header is valid for the entire document. This includes, for example, data about the payer and the billing date. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_036",
@@ -605,7 +640,8 @@
     "erp_evidence": null,
     "rag_evidence": "created. If material determination is re-run, the result of the substitution may change due to \nthe new availability situation.\nYou can use the product attributes in the material and customer master records to exclude a \nparticular material from product selection. This means, for example, that all the materials that \nhave been rejected in the customer master will not be included by the system when it \ndetermines a substitution material.",
     "action_description": null,
-    "qa_question": "How does the system use product attributes in customer master records to exclude specific materials from substitution during material determination?"
+    "qa_question": "How does the system use product attributes in customer master records to exclude specific materials from substitution during material determination?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the system use product attributes in customer master records to exclude specific materials from substitution during material determination? — please find the answer below.\n\ncreated. If material determination is re-run, the result of the substitution may change due to the new availability situation. You can use the product attributes in the material and customer master records to exclude a particular material from product selection. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_037",
@@ -616,7 +652,8 @@
     "erp_evidence": null,
     "rag_evidence": "Unit 5\nLesson 1\nControlling Sales Documents - Sales \nDocument Type\nLESSON OBJECTIVES\nAfter completing this lesson, you will be able to:\n●\nIdentify the elements that control the sales documents\nBasic Principles\nControlling Business Processes in Sales\nFigure 25: Controlling Business Processes in Sales\nSales processes are controlled by Customizing for sales documents.\nCustomizing for sales documents can be done at header, item, or schedule line level,",
     "action_description": null,
-    "qa_question": "How does Customizing for sales documents at the header, item, and schedule line levels influence the structure and behavior of sales documents in SAP ERP?"
+    "qa_question": "How does Customizing for sales documents at the header, item, and schedule line levels influence the structure and behavior of sales documents in SAP ERP?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does Customizing for sales documents at the header, item, and schedule line levels influence the structure and behavior of sales documents in SAP ERP? — please find the answer below.\n\nUnit 5 Lesson 1 Controlling Sales Documents - Sales Document Type LESSON OBJECTIVES After completing this lesson, you will be able to: ● Identify the elements that control the sales documents Basic Principles Controlling Business Processes in Sales Figure 25: Controlling Business Processes in Sales Sales processes are controlled by Customizing for sales documents. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_038",
@@ -627,7 +664,8 @@
     "erp_evidence": null,
     "rag_evidence": "level item and item category fields (TANN). In this case, however, the system does not refer to \nthe free goods master record, and settings such as automatic reduction of the main item \nquantity for inclusive quantities or certain controls for the delivery are not available.\nThe system re-reads the free goods master record in the sales order if the quantities in the \nmain item change or if the pricing date changes. The system then deletes the sub-items and",
     "action_description": null,
-    "qa_question": "How does the system handle re-reading of the free goods master record and deletion of sub-items when main item quantities or pricing dates change in a TANN item category scenario?"
+    "qa_question": "How does the system handle re-reading of the free goods master record and deletion of sub-items when main item quantities or pricing dates change in a TANN item category scenario?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the system handle re-reading of the free goods master record and deletion of sub-items when main item quantities or pricing dates change in a TANN item category scenario? — please find the answer below.\n\nlevel item and item category fields (TANN). In this case, however, the system does not refer to the free goods master record, and settings such as automatic reduction of the main item quantity for inclusive quantities or certain controls for the delivery are not available. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_039",
@@ -638,7 +676,8 @@
     "erp_evidence": null,
     "rag_evidence": "of the fields requires you to enter the legal form, whereas when creating a business partner as \na person, you have to enter first name, other names, gender, and so on. You cannot create \nyour own business partner category; it is hard coded by SAP.\nWhen you create a business partner, you have to select a business partner category. \nDepending on the business partner category, a certain set of fields has to be filled with data.",
     "action_description": null,
-    "qa_question": "How does the SAP ERP system determine which set of fields to display when creating a business partner based on the selected business partner category?"
+    "qa_question": "How does the SAP ERP system determine which set of fields to display when creating a business partner based on the selected business partner category?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the SAP ERP system determine which set of fields to display when creating a business partner based on the selected business partner category? — please find the answer below.\n\nof the fields requires you to enter the legal form, whereas when creating a business partner as a person, you have to enter first name, other names, gender, and so on. You cannot create your own business partner category; it is hard coded by SAP. When you create a business partner, you have to select a business partner category. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_040",
@@ -649,7 +688,8 @@
     "erp_evidence": null,
     "rag_evidence": "●\nRoutines for data transfer: \nThese routines control transfer of fields in the preceding document.\n●\nCopying Requirements: \nHere you define requirements that are checked when you create a document with \nreference. If these requirements are not met in a particular case, the system issues a \nwarning or error message and if necessary, terminates processing.\n●\nSwitches:\nThere are switches for setting specific controls for each transaction. For example, you can",
     "action_description": null,
-    "qa_question": "How do data transfer routines determine which fields are carried over when creating a document with reference in SAP ERP?"
+    "qa_question": "How do data transfer routines determine which fields are carried over when creating a document with reference in SAP ERP?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How do data transfer routines determine which fields are carried over when creating a document with reference in SAP ERP? — please find the answer below.\n\n● Routines for data transfer: These routines control transfer of fields in the preceding document. ● Copying Requirements: Here you define requirements that are checked when you create a document with reference. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_041",
@@ -660,7 +700,8 @@
     "erp_evidence": null,
     "rag_evidence": "●\nThe tab pages Sales: Sales Org. Data 1, Sales: Sales Org. Data 2 and Sales Text are valid for \nthe corresponding sales organization and distribution channel.\n●\nThe tab pages Sales: General/Plant Data is valid for the corresponding delivering plant.\nBy changing the Customizing settings, you can hide certain fields on a tab page or make them \nmandatory.\nFigure 45: Material Master Data for Sales and Distribution\nDivision-Specific and Cross-Division Sales\nCross-Division Sales",
     "action_description": null,
-    "qa_question": "How can we configure the system to hide specific fields in the Sales Org. Data tab pages?"
+    "qa_question": "How can we configure the system to hide specific fields in the Sales Org. Data tab pages?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How can we configure the system to hide specific fields in the Sales Org. Data tab pages? — please find the answer below.\n\n● The tab pages Sales: Sales Org. Data 1, Sales: Sales Org. Data 2 and Sales Text are valid for the corresponding sales organization and distribution channel. ● The tab pages Sales: General/Plant Data is valid for the corresponding delivering plant. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_042",
@@ -671,7 +712,8 @@
     "erp_evidence": null,
     "rag_evidence": "missing.\nExamples:\n●\nIncomplete for delivery – No delivery is possible\n●\nIncomplete for billing – No billing is possible\n●\nIncomplete for pricing – No order confirmation or billing are possible\nA status group can contain any number of these consequences.\nThis allows you to control the effects of incomplete data separately for each field.\nLESSON SUMMARY\nYou should now be able to:\n●\nIncompletion Check and its Configuration\nLesson: Incompletion Check and its Configuration\n© Copyright. All rights reserved.\n93",
     "action_description": null,
-    "qa_question": "Could you explain how the system determines which status group applies to an order when data is incomplete?"
+    "qa_question": "Could you explain how the system determines which status group applies to an order when data is incomplete?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — Could you explain how the system determines which status group applies to an order when data is incomplete? — please find the answer below.\n\nmissing. Examples: ● Incomplete for delivery – No delivery is possible ● Incomplete for billing – No billing is possible ● Incomplete for pricing – No order confirmation or billing are possible A status group can contain any number of these consequences. This allows you to control the effects of incomplete data separately for each field. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_043",
@@ -682,7 +724,8 @@
     "erp_evidence": null,
     "rag_evidence": "The material availability check in sales orders is performed at plant level for the \ncorresponding item. The plant can be determined automatically or maintained manually. \nDuring automatic determination, the system looks for a valid default value for the plant in the \nrelevant master data using the following sequence:\nUnit 6: Availability Check\n106\n© Copyright. All rights reserved.",
     "action_description": null,
-    "qa_question": "How does the system determine the default plant for material availability checks in sales orders when automatic determination is enabled?"
+    "qa_question": "How does the system determine the default plant for material availability checks in sales orders when automatic determination is enabled?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the system determine the default plant for material availability checks in sales orders when automatic determination is enabled? — please find the answer below.\n\nThe material availability check in sales orders is performed at plant level for the corresponding item. The plant can be determined automatically or maintained manually. During automatic determination, the system looks for a valid default value for the plant in the relevant master data using the following sequence:\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_044",
@@ -693,7 +736,8 @@
     "erp_evidence": null,
     "rag_evidence": "house-sharing group). When a business partner is created, a business partner category must \nbe selected. Only one business partner category can be created, and this cannot be changed \nat a later date. The business partner category determines the fields in which the user can \nenter data. For example, when you want to create a business partner as an organization, one \nof the fields requires you to enter the legal form, whereas when creating a business partner as",
     "action_description": null,
-    "qa_question": "How does selecting a business partner category affect the data fields available during creation?"
+    "qa_question": "How does selecting a business partner category affect the data fields available during creation?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does selecting a business partner category affect the data fields available during creation? — please find the answer below.\n\nhouse-sharing group). When a business partner is created, a business partner category must be selected. Only one business partner category can be created, and this cannot be changed at a later date. The business partner category determines the fields in which the user can enter data. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_045",
@@ -704,7 +748,8 @@
     "erp_evidence": null,
     "rag_evidence": "Create with Reference: Item Selection (3)\nFigure 44: Create with Reference: Item Selection (3)\nYou can create sales documents with reference to documents that already exist.\nIn the process, you can specify a different requested delivery date for the new document. This \ndate is set at header level and for all referenced items in the new document.\nYou can use the Selection list button to select one or more items in the referenced document",
     "action_description": null,
-    "qa_question": "How does specifying a different requested delivery date in a new sales document affect the referenced items when using the 'Create with Reference' function?"
+    "qa_question": "How does specifying a different requested delivery date in a new sales document affect the referenced items when using the 'Create with Reference' function?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does specifying a different requested delivery date in a new sales document affect the referenced items when using the 'Create with Reference' function? — please find the answer below.\n\nCreate with Reference: Item Selection (3) Figure 44: Create with Reference: Item Selection (3) You can create sales documents with reference to documents that already exist. In the process, you can specify a different requested delivery date for the new document. This date is set at header level and for all referenced items in the new document. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_046",
@@ -715,7 +760,8 @@
     "erp_evidence": null,
     "rag_evidence": "UNIT 3\nEnterprise Structures in Sales \nand Distribution\nLesson 1\nEnterprise Structures in Sales and Distribution\n13\nUNIT OBJECTIVES\n●\nUse organizational units in the SAP system to map the different areas in your company\n© Copyright. All rights reserved.\n11",
     "action_description": null,
-    "qa_question": "How do I configure organizational units to map different sales regions in the SAP ERP system?"
+    "qa_question": "How do I configure organizational units to map different sales regions in the SAP ERP system?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How do I configure organizational units to map different sales regions in the SAP ERP system? — please find the answer below.\n\nUNIT 3 Enterprise Structures in Sales and Distribution Lesson 1 Enterprise Structures in Sales and Distribution 13 UNIT OBJECTIVES ● Use organizational units in the SAP system to map the different areas in your company 11\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_047",
@@ -726,7 +772,8 @@
     "erp_evidence": null,
     "rag_evidence": "Figure 85: Examples for Creation of Outbound Deliveries\nCollective Processing – Picking\nTo perform picking in SAP S/4HANA, warehouse tasks have to be created with reference to \noutbound delivery orders in SAP EWM. The warehouse tasks contain the materials and \nquantities to be picked, which correspond to the delivery quantities. Based on the data of the \nwarehouse task, you can print the pick list for the warehouse clerk. This step can be carried \nout automatically.",
     "action_description": null,
-    "qa_question": "How does the system automatically generate pick lists for outbound deliveries based on warehouse tasks in SAP EWM?"
+    "qa_question": "How does the system automatically generate pick lists for outbound deliveries based on warehouse tasks in SAP EWM?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the system automatically generate pick lists for outbound deliveries based on warehouse tasks in SAP EWM? — please find the answer below.\n\nFigure 85: Examples for Creation of Outbound Deliveries Collective Processing – Picking To perform picking in SAP S/4HANA, warehouse tasks have to be created with reference to outbound delivery orders in SAP EWM. The warehouse tasks contain the materials and quantities to be picked, which correspond to the delivery quantities. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_048",
@@ -737,7 +784,8 @@
     "erp_evidence": null,
     "rag_evidence": "order processing.\nThere are also various settings in Customizing control tables that influence the scope and \nbehavior of the availability check, as mentioned in the figure, Control the Availability Check in \nSales Orders.\n© Copyright. All rights reserved.\n105",
     "action_description": null,
-    "qa_question": "Could you explain how the Customizing control tables affect the availability check process in sales orders?"
+    "qa_question": "Could you explain how the Customizing control tables affect the availability check process in sales orders?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — Could you explain how the Customizing control tables affect the availability check process in sales orders? — please find the answer below.\n\norder processing. There are also various settings in Customizing control tables that influence the scope and behavior of the availability check, as mentioned in the figure, Control the Availability Check in Sales Orders. 105\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_049",
@@ -748,7 +796,8 @@
     "erp_evidence": null,
     "rag_evidence": "level or for each item.\nYou can decide in Customizing for the item category whether business data at item level \nshould be able to differ from business data at header level. You define this option separately \nfor each item category. This allows you to create documents containing both items in which \nthe business data must be identical to the sales document header and items that allow \ndifferent business data.\nOverview of Changing of Sales Documents - Fast Changes\nFast Changes",
     "action_description": null,
-    "qa_question": "How does the SAP ERP system handle business data consistency between item-level and header-level settings when multiple item categories with different configurations are used in a single sales document?"
+    "qa_question": "How does the SAP ERP system handle business data consistency between item-level and header-level settings when multiple item categories with different configurations are used in a single sales document?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the SAP ERP system handle business data consistency between item-level and header-level settings when multiple item categories with different configurations are used in a single sales document? — please find the answer below.\n\nlevel or for each item. You can decide in Customizing for the item category whether business data at item level should be able to differ from business data at header level. You define this option separately for each item category. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_050",
@@ -759,7 +808,8 @@
     "erp_evidence": null,
     "rag_evidence": "to return consignment goods.\nYou process consignment fill-up with order type KB. The goods issue sets up a special stock \nat the customer. The goods remain in the valuated stocks of the delivering plant, however. \nThis transaction is not billed because the consignment stock remains the property of your \ncompany.\nConsignment issue is processed with order type KE. When goods are issued, both the \ncustomer special stock and the stock in the delivering plant are reduced. This transaction is",
     "action_description": null,
-    "qa_question": "How does the SAP ERP system handle the valuation of consignment stock when processing an issue transaction with order type KE?"
+    "qa_question": "How does the SAP ERP system handle the valuation of consignment stock when processing an issue transaction with order type KE?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nregarding your question — How does the SAP ERP system handle the valuation of consignment stock when processing an issue transaction with order type KE? — please find the answer below.\n\nto return consignment goods. You process consignment fill-up with order type KB. The goods issue sets up a special stock at the customer. The goods remain in the valuated stocks of the delivering plant, however. This transaction is not billed because the consignment stock remains the property of your company. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_051",
@@ -781,7 +831,8 @@
     },
     "rag_evidence": null,
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 5220, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_052",
@@ -802,7 +853,8 @@
     },
     "rag_evidence": null,
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_053",
@@ -824,7 +876,8 @@
     },
     "rag_evidence": null,
     "action_description": "Assign batch number B-54438 to this item.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Assign batch number B-54438 to this item on order 6404, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_054",
@@ -846,7 +899,8 @@
     },
     "rag_evidence": null,
     "action_description": "We would like to cancel this order item.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: We would like to cancel this order item on order 60000184, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_055",
@@ -868,7 +922,8 @@
     },
     "rag_evidence": null,
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 74, item 20.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_056",
@@ -890,7 +945,8 @@
     },
     "rag_evidence": null,
     "action_description": "Reduce the order quantity by 50 units.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Reduce the order quantity by 50 units on order 15883, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_057",
@@ -912,7 +968,8 @@
     },
     "rag_evidence": null,
     "action_description": "Unblock the delivery for this order.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Unblock the delivery for this order on order 5345, item 20.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_058",
@@ -934,7 +991,8 @@
     },
     "rag_evidence": null,
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_059",
@@ -956,7 +1014,8 @@
     },
     "rag_evidence": null,
     "action_description": "Please set the payment terms to Net 60.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please set the payment terms to Net 60 on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_060",
@@ -977,7 +1036,8 @@
     },
     "rag_evidence": null,
     "action_description": "Kindly update the delivery date for this order.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Kindly update the delivery date for this order on order 20318, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_061",
@@ -998,7 +1058,8 @@
     },
     "rag_evidence": null,
     "action_description": "Reduce the order quantity by 50 units.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Reduce the order quantity by 50 units on order 20329, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_062",
@@ -1019,7 +1080,8 @@
     },
     "rag_evidence": null,
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 5001521, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_063",
@@ -1039,7 +1101,8 @@
     },
     "rag_evidence": null,
     "action_description": "We would like to cancel this order item.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: We would like to cancel this order item on order 60000350, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_064",
@@ -1060,7 +1123,8 @@
     },
     "rag_evidence": null,
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 6671, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_065",
@@ -1081,7 +1145,8 @@
     },
     "rag_evidence": null,
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 2371, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_066",
@@ -1103,7 +1168,8 @@
     },
     "rag_evidence": null,
     "action_description": "Reduce the order quantity by 50 units.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Reduce the order quantity by 50 units on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_067",
@@ -1125,7 +1191,8 @@
     },
     "rag_evidence": null,
     "action_description": "Kindly update the delivery date for this order.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Kindly update the delivery date for this order on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_068",
@@ -1147,7 +1214,8 @@
     },
     "rag_evidence": null,
     "action_description": "Unblock the delivery for this order.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Unblock the delivery for this order on order 3038, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_069",
@@ -1167,7 +1235,8 @@
     },
     "rag_evidence": null,
     "action_description": "We would like to cancel this order item.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: We would like to cancel this order item on order 6026, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_071",
@@ -1189,7 +1258,8 @@
     },
     "rag_evidence": "Table 2: Split Criteria\nThe following table lists some of the criteria that frequently occur.\nCriteria\nConsequence\nDifferent ship-to parties in sales orders\nNo combination into a single outbound deliv-\nery\nDifferent shipping points in sales orders\nNo combination into a single outbound deliv-\nery\nDifferent payment terms in sales orders\nNo combination into a single billing docu-\nment\nHint:\nYou can maintain some of the criteria that affect the combination of documents \nin Customizing.",
     "action_description": "Please change the quantity to 114 units.",
-    "qa_question": "How can we configure the system to allow combining outbound deliveries when different shipping points are specified in the sales order, as per the split criteria table in Customizing?"
+    "qa_question": "How can we configure the system to allow combining outbound deliveries when different shipping points are specified in the sales order, as per the split criteria table in Customizing?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please change the quantity to 114 units on order 5220, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can we configure the system to allow combining outbound deliveries when different shipping points are specified in the sales order, as per the split criteria table in Customizing? — please find the answer below.\n\nTable 2: Split Criteria The following table lists some of the criteria that frequently occur. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_072",
@@ -1210,7 +1280,8 @@
     },
     "rag_evidence": "relevant for picking in an SAP EWM-managed warehouse, it is forwarded to SAP EWM, where \nan outbound delivery order is created.\nFigure 33: Warehouse Management – Connection to SAP EWM\nAn outbound delivery order contains all the data that is required for triggering and monitoring \nthe complete outbound delivery process. In other words, the outbound delivery order is the \nbasis for the execution of picking activities.\nWhen the goods issue is posted in SAP EWM, a final outbound delivery (in SAP EWM) is",
     "action_description": "Please update the shipping address for this order.",
-    "qa_question": "Could you clarify the steps required to create an outbound delivery order in SAP EWM when goods issue is posted, as this appears to be the basis for picking activities?"
+    "qa_question": "Could you clarify the steps required to create an outbound delivery order in SAP EWM when goods issue is posted, as this appears to be the basis for picking activities?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please update the shipping address for this order on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify the steps required to create an outbound delivery order in SAP EWM when goods issue is posted, as this appears to be the basis for picking activities? — please find the answer below.\n\nrelevant for picking in an SAP EWM-managed warehouse, it is forwarded to SAP EWM, where an outbound delivery order is created. Figure 33: Warehouse Management – Connection to SAP EWM An outbound delivery order contains all the data that is required for triggering and monitoring the complete outbound delivery process. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_073",
@@ -1232,7 +1303,8 @@
     },
     "rag_evidence": "Automatic Product Selection Master Data\nFigure 90: Automatic Product Selection Master Data\nThe sequence of the substitution materials in the master data influences the result of the \nautomatic product selection in the order.\nIf you want the material that is first entered in the order to be included in the substitution, \nthen you must enter it in the substitutions list.\n●\nCase A: The original material is in the first place in the list, and its available stock is",
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": "How should substitution materials be prioritized in the Automatic Product Selection Master Data to ensure the original material listed in the order is selected first during substitution?"
+    "qa_question": "How should substitution materials be prioritized in the Automatic Product Selection Master Data to ensure the original material listed in the order is selected first during substitution?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 6404, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How should substitution materials be prioritized in the Automatic Product Selection Master Data to ensure the original material listed in the order is selected first during substitution? — please find the answer below.\n\nAutomatic Product Selection Master Data Figure 90: Automatic Product Selection Master Data The sequence of the substitution materials in the master data influences the result of the automatic product selection in the order. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_074",
@@ -1254,7 +1326,8 @@
     },
     "rag_evidence": "●\nTransportation lead time: the amount of time needed to organize the means of transport\nRoute determination can be performed automatically for each delivery-relevant item in the \nsales document.\nThe figure, Determining the Route Automatically, illustrates the different criteria that SAP S/\n4HANA uses to determine a route for shipping within sales documents.\nUnit 5: Automatic Data Determination and Scheduling\n92\n© Copyright. All rights reserved.",
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": "Could you clarify how SAP S/4HANA determines the route for delivery-relevant items when automatic route determination is enabled, particularly regarding the criteria used for selecting transportation options?"
+    "qa_question": "Could you clarify how SAP S/4HANA determines the route for delivery-relevant items when automatic route determination is enabled, particularly regarding the criteria used for selecting transportation options?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 60000184, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify how SAP S/4HANA determines the route for delivery-relevant items when automatic route determination is enabled, particularly regarding the criteria used for selecting transportation options? — please find the answer below.\n\n● Transportation lead time: the amount of time needed to organize the means of transport Route determination can be performed automatically for each delivery-relevant item in the sales document. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_075",
@@ -1276,7 +1349,8 @@
     },
     "rag_evidence": "Unit 8\nLearning Assessment\n1.\nIn Customizing, you can configure the incompletion messages field, which allows you to \ncontrol whether incomplete sales documents can be saved or not.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n2. You can set up the incompleteness procedure so the system goes directly from the \nincompletion log to various views, where you can then edit the incomplete data.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse",
     "action_description": "We would like to cancel this order item.",
-    "qa_question": "How can I configure the incompletion messages in Customizing to control whether incomplete sales documents can be saved?"
+    "qa_question": "How can I configure the incompletion messages in Customizing to control whether incomplete sales documents can be saved?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: We would like to cancel this order item on order 74, item 20.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can I configure the incompletion messages in Customizing to control whether incomplete sales documents can be saved? — please find the answer below.\n\nUnit 8 Learning Assessment 1. In Customizing, you can configure the incompletion messages field, which allows you to control whether incomplete sales documents can be saved or not. Determine whether this statement is true or false. X True X False 2. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_076",
@@ -1298,7 +1372,8 @@
     },
     "rag_evidence": "(VDM), which is based on the transactional and master data tables of SAP S/4HANA. CDS \nviews are developed, maintained, and extended in the ABAP layer of the SAP S/4HANA \nsystem. The system generates SQL-Runtime-Views in SAP HANA to execute the data read \nand transformation inside the SAP HANA database layer.\nThe advantages of this approach include full ABAP integration, allowing for instances to re-\nuse existing reporting authorizations, and so on. Also, SAP can make use of the analytical",
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": "Could you clarify how to configure CDS views in the ABAP layer for real-time data reporting while ensuring compatibility with SQL-Runtime-Views in SAP HANA?"
+    "qa_question": "Could you clarify how to configure CDS views in the ABAP layer for real-time data reporting while ensuring compatibility with SQL-Runtime-Views in SAP HANA?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 15883, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify how to configure CDS views in the ABAP layer for real-time data reporting while ensuring compatibility with SQL-Runtime-Views in SAP HANA? — please find the answer below.\n\n(VDM), which is based on the transactional and master data tables of SAP S/4HANA. CDS views are developed, maintained, and extended in the ABAP layer of the SAP S/4HANA system. The system generates SQL-Runtime-Views in SAP HANA to execute the data read and transformation inside the SAP HANA database layer. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_077",
@@ -1320,7 +1395,8 @@
     },
     "rag_evidence": "warehouse task, you can print the pick list for the warehouse clerk. This step can be carried \nout automatically.\nPicking can be confirmed automatically or in a separate processing step. If automatic \nconfirmation is not used, you can monitor picking by confirming the picked quantities \nmanually.\nThe figure, Collective Processing in Picking, illustrates collective creation of warehouse tasks.\nFigure 86: Collective Processing in Picking\nUnit 7: Collective Processing\n130\n© Copyright. All rights reserved.",
     "action_description": "Kindly update the delivery date for this order.",
-    "qa_question": "Could you explain the steps to perform collective processing for warehouse tasks as described in Figure 86, particularly regarding manual confirmation of picked quantities?"
+    "qa_question": "Could you explain the steps to perform collective processing for warehouse tasks as described in Figure 86, particularly regarding manual confirmation of picked quantities?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Kindly update the delivery date for this order on order 5345, item 20.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you explain the steps to perform collective processing for warehouse tasks as described in Figure 86, particularly regarding manual confirmation of picked quantities? — please find the answer below.\n\nwarehouse task, you can print the pick list for the warehouse clerk. This step can be carried out automatically. Picking can be confirmed automatically or in a separate processing step. If automatic confirmation is not used, you can monitor picking by confirming the picked quantities manually. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_078",
@@ -1342,7 +1418,8 @@
     },
     "rag_evidence": "●\nDelivery type from a sales document type, for example, Delivery (LF) ← Standard order \n(OR)\n●\nBilling doc. type from a sales doc. type, for example, Invoice (F2) ← standard order (OR)\n●\nBilling document type from a delivery type, for example, Invoice (F1) ← Delivery (LF)\n●\nBilling doc. type from a billing doc. type, for example, Credit memo (G2) ← Invoice (F2)\nYou determine the details of the copying procedure in copying control.\nCopying Control for Sales Documents",
     "action_description": "Please set the payment terms to Net 60.",
-    "qa_question": "When creating a standard order (OR) with Delivery type LF, how is the billing document type (e.g., Invoice F2) determined through the copying control settings?"
+    "qa_question": "When creating a standard order (OR) with Delivery type LF, how is the billing document type (e.g., Invoice F2) determined through the copying control settings?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please set the payment terms to Net 60 on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — When creating a standard order (OR) with Delivery type LF, how is the billing document type (e.g., Invoice F2) determined through the copying control settings? — please find the answer below.\n\n● Delivery type from a sales document type, for example, Delivery (LF) ← Standard order (OR) ● Billing doc. type from a sales doc. type, for example, Invoice (F2) ← standard order (OR) ● Billing document type from a delivery type, for example, Invoice (F1) ← Delivery (LF) ● Billing doc. type from a billing doc. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_079",
@@ -1364,7 +1441,8 @@
     },
     "rag_evidence": "required, which is why the corresponding fields are not displayed.\nIn contrast to the account group, which controls a customer master record, the partner \nfunction determines which partner assumes specific business functions within the sales \nprocess.\nUnit 9: Partner Functions in SD\n106\n© Copyright. All rights reserved.",
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": "Could you clarify how to properly assign partner functions in the customer master record when multiple sales organizations are involved?"
+    "qa_question": "Could you clarify how to properly assign partner functions in the customer master record when multiple sales organizations are involved?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify how to properly assign partner functions in the customer master record when multiple sales organizations are involved? — please find the answer below.\n\nrequired, which is why the corresponding fields are not displayed. In contrast to the account group, which controls a customer master record, the partner function determines which partner assumes specific business functions within the sales process.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_080",
@@ -1385,7 +1463,8 @@
     },
     "rag_evidence": "a basis for establishing long-term business relationships with your customers, for example, \nby:\n●\nTracking lost sales\n●\nRecording presales data to help negotiate large contracts\n●\nSelling goods and services to large organizations that require the entire process to be \ndocumented\nThe figure, Presales Activities, names some important topics within the presales process \nphase.\nFigure 21: Presales Activities\nSales Order Processing\n© Copyright. All rights reserved.\n29",
     "action_description": "Please update the shipping address for this order.",
-    "qa_question": "How can we document the entire presales process in SAP ERP to ensure compliance with requirements from large organizations that need full process documentation?"
+    "qa_question": "How can we document the entire presales process in SAP ERP to ensure compliance with requirements from large organizations that need full process documentation?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please update the shipping address for this order on order 20318, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can we document the entire presales process in SAP ERP to ensure compliance with requirements from large organizations that need full process documentation? — please find the answer below.\n\na basis for establishing long-term business relationships with your customers, for example, by: ● Tracking lost sales ● Recording presales data to help negotiate large contracts ● Selling goods and services to large organizations that require the entire process to be documented The figure, Presales Activities, names some important topics within the presales process phase. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_081",
@@ -1406,7 +1485,8 @@
     },
     "rag_evidence": "Business applications started out decades ago as a means of capturing systems of record, \nsales orders, trouble tickets, journal entries, and other records of business operations. Line-\nof-business personnel needed access to this information to decide, for example, how to price, \nplan, and set priorities. IT then built separate analytic decision support systems on \ncompletely different platforms. In theory, having separate systems for the various workloads",
     "action_description": "We would like to cancel this order item.",
-    "qa_question": "How can we efficiently retrieve order details for analysis when working with SAP ERP systems that handle operational records separately from analytic platforms?"
+    "qa_question": "How can we efficiently retrieve order details for analysis when working with SAP ERP systems that handle operational records separately from analytic platforms?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: We would like to cancel this order item on order 20329, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can we efficiently retrieve order details for analysis when working with SAP ERP systems that handle operational records separately from analytic platforms? — please find the answer below.\n\nBusiness applications started out decades ago as a means of capturing systems of record, sales orders, trouble tickets, journal entries, and other records of business operations. Line- of-business personnel needed access to this information to decide, for example, how to price, plan, and set priorities. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_082",
@@ -1427,7 +1507,8 @@
     },
     "rag_evidence": "●\nThe requested delivery date is earlier than in scenario 1\nBecause the system now also considers the replenishment lead time as part of the availability \ncheck, and the material availability date lies after the expiration of the replenishment lead \ntime, the requested delivery date can be confirmed.\nThe figure, Availability Checks – Scenario 4, illustrates scenario 4.\nFigure 79: Availability Checks – Scenario 4\nBackorder Processing",
     "action_description": "Unblock the delivery for this order.",
-    "qa_question": "In Scenario 4 of Availability Checks, why is the system not allowing a requested delivery date earlier than Scenario 1 when the replenishment lead time is factored into the availability check?"
+    "qa_question": "In Scenario 4 of Availability Checks, why is the system not allowing a requested delivery date earlier than Scenario 1 when the replenishment lead time is factored into the availability check?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Unblock the delivery for this order on order 5001521, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — In Scenario 4 of Availability Checks, why is the system not allowing a requested delivery date earlier than Scenario 1 when the replenishment lead time is factored into the availability check? — please find the answer below.\n\n● The requested delivery date is earlier than in scenario 1 Because the system now also considers the replenishment lead time as part of the availability check, and the material availability date lies after the expiration of the replenishment lead time, the requested delivery date can be confirmed. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_083",
@@ -1447,7 +1528,8 @@
     },
     "rag_evidence": "Free Goods – Transfer Data to Accounting\nFigure 104: Free Goods – Transfer Data to Accounting\nYou can see detailed information about free goods in Accounting or analyses.\nRevenues, sales deductions, and costs of free goods can be transferred to Accounting in \ndifferent ways, shown in the examples below. (MIt = main item, SIt = sub-item)\n●\nScenario 1 (SAP standard system)\nMIt: Not influenced by free goods\nSlt: Pricing de-activated, calculation price (VPRS) configured as costs\n●\nScenario 2",
     "action_description": "Reduce the order quantity by 50 units.",
-    "qa_question": "Could you clarify how the main item (MIt) and sub-item (SIt) handling differs between Scenario 1 and Scenario 2 when transferring free goods data to accounting in SAP?"
+    "qa_question": "Could you clarify how the main item (MIt) and sub-item (SIt) handling differs between Scenario 1 and Scenario 2 when transferring free goods data to accounting in SAP?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Reduce the order quantity by 50 units on order 60000350, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify how the main item (MIt) and sub-item (SIt) handling differs between Scenario 1 and Scenario 2 when transferring free goods data to accounting in SAP? — please find the answer below.\n\nFree Goods – Transfer Data to Accounting Figure 104: Free Goods – Transfer Data to Accounting You can see detailed information about free goods in Accounting or analyses. Revenues, sales deductions, and costs of free goods can be transferred to Accounting in different ways, shown in the examples below. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_084",
@@ -1468,7 +1550,8 @@
     },
     "rag_evidence": "warehouse complex in detail.\nThere are different areas where products are physically stored in a warehouse. These areas, \ncalled storage types, include various types of racks, goods receipt areas, and goods issue \nareas. Storage types are represented as a group of warehouse bins with similar \ncharacteristics.\nStorage sections are subdivisions of a storage type. A storage section represents a group of \nbins that have a common attribute, for example, bins that are used to store fast-moving",
     "action_description": "Assign batch number B-90199 to this item.",
-    "qa_question": "Could you clarify the steps to navigate the SAP ERP warehouse management module to view storage sections and their associated storage types?"
+    "qa_question": "Could you clarify the steps to navigate the SAP ERP warehouse management module to view storage sections and their associated storage types?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Assign batch number B-90199 to this item on order 6671, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify the steps to navigate the SAP ERP warehouse management module to view storage sections and their associated storage types? — please find the answer below.\n\nwarehouse complex in detail. There are different areas where products are physically stored in a warehouse. These areas, called storage types, include various types of racks, goods receipt areas, and goods issue areas. Storage types are represented as a group of warehouse bins with similar characteristics. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_085",
@@ -1489,7 +1572,8 @@
     },
     "rag_evidence": "materials as a material listing.\nThe material listing is controlled by the condition technique.\nIn the above example, you have created master records with a key for the customer and \nmaterial numbers. This key is delivered in the standard system. The access sequence for the \ncondition type guarantees that the system searches for valid master records both for the \nsold-to party and the payer.\nYou can also define your own keys, for example:\n●\nCustomer group/material\n●\nCustomer/product hierarchy",
     "action_description": "Reduce the order quantity by 50 units.",
-    "qa_question": "How does the SAP ERP system handle material listings with custom keys like customer/product hierarchy when using the condition technique for access sequences?"
+    "qa_question": "How does the SAP ERP system handle material listings with custom keys like customer/product hierarchy when using the condition technique for access sequences?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Reduce the order quantity by 50 units on order 2371, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How does the SAP ERP system handle material listings with custom keys like customer/product hierarchy when using the condition technique for access sequences? — please find the answer below.\n\nmaterials as a material listing. The material listing is controlled by the condition technique. In the above example, you have created master records with a key for the customer and material numbers. This key is delivered in the standard system. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_086",
@@ -1511,7 +1595,8 @@
     },
     "rag_evidence": "Sales Office and Sales Group\nFigure 11: Sales Office and Sales Group\nSales office\nSales offices define geographical aspects of the organizational structures in business \ndevelopment and sales. A sales office can be viewed as an actual office or perhaps a territory \nor region. Sales offices can be assigned to multiple sales areas. If you enter a sales order for a \nsales office within a particular sales area, the sales office must be permitted for that sales \narea.\nSales group",
     "action_description": "Please update the shipping address for this order.",
-    "qa_question": "When creating a sales order for a sales office within a specific sales area, how can we verify if the sales office is properly permitted for that sales area?"
+    "qa_question": "When creating a sales order for a sales office within a specific sales area, how can we verify if the sales office is properly permitted for that sales area?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please update the shipping address for this order on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — When creating a sales order for a sales office within a specific sales area, how can we verify if the sales office is properly permitted for that sales area? — please find the answer below.\n\nSales Office and Sales Group Figure 11: Sales Office and Sales Group Sales office Sales offices define geographical aspects of the organizational structures in business development and sales. A sales office can be viewed as an actual office or perhaps a territory or region. Sales offices can be assigned to multiple sales areas. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_087",
@@ -1533,7 +1618,8 @@
     },
     "rag_evidence": "Customizing. Examples in the standard system include:\nReason for substitution 0002\nCustomized material\nReason for substitution 0003\nEAN number\nYou do not need a material master record for the material number that you are replacing.\n© Copyright. All rights reserved.\n139",
     "action_description": "Kindly update the delivery date for this order.",
-    "qa_question": "Could you clarify the process for entering an EAN number in the material master record when substituting a customized material?"
+    "qa_question": "Could you clarify the process for entering an EAN number in the material master record when substituting a customized material?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Kindly update the delivery date for this order on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — Could you clarify the process for entering an EAN number in the material master record when substituting a customized material? — please find the answer below.\n\nCustomizing. Examples in the standard system include: Reason for substitution 0002 Customized material Reason for substitution 0003 EAN number You do not need a material master record for the material number that you are replacing. 139\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_088",
@@ -1555,7 +1641,8 @@
     },
     "rag_evidence": "or self-defined groups..\nFigure 7: SAP Fiori Launchpad Layout Options\nThe Fiori launchpad layout can be structured by groups or by spaces and pages.\nFigure 8: SAP Fiori Launchpad Layout - Spaces and Pages\nLesson: Identifying Key Features of SAP Fiori\n© Copyright. All rights reserved.\n7",
     "action_description": "Assign batch number B-99381 to this item.",
-    "qa_question": "How can we configure the SAP Fiori launchpad to organize app tiles using both groups and spaces/pages for better navigation?"
+    "qa_question": "How can we configure the SAP Fiori launchpad to organize app tiles using both groups and spaces/pages for better navigation?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Assign batch number B-99381 to this item on order 3038, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How can we configure the SAP Fiori launchpad to organize app tiles using both groups and spaces/pages for better navigation? — please find the answer below.\n\nor self-defined groups.. Figure 7: SAP Fiori Launchpad Layout Options The Fiori launchpad layout can be structured by groups or by spaces and pages. Figure 8: SAP Fiori Launchpad Layout - Spaces and Pages Lesson: Identifying Key Features of SAP Fiori 7\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_089",
@@ -1575,7 +1662,8 @@
     },
     "rag_evidence": "the provided order to be able to maintain address-dependent data:\nMultiple Address Handling for Customer Master Data in Business Partner \n(BPCUSTOMER_MULTIPLE_ADDRESSES)\nMultiple Address Handling for Business Partners in Sales and Distribution \n(Q2C_MULTIPLE_BP_ADDRESSES).\nFor more information about activating these business functions, see the Configuration Guide \nin SAP Note 3067314\nWhen multiple address handling is active, a customer as a legal entity can typically be",
     "action_description": "Please reschedule the delivery by two weeks.",
-    "qa_question": "How do we properly maintain address-dependent data in the SAP ERP system when multiple addresses are activated for a customer master record?"
+    "qa_question": "How do we properly maintain address-dependent data in the SAP ERP system when multiple addresses are activated for a customer master record?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Please reschedule the delivery by two weeks on order 6026, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — How do we properly maintain address-dependent data in the SAP ERP system when multiple addresses are activated for a customer master record? — please find the answer below.\n\nthe provided order to be able to maintain address-dependent data: Multiple Address Handling for Customer Master Data in Business Partner (BPCUSTOMER_MULTIPLE_ADDRESSES) Multiple Address Handling for Business Partners in Sales and Distribution (Q2C_MULTIPLE_BP_ADDRESSES). …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_090",
@@ -1597,7 +1685,8 @@
     },
     "rag_evidence": "Integration of Sales and Financial Accounting\nFigure 5: Integration of Sales and Financial Accounting\nAll organizational units within a client are subject to one business control. A client can thus be \nconsidered to be a synonym for the group.\nA client is a self-contained technical unit. General data and tables that are used for several \norganizational structures are stored at this level.\nYou can use the company code and business area to represent a group from a financial \naccounting perspective.",
     "action_description": "Kindly update the delivery date for this order.",
-    "qa_question": "When modifying delivery dates in SAP ERP, how can we ensure proper integration with financial accounting processes, particularly regarding company code configurations?"
+    "qa_question": "When modifying delivery dates in SAP ERP, how can we ensure proper integration with financial accounting processes, particularly regarding company code configurations?",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Kindly update the delivery date for this order on order 40, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nOn your additional question, regarding your question — When modifying delivery dates in SAP ERP, how can we ensure proper integration with financial accounting processes, particularly regarding company code configurations? — please find the answer below.\n\nIntegration of Sales and Financial Accounting Figure 5: Integration of Sales and Financial Accounting All organizational units within a client are subject to one business control. A client can thus be considered to be a synonym for the group. A client is a self-contained technical unit. …\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_070",
@@ -1619,6 +1708,7 @@
     },
     "rag_evidence": null,
     "action_description": "Change the shipping method to express courier.",
-    "qa_question": null
+    "qa_question": null,
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nwe have processed your request: Change the shipping method to express courier on order 4198, item 10.\n\nThe change has been applied successfully in our system, and you will see it reflected on the relevant documents shortly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   }
 ]

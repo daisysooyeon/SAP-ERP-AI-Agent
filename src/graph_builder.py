@@ -20,6 +20,7 @@ from src.graph.worker_a import worker_a_node
 from src.graph.worker_b import worker_b_node
 from src.graph.human_loop import human_loop_node
 from src.graph.synthesizer import synthesizer_node
+from src.preprocess import preprocess_email
 
 
 def _build_state_graph(*, hitl: bool = True) -> StateGraph:
@@ -85,9 +86,14 @@ if __name__ == "__main__":
     graph = build_graph()
     thread_id = str(uuid.uuid4())
     config = {"configurable": {"thread_id": thread_id}}
+
+    # LangGraph 진입 전 이메일 전처리 — 발신자/수신자/요청 사항/엔티티 구조화
+    email_ctx = preprocess_email(args.input)
+
     result = graph.invoke(
         {
-            "user_input": args.input,
+            "user_input":     args.input,
+            "email_context":  email_ctx.model_dump(),
             "error_messages": [],
             "requires_human_approval": False,
             "human_approved": None,

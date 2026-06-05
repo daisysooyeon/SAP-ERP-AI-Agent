@@ -96,9 +96,14 @@ def _run_scenario(
 
     # ── Step 1: Run agent ────────────────────────────────────────────────────
     print("\n[Step 1] Running agent …")
+    # LangGraph 진입 전 이메일 전처리 (운영 경로와 동일)
+    from src.preprocess import preprocess_email
+    email_ctx = preprocess_email(email)
+
     result = graph.invoke(
         {
             "user_input":             email,
+            "email_context":          email_ctx.model_dump(),
             "error_messages":         [],
             "requires_human_approval": False,
             "human_approved":         None,

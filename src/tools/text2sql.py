@@ -70,34 +70,103 @@ You are a Text-to-SQL expert for SAP ERP data stored in SQLite.
 
 Given the schema below and a request, generate a single valid SQLite SELECT query.
 
-Rules:
+═════════════════ HARD RULES (violating ANY of these = wrong answer) ═════════════════
+
 1. Output ONLY the raw SQL — no markdown, no explanation, no code fences.
-2. The result must be exactly ONE row with these aliases: material_name, quantity,
-   delivery_status, delivery_date, available_stock. Use LEFT JOINs so missing data
-   yields NULL/0, never zero rows.
-3. CRITICAL — MARD, MAKT and VBEP have MULTIPLE rows per material/item (one per storage
-   location / language / schedule line). Do NOT join them directly and rely on LIMIT 1 —
-   that picks an arbitrary, often NULL, row. AGGREGATE them in subqueries instead:
-     • available_stock — total stock across ALL storage locations:
+
+2. The result must be exactly ONE row with these aliases (use these EXACT alias names):
+       material_name, quantity, delivery_status, delivery_date, available_stock
+   Use LEFT JOINs so missing data yields NULL/0, never zero rows.
+
+3. CRITICAL — MARD, MAKT, VBEP have MULTIPLE rows per material/item (one row per
+   storage location / language / schedule line). Direct JOIN + LIMIT 1 picks an
+   ARBITRARY (often NULL) row. You MUST aggregate them in subqueries:
+
+     available_stock — SUM stock across ALL storage locations, then COALESCE to 0:
          LEFT JOIN (SELECT MATNR, SUM(LABST) AS total_stock FROM MARD GROUP BY MATNR) stock
                 ON stock.MATNR = vbap.MATNR
-       then select COALESCE(stock.total_stock, 0).
-     • material_name — prefer English, else any language:
+       SELECT COALESCE(stock.total_stock, 0) AS available_stock
+
+     material_name — prefer English (SPRAS='E'), else any language:
          LEFT JOIN (SELECT MATNR,
                       COALESCE(MAX(CASE WHEN SPRAS='E' THEN MAKTX END), MIN(MAKTX)) AS material_name
                     FROM MAKT GROUP BY MATNR) makt ON makt.MATNR = vbap.MATNR
-     • delivery_date — earliest schedule line:
+
+     delivery_date — earliest schedule line (MIN(EDATU)):
          LEFT JOIN (SELECT VBELN, POSNR, MIN(EDATU) AS EDATU FROM VBEP GROUP BY VBELN, POSNR) vbep
                 ON CAST(vbep.VBELN AS INTEGER) = CAST(vbap.VBELN AS INTEGER)
                AND CAST(vbep.POSNR AS INTEGER) = CAST(vbap.POSNR AS INTEGER)
-4. Match VBELN and POSNR numerically (VBELN is stored inconsistently — padded vs raw):
+
+4. ⚠️ MOST COMMON FAILURE — read carefully ⚠️
+   VBELN is stored INCONSISTENTLY in the DB: some rows are 10-digit zero-padded
+   ('0000015353'), others are raw ('6105'). Plain string equality WILL fail and
+   return 0 rows for most inputs. You MUST normalize numerically on BOTH sides
+   of every VBELN comparison:
+
        WHERE CAST(vbap.VBELN AS INTEGER) = CAST('<order_id>' AS INTEGER)
          AND CAST(vbap.POSNR AS INTEGER) = CAST('<item_no>'  AS INTEGER)
-   Never use plain 'VBELN = ...' equality.
-5. End with LIMIT 1 (after the aggregations above, this only guards against duplicate VBAP rows).
+
+   This applies to ALL VBELN/POSNR comparisons — WHERE clauses AND every
+   JOIN condition that uses VBELN or POSNR. Do NOT zero-pad the input yourself;
+   CAST handles it.
+
+5. End with LIMIT 1 (with proper aggregation above, this only guards against
+   duplicate VBAP rows).
+
 6. Use exact column and table names as shown in the schema.
 
-Schema:
+═════════════════ EXAMPLES ═════════════════
+
+❌ WRONG — this is what a careless LLM produces. It returns 0 rows because
+   VBELN is stored padded ('0000000040') but the request says '40', and MARD/MAKT/VBEP
+   are joined directly, picking arbitrary rows:
+
+   SELECT MAKT.MAKTX AS material_name, VBAP.KWMENG AS quantity,
+          VBUP.WBSTA AS delivery_status, VBEP.EDATU AS delivery_date,
+          COALESCE(MARD.LABST, 0) AS available_stock
+   FROM VBAP
+   LEFT JOIN MAKT ON VBAP.MATNR = MAKT.MATNR
+   LEFT JOIN VBUP ON VBAP.VBELN = VBUP.VBELN AND VBAP.POSNR = VBUP.POSNR
+   LEFT JOIN VBEP ON VBAP.VBELN = VBEP.VBELN AND VBAP.POSNR = VBEP.POSNR
+   LEFT JOIN MARD ON VBAP.MATNR = MARD.MATNR
+   WHERE VBAP.VBELN = '40' AND VBAP.POSNR = 10
+   LIMIT 1;
+   -- violations: rule 3 (no aggregation), rule 4 (no CAST on VBELN/POSNR)
+
+✅ CORRECT — aggregates MARD/MAKT/VBEP in subqueries, CASTs every VBELN/POSNR
+   comparison to INTEGER, COALESCEs stock to 0:
+
+   SELECT
+       makt.material_name              AS material_name,
+       vbap.KWMENG                     AS quantity,
+       vbup.WBSTA                      AS delivery_status,
+       vbep.EDATU                      AS delivery_date,
+       COALESCE(stock.total_stock, 0)  AS available_stock
+   FROM VBAP vbap
+   LEFT JOIN (
+       SELECT MATNR,
+              COALESCE(MAX(CASE WHEN SPRAS='E' THEN MAKTX END), MIN(MAKTX)) AS material_name
+       FROM MAKT GROUP BY MATNR
+   ) makt ON makt.MATNR = vbap.MATNR
+   LEFT JOIN VBUP vbup
+          ON CAST(vbup.VBELN AS INTEGER) = CAST(vbap.VBELN AS INTEGER)
+         AND CAST(vbup.POSNR AS INTEGER) = CAST(vbap.POSNR AS INTEGER)
+   LEFT JOIN (
+       SELECT VBELN, POSNR, MIN(EDATU) AS EDATU FROM VBEP GROUP BY VBELN, POSNR
+   ) vbep ON CAST(vbep.VBELN AS INTEGER) = CAST(vbap.VBELN AS INTEGER)
+        AND CAST(vbep.POSNR AS INTEGER) = CAST(vbap.POSNR AS INTEGER)
+   LEFT JOIN (
+       SELECT MATNR, SUM(LABST) AS total_stock FROM MARD GROUP BY MATNR
+   ) stock ON stock.MATNR = vbap.MATNR
+   WHERE CAST(vbap.VBELN AS INTEGER) = CAST('40' AS INTEGER)
+     AND CAST(vbap.POSNR AS INTEGER) = CAST('10' AS INTEGER)
+   LIMIT 1;
+
+Before answering, mentally check: did I CAST every VBELN/POSNR? Did I aggregate
+MARD, MAKT, VBEP? Did I COALESCE stock to 0? If any answer is "no", rewrite.
+
+═════════════════ SCHEMA ═════════════════
+
 {schema}
 """
 
@@ -216,7 +285,11 @@ def build_validation_query(order_id: str, item_no: str) -> tuple[str, str]:
     LLM(primary → hardcoded) 순서로 SQLite 검증 쿼리를 생성하고 반환.
 
     Returns:
-        (sql, strategy) — strategy는 "primary" | "hardcoded"
+        (sql, strategy) — strategy는 다음 중 하나:
+          "primary"            : LLM이 정상적으로 SQL을 생성
+          "hardcoded_llm_fail" : LLM 호출/파싱 단계에서 예외 → hardcoded fallback 사용
+
+        (run_validation_query는 여기에 더해 "hardcoded_zero_rows"를 별도로 사용한다.)
     """
     invoke_input = {
         "schema":   SCHEMA_CONTEXT,
@@ -230,15 +303,20 @@ def build_validation_query(order_id: str, item_no: str) -> tuple[str, str]:
     try:
         response = chain.invoke(invoke_input)
         sql = _clean_sql(response.content)
-        logger.info("[text_to_sql] LLM 쿼리 생성 성공")
+        logger.info("[text_to_sql] strategy=primary  | LLM 쿼리 생성 성공 (order=%s item=%s)",
+                    order_id, item_no)
         logger.debug("[text_to_sql] SQL:\n%s", sql)
         return sql, "primary"
     except Exception as e:
-        logger.warning("[text_to_sql] LLM failed: %s --> using hardcoded query", e)
+        # LLM 실패는 운영상 주목해야 함 → ERROR 레벨 + 명시적 마커
+        logger.error(
+            "[text_to_sql] FALLBACK(llm_fail) | LLM 호출 실패 → hardcoded 쿼리 사용 "
+            "(order=%s item=%s) | reason=%s: %s",
+            order_id, item_no, type(e).__name__, e,
+        )
 
     # ── 2. Hardcoded fallback ───────────────────────────────────────────────
-    logger.warning("[text_to_sql] 하드코딩 fallback 쿼리 사용")
-    return _hardcoded_query(order_id, item_no), "hardcoded"
+    return _hardcoded_query(order_id, item_no), "hardcoded_llm_fail"
 
 
 def _execute_query(sql: str) -> dict | None:
@@ -261,13 +339,33 @@ def run_validation_query(order_id: str, item_no: str) -> dict | None:
 
     Primary(LLM) 쿼리가 0건을 반환하면 — LLM이 VBELN을 엄격 매칭(padded vs raw 불일치)
     하는 경우가 있으므로 — robust hardcoded 쿼리로 한 번 더 재시도한다. 둘 다 실패 시 None.
+
+    fallback이 일어났는지 운영상 추적 가능하도록, 각 경로에서 명시적 WARNING 로그를 남긴다.
     """
     sql, strategy = build_validation_query(order_id, item_no)
     result = _execute_query(sql)
 
     if result is None and strategy == "primary":
-        logger.warning("[text_to_sql] primary 쿼리 0건 — robust hardcoded 쿼리로 재시도")
+        # LLM은 정상 호출됐는데 실행 결과가 0건 → JOIN/WHERE 규칙 누락이 의심됨
+        logger.warning(
+            "[text_to_sql] FALLBACK(primary_zero_rows) | LLM SQL이 0건 반환 → "
+            "hardcoded 쿼리로 재시도 (order=%s item=%s)",
+            order_id, item_no,
+        )
+        logger.debug("[text_to_sql] 0-row primary SQL:\n%s", sql)
         result = _execute_query(_hardcoded_query(order_id, item_no))
+        if result is not None:
+            logger.warning(
+                "[text_to_sql] FALLBACK(primary_zero_rows) RECOVERED | hardcoded 쿼리가 "
+                "row를 반환 → LLM 쿼리가 잘못 만들어졌다는 강한 신호 (order=%s item=%s)",
+                order_id, item_no,
+            )
+        else:
+            logger.warning(
+                "[text_to_sql] FALLBACK(primary_zero_rows) STILL_EMPTY | hardcoded 쿼리도 "
+                "0건 → 실제로 DB에 데이터가 없을 가능성 (order=%s item=%s)",
+                order_id, item_no,
+            )
 
-    logger.info("[text_to_sql] 쿼리 실행 완료: result=%s", result)
+    logger.info("[text_to_sql] 쿼리 실행 완료: strategy=%s result=%s", strategy, result)
     return result

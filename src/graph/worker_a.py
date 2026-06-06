@@ -91,7 +91,10 @@ Field rules:
 Output ONLY valid JSON matching the required schema. No explanation, no markdown.
 """
 
-_EXTRACTION_HUMAN = "Customer email:\n\n{user_input}"
+_EXTRACTION_HUMAN = """\
+Customer email:
+
+{user_input}{preprocess_hint}"""
 
 _EXTRACTION_PROMPT = ChatPromptTemplate.from_messages([
     ("system", _EXTRACTION_SYSTEM),
@@ -128,15 +131,41 @@ _extraction_chain = _EXTRACTION_PROMPT | _extraction_llm.with_structured_output(
 # ① Parameter Extraction
 # ---------------------------------------------------------------------------
 
-def extract_erp_action(user_input: str) -> ERPActionRequest | None:
+def _build_preprocess_hint(email_context: dict | None) -> str:
+    """전처리 결과에서 worker_a 추출에 도움이 되는 hint를 만든다.
+    LLM은 여전히 자기 판단으로 최종값을 정하지만(=order_ids 중 어느 게 진짜 order_id인지,
+    item_nos 중 어느 게 진짜 item_no인지는 문맥에 의존), 후보 풀을 미리 좁혀주면 다른
+    숫자(수량, 날짜의 일부)와 헷갈리는 실수를 줄일 수 있다."""
+    if not email_context or not email_context.get("preprocess_ok"):
+        return ""
+
+    parts = ["\n\n---\nPreprocessor hints (use as a cross-check, not authoritative):"]
+    if email_context.get("request_summary"):
+        parts.append(f"- Request summary: {email_context['request_summary']}")
+    if email_context.get("order_ids"):
+        parts.append(f"- Candidate order IDs detected in email: {email_context['order_ids']}")
+    if email_context.get("item_nos"):
+        parts.append(f"- Candidate item numbers detected in email: {email_context['item_nos']}")
+    return "\n".join(parts)
+
+
+def extract_erp_action(user_input: str, email_context: dict | None = None) -> ERPActionRequest | None:
     """
     Extract ERPActionRequest from the email using LLM structured output.
 
+    Args:
+        user_input:    raw email text (authoritative input)
+        email_context: optional preprocessor result — used only as soft hints
+
     Returns None if extraction fails or validation errors occur.
     """
-    logger.info("[worker_a] ① Extracting ERP action parameters …")
+    logger.info("[worker_a] ① Extracting ERP action parameters …%s",
+                " (with preprocess hints)" if email_context else "")
     try:
-        result: ERPActionRequest = _extraction_chain.invoke({"user_input": user_input})
+        result: ERPActionRequest = _extraction_chain.invoke({
+            "user_input": user_input,
+            "preprocess_hint": _build_preprocess_hint(email_context),
+        })
         # 패딩은 여기(결정론적 코드)서 담당한다. LLM은 원본 숫자만 추출하므로
         # 끝자리를 흘리는 오패딩이 발생하지 않는다.
         # order_id → 10자리, item_no → 6자리 좌측 제로패딩.
@@ -298,12 +327,13 @@ def worker_a_node(state: AgentState) -> dict:
         }
     """
     user_input: str = state["user_input"]
+    email_context: dict | None = state.get("email_context")
     errors: list[str] = list(state.get("error_messages", []))
 
     logger.info("[worker_a] ═══════════════ Worker A START ═══════════════")
 
     # ── ① Extract ERP action parameters ────────────────────────────────────
-    action = extract_erp_action(user_input)
+    action = extract_erp_action(user_input, email_context=email_context)
 
     if action is None:
         msg = "worker_a: Failed to extract ERP action parameters from email."

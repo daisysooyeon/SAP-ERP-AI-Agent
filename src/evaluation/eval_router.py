@@ -83,13 +83,19 @@ def eval_router(
     total = len(test_cases)
     logger.info("Starting router evaluation on %d samples …", total)
 
+    # 운영 경로와 동일하게 진입 전 이메일 전처리 — 라우터가 preprocess hint도 함께 보도록 한다.
+    from src.preprocess import preprocess_email
+
     for i, case in enumerate(test_cases, start=1):
         user_input: str = case["input"]
         true_label: str = case["label"]
 
+        email_ctx = preprocess_email(user_input).model_dump()
+
         # Build a minimal AgentState (only fields router_node reads are required)
         state = {
-            "user_input": user_input,
+            "user_input":     user_input,
+            "email_context":  email_ctx,
             "error_messages": [],
         }
 

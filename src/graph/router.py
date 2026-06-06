@@ -144,7 +144,10 @@ Now classify the following email. Output ONLY valid JSON matching the required s
 ────────────────────────────────────────
 """
 
-ROUTER_HUMAN_TEMPLATE = "Email to classify:\n\n{user_input}"
+ROUTER_HUMAN_TEMPLATE = """\
+Email to classify:
+
+{user_input}{preprocess_hint}"""
 
 _PROMPT = ChatPromptTemplate.from_messages(
     [
@@ -214,12 +217,33 @@ _chain = _PROMPT | _llm.with_structured_output(RouterOutput)
 # LangGraph node
 # ---------------------------------------------------------------------------
 
+def _build_preprocess_hint(state: AgentState) -> str:
+    """전처리 결과가 있으면 라우터에 추가 컨텍스트로 주입하는 짧은 hint 문자열을 만든다.
+    라우터의 최종 판정은 LLM이 내리지만, request_summary와 mentions_* 플래그가
+    분류 정확도를 안정화하는 데 도움이 된다. 전처리가 실패했거나 없으면 빈 문자열."""
+    ctx = state.get("email_context")
+    if not ctx or not ctx.get("preprocess_ok"):
+        return ""
+
+    parts = ["\n\n---\nPreprocessor hints (cross-check, then decide):"]
+    if ctx.get("request_summary"):
+        parts.append(f"- Request summary : {ctx['request_summary']}")
+    parts.append(f"- ERP-action signal     : {ctx.get('mentions_action', False)}")
+    parts.append(f"- Knowledge-question signal: {ctx.get('mentions_question', False)}")
+    if ctx.get("order_ids"):
+        parts.append(f"- Order IDs mentioned : {ctx['order_ids']}")
+    return "\n".join(parts)
+
+
 def router_node(state: AgentState) -> dict:
     """
     LangGraph router node — classifies email intent and updates AgentState.
 
     Reads:
-        state["user_input"]  – raw email text
+        state["user_input"]    – raw email text
+        state["email_context"] – (optional) preprocessor result; if present, its
+                                  request_summary + mentions_* flags are appended
+                                  to the prompt as cross-check hints.
 
     Returns a partial AgentState update:
         {
@@ -228,9 +252,11 @@ def router_node(state: AgentState) -> dict:
         }
     """
     user_input: str = state["user_input"]
+    preprocess_hint = _build_preprocess_hint(state)
     errors: list[str] = list(state.get("error_messages", []))
 
-    logger.info("[router_node] Classifying email intent …")
+    logger.info("[router_node] Classifying email intent …%s",
+                " (with preprocess hints)" if preprocess_hint else "")
     logger.debug("[router_node] Input: %s", user_input[:200])
 
     # Retry with exponential backoff on 429 Rate Limit errors
@@ -239,7 +265,10 @@ def router_node(state: AgentState) -> dict:
 
     for attempt in range(1, max_retries + 1):
         try:
-            result: RouterOutput = _chain.invoke({"user_input": user_input})
+            result: RouterOutput = _chain.invoke({
+                "user_input": user_input,
+                "preprocess_hint": preprocess_hint,
+            })
             break  # 성공 시 루프 탈출
         except Exception as exc:
             err_str = str(exc)

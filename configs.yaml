@@ -13,6 +13,12 @@ openrouter:
 
 # ── 노드별 모델 설정 ─────────────────────────────────────────────────────────
 models:
+  preprocessor:
+    # LangGraph 진입 전 이메일 전처리(발신자/수신자/요청 사항/엔티티 구조화) 전용.
+    # 구조화 추출 태스크라 worker_a와 같은 gpt-4o-mini가 안정적.
+    name: "openai/gpt-4o-mini"
+    provider: "openrouter"
+    temperature: 0.0
   router:
     name: "google/gemini-2.0-flash-lite-001"
     provider: "openrouter"                          # ollama | openrouter
@@ -22,7 +28,10 @@ models:
     provider: "openrouter"
     temperature: 0.0
   worker_a_sql:
-    name: "poolside/laguna-m.1:free"               # Text-to-SQL 전용
+    # Text-to-SQL은 스키마 + 복잡한 JOIN/aggregation/CAST 규칙을 동시에 지켜야 함.
+    # 1차 선택: deepseek-chat-v3 (코드/SQL 특화, 비용 저렴)
+    # 효과가 부족하면 anthropic/claude-haiku-4.5로 승급 검토.
+    name: "deepseek/deepseek-chat-v3"              # Text-to-SQL 전용
     provider: "openrouter"
     temperature: 0.0
   worker_b:

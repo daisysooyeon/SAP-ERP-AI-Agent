@@ -75,13 +75,14 @@ class LoggingConfig:
 
 @dataclass
 class RagConfig:
-    chunk_size:       int   = 512
-    chunk_overlap:    int   = 64
-    collection_name:  str   = "sap_manuals"
-    dense_weight:     float = 0.6
-    sparse_weight:    float = 0.4
-    top_k_retrieval:  int   = 10
-    top_k_rerank:     int   = 3
+    chunk_size:        int   = 512
+    chunk_overlap:     int   = 64
+    collection_name:   str   = "sap_manuals"
+    dense_weight:      float = 0.6
+    sparse_weight:     float = 0.4
+    top_k_retrieval:   int   = 10
+    top_k_rerank:      int   = 3
+    contextual_header: bool  = True   # 청크 본문 앞에 [Source: ... | p.N] 헤더를 prepend 해 임베딩에 메타 반영
 
 
 @dataclass
@@ -168,13 +169,14 @@ def _load_from_yaml(path: Path) -> AppConfig:
     # ── rag ─────────────────────────────────────────────────────────────────
     r = raw.get("rag", {})
     rag = RagConfig(
-        chunk_size=      int(r.get("chunk_size",      512)),
-        chunk_overlap=   int(r.get("chunk_overlap",   64)),
-        collection_name= r.get("collection_name",     "sap_manuals"),
-        dense_weight=    float(r.get("dense_weight",  0.6)),
-        sparse_weight=   float(r.get("sparse_weight", 0.4)),
-        top_k_retrieval= int(r.get("top_k_retrieval", 10)),
-        top_k_rerank=    int(r.get("top_k_rerank",    3)),
+        chunk_size=        int(r.get("chunk_size",      512)),
+        chunk_overlap=     int(r.get("chunk_overlap",   64)),
+        collection_name=   r.get("collection_name",     "sap_manuals"),
+        dense_weight=      float(r.get("dense_weight",  0.6)),
+        sparse_weight=     float(r.get("sparse_weight", 0.4)),
+        top_k_retrieval=   int(r.get("top_k_retrieval", 10)),
+        top_k_rerank=      int(r.get("top_k_rerank",    3)),
+        contextual_header= bool(r.get("contextual_header", True)),
     )
 
     # ── feature flags ────────────────────────────────────────────────────────

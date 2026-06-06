@@ -46,7 +46,7 @@ def _serialize_docs(docs: list) -> list[dict]:
         {
             "content":  doc.page_content,
             "source":   doc.metadata.get("source", ""),
-            "chunk_id": doc.metadata.get("chunk_id", -1),
+            "chunk_id": doc.metadata.get("chunk_id", ""),
             "page":     doc.metadata.get("page", -1),
         }
         for doc in docs
@@ -121,8 +121,31 @@ def _chunk_in_docs(source_chunks: str | list[str], docs: list[dict], threshold: 
                     if best_pos is None or i < best_pos:
                         best_pos = i
                     break
-                    
+
     return best_pos
+
+
+def _match_by_id(evidence_ids: str | list[str], docs: list[dict]) -> int | None:
+    """retrieved docs 중 metadata chunk_id 가 정답 id 집합에 속한 첫 위치(0-indexed)를 반환."""
+    if not evidence_ids:
+        return None
+    id_set = {evidence_ids} if isinstance(evidence_ids, str) else set(evidence_ids)
+    for i, doc in enumerate(docs):
+        if doc.get("chunk_id") in id_set:
+            return i
+    return None
+
+
+def _locate_evidence(case: dict, docs: list[dict], threshold: float = 0.5) -> int | None:
+    """
+    정답 청크가 docs 중 어느 위치에 있는지 반환.
+    case 에 정답 chunk_id(evidence_chunk_id)가 있으면 id 정확 매칭,
+    없으면 rag_evidence 텍스트 fuzzy 매칭으로 폴백. (build_eval_ids.py 로 id 부여 가능)
+    """
+    evidence_ids = case.get("evidence_chunk_id")
+    if evidence_ids:
+        return _match_by_id(evidence_ids, docs)
+    return _chunk_in_docs(case.get("rag_evidence"), docs, threshold)
 
 
 # ---------------------------------------------------------------------------
@@ -133,7 +156,7 @@ def compute_hit_rate(cases: list[dict], all_retrieved: list[list[dict]]) -> floa
     """top-k 안에 정답 청크가 포함된 비율"""
     hits = sum(
         1 for case, docs in zip(cases, all_retrieved)
-        if _chunk_in_docs(case.get("rag_evidence"), docs) is not None
+        if _locate_evidence(case, docs) is not None
     )
     return hits / len(cases) if cases else 0.0
 
@@ -146,7 +169,7 @@ def compute_ndcg_at_3(cases: list[dict], all_retrieved: list[list[dict]]) -> flo
     ndcg_scores = []
     for case, docs in zip(cases, all_retrieved):
         top3 = docs[:3]
-        pos = _chunk_in_docs(case.get("rag_evidence"), top3)
+        pos = _locate_evidence(case, top3)
         if pos is None:
             ndcg_scores.append(0.0)
         else:
@@ -160,7 +183,7 @@ def compute_mrr(cases: list[dict], all_retrieved: list[list[dict]]) -> float:
     """Mean Reciprocal Rank: 첫 번째 정답 문서의 역순위 평균"""
     rr_scores = []
     for case, docs in zip(cases, all_retrieved):
-        pos = _chunk_in_docs(case.get("rag_evidence"), docs)
+        pos = _locate_evidence(case, docs)
         if pos is None:
             rr_scores.append(0.0)
         else:
@@ -452,8 +475,8 @@ def _main():
 
         elapsed = (time.perf_counter() - t0) * 1000
 
-        # 정답 위치
-        hit_pos = _chunk_in_docs(case.get("rag_evidence"), docs_serial)
+        # 정답 위치 (evidence_chunk_id 있으면 id 정확 매칭, 없으면 텍스트 폴백)
+        hit_pos = _locate_evidence(case, docs_serial)
 
         result = {
             "id":             cid,

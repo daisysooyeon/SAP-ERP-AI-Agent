@@ -70,6 +70,7 @@ class TestCase:
     item_no:          int
     expected_columns: list[str]
     expected_values:  dict[str, Any] | None
+    golden_sql:       str          # 정답(레퍼런스) SQL — 프로덕션 도구의 _hardcoded_query 결과
     notes:            str
 
 
@@ -96,8 +97,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             NULL                AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         WHERE vbup.WBSTA = 'A'
         ORDER BY RANDOM()
         LIMIT {limit}
@@ -119,8 +120,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             NULL                AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         WHERE vbup.WBSTA = 'B'
         ORDER BY RANDOM()
         LIMIT {limit}
@@ -142,8 +143,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             NULL                AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         WHERE vbup.WBSTA = 'C'
         ORDER BY RANDOM()
         LIMIT {limit}
@@ -165,8 +166,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             mard.LABST          AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         LEFT JOIN MARD mard ON vbap.MATNR = mard.MATNR
         WHERE mard.LABST IS NOT NULL AND mard.LABST > 0
         ORDER BY RANDOM()
@@ -189,8 +190,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             NULL                AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         LEFT JOIN MARD mard ON vbap.MATNR = mard.MATNR
         WHERE vbep.EDATU IS NOT NULL AND mard.LABST IS NULL
         ORDER BY RANDOM()
@@ -213,8 +214,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             mard.LABST          AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         LEFT JOIN MARD mard ON vbap.MATNR = mard.MATNR
         WHERE vbap.POSNR != 10
         ORDER BY RANDOM()
@@ -237,8 +238,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             NULL                AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         WHERE makt.MAKTX IS NOT NULL
           AND vbup.WBSTA IS NOT NULL
           AND vbep.EDATU IS NOT NULL
@@ -262,8 +263,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             NULL                AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         WHERE vbep.EDATU < strftime('%Y%m%d', 'now')
           AND vbup.WBSTA IN ('A', 'B')
           AND vbep.EDATU IS NOT NULL
@@ -287,8 +288,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             NULL                AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         WHERE vbep.EDATU >= strftime('%Y%m%d', 'now')
           AND vbup.WBSTA = 'A'
         ORDER BY RANDOM()
@@ -311,8 +312,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             mard.LABST          AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         LEFT JOIN MARD mard ON vbap.MATNR = mard.MATNR
         WHERE mard.LABST > vbap.KWMENG
         ORDER BY RANDOM()
@@ -335,8 +336,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             NULL                AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         WHERE vbap.VBELN IN (
             SELECT VBELN FROM VBAP GROUP BY VBELN HAVING COUNT(DISTINCT POSNR) > 1
         )
@@ -360,8 +361,8 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
             COALESCE(mard.LABST, 0.0)   AS available_stock
         FROM VBAP vbap
         LEFT JOIN MAKT makt ON vbap.MATNR = makt.MATNR AND makt.SPRAS = 'E'
-        LEFT JOIN VBUP vbup ON vbap.VBELN = vbup.VBELN AND vbap.POSNR = vbup.POSNR
-        LEFT JOIN VBEP vbep ON vbap.VBELN = vbep.VBELN AND vbap.POSNR = vbep.POSNR
+        LEFT JOIN VBUP vbup ON CAST(vbap.VBELN AS INTEGER) = CAST(vbup.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbup.POSNR AS INTEGER)
+        LEFT JOIN VBEP vbep ON CAST(vbap.VBELN AS INTEGER) = CAST(vbep.VBELN AS INTEGER) AND CAST(vbap.POSNR AS INTEGER) = CAST(vbep.POSNR AS INTEGER)
         LEFT JOIN MARD mard ON vbap.MATNR = mard.MATNR
         WHERE (mard.LABST IS NULL OR mard.LABST = 0)
           AND vbap.KWMENG > 0
@@ -376,21 +377,69 @@ _SAMPLING_QUERIES: list[tuple[str, str, str]] = [
 # DB 연결 헬퍼
 # ---------------------------------------------------------------------------
 
-def _query(db_path: str, sql: str) -> list[dict]:
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
+def _query(db_path: str, sql: str, conn: sqlite3.Connection | None = None) -> list[dict]:
+    """SQL 실행 → dict 리스트. conn이 주어지면 그 연결을 재사용(닫지 않음),
+    없으면 일회성 연결을 열고 닫는다(하위호환). 배치 샘플링에선 conn을 재사용해
+    연결 오픈 비용 + SQLite 페이지 캐시 콜드스타트를 피한다."""
+    own = conn is None
+    if own:
+        conn = sqlite3.connect(db_path)
+        conn.row_factory = sqlite3.Row
     try:
         rows = conn.execute(sql).fetchall()
         return [dict(r) for r in rows]
     finally:
-        conn.close()
+        if own:
+            conn.close()
 
 
 def _edatu_to_iso(edatu: str | None) -> str | None:
-    """YYYYMMDD → YYYY-MM-DD 변환"""
+    """YYYYMMDD → YYYY-MM-DD 변환 (이미 ISO면 그대로)"""
     if edatu and len(edatu) == 8:
         return f"{edatu[:4]}-{edatu[4:6]}-{edatu[6:]}"
     return edatu
+
+
+# 샘플링·캐노니컬 쿼리가 쓰는 CAST(...) 조인 키에 대한 표현식 인덱스.
+# 이게 없으면 CAST 양변 조인이 인덱스를 못 타 VBAP×VBUP 중첩루프(수십억 비교)로 폭발한다
+# (시나리오 쿼리 1회 ~254초 관측). 인덱스가 있으면 ~0.2초로 떨어진다. 멱등 생성.
+_PERF_INDEXES = [
+    "CREATE INDEX IF NOT EXISTS ix_vbup_norm ON VBUP(CAST(VBELN AS INTEGER), CAST(POSNR AS INTEGER))",
+    "CREATE INDEX IF NOT EXISTS ix_vbep_norm ON VBEP(CAST(VBELN AS INTEGER), CAST(POSNR AS INTEGER))",
+    "CREATE INDEX IF NOT EXISTS ix_mard_mw   ON MARD(MATNR, WERKS)",
+    "CREATE INDEX IF NOT EXISTS ix_makt_m    ON MAKT(MATNR)",
+]
+
+
+def _ensure_perf_indexes(conn: sqlite3.Connection) -> None:
+    """샘플링 성능용 인덱스를 멱등 생성. 실패해도(예: 읽기전용/락) 흐름을 끊지 않는다."""
+    try:
+        for ddl in _PERF_INDEXES:
+            conn.execute(ddl)
+        conn.commit()
+    except sqlite3.Error as e:
+        logger.warning("Perf index creation skipped: %s", e)
+
+
+def _canonical_query_and_row(
+    db_path: str, order_id: str, item_no: str | int,
+    conn: sqlite3.Connection | None = None,
+) -> tuple[str, dict | None]:
+    """expected_values + golden_sql의 단일 출처(source of truth).
+
+    프로덕션 프롬프트가 LLM에게 지시하는 의미와 1:1로 일치하는 레퍼런스 쿼리
+    (src.tools.text2sql._hardcoded_query)를 그대로 실행해 정답 행을 만든다.
+    시나리오 SQL은 (order_id, item_no) 다양성 선택에만 쓰고, 값·정답SQL은 여기서 산출한다.
+    이렇게 해야 골든(값+SQL)과 프롬프트가 같은 결정적 정의를 공유한다.
+
+    conn이 주어지면 재사용한다(배치 샘플링 성능).
+
+    Returns: (golden_sql, 정답 행 or None)
+    """
+    from src.tools.text2sql import _hardcoded_query
+    sql = _hardcoded_query(str(order_id), str(item_no))
+    rows = _query(db_path, sql, conn=conn)
+    return sql, (rows[0] if rows else None)
 
 
 # ---------------------------------------------------------------------------
@@ -422,35 +471,48 @@ def _sample_cases(
     random.seed(seed)
     cases: list[TestCase] = []
 
-    for desc_tmpl, notes, sql_tmpl in _SAMPLING_QUERIES:
-        # 넉넉하게 쿼리 후 랜덤 선택
-        sql = sql_tmpl.format(limit=n_per_scenario * 5)
-        try:
-            rows = _query(db_path, sql)
-        except Exception as e:
-            logger.warning("Sampling failed (%s): %s", desc_tmpl[:40], e)
-            continue
+    # 연결 1개 재사용(264+ 오픈 방지 + 페이지 캐시 유지) + CAST 조인 인덱스 멱등 생성.
+    # 인덱스가 없으면 시나리오 쿼리의 CAST 양변 조인이 중첩루프로 폭발한다(1회 ~254초).
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    _ensure_perf_indexes(conn)
+    try:
+        for desc_tmpl, notes, sql_tmpl in _SAMPLING_QUERIES:
+            # 넉넉하게 쿼리 후 랜덤 선택
+            sql = sql_tmpl.format(limit=n_per_scenario * 5)
+            try:
+                rows = _query(db_path, sql, conn=conn)
+            except Exception as e:
+                logger.warning("Sampling failed (%s): %s", desc_tmpl[:40], e)
+                continue
 
-        sampled = random.sample(rows, min(n_per_scenario, len(rows)))
-        for row in sampled:
-            order_id = str(row.get("order_id", "")).strip()
-            item_no  = int(row.get("item_no", 10))
+            sampled = random.sample(rows, min(n_per_scenario, len(rows)))
+            for row in sampled:
+                order_id = str(row.get("order_id", "")).strip()
+                item_no  = int(row.get("item_no", 10))
 
-            cases.append(TestCase(
-                id="",  # 나중에 부여
-                description=desc_tmpl,
-                order_id=order_id,
-                item_no=item_no,
-                expected_columns=REQUIRED_COLUMNS,
-                expected_values=_build_expected_values(row),
-                notes=notes,
-            ))
+                # expected_values·golden_sql은 시나리오 행이 아니라 레퍼런스(캐노니컬) 쿼리에서 산출
+                golden_sql, canon = _canonical_query_and_row(db_path, order_id, item_no, conn=conn)
+                cases.append(TestCase(
+                    id="",  # 나중에 부여
+                    description=desc_tmpl,
+                    order_id=order_id,
+                    item_no=item_no,
+                    expected_columns=REQUIRED_COLUMNS,
+                    expected_values=_build_expected_values(canon) if canon else None,
+                    golden_sql=golden_sql,
+                    notes=notes,
+                ))
+    finally:
+        conn.close()
 
     return cases
 
 
 def _add_negative_case(cases: list[TestCase]) -> None:
-    """존재하지 않는 주문번호 케이스(expected_values=None)를 추가합니다."""
+    """존재하지 않는 주문번호 케이스(expected_values=None)를 추가합니다.
+    정답 SQL은 유효하지만 결과 행이 없는 케이스를 검증한다."""
+    from src.tools.text2sql import _hardcoded_query
     cases.append(TestCase(
         id="",
         description="Non-existent order — should return no row (None result)",
@@ -458,6 +520,7 @@ def _add_negative_case(cases: list[TestCase]) -> None:
         item_no=10,
         expected_columns=REQUIRED_COLUMNS,
         expected_values=None,
+        golden_sql=_hardcoded_query(NEGATIVE_ORDER_ID, "10"),
         notes="SQL must execute without error even if no rows returned",
     ))
 

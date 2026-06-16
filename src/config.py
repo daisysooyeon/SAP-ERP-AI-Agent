@@ -84,6 +84,7 @@ class RagConfig:
     top_k_retrieval:   int   = 10
     top_k_rerank:      int   = 3
     contextual_header: bool  = True   # 청크 본문 앞에 [Source: ... | p.N] 헤더를 prepend 해 임베딩에 메타 반영
+    ocr_enabled:      bool  = True   # PDF 페이지 내 이미지에 Surya OCR 적용 → 별도 OCR 청크 생성
 
 
 @dataclass
@@ -178,6 +179,7 @@ def _load_from_yaml(path: Path) -> AppConfig:
         top_k_retrieval=   int(r.get("top_k_retrieval", 10)),
         top_k_rerank=      int(r.get("top_k_rerank",    3)),
         contextual_header= bool(r.get("contextual_header", True)),
+        ocr_enabled=      bool(r.get("ocr_enabled",      True)),
     )
 
     # ── feature flags ────────────────────────────────────────────────────────

@@ -12,7 +12,6 @@ RAG 품질 평가 — 자체 구현 메트릭 (RAGAS 대신)
 입력 데이터셋 형식 (router_test_cases_gen.json, QA_ONLY + BOTH 필터):
   {
     "id": "r_001",
-    "input": "customer email text",
     "user_input": "customer email text",
     "label": "QA_ONLY",
     "rag_evidence": "exact chunk text (str or list[str] for multi-chunk)",
@@ -473,8 +472,8 @@ def _main():
 
     for i, case in enumerate(test_cases):
         cid      = case.get("id", f"case_{i}")
-        # router_test_cases_gen.json의 input (이메일 원문) 사용
-        raw_input = case.get("input") or case.get("user_input") or case.get("qa_question") or case.get("question", "")
+        # router_test_cases_gen.json의 user_input (이메일 원문) 사용
+        raw_input = case.get("user_input") or case.get("qa_question") or case.get("question", "")
         t0       = time.perf_counter()
 
         # 쿼리 추출 — Query Expansion (worker_b의 실제 로직과 동일하게)

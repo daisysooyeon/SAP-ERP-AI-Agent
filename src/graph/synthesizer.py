@@ -142,6 +142,7 @@ _ERP_STATUS_LABELS = {
     "BLOCKED_NO_STOCK":         "Request blocked: insufficient stock.",
     "BLOCKED_INVALID_QTY":      "Request blocked: the resulting quantity would be zero or negative.",
     "BLOCKED_SHIPPED":          "Request blocked: item has already shipped.",
+    "BLOCKED_PARTIALLY_PROCESSED":"Request blocked: item cannot be cancelled once goods movement has started.",
     "BLOCKED_EXTRACTION_FAILED":"Request blocked: could not parse the order details.",
     "BLOCKED_VALIDATION":       "Request blocked: validation error.",
     "BLOCKED_NO_DATA":          "Request blocked: order or item not found in the system.",

@@ -16,7 +16,6 @@ from __future__ import annotations
 import asyncio
 import logging
 import os
-import re
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -154,16 +153,34 @@ def extract_erp_action(user_input: str, email_context: dict | None = None) -> ER
     Extract ERPActionRequest from the email using LLM structured output.
 
     Args:
-        user_input:    raw email text (authoritative input)
-        email_context: optional preprocessor result — used only as soft hints
+        user_input:    raw email text. Used as the extraction input only when the
+                       preprocessor produced no usable cleaned_body.
+        email_context: optional preprocessor result. When preprocess_ok and a
+                       cleaned_body is present, the cleaned_body (greetings/signatures
+                       stripped, but order/item/quantity digits preserved) becomes the
+                       extraction input; its summary/entity fields are still passed as
+                       soft cross-check hints. Mirrors worker_b's pattern.
 
     Returns None if extraction fails or validation errors occur.
     """
-    logger.info("[worker_a] ① Extracting ERP action parameters …%s",
-                " (with preprocess hints)" if email_context else "")
+    # 전처리가 만든 cleaned_body가 있으면 추출 입력으로 사용한다(worker_b와 동일 패턴).
+    # 인사·서명 노이즈가 제거돼 더 안정적이며, cleaned_body는 주문/아이템/수량 숫자를
+    # 원문 그대로 보존한다. 없거나 전처리 실패 시 원본 user_input으로 폴백.
+    extraction_input = user_input
+    used_cleaned = bool(
+        email_context
+        and email_context.get("preprocess_ok")
+        and email_context.get("cleaned_body")
+    )
+    if used_cleaned:
+        extraction_input = email_context["cleaned_body"]
+
+    logger.info("[worker_a] ① Extracting ERP action parameters … (input=%s%s)",
+                "cleaned_body" if used_cleaned else "raw",
+                ", with hints" if email_context else "")
     try:
         result: ERPActionRequest = _extraction_chain.invoke({
-            "user_input": user_input,
+            "user_input": extraction_input,
             "preprocess_hint": _build_preprocess_hint(email_context),
         })
         # 패딩은 여기(결정론적 코드)서 담당한다. LLM은 원본 숫자만 추출하므로
@@ -199,10 +216,12 @@ def check_business_rules(action: ERPActionRequest, validation_result: dict | Non
     Validate ERP business rules against the DB snapshot.
 
     Returns:
-        None                  — all checks passed, proceed
-        "BLOCKED_NO_STOCK"    — requested quantity exceeds available stock
-        "BLOCKED_SHIPPED"     — item already fully shipped (WBSTA = C)
-        "BLOCKED_NO_DATA"     — order/item not found in DB
+        None                          — all checks passed, proceed
+        "BLOCKED_NO_STOCK"            — additional quantity (delta) exceeds available stock
+        "BLOCKED_SHIPPED"            — item already fully shipped (WBSTA = C)
+        "BLOCKED_PARTIALLY_PROCESSED" — cancellation of an item whose goods movement
+                                        already started (WBSTA = B)
+        "BLOCKED_NO_DATA"            — order/item not found in DB
     """
     logger.info("[worker_a] ③ Checking business rules …")
 
@@ -222,12 +241,38 @@ def check_business_rules(action: ERPActionRequest, validation_result: dict | Non
         )
         return "BLOCKED_SHIPPED"
 
-    # Rule 2: Block quantity change if requested quantity exceeds available stock
+    # Rule 1b: An item cannot be CANCELLED once goods movement has started.
+    # Full shipment (WBSTA=C) is already caught by Rule 1 (BLOCKED_SHIPPED); here we
+    # additionally block partial processing (WBSTA=B) — but only for cancellations.
+    # Other actions (qty/date) on a partially processed item remain allowed.
+    if action.action_type == "CANCEL_ITEM" and delivery_status == "B":
+        logger.warning(
+            "[worker_a] BLOCKED_PARTIALLY_PROCESSED: cannot cancel partially processed "
+            "item (WBSTA=B) for order=%s item=%s",
+            action.order_id, action.item_no,
+        )
+        return "BLOCKED_PARTIALLY_PROCESSED"
+
+    # Rule 2: For a quantity change, only the ADDITIONAL units (delta) must be covered
+    # by available stock — not the whole new quantity. A decrease frees stock, so its
+    # delta is negative and never blocks. new_quantity is already absolute here
+    # (resolve_quantity normalized any relative "reduce by N"/"increase by N" upstream),
+    # so the delta is computed identically regardless of how the email phrased it.
     if action.action_type == "CHANGE_QTY" and action.new_quantity is not None:
-        if action.new_quantity > available_stock:
+        current_qty = validation_result.get("quantity")
+        if current_qty is None:
+            # Current quantity unknown → can't compute the delta. Fall back to the
+            # conservative absolute check so we never under-reserve stock.
+            additional_needed = float(action.new_quantity)
+        else:
+            additional_needed = action.new_quantity - float(current_qty)
+
+        if additional_needed > available_stock:
             logger.warning(
-                "[worker_a] BLOCKED_NO_STOCK: requested=%d available=%.2f for order=%s item=%s",
-                action.new_quantity, available_stock, action.order_id, action.item_no,
+                "[worker_a] BLOCKED_NO_STOCK: new_qty=%d current=%s additional_needed=%.2f "
+                "available=%.2f for order=%s item=%s",
+                action.new_quantity, current_qty, additional_needed, available_stock,
+                action.order_id, action.item_no,
             )
             return "BLOCKED_NO_STOCK"
 
@@ -282,6 +327,40 @@ def resolve_quantity(action: ERPActionRequest, validation_result: dict | None) -
     action.new_quantity = resolved
     action.quantity_change = None  # consumed — downstream uses the absolute value
     return None
+
+
+# ---------------------------------------------------------------------------
+# ②-context — Text-to-SQL 요청 컨텍스트
+# ---------------------------------------------------------------------------
+
+def _build_request_context(action: ERPActionRequest) -> str:
+    """text2sql에 넘길 요청 컨텍스트 문자열을 만든다.
+
+    LLM이 이 액션을 검증하려면 (필수 5개 컬럼 외에) 어떤 추가 컬럼이 필요한지 판단할
+    수 있도록 액션 의도를 서술한다. 필수 5개 컬럼은 컨텍스트와 무관하게 항상 반환된다.
+    주의: 현재 check_business_rules는 결정론을 위해 고정 5개 필드만 소비하므로, 추가로
+    조회된 컬럼은 아직 다운스트림에서 사용되지 않는다(향후 가변 검증 확장 대비).
+    """
+    at = action.action_type
+    if at == "CHANGE_QTY":
+        if action.new_quantity is not None:
+            tgt = f"to an absolute quantity of {action.new_quantity}"
+        elif action.quantity_change is not None:
+            verb = "increase" if action.quantity_change > 0 else "decrease"
+            tgt = f"by a relative {verb} of {abs(action.quantity_change)}"
+        else:
+            tgt = "(quantity change)"
+        return (f"- Action: CHANGE_QTY {tgt}. To judge stock feasibility, the current "
+                f"ordered quantity and the available stock at the order's own plant matter.")
+    if at == "CHANGE_DATE":
+        return (f"- Action: CHANGE_DATE to {action.new_date or '(unspecified)'}. "
+                f"The current delivery/requested schedule date is relevant for validation.")
+    if at == "CANCEL_ITEM":
+        return ("- Action: CANCEL_ITEM (cancel this order line). Goods-movement status and "
+                "any already-processed/delivered quantity are relevant to whether cancellation is allowed.")
+    if at == "CHANGE_ADDR":
+        return "- Action: CHANGE_ADDR (change ship-to address). No extra stock/schedule context is needed."
+    return f"- Action: {at} (general status validation)."
 
 
 # ---------------------------------------------------------------------------
@@ -350,7 +429,10 @@ def worker_a_node(state: AgentState) -> dict:
 
     # ── ② Text-to-SQL validation query ─────────────────────────────────────
     logger.info("[worker_a] ② Running Text-to-SQL validation query …")
-    validation_result = run_validation_query(action.order_id, action.item_no)
+    validation_result = run_validation_query(
+        action.order_id, action.item_no,
+        request_context=_build_request_context(action),
+    )
     logger.info("[worker_a] Validation result: %s", validation_result)
 
     # ── ③ Business rule checks ──────────────────────────────────────────────

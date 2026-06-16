@@ -48,19 +48,31 @@ def _fmt(path: Path) -> str:
     return f"{st.st_size:,} bytes  |  수정: {mtime}"
 
 
+# 데모 샘플(web/index.html)이 실제로 수정하는 주문들 — 복원 전후 sanity check 대상.
+# CANCEL_ITEM은 ABGRU(None→'ZZ'), CHANGE_QTY는 KWMENG가 바뀐다.
+# (CHANGE_ADDR 17232/70은 human_loop에서 시뮬레이션이라 DB가 안 바뀜 — 대조용으로 함께 표시)
+# 데모 샘플을 바꾸면 이 목록도 같이 맞춰야 한다.
+_DEMO_PEEK_ROWS = [("15867", "20"), ("17232", "70")]
+
+
 def _peek_row(db: Path) -> str:
-    """6105/20 행을 빠른 sanity check 로 보여준다 (없으면 빈 문자열)."""
+    """데모 샘플이 건드리는 주문들의 KWMENG/ABGRU를 빠른 sanity check 로 보여준다."""
     if not db.exists():
         return ""
     try:
         c = sqlite3.connect(str(db))
-        r = c.execute(
-            "SELECT KWMENG, ABGRU FROM VBAP "
-            "WHERE CAST(VBELN AS INTEGER)=6105 AND CAST(POSNR AS INTEGER)=20"
-        ).fetchone()
+        parts = []
+        for vbeln, posnr in _DEMO_PEEK_ROWS:
+            r = c.execute(
+                "SELECT KWMENG, ABGRU FROM VBAP "
+                "WHERE CAST(VBELN AS INTEGER)=CAST(? AS INTEGER) "
+                "AND CAST(POSNR AS INTEGER)=CAST(? AS INTEGER)",
+                (vbeln, posnr),
+            ).fetchone()
+            if r:
+                parts.append(f"{vbeln}/{posnr} → KWMENG={r[0]!r} ABGRU={r[1]!r}")
         c.close()
-        if r:
-            return f"6105/20 → KWMENG={r[0]!r} ABGRU={r[1]!r}"
+        return "  |  ".join(parts)
     except sqlite3.Error:
         pass
     return ""

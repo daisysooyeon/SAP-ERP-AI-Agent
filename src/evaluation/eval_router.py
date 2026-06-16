@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 _DEFAULT_TEST_CASES = (
     Path(__file__).resolve().parent.parent.parent
-    / "data" / "eval" / "router_test_cases.json"
+    / "data" / "eval" / "router_test_cases_gen.json"
 )
 
 
@@ -59,8 +59,8 @@ def eval_router(
     ----------
     test_cases : list[dict]
         Each element must have:
-            "input"  : str   — email text fed to the router
-            "label"  : str   — ground-truth intent ("ACTION_ONLY" | "QA_ONLY" | "BOTH")
+            "user_input" : str   — email text fed to the router
+            "label"      : str   — ground-truth intent ("ACTION_ONLY" | "QA_ONLY" | "BOTH")
     verbose : bool
         If True, print per-sample progress and the final report to stdout.
     delay : float
@@ -87,7 +87,7 @@ def eval_router(
     from src.preprocess import preprocess_email
 
     for i, case in enumerate(test_cases, start=1):
-        user_input: str = case["input"]
+        user_input: str = case["user_input"]
         true_label: str = case["label"]
 
         email_ctx = preprocess_email(user_input).model_dump()
@@ -225,7 +225,7 @@ if __name__ == "__main__":
     if not test_cases_path.exists():
         logger.error(
             "Test cases file not found: %s\n"
-            "  Generate it with:  python -m src.evaluation.generate_router_testset",
+            "  Generate it with:  python -m src.data.generate_router_dataset",
             test_cases_path,
         )
         sys.exit(1)

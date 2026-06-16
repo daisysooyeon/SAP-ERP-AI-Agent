@@ -188,24 +188,25 @@
 </div>
 
 <script>
-// ---- 대표 입력 샘플 (router_test_cases_gen.json: r_001 / r_011 / r_021) ----
+// ---- 대표 입력 샘플 (data/eval/check/router_test_cases_gen.json: r_001 / r_032 / r_061) ----
 const SAMPLES = {
   QA_ONLY:
-`Dear Support Team,
+`Dear Support Team, I have been reviewing the training material on analytical apps and noticed the reference to ready-to-use content for sales monitoring. Could you please clarify how I can access these analytical apps from the SAP Fiori launchpad? Specifically, I would like to know whether any additional authorizations or integration with BI tools like SAP BusinessObjects is required. Thank you for your assistance.`,
 
-I hope this message finds you well. While reviewing the documentation on free goods, I'm seeking clarification on how exclusive bonus quantities appear in the sales document. Specifically, could you explain the format or location where these free-of-charge items are listed in the system? Your guidance on this process would help ensure proper understanding of invoice generation. Thank you for your assistance.
+  ACTION_ONLY:
+`Subject: Request to Update Shipping Address for Order 17232, Item 70
+
+Dear [Recipient Name],
+
+We need to update the shipping address on order 17232 for item number 70. Please change the shipping address to the following: [new address details]. Kindly confirm once the update has been processed.
+
+Thank you for your assistance.
 
 Best regards,
 [Your Name]`,
 
-  ACTION_ONLY:
-`Subject: Request to Cancel Order Item 20 (Order #6105)
-
-Dear [Recipient],
-We would like to request the cancellation of item 20 from order #6105. The cancellation is feasible as there is available stock indicated via the MARD JOIN. Please confirm the processing of this request at your earliest convenience. Thank you for your attention.`,
-
   BOTH:
-`Dear SAP Team, I need to adjust order 6105, item 20 by reducing the quantity by 50 units, as the order is being fulfilled using available stock via MARD JOIN. Could you also clarify how to configure storage bins in SAP ERP to automatically assign fast-moving items to specific bins based on their storage section attributes? This will help ensure accurate putaway processes. Thank you for your assistance.`
+`Dear Team, Please process the cancellation of item 20 (Sales Order 15867) as soon as possible. This is part of a multi-line order, and we are also evaluating how to manage address assignments for future orders. Could you explain how to configure multi-address handling so that each item can have its own shipping address? Understanding this feature would help us avoid unnecessary cancellations. Thank you.`
 };
 
 const $ = (id) => document.getElementById(id);

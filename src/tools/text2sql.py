@@ -47,6 +47,9 @@ Table: VBUP (Item Status)
 
 Table: MARD (Plant Stock)
   MATNR: Material number, WERKS: Plant, LGORT: Storage location, LABST: Unrestricted-use stock (REAL)
+  NOTE: a material has many MARD rows (one per plant/storage location). "available stock"
+  for an order line means the stock at THAT line's plant (VBAP.WERKS), summed over its
+  storage locations — NOT the material's stock across every plant.
 
 Table: MAKT (Material Descriptions)
   MATNR: Material number, SPRAS: Language key, MAKTX: Material description
@@ -58,7 +61,8 @@ Notes:
     Always normalize both sides numerically:
         CAST(vbap.VBELN AS INTEGER) = CAST('<order_id>' AS INTEGER)
   - POSNR is an INTEGER (e.g. 10, 20). Match with CAST(vbap.POSNR AS INTEGER) = CAST('<item_no>' AS INTEGER).
-  - EDATU is stored as TEXT in YYYYMMDD format.
+  - VBAP and VBUP hold exactly ONE row per (VBELN, POSNR) — the order line is unique.
+  - EDATU is already stored as TEXT in ISO 'YYYY-MM-DD' format. Output it as-is (do NOT reformat).
 """
 
 # ---------------------------------------------------------------------------
@@ -74,17 +78,25 @@ Given the schema below and a request, generate a single valid SQLite SELECT quer
 
 1. Output ONLY the raw SQL — no markdown, no explanation, no code fences.
 
-2. The result must be exactly ONE row with these aliases (use these EXACT alias names):
+2. The result must be exactly ONE row. It MUST ALWAYS include AT LEAST these five
+   aliases (use these EXACT alias names) — they are required on every query:
        material_name, quantity, delivery_status, delivery_date, available_stock
-   Use LEFT JOINs so missing data yields NULL/0, never zero rows.
+   These five are the MINIMUM, not the maximum: when the request needs extra context
+   to be validated, you MAY add further read-only columns (e.g. confirmed/open
+   quantity, plant WERKS, schedule line, requested date) with clear aliases. Never
+   drop, rename, or reorder the five required aliases. Use LEFT JOINs so missing data
+   yields NULL/0, never zero rows.
 
-3. CRITICAL — MARD, MAKT, VBEP have MULTIPLE rows per material/item (one row per
-   storage location / language / schedule line). Direct JOIN + LIMIT 1 picks an
-   ARBITRARY (often NULL) row. You MUST aggregate them in subqueries:
+3. CRITICAL — MARD, MAKT, VBEP, VBUP have MULTIPLE rows per material/item (one row per
+   storage location / language / schedule line / status record). Direct JOIN + LIMIT 1
+   picks an ARBITRARY (often NULL or conflicting) row. You MUST aggregate them in subqueries:
 
-     available_stock — SUM stock across ALL storage locations, then COALESCE to 0:
-         LEFT JOIN (SELECT MATNR, SUM(LABST) AS total_stock FROM MARD GROUP BY MATNR) stock
-                ON stock.MATNR = vbap.MATNR
+     available_stock — SUM stock at the ORDER LINE'S OWN PLANT (VBAP.WERKS), then
+       COALESCE to 0. Group MARD by (MATNR, WERKS) and join on BOTH MATNR and WERKS,
+       so you sum only the storage locations of that plant — never every plant:
+         LEFT JOIN (SELECT MATNR, WERKS, SUM(LABST) AS total_stock
+                    FROM MARD GROUP BY MATNR, WERKS) stock
+                ON stock.MATNR = vbap.MATNR AND stock.WERKS = vbap.WERKS
        SELECT COALESCE(stock.total_stock, 0) AS available_stock
 
      material_name — prefer English (SPRAS='E'), else any language:
@@ -92,10 +104,20 @@ Given the schema below and a request, generate a single valid SQLite SELECT quer
                       COALESCE(MAX(CASE WHEN SPRAS='E' THEN MAKTX END), MIN(MAKTX)) AS material_name
                     FROM MAKT GROUP BY MATNR) makt ON makt.MATNR = vbap.MATNR
 
-     delivery_date — earliest schedule line (MIN(EDATU)):
-         LEFT JOIN (SELECT VBELN, POSNR, MIN(EDATU) AS EDATU FROM VBEP GROUP BY VBELN, POSNR) vbep
+     delivery_date — earliest schedule line, MIN(EDATU); EDATU is already ISO
+       'YYYY-MM-DD', so output it unchanged:
+         LEFT JOIN (SELECT VBELN, POSNR, MIN(EDATU) AS delivery_date
+                    FROM VBEP WHERE EDATU IS NOT NULL GROUP BY VBELN, POSNR) vbep
                 ON CAST(vbep.VBELN AS INTEGER) = CAST(vbap.VBELN AS INTEGER)
                AND CAST(vbep.POSNR AS INTEGER) = CAST(vbap.POSNR AS INTEGER)
+
+     delivery_status — one item can have several VBUP rows, sometimes with CONFLICTING
+       WBSTA. Pick the most advanced status deterministically with MAX(WBSTA) (A < B < C —
+       conservative: prefer "shipped" so a partially/fully processed item isn't wrongly editable):
+         LEFT JOIN (SELECT CAST(VBELN AS INTEGER) AS v, CAST(POSNR AS INTEGER) AS p,
+                      MAX(WBSTA) AS delivery_status
+                    FROM VBUP GROUP BY v, p) vbup
+                ON vbup.v = CAST(vbap.VBELN AS INTEGER) AND vbup.p = CAST(vbap.POSNR AS INTEGER)
 
 4. ⚠️ MOST COMMON FAILURE — read carefully ⚠️
    VBELN is stored INCONSISTENTLY in the DB: some rows are 10-digit zero-padded
@@ -133,14 +155,14 @@ Given the schema below and a request, generate a single valid SQLite SELECT quer
    LIMIT 1;
    -- violations: rule 3 (no aggregation), rule 4 (no CAST on VBELN/POSNR)
 
-✅ CORRECT — aggregates MARD/MAKT/VBEP in subqueries, CASTs every VBELN/POSNR
-   comparison to INTEGER, COALESCEs stock to 0:
+✅ CORRECT — aggregates MARD/MAKT/VBEP/VBUP in subqueries, scopes stock to the order's
+   plant (VBAP.WERKS), CASTs every VBELN/POSNR comparison to INTEGER, COALESCEs stock to 0:
 
    SELECT
        makt.material_name              AS material_name,
        vbap.KWMENG                     AS quantity,
-       vbup.WBSTA                      AS delivery_status,
-       vbep.EDATU                      AS delivery_date,
+       vbup.delivery_status            AS delivery_status,
+       vbep.delivery_date              AS delivery_date,
        COALESCE(stock.total_stock, 0)  AS available_stock
    FROM VBAP vbap
    LEFT JOIN (
@@ -148,22 +170,27 @@ Given the schema below and a request, generate a single valid SQLite SELECT quer
               COALESCE(MAX(CASE WHEN SPRAS='E' THEN MAKTX END), MIN(MAKTX)) AS material_name
        FROM MAKT GROUP BY MATNR
    ) makt ON makt.MATNR = vbap.MATNR
-   LEFT JOIN VBUP vbup
-          ON CAST(vbup.VBELN AS INTEGER) = CAST(vbap.VBELN AS INTEGER)
-         AND CAST(vbup.POSNR AS INTEGER) = CAST(vbap.POSNR AS INTEGER)
    LEFT JOIN (
-       SELECT VBELN, POSNR, MIN(EDATU) AS EDATU FROM VBEP GROUP BY VBELN, POSNR
+       SELECT CAST(VBELN AS INTEGER) AS v, CAST(POSNR AS INTEGER) AS p,
+              MAX(WBSTA) AS delivery_status
+       FROM VBUP GROUP BY v, p
+   ) vbup ON vbup.v = CAST(vbap.VBELN AS INTEGER)
+        AND vbup.p = CAST(vbap.POSNR AS INTEGER)
+   LEFT JOIN (
+       SELECT VBELN, POSNR, MIN(EDATU) AS delivery_date
+       FROM VBEP WHERE EDATU IS NOT NULL GROUP BY VBELN, POSNR
    ) vbep ON CAST(vbep.VBELN AS INTEGER) = CAST(vbap.VBELN AS INTEGER)
         AND CAST(vbep.POSNR AS INTEGER) = CAST(vbap.POSNR AS INTEGER)
    LEFT JOIN (
-       SELECT MATNR, SUM(LABST) AS total_stock FROM MARD GROUP BY MATNR
-   ) stock ON stock.MATNR = vbap.MATNR
+       SELECT MATNR, WERKS, SUM(LABST) AS total_stock FROM MARD GROUP BY MATNR, WERKS
+   ) stock ON stock.MATNR = vbap.MATNR AND stock.WERKS = vbap.WERKS
    WHERE CAST(vbap.VBELN AS INTEGER) = CAST('40' AS INTEGER)
      AND CAST(vbap.POSNR AS INTEGER) = CAST('10' AS INTEGER)
    LIMIT 1;
 
 Before answering, mentally check: did I CAST every VBELN/POSNR? Did I aggregate
-MARD, MAKT, VBEP? Did I COALESCE stock to 0? If any answer is "no", rewrite.
+MARD (by MATNR, WERKS), MAKT, VBEP? Did I join stock on BOTH MATNR and WERKS?
+Did I COALESCE stock to 0? If any answer is "no", rewrite.
 
 ═════════════════ SCHEMA ═════════════════
 
@@ -177,12 +204,17 @@ Parameters:
   - VBELN (order_id): {order_id}
   - POSNR (item_no) : {item_no}
 
-Require these columns in the result (use these exact aliases):
+Requested change to validate (decide whether any EXTRA columns are needed to check it;
+the five required columns below must always be present regardless):
+{request_context}
+
+These columns are ALWAYS required in the result (use these exact aliases) — they are
+the minimum, and you may add more read-only columns if the request needs extra context:
   - material_name    (MAKT.MAKTX — English preferred, else any language; see rule 3)
   - quantity         (from VBAP.KWMENG)
   - delivery_status  (from VBUP.WBSTA)
-  - delivery_date    (earliest VBEP.EDATU; see rule 3)
-  - available_stock  (SUM of MARD.LABST across all storage locations, COALESCE to 0; see rule 3)
+  - delivery_date    (earliest VBEP.EDATU, already ISO 'YYYY-MM-DD'; see rule 3)
+  - available_stock  (SUM of MARD.LABST at the order's plant VBAP.WERKS, COALESCE to 0; see rule 3)
 """
 
 _PROMPT = ChatPromptTemplate.from_messages([
@@ -242,17 +274,21 @@ def _clean_sql(raw: str) -> str:
 # ---------------------------------------------------------------------------
 
 def _hardcoded_query(order_id: str, item_no: str) -> str:
-    # MARD / MAKT / VBEP 는 자재·아이템당 여러 행(저장위치·언어·일정라인)이므로
-    # 직접 JOIN 후 LIMIT 1 하면 임의의(종종 NULL) 행을 집게 된다. 반드시 집계한다:
-    #   available_stock : 전 저장위치 SUM(LABST)
-    #   material_name   : 영어(SPRAS='E') 우선, 없으면 MIN(MAKTX)로 라틴/영문 우선
-    #   delivery_date   : 가장 이른 일정라인 MIN(EDATU)
+    # 이 쿼리는 평가의 "정답(golden)"을 만드는 레퍼런스이기도 하다
+    # (generate_text2sql_dataset.py가 동일 함수를 호출). 따라서 프롬프트가 LLM에게
+    # 지시하는 의미와 1:1로 일치해야 한다. 결정적(deterministic) 정의:
+    #   material_name   : 영어(SPRAS='E') 우선, 없으면 MIN(MAKTX)
+    #   delivery_date   : 가장 이른 일정라인 MIN(EDATU) — EDATU는 이미 ISO 'YYYY-MM-DD'
+    #   available_stock : 주문 라인의 플랜트(VBAP.WERKS) 한정 SUM(LABST), 없으면 0
+    #   delivery_status : VBUP가 (VBELN,POSNR)당 여러 행(때로 WBSTA 충돌)일 수 있어 MAX(WBSTA)로
+    #                     집계 — 충돌 시 가장 진행된 상태(A<B<C)를 결정론적·보수적으로 선택.
+    # 보조 테이블을 모두 서브쿼리로 라인당 1행으로 접으므로 LIMIT 1은 안전 가드일 뿐이다.
     return f"""
     SELECT
         makt.material_name              AS material_name,
         vbap.KWMENG                     AS quantity,
-        vbup.WBSTA                      AS delivery_status,
-        vbep.EDATU                      AS delivery_date,
+        vbup.delivery_status            AS delivery_status,
+        vbep.delivery_date              AS delivery_date,
         COALESCE(stock.total_stock, 0)  AS available_stock
     FROM VBAP vbap
     LEFT JOIN (
@@ -260,17 +296,21 @@ def _hardcoded_query(order_id: str, item_no: str) -> str:
                COALESCE(MAX(CASE WHEN SPRAS = 'E' THEN MAKTX END), MIN(MAKTX)) AS material_name
         FROM MAKT GROUP BY MATNR
     ) makt ON makt.MATNR = vbap.MATNR
-    LEFT JOIN VBUP vbup
-           ON CAST(vbup.VBELN AS INTEGER) = CAST(vbap.VBELN AS INTEGER)
-          AND CAST(vbup.POSNR AS INTEGER) = CAST(vbap.POSNR AS INTEGER)
     LEFT JOIN (
-        SELECT VBELN, POSNR, MIN(EDATU) AS EDATU FROM VBEP GROUP BY VBELN, POSNR
+        SELECT CAST(VBELN AS INTEGER) AS v, CAST(POSNR AS INTEGER) AS p,
+               MAX(WBSTA) AS delivery_status
+        FROM VBUP GROUP BY v, p
+    ) vbup ON vbup.v = CAST(vbap.VBELN AS INTEGER)
+          AND vbup.p = CAST(vbap.POSNR AS INTEGER)
+    LEFT JOIN (
+        SELECT VBELN, POSNR, MIN(EDATU) AS delivery_date
+        FROM VBEP WHERE EDATU IS NOT NULL GROUP BY VBELN, POSNR
     ) vbep
            ON CAST(vbep.VBELN AS INTEGER) = CAST(vbap.VBELN AS INTEGER)
           AND CAST(vbep.POSNR AS INTEGER) = CAST(vbap.POSNR AS INTEGER)
     LEFT JOIN (
-        SELECT MATNR, SUM(LABST) AS total_stock FROM MARD GROUP BY MATNR
-    ) stock ON stock.MATNR = vbap.MATNR
+        SELECT MATNR, WERKS, SUM(LABST) AS total_stock FROM MARD GROUP BY MATNR, WERKS
+    ) stock ON stock.MATNR = vbap.MATNR AND stock.WERKS = vbap.WERKS
     WHERE CAST(vbap.VBELN AS INTEGER) = CAST('{order_id}' AS INTEGER)
       AND CAST(vbap.POSNR AS INTEGER) = CAST('{item_no}'  AS INTEGER)
     LIMIT 1
@@ -280,9 +320,18 @@ def _hardcoded_query(order_id: str, item_no: str) -> str:
 # Public API
 # ---------------------------------------------------------------------------
 
-def build_validation_query(order_id: str, item_no: str) -> tuple[str, str]:
+def build_validation_query(
+    order_id: str,
+    item_no: str,
+    request_context: str | None = None,
+) -> tuple[str, str]:
     """
     LLM(primary → hardcoded) 순서로 SQLite 검증 쿼리를 생성하고 반환.
+
+    Args:
+        request_context: 어떤 요청을 검증하려는지에 대한 설명(액션 의도). LLM이 필요한
+            추가 컬럼을 판단하는 데 쓰인다. None이면 일반 상태 조회로 처리. 필수 5개
+            컬럼은 컨텍스트와 무관하게 항상 포함된다. hardcoded fallback은 이를 무시한다.
 
     Returns:
         (sql, strategy) — strategy는 다음 중 하나:
@@ -295,6 +344,7 @@ def build_validation_query(order_id: str, item_no: str) -> tuple[str, str]:
         "schema":   SCHEMA_CONTEXT,
         "order_id": order_id,
         "item_no":  item_no,
+        "request_context": request_context or "(none — general status validation)",
     }
 
     chain = _get_chain()
@@ -333,16 +383,23 @@ def _execute_query(sql: str) -> dict | None:
         conn.close()
 
 
-def run_validation_query(order_id: str, item_no: str) -> dict | None:
+def run_validation_query(
+    order_id: str,
+    item_no: str,
+    request_context: str | None = None,
+) -> dict | None:
     """
     build_validation_query()로 생성된 쿼리를 SQLite에서 실행, 첫 번째 행을 dict로 반환.
 
     Primary(LLM) 쿼리가 0건을 반환하면 — LLM이 VBELN을 엄격 매칭(padded vs raw 불일치)
     하는 경우가 있으므로 — robust hardcoded 쿼리로 한 번 더 재시도한다. 둘 다 실패 시 None.
 
+    request_context는 LLM SQL 생성에만 전달된다(추가 컬럼 판단용). 0건 재시도 시 쓰는
+    hardcoded 쿼리는 결정론적 고정 쿼리이므로 컨텍스트의 영향을 받지 않는다.
+
     fallback이 일어났는지 운영상 추적 가능하도록, 각 경로에서 명시적 WARNING 로그를 남긴다.
     """
-    sql, strategy = build_validation_query(order_id, item_no)
+    sql, strategy = build_validation_query(order_id, item_no, request_context=request_context)
     result = _execute_query(sql)
 
     if result is None and strategy == "primary":

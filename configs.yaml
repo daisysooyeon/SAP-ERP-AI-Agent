@@ -20,7 +20,7 @@ models:
     provider: "openrouter"
     temperature: 0.0
   router:
-    name: "google/gemini-2.0-flash-lite-001"
+    name: "deepseek/deepseek-v4-flash"               # 분류(3-class) — 저비용·강추론 실험
     provider: "openrouter"                          # ollama | openrouter
     temperature: 0.0          # 분류 태스크 → 결정론적 출력
   worker_a:
@@ -39,11 +39,11 @@ models:
     provider: "openrouter"
     temperature: 0.1
   synthesizer:
-    name: "google/gemini-2.0-flash-lite-001"  # Phase 6: email synthesis LLM
+    name: "google/gemini-3.1-flash-lite"  # Phase 6: email synthesis LLM
     provider: "openrouter"
     temperature: 0.3
   data_gen:
-    name: "qwen/qwen3-8b"     # src/data/ 데이터셋 생성 전용 모델
+    name: "deepseek/deepseek-v4-flash"     # src/data/ 데이터셋 생성 전용 모델
     provider: "openrouter"
     temperature: 0.5
   eval_judge:
@@ -79,6 +79,7 @@ rag:
   top_k_retrieval: 20         # Retriever 후보 수
   top_k_rerank: 5             # Reranker 최종 선별 수
   contextual_header: true     # 청크 본문 앞에 [Source: 문서명 | p.N] 헤더를 붙여 임베딩 (재인제스트 필요)
+  ocr_enabled: true           # PDF 내 이미지 페이지에 Surya OCR 적용해 별도 OCR 청크 생성 (재인제스트 필요)
 
 # ── Feature Flags ─────────────────────────────────────────────────────────────
 feature_flags:

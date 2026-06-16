@@ -1,241 +1,332 @@
 """
 src/data/generate_golden_responses.py
+Generate golden_response for each test case using an LLM with ground-truth context.
 
-router_test_cases_gen.json의 각 케이스에 Samsung SDS 물류팀 형식 템플릿으로
-`golden_response`(정답 이메일 출력)를 채워넣는 결정론적 생성기.
+Three separate prompts per label to avoid context leakage:
+  QA_ONLY     : no ERP context — only qa_question + rag_evidence
+  ACTION_ONLY : no user_input — only structured erp_evidence to prevent hallucination
+  BOTH        : structured ERP action + RAG answer
 
-LLM을 호출하지 않고 stdlib만 사용한다 — 케이스의 기존 필드(label /
-action_description / qa_question / erp_evidence / rag_evidence)에서
-구체적 내용을 직접 조합한다. 이렇게 만든 golden_response는 eval_e2e가
-실제 모델 출력과 비교할 ground-truth 답안으로 쓰인다.
-
-템플릿 구조 (요청 사양 — 영어 본문):
-
-    Dear {first_name or "Customer"},
-
-    Hello,
-
-    This is the Samsung SDS Logistics Team.
-
-    After our internal review of the matter you raised in your email,
-    {specific content per case}
-
-    Please feel free to contact us anytime for any related inquiries.
-
-    Thank you.
-
-실행:
-    python -m src.data.generate_golden_responses
-    python -m src.data.generate_golden_responses --in data/eval/router_test_cases_gen.json \\
-                                                  --out data/eval/router_test_cases_gen.json
+Run:
+  python -m src.data.generate_golden_responses
+  python -m src.data.generate_golden_responses --skip-existing --delay 1.0
+  python -m src.data.generate_golden_responses --model openai/gpt-4o
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import logging
 import re
+import sys
+import time
 from pathlib import Path
-from typing import Any
+
+from dotenv import load_dotenv
+load_dotenv()
+
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+from langchain_core.prompts import ChatPromptTemplate
+from src.data._llm_client import build_llm, invoke_with_retry
+
+_ROOT = Path(__file__).resolve().parent.parent.parent
+DEFAULT_PATH = str(_ROOT / "data" / "eval" / "router_test_cases_gen.json")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)],
+    force=True,
+)
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# 템플릿 — 인사·서명 고정. 본문(body)만 케이스별로 채워진다.
+# Shared system prompt (Samsung SDS email template)
 # ---------------------------------------------------------------------------
 
-_TEMPLATE = (
-    "Dear {greeting_name},\n"
-    "\n"
-    "Hello,\n"
-    "\n"
-    "This is the Samsung SDS Logistics Team.\n"
-    "\n"
-    "After our internal review of the matter you raised in your email,\n"
-    "{body}\n"
-    "\n"
-    "Please feel free to contact us anytime for any related inquiries.\n"
-    "\n"
-    "Thank you."
+_SYSTEM = """\
+You are a customer service agent for the Samsung SDS Logistics Team, composing
+professional B2B email replies in English.
+
+STRICTLY follow this template — only the body paragraphs change per case:
+
+Dear Customer,
+
+Hello,
+
+This is the Samsung SDS Logistics Team.
+
+After our internal review of the matter you raised in your email,
+[body — 1 to 4 short paragraphs]
+
+Please feel free to contact us anytime for any related inquiries.
+
+Thank you.
+
+Rules:
+- Body must be factual. Use ONLY the information provided in the context.
+- Do NOT use technical database terms (e.g. MARD, JOIN, VBAP).
+- Do NOT invent order numbers, quantities, or dates not given.
+- Keep the entire email under 220 words.
+- Output the full email only — no explanation, no markdown.
+"""
+
+# ---------------------------------------------------------------------------
+# Label-specific human prompts
+# ---------------------------------------------------------------------------
+
+_QA_HUMAN = """\
+The customer asked a knowledge question about SAP ERP.
+
+Question  : {qa_question}
+Source    : {rag_evidence}
+
+Write the golden response. Answer the question using the source text.
+Do NOT mention any ERP order processing — this is a knowledge-only reply.
+"""
+
+_ACTION_HUMAN = """\
+The customer requested an ERP order modification. Use ONLY the details below.
+
+Order ID    : {order_id}
+Item No     : {item_no}
+Action Type : {action_type}
+Requested   : {action_desc}
+Result      : {erp_status_display}
+
+Write the golden response informing the customer of the result.
+Use ONLY the order/item numbers listed above — do not reference any other numbers.
+"""
+
+_BOTH_HUMAN = """\
+The customer made an ERP order request AND asked a knowledge question.
+
+--- ERP Action ---
+Order ID    : {order_id}
+Item No     : {item_no}
+Action Type : {action_type}
+Requested   : {action_desc}
+Result      : {erp_status_display}
+
+--- Knowledge Question ---
+Question  : {qa_question}
+Source    : {rag_evidence}
+
+Write the golden response covering both parts:
+1. Inform about the ERP action result (use only the order/item numbers above).
+2. Answer the knowledge question using the source text.
+"""
+
+_QA_PROMPT     = ChatPromptTemplate.from_messages([("system", _SYSTEM), ("human", _QA_HUMAN)])
+_ACTION_PROMPT = ChatPromptTemplate.from_messages([("system", _SYSTEM), ("human", _ACTION_HUMAN)])
+_BOTH_PROMPT   = ChatPromptTemplate.from_messages([("system", _SYSTEM), ("human", _BOTH_HUMAN)])
+
+# ---------------------------------------------------------------------------
+# ERP status display strings
+# PENDING_APPROVAL → SUCCESS (HITL would approve in production)
+# ---------------------------------------------------------------------------
+
+_STATUS_DISPLAY: dict[str, str] = {
+    "SUCCESS":                   "Action completed successfully.",
+    "PENDING_APPROVAL":          "Action completed successfully.",
+    "REJECTED":                  "Action rejected by the approver.",
+    "FAILED":                    "Action failed due to a system error.",
+    "BLOCKED_NO_STOCK":          "BLOCKED — insufficient stock for the requested quantity.",
+    "BLOCKED_INVALID_QTY":       "BLOCKED — resulting quantity would be zero or negative.",
+    "BLOCKED_SHIPPED":           "BLOCKED — item already fully shipped, cannot be modified.",
+    "BLOCKED_EXTRACTION_FAILED": "BLOCKED — could not parse order details from the email.",
+    "BLOCKED_NO_DATA":           "BLOCKED — order or item not found in the system.",
+    "BLOCKED_VALIDATION":        "BLOCKED — validation error.",
+}
+
+_OTHER_STATUS = (
+    "This request type requires manual processing by our team "
+    "and cannot be handled automatically."
 )
 
-
 # ---------------------------------------------------------------------------
-# 헬퍼
-# ---------------------------------------------------------------------------
-
-def _summarize_rag(rag_evidence: str | None, max_chars: int = 350) -> str:
-    """rag_evidence를 답변 본문에 어울리는 형태로 정제 — 줄바꿈/페이지 표시 제거 후
-    문장 단위로 자르고 max_chars 이내로 축약. LLM을 안 쓰는 결정론적 요약."""
-    if not rag_evidence:
-        return ""
-
-    text = rag_evidence.replace("\n", " ").strip()
-    # "Unit 12: ..." / "© Copyright" / "Page 158" 같은 출처 메타 제거
-    text = re.sub(r"©\s*Copyright[^.]*\.?", "", text)
-    text = re.sub(r"All rights reserved\.?", "", text)
-    text = re.sub(r"Unit\s+\d+:[^.]*\.?", "", text)
-    text = re.sub(r"\s{2,}", " ", text).strip()
-
-    if len(text) <= max_chars:
-        return text
-
-    # 문장 경계로 자르기
-    sentences = re.split(r"(?<=[.!?])\s+", text)
-    out, total = [], 0
-    for s in sentences:
-        if total + len(s) > max_chars and out:
-            break
-        out.append(s)
-        total += len(s) + 1
-    return " ".join(out).rstrip() + (" …" if total < len(text) else "")
-
-
-def _action_body(action_description: str | None, erp_evidence: dict | None) -> str:
-    """ACTION_ONLY (또는 BOTH의 action 파트) 본문 — 처리 결과 요약."""
-    action = (action_description or "").strip().rstrip(".")
-    ev     = erp_evidence or {}
-    order  = ev.get("order_id", "")
-    item   = ev.get("item_no", "")
-
-    target = ""
-    if order and item:
-        target = f" on order {order}, item {item}"
-    elif order:
-        target = f" on order {order}"
-
-    if action:
-        return (
-            f"we have processed your request: {action}{target}.\n"
-            f"\n"
-            f"The change has been applied successfully in our system, and you will see "
-            f"it reflected on the relevant documents shortly."
-        )
-    return (
-        f"we have processed your request{target}.\n"
-        f"\n"
-        f"The change has been applied successfully in our system."
-    )
-
-
-def _qa_body(qa_question: str | None, rag_evidence: str | None) -> str:
-    """QA_ONLY (또는 BOTH의 QA 파트) 본문 — 질문 인용 + 근거 요약."""
-    q = (qa_question or "").strip().rstrip("?")
-    summary = _summarize_rag(rag_evidence)
-
-    if not summary:
-        return f"regarding your question — {q}? — we will get back to you with the relevant details shortly."
-
-    if q:
-        return (
-            f"regarding your question — {q}? — please find the answer below.\n"
-            f"\n"
-            f"{summary}"
-        )
-    return summary
-
-
-def _both_body(action_description, erp_evidence, qa_question, rag_evidence) -> str:
-    """BOTH 본문 — action 처리 결과 + 질문 답변. _qa_body가 이미 'regarding'
-    으로 시작하므로 별도 연결구는 빈 줄 두 개만 둔다."""
-    return (
-        _action_body(action_description, erp_evidence)
-        + "\n\n"
-        + "On your additional question, "
-        + _qa_body(qa_question, rag_evidence)
-    )
-
-
-# ---------------------------------------------------------------------------
-# 케이스별 골든 응답 생성
+# Derive action_type / erp_status when fields are missing
 # ---------------------------------------------------------------------------
 
-_NAME_RE = re.compile(
-    r"(?:^|\n)(?:From|Best regards,|Sincerely,|Regards,|Thanks,?)\s*\n?\s*([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)",
-    re.MULTILINE,
-)
+def _derive_action_type(action_desc: str | None) -> str:
+    if not action_desc:
+        return "OTHER"
+    if re.search(r"cancel", action_desc, re.I):
+        return "CANCEL_ITEM"
+    if re.search(r"quantit|qty|units?|reduce\s+the\s+order", action_desc, re.I):
+        return "CHANGE_QTY"
+    if re.search(r"deliver(y)?\s+date|reschedule", action_desc, re.I):
+        return "CHANGE_DATE"
+    if re.search(r"address|ship.to|shipping\s+address", action_desc, re.I):
+        return "CHANGE_ADDR"
+    return "OTHER"
 
 
-def _extract_sender_first_name(email_text: str) -> str:
-    """이메일 서명에서 발신자 이름의 first name을 보수적으로 추출.
-    placeholder([Your Name], [Name])는 무시. 못 찾으면 빈 문자열."""
-    if not email_text:
-        return ""
+def _derive_erp_status(action_type: str, ev: dict | None, action_desc: str | None) -> str:
+    if not ev:
+        return "BLOCKED_NO_DATA"
+    expected_values = ev.get("expected_values") or {}
+    delivery_status = expected_values.get("delivery_status") or ""
+    available_stock = float(expected_values.get("available_stock") or 0)
+    if delivery_status == "C":
+        return "BLOCKED_SHIPPED"
+    if action_type == "CHANGE_QTY":
+        m = (re.search(r"(\d+)\s*units?", action_desc or "", re.I) or
+             re.search(r"by\s+(\d+)", action_desc or "", re.I))
+        if m and int(m.group(1)) > available_stock:
+            return "BLOCKED_NO_STOCK"
+    return "PENDING_APPROVAL"
 
-    m = _NAME_RE.search(email_text)
-    if not m:
-        return ""
-    full = m.group(1).strip()
-    if re.search(r"\[.*\]", full) or full.lower() in {"your name", "name"}:
-        return ""
-    return full.split()[0]
+
+def _status_display(erp_status: str, action_type: str) -> str:
+    if action_type == "OTHER":
+        return _OTHER_STATUS
+    return _STATUS_DISPLAY.get(erp_status, f"Status: {erp_status}")
 
 
-def build_golden_response(case: dict) -> str:
-    """케이스 하나에 대한 golden_response 문자열을 생성."""
-    label = case.get("label", "")
-    sender_first_name = _extract_sender_first_name(
-        case.get("user_input") or case.get("input") or ""
-    )
-    greeting_name = sender_first_name or "Customer"
+def _rag_text(case: dict) -> str:
+    evidence = case.get("rag_evidence") or ""
+    if isinstance(evidence, list):
+        evidence = "\n\n---\n\n".join(evidence)
+    return str(evidence)[:1500]
+
+# ---------------------------------------------------------------------------
+# Build label-specific LLM inputs
+# ---------------------------------------------------------------------------
+
+def _build_inputs(case: dict) -> tuple[ChatPromptTemplate, dict]:
+    label       = case.get("label", "QA_ONLY")
+    ev          = case.get("erp_evidence") or {}
+    action_desc = ev.get("action") or ""
+
+    action_type = case.get("expected_action_type") or _derive_action_type(action_desc)
+    erp_status  = (
+        case.get("expected_erp_action_status")
+        or _derive_erp_status(action_type, ev, action_desc)
+    ) if label != "QA_ONLY" else "N/A"
+
+    # Save derived values back (so JSON reflects the ground truth)
+    if not case.get("expected_action_type") and label != "QA_ONLY":
+        case["expected_action_type"] = action_type
+    if not case.get("expected_erp_action_status") and label != "QA_ONLY":
+        case["expected_erp_action_status"] = erp_status
+
+    status_disp = _status_display(erp_status, action_type)
+
+    if label == "QA_ONLY":
+        return _QA_PROMPT, {
+            "qa_question":  case.get("qa_question") or "",
+            "rag_evidence": _rag_text(case),
+        }
+
+    order_id   = str(ev.get("order_id", ""))
+    item_no    = str(ev.get("item_no", ""))
 
     if label == "ACTION_ONLY":
-        body = _action_body(case.get("action_description"), case.get("erp_evidence"))
-    elif label == "QA_ONLY":
-        body = _qa_body(case.get("qa_question"), case.get("rag_evidence"))
-    elif label == "BOTH":
-        body = _both_body(
-            case.get("action_description"),
-            case.get("erp_evidence"),
-            case.get("qa_question"),
-            case.get("rag_evidence"),
-        )
-    else:
-        body = "we have noted your message and will follow up shortly with the relevant details."
+        return _ACTION_PROMPT, {
+            "order_id":          order_id,
+            "item_no":           item_no,
+            "action_type":       action_type,
+            "action_desc":       action_desc,
+            "erp_status_display": status_disp,
+        }
 
-    return _TEMPLATE.format(greeting_name=greeting_name, body=body)
-
+    # BOTH
+    return _BOTH_PROMPT, {
+        "order_id":          order_id,
+        "item_no":           item_no,
+        "action_type":       action_type,
+        "action_desc":       action_desc,
+        "erp_status_display": status_disp,
+        "qa_question":       case.get("qa_question") or "",
+        "rag_evidence":      _rag_text(case),
+    }
 
 # ---------------------------------------------------------------------------
-# Entry point
+# Main
 # ---------------------------------------------------------------------------
 
-def populate(in_path: Path, out_path: Path, overwrite: bool = False) -> int:
-    """in_path를 읽어 각 케이스에 golden_response를 채우고 out_path에 저장.
-    overwrite=False면 이미 비어있지 않은 golden_response는 건드리지 않음."""
-    cases: list[dict[str, Any]] = json.loads(in_path.read_text(encoding="utf-8"))
-    changed = 0
-    for c in cases:
-        if not overwrite and c.get("golden_response"):
+def generate_golden_responses(
+    path: str = DEFAULT_PATH,
+    skip_existing: bool = False,
+    delay: float = 1.5,
+    model_name: str | None = None,
+) -> None:
+    data_path = Path(path)
+    with open(data_path, encoding="utf-8") as f:
+        dataset: list[dict] = json.load(f)
+
+    llm = build_llm(model_name=model_name, temperature=0.0)
+    updated = skipped = failed = 0
+
+    for i, case in enumerate(dataset):
+        cid   = case.get("id", f"#{i}")
+        label = case.get("label", "?")
+
+        if skip_existing and case.get("golden_response"):
+            logger.info("[%s] skipped", cid)
+            skipped += 1
             continue
-        c["golden_response"] = build_golden_response(c)
-        changed += 1
 
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(
-        json.dumps(cases, ensure_ascii=False, indent=2),
-        encoding="utf-8",
+        prompt, inputs = _build_inputs(case)
+        chain = prompt | llm
+
+        logger.info(
+            "[%d/%d] %s  label=%-11s  erp_status=%-35s  action_type=%s",
+            i + 1, len(dataset), cid, label,
+            case.get("expected_erp_action_status") or "N/A",
+            case.get("expected_action_type") or "N/A",
+        )
+
+        raw = invoke_with_retry(chain, inputs, label=f"golden/{cid}")
+        time.sleep(delay)
+
+        if raw is None:
+            logger.warning("[%s] generation failed — keeping existing value", cid)
+            failed += 1
+            continue
+
+        case["golden_response"] = raw.strip()
+        updated += 1
+
+    with open(data_path, "w", encoding="utf-8") as f:
+        json.dump(dataset, f, indent=2, ensure_ascii=False)
+
+    print("\n" + "=" * 60)
+    print("  Golden Response Generation Complete")
+    print("=" * 60)
+    print(f"  Updated : {updated}")
+    print(f"  Skipped : {skipped}  (--skip-existing)")
+    print(f"  Failed  : {failed}")
+    print(f"  Total   : {len(dataset)}")
+    print(f"  Output  : {path}")
+    print("=" * 60)
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def _parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(
+        description="Generate per-case golden_response using LLM with ground-truth context"
     )
-    return changed
-
-
-def main() -> None:
-    repo_root = Path(__file__).resolve().parent.parent.parent
-    default_in = repo_root / "data" / "eval" / "router_test_cases_gen.json"
-
-    parser = argparse.ArgumentParser(description="Generate golden_response field for router test cases")
-    parser.add_argument("--in", dest="in_path", default=str(default_in),
-                        help=f"input JSON path (default: {default_in})")
-    parser.add_argument("--out", dest="out_path", default=None,
-                        help="output JSON path (default: same as --in, in-place)")
-    parser.add_argument("--overwrite", action="store_true",
-                        help="overwrite existing golden_response values")
-    args = parser.parse_args()
-
-    in_path  = Path(args.in_path)
-    out_path = Path(args.out_path) if args.out_path else in_path
-
-    changed = populate(in_path, out_path, overwrite=args.overwrite)
-    print(f"[generate_golden_responses] populated {changed} case(s) → {out_path}")
+    p.add_argument("--input",         default=DEFAULT_PATH, help="Path to test cases JSON")
+    p.add_argument("--skip-existing", action="store_true",
+                   help="Skip cases that already have a golden_response")
+    p.add_argument("--delay",         type=float, default=1.5,
+                   help="Seconds between API calls (default: 1.5)")
+    p.add_argument("--model",         default=None,
+                   help="OpenRouter model override (default: models.data_gen.name in configs.yaml)")
+    return p.parse_args()
 
 
 if __name__ == "__main__":
-    main()
+    args = _parse_args()
+    generate_golden_responses(
+        path=args.input,
+        skip_existing=args.skip_existing,
+        delay=args.delay,
+        model_name=args.model,
+    )

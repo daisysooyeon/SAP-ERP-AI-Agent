@@ -61,10 +61,25 @@ log_step "1/4  FastAPI 서버를 백그라운드로 시작합니다..."
 
 cd "${PROJECT_ROOT}"
 LOG_FILE="/tmp/sap_server_$$.log"
+PORT=8000
+
+# ── 포트 점유 검사 ────────────────────────────────────────────────────────────
+# 이전 실행의 서버가 비정상 종료로 ${PORT}에 남아 있으면, 새 uvicorn은 바인딩에
+# 실패하지만(백그라운드 &라 스크립트는 계속 진행) health 체크는 그 '낡은 서버'에
+# 붙어버린다. 낡은 서버가 옛 코드면 응답에 requires_approval이 없어 "승인 미트리거"
+# 처럼 보인다. 이를 막기 위해 시작 전에 포트를 검사하고, 점유 중이면 즉시 실패한다.
+if "${PYTHON}" -c "import socket,sys; s=socket.socket(); s.settimeout(1); sys.exit(0 if s.connect_ex(('127.0.0.1', ${PORT}))==0 else 1)" 2>/dev/null; then
+  log_error "Port ${PORT} is already in use - a stale server may be running."
+  log_error "If left as-is, requests may hit the OLD server (e.g. missing requires_approval in the response)."
+  log_error "Kill the process holding the port, then re-run:"
+  log_error "    netstat -ano | grep :${PORT}     # find the PID"
+  log_error "    taskkill //PID <pid> //F         # terminate (Windows)"
+  exit 1
+fi
 
 "${UVICORN}" src.api.server:app \
   --host 0.0.0.0 \
-  --port 8000 \
+  --port "${PORT}" \
   > "${LOG_FILE}" 2>&1 &
 
 SERVER_PID=$!
@@ -143,6 +158,12 @@ echo ""
 REQUIRES_APPROVAL=$(echo "${RESPONSE}" | "${PYTHON}" -c "import sys,json; print(json.load(sys.stdin).get('requires_approval', False))" 2>/dev/null || echo "False")
 THREAD_ID=$(echo "${RESPONSE}" | "${PYTHON}" -c "import sys,json; print(json.load(sys.stdin).get('thread_id',''))" 2>/dev/null || echo "")
 
+# Windows python.exe prints "True\r\n"; $() strips the trailing \n but NOT the \r,
+# leaving "True\r" so [[ "True\r" == "True" ]] is false. Strip CR/LF/spaces so the
+# comparison (and the thread_id used in URLs) is clean.
+REQUIRES_APPROVAL="${REQUIRES_APPROVAL//[$'\r\n ']/}"
+THREAD_ID="${THREAD_ID//[$'\r\n ']/}"
+
 if [[ "${REQUIRES_APPROVAL}" == "True" ]]; then
   log_info "✅ 승인 대기 중 — Slack 알림이 전송되었는지 확인하세요."
   echo ""
@@ -164,4 +185,23 @@ else
 fi
 
 echo ""
-read -r -p "  [Enter] 서버 종료 > "
+read -r -p "  [Enter] press AFTER approving/rejecting to fetch the final result (or to exit) > "
+
+# After the human decision, query the final state so the CLI shows the change
+# (the resume — DB update + reply synthesis — happens on the server when you
+#  click the Slack button / hit the approve URL; this fetches the outcome).
+if [[ "${REQUIRES_APPROVAL}" == "True" && -n "${THREAD_ID}" ]]; then
+  echo ""
+  log_info "Final state (/api/status/${THREAD_ID}):"
+  "${PYTHON}" - "${THREAD_ID}" "${PORT}" <<'PYEOF' 2>/dev/null || log_warn "Could not fetch final status (server may be busy or already resumed)."
+import sys, urllib.request, json
+tid, port = sys.argv[1], sys.argv[2]
+r = urllib.request.urlopen(f"http://localhost:{port}/api/status/{tid}", timeout=10)
+d = json.loads(r.read())
+print(f"  erp_action_status : {d.get('erp_action_status')}")
+fr = d.get("final_response") or "(none)"
+print("  final_response    :")
+for line in fr.splitlines():
+    print(f"    {line}")
+PYEOF
+fi

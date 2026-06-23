@@ -33,6 +33,31 @@ from src.graph.router import router_node
 setup_logging()
 logger = logging.getLogger(__name__)
 
+
+# ---------------------------------------------------------------------------
+# 전처리 플래그(mentions_action / mentions_question) → intent 환산
+# ---------------------------------------------------------------------------
+
+def _flags_to_intent(email_ctx: dict | None) -> Optional[str]:
+    """전처리 플래그를 router intent 라벨로 환산. 전처리 실패/둘 다 False면 None.
+
+      (action=T, question=T) → BOTH
+      (action=T, question=F) → ACTION_ONLY
+      (action=F, question=T) → QA_ONLY
+      (action=F, question=F) → None  (전처리가 둘 다 못 잡음 → 환산 불가)
+    """
+    if not email_ctx or not email_ctx.get("preprocess_ok"):
+        return None
+    a = bool(email_ctx.get("mentions_action"))
+    q = bool(email_ctx.get("mentions_question"))
+    if a and q:
+        return "BOTH"
+    if a:
+        return "ACTION_ONLY"
+    if q:
+        return "QA_ONLY"
+    return None
+
 # ---------------------------------------------------------------------------
 # Default test-cases path
 # ---------------------------------------------------------------------------
@@ -80,6 +105,12 @@ def eval_router(
     mismatches: list[dict] = []
     latencies: list[float] = []
 
+    # 전처리 플래그 ↔ router 결과 일치도 추적
+    flag_total = 0          # flag_intent 환산 가능한 케이스 수 (전처리 OK & 플래그로 intent 결정됨)
+    flag_agree = 0          # flag_intent == router 예측 일치 수
+    flag_correct = 0        # flag_intent == 정답 라벨 (전처리 플래그 자체 정확도)
+    flag_disagreements: list[dict] = []
+
     total = len(test_cases)
     logger.info("Starting router evaluation on %d samples …", total)
 
@@ -114,6 +145,25 @@ def eval_router(
 
         labels_true.append(true_label)
         labels_pred.append(predicted)
+
+        # ── 전처리 플래그 ↔ router 결과 일치 검사 ──────────────────────────────
+        flag_intent = _flags_to_intent(email_ctx)
+        if flag_intent is not None:
+            flag_total += 1
+            if flag_intent == predicted:
+                flag_agree += 1
+            else:
+                flag_disagreements.append({
+                    "index": i,
+                    "id": case.get("id", f"#{i}"),
+                    "true_label": true_label,
+                    "router_pred": predicted,
+                    "flag_intent": flag_intent,
+                    "mentions_action": bool(email_ctx.get("mentions_action")),
+                    "mentions_question": bool(email_ctx.get("mentions_question")),
+                })
+            if flag_intent == true_label:
+                flag_correct += 1
 
         status = "✓" if predicted == true_label else "✗"
         if predicted != true_label and predicted != "__ERROR__":
@@ -166,6 +216,18 @@ def eval_router(
         print(f"  Errors (None)    : {len(errors)}")
         print(f"  Latency (mean)   : {mean_latency:.2f}s")
         print(f"  Latency (total)  : {total_latency:.1f}s")
+        print("-" * 70)
+        # 전처리 플래그(mentions_action/question) ↔ router 결과 정합성
+        agree_pct = (flag_agree / flag_total * 100) if flag_total else 0.0
+        fcorr_pct = (flag_correct / flag_total * 100) if flag_total else 0.0
+        print(f"  Preprocess-flag ↔ router agreement : {flag_agree}/{flag_total} = {agree_pct:.1f}%")
+        print(f"  Preprocess-flag accuracy (vs label): {flag_correct}/{flag_total} = {fcorr_pct:.1f}%")
+        print(f"  Flag-derivable cases               : {flag_total}/{total}  (rest: preprocess failed or both flags False)")
+        if flag_disagreements:
+            print(f"  Flag↔router disagreements          : {len(flag_disagreements)}")
+            for d in flag_disagreements[:10]:
+                print(f"    - [{d['id']}] router={d['router_pred']:<11} flag={str(d['flag_intent']):<11}"
+                      f" (action={d['mentions_action']}, question={d['mentions_question']}, true={d['true_label']})")
         print("=" * 70)
 
         if accuracy >= 0.99:
@@ -180,6 +242,13 @@ def eval_router(
         "errors": errors,
         "mismatches": mismatches,
         "latency_s": {"mean": mean_latency, "total": total_latency},
+        "preprocess_flag_consistency": {
+            "flag_total": flag_total,
+            "agree_with_router": flag_agree,
+            "agree_rate": (flag_agree / flag_total) if flag_total else None,
+            "flag_accuracy_vs_label": (flag_correct / flag_total) if flag_total else None,
+            "disagreements": flag_disagreements,
+        },
     }
 
 

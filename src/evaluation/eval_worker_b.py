@@ -38,7 +38,6 @@ from langchain_openai import ChatOpenAI
 from src.config import get_config
 from src.rag.retriever import build_hybrid_retriever
 from src.rag.reranker import rerank
-from src.evaluation._bertscore import compute_bertscore_f1
 
 
 def _serialize_docs(docs: list) -> list[dict]:
@@ -309,29 +308,6 @@ def compute_faithfulness(
 # 메인 평가 함수
 # ---------------------------------------------------------------------------
 
-def _flatten_rag_evidence(evidence: str | list[str] | None) -> str:
-    """rag_evidence가 list면 \\n\\n으로 join, str이면 그대로. None이면 빈 문자열."""
-    if evidence is None:
-        return ""
-    if isinstance(evidence, list):
-        return "\n\n".join(str(e) for e in evidence if e)
-    return str(evidence)
-
-
-def compute_bertscore_for_rag(
-    test_cases: list[dict],
-    rag_answers: list[str],
-) -> tuple[list[float | None], float | None]:
-    """RAG 답변의 BERTScore F1 — 정답지로 rag_evidence를 사용.
-
-    LLM judge의 faithfulness(컨텍스트 근거성)와는 다른 신호: BERTScore는 답변이
-    rag_evidence의 *내용*과 얼마나 의미적으로 가까운지를 0~1 정량으로 잡는다.
-    문장 어휘가 달라도 의미가 일치하면 높은 점수.
-    """
-    references = [_flatten_rag_evidence(tc.get("rag_evidence")) for tc in test_cases]
-    return compute_bertscore_f1(rag_answers, references)
-
-
 def run_rag_evaluation(
     test_cases: list[dict],
     rag_answers: list[str] | None = None,
@@ -354,8 +330,6 @@ def run_rag_evaluation(
             "mrr": float,
             "context_recall": float | None,
             "faithfulness": float | None,
-            "bertscore_f1": float | None,
-            "bertscore_valid_n": int,
             "n_cases": int,
         }
     """
@@ -368,8 +342,6 @@ def run_rag_evaluation(
 
     context_recall: float | None = None
     faithfulness:   float | None = None
-    bertscore_f1:   float | None = None
-    bertscore_valid_n: int = 0
     invalid_cr: int = 0
     invalid_fa: int = 0
 
@@ -377,14 +349,6 @@ def run_rag_evaluation(
         logger.info("[eval_rag] Running LLM judges (Context Recall + Faithfulness) ...")
         context_recall, invalid_cr = compute_context_recall(test_cases, all_retrieved)
         faithfulness,   invalid_fa = compute_faithfulness(test_cases, all_retrieved, rag_answers)
-
-        # BERTScore F1 — 정답지(rag_evidence) 대비 답변의 의미 유사도
-        logger.info("[eval_rag] Computing BERTScore F1 (answer vs rag_evidence) ...")
-        per_case_bs, mean_bs = compute_bertscore_for_rag(test_cases, rag_answers)
-        bertscore_f1     = mean_bs
-        bertscore_valid_n = sum(1 for v in per_case_bs if v is not None)
-        # 결과를 호출자가 케이스별로 보고 싶을 수 있으니 별도 attr로도 노출
-        run_rag_evaluation._last_per_case_bertscore = per_case_bs  # type: ignore[attr-defined]
 
     if invalid_cr > 0:
         logger.warning("[eval_rag] Context Recall judge invalid: %d / %d", invalid_cr, n)
@@ -397,8 +361,6 @@ def run_rag_evaluation(
         "mrr":                             round(mrr, 4),
         "context_recall":                  round(context_recall, 4) if context_recall is not None else None,
         "faithfulness":                    round(faithfulness, 4)   if faithfulness   is not None else None,
-        "bertscore_f1":                    bertscore_f1,
-        "bertscore_valid_n":               bertscore_valid_n,
         "n_cases":                         n,
         "judge_invalid_context_recall":    invalid_cr,
         "judge_invalid_faithfulness":      invalid_fa,
@@ -415,7 +377,6 @@ TARGETS = {
     "mrr":            0.70,
     "context_recall": 0.90,
     "faithfulness":   0.85,
-    "bertscore_f1":   0.65,   # BERTScore F1 — deberta-xlarge 기준 0.6~0.7대가 양호한 답변
 }
 
 METRIC_LABELS = {
@@ -424,7 +385,6 @@ METRIC_LABELS = {
     "mrr":            "MRR         ",
     "context_recall": "Ctx Recall  ",
     "faithfulness":   "Faithfulness",
-    "bertscore_f1":   "BERTScore F1",
 }
 
 
@@ -447,6 +407,11 @@ def _main():
     parser.add_argument("--report",  default="reports/worker_b_eval_result.json", help="출력 리포트 경로")
     parser.add_argument("--dataset", default="data/eval/router_test_cases_gen.json")
     parser.add_argument("--skip-llm-judge", action="store_true", help="LLM judge 메트릭 스킵")
+    parser.add_argument(
+        "--no-preprocess", action="store_true",
+        help="Skip email preprocessing (cleaned_body extraction) and extract queries from raw user_input "
+             "(default: use preprocessed cleaned_body, matching production worker_b_node)",
+    )
     args = parser.parse_args()
 
     # 데이터셋 로드 및 필터링 (QA_ONLY, BOTH)
@@ -460,6 +425,15 @@ def _main():
     retriever = build_hybrid_retriever()
     cfg = get_config()
     top_n = cfg.rag.top_k_rerank
+
+    # 이메일 전처리 — 프로덕션(worker_b_node)은 원본 대신 cleaned_body로 쿼리를 추출한다.
+    # eval도 동일 조건을 맞추기 위해 케이스별로 전처리해 cleaned_body를 쿼리 추출 입력으로 쓴다.
+    # (--no-preprocess 면 기존처럼 원본 user_input 사용)
+    if not args.no_preprocess:
+        from src.preprocess.email_preprocessor import preprocess_email
+        logger.info("Email preprocessing ENABLED (using cleaned_body for query extraction, matching production)")
+    else:
+        logger.info("Email preprocessing DISABLED (using raw user_input)")
 
     # 각 케이스 실행
     results = []
@@ -476,9 +450,20 @@ def _main():
         raw_input = case.get("user_input") or case.get("qa_question") or case.get("question", "")
         t0       = time.perf_counter()
 
+        query_extraction_input = raw_input
+        if not args.no_preprocess:
+            try:
+                ctx = preprocess_email(raw_input)
+                if ctx.preprocess_ok:
+                    query_extraction_input = (
+                        ctx.question_summary or ctx.cleaned_body or raw_input
+                    )
+            except Exception as e:
+                logger.warning("[%s] preprocess failed: %s — using raw user_input", cid, e)
+
         # 쿼리 추출 — Query Expansion (worker_b의 실제 로직과 동일하게)
         from src.graph.worker_b import _extract_rag_queries
-        rag_queries = _extract_rag_queries(raw_input)
+        rag_queries = _extract_rag_queries(query_extraction_input)
         if not rag_queries:
             rag_queries = [case.get("qa_question") or raw_input]  # qa_question이 이메일 전문보다 정확한 쿼리
         rag_query = rag_queries[0]  # 대표 쿼리 (reranking 기준)
@@ -545,12 +530,6 @@ def _main():
         all_retrieved=all_retrieved,
         skip_llm_judge=args.skip_llm_judge,
     )
-
-    # 케이스별 BERTScore F1을 results에 부착 (json 리포트에서 회귀 추적용)
-    per_case_bs = getattr(run_rag_evaluation, "_last_per_case_bertscore", None)
-    if per_case_bs is not None and len(per_case_bs) == len(results):
-        for r, val in zip(results, per_case_bs):
-            r["bertscore_f1"] = val
 
     # 결과 출력
     print(f"\n{'='*60}")

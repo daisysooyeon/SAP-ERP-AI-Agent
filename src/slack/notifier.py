@@ -44,7 +44,7 @@ def _build_action_summary(action: dict) -> str:
     )
 
 
-def _build_message(action: dict, thread_id: str, server_base_url: str = "") -> dict:
+def _build_message(action: dict, thread_id: str) -> dict:
     """
     Build a Slack Block Kit message payload with INTERACTIVE buttons.
 
@@ -213,41 +213,12 @@ async def update_message_via_response_url(response_url: str, text: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# 발송 함수 (동기 + 비동기)
+# 발송 함수 (비동기 — FastAPI 핸들러에서 사용)
 # ---------------------------------------------------------------------------
-
-def send_approval_request(
-    action: dict,
-    thread_id: str,
-    server_base_url: str = "http://localhost:8000",
-) -> bool:
-    """
-    Sync version: Send an ERP update approval request to Slack.
-
-    Returns:
-        True  — message sent successfully
-        False — SLACK_WEBHOOK_URL not set, or send failed
-    """
-    webhook_url = os.getenv("SLACK_WEBHOOK_URL", "")
-    if not webhook_url:
-        logger.warning("[slack] SLACK_WEBHOOK_URL is not set. Skipping message.")
-        return False
-
-    message = _build_message(action, thread_id, server_base_url)
-    try:
-        resp = httpx.post(webhook_url, json=message, timeout=5.0)
-        resp.raise_for_status()
-        logger.info("[slack] Approval request sent (thread_id=%s)", thread_id)
-        return True
-    except Exception as e:
-        logger.error("[slack] Failed to send message: %s", e)
-        return False
-
 
 async def send_approval_request_async(
     action: dict,
     thread_id: str,
-    server_base_url: str = "http://localhost:8000",
 ) -> bool:
     """
     Async version: for use inside FastAPI request handlers.
@@ -261,7 +232,7 @@ async def send_approval_request_async(
         logger.warning("[slack] SLACK_WEBHOOK_URL is not set. Skipping message.")
         return False
 
-    message = _build_message(action, thread_id, server_base_url)
+    message = _build_message(action, thread_id)
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
             resp = await client.post(webhook_url, json=message)

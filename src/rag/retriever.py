@@ -93,13 +93,20 @@ def _rrf_merge(
     scores: dict[str, float] = {}
     doc_map: dict[str, Document] = {}
 
+    def _key(doc: Document) -> str:
+        # 청크 고유 id 를 dedup 키로 사용. contextual_header 가 켜지면 모든 청크가
+        # 동일한 '[Source: ... | Unit | Lesson | Section ...]' 헤더로 시작해
+        # page_content[:N] 프리픽스가 서로 충돌(89% 충돌) → 병합 시 정답 청크가
+        # 같은 헤더의 다른 청크에 덮여 사라진다. chunk_id 로 키를 잡아야 안전하다.
+        return doc.metadata.get("chunk_id") or doc.page_content
+
     for rank, doc in enumerate(dense_docs, 1):
-        key = doc.page_content[:100]
+        key = _key(doc)
         scores[key] = scores.get(key, 0.0) + dense_weight / (k_rrf + rank)
         doc_map[key] = doc
 
     for rank, doc in enumerate(sparse_docs, 1):
-        key = doc.page_content[:100]
+        key = _key(doc)
         scores[key] = scores.get(key, 0.0) + sparse_weight / (k_rrf + rank)
         doc_map[key] = doc
 

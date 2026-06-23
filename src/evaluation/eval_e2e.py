@@ -77,6 +77,13 @@ class CaseResult:
     rag_evidence:    Optional[str]  = None   # ground-truth RAG evidence from test case
     golden_response: Optional[str]  = None   # ground-truth final email reply (Samsung SDS 형식 템플릿)
 
+    # 구조화 정답 대비 결정론적 exact-match (LLM judge 없이 정량 채점).
+    # 데이터셋의 expected_* 필드를 정답으로 사용 — action/BOTH 케이스에만 적용(QA_ONLY는 None).
+    expected_action_type:        Optional[str]  = None
+    expected_erp_action_status:  Optional[str]  = None
+    action_type_match:           Optional[bool] = None  # None=비적용(정답 없음)
+    erp_status_match:            Optional[bool] = None
+
     # Judge scores (1-5, or None if judging failed)
     faithfulness:    Optional[float] = None
     correctness:     Optional[float] = None
@@ -121,6 +128,15 @@ class EvalReport:
     # BERTScore 집계 — 정답지 대비 평균 의미 유사도 + 유효 케이스 수
     avg_bertscore_f1:     Optional[float] = None
     bertscore_valid_n:    int = 0
+
+    # 구조화 정답 exact-match accuracy (LLM judge 없는 결정론적 정량 채점).
+    # 분모 = expected_*가 명시된 케이스 수(action/BOTH). 분자 = 정확히 일치한 수.
+    action_type_accuracy:   Optional[float] = None
+    action_type_match_n:    int = 0
+    action_type_total:      int = 0
+    erp_status_accuracy:    Optional[float] = None
+    erp_status_match_n:     int = 0
+    erp_status_total:       int = 0
 
     results: list[dict] = field(default_factory=list)
 
@@ -321,6 +337,8 @@ def _run_case(tc: dict, graph) -> CaseResult:
         user_input=tc.get("user_input", "")[:120],
         rag_evidence=tc.get("rag_evidence"),
         golden_response=tc.get("golden_response"),
+        expected_action_type=tc.get("expected_action_type"),
+        expected_erp_action_status=tc.get("expected_erp_action_status"),
     )
 
     # ── Run agent ─────────────────────────────────────────────────────────────
@@ -357,6 +375,14 @@ def _run_case(tc: dict, graph) -> CaseResult:
         cr.judge_error = f"Agent run failed: {e}"
         cr.elapsed_ms  = int((time.perf_counter() - t0) * 1000)
         return cr
+
+    # ── 구조화 정답 exact-match (결정론적, LLM judge 없이 정량 채점) ───────────
+    # expected_*가 명시된 경우(action/BOTH)에만 비교. QA_ONLY는 None 유지(비적용).
+    if cr.expected_action_type is not None:
+        got_at = (cr.erp_action or {}).get("action_type")
+        cr.action_type_match = (got_at == cr.expected_action_type)
+    if cr.expected_erp_action_status is not None:
+        cr.erp_status_match = (cr.erp_status == cr.expected_erp_action_status)
 
     # ── Samsung SDS 형식 정적 검사 ────────────────────────────────────────────
     # LLM judge보다 먼저, 결정론적으로 수행. judge가 실패해도 형식 회귀는 잡힌다.
@@ -477,6 +503,18 @@ def run_eval(
     report.avg_bertscore_f1   = mean_bs
     report.bertscore_valid_n  = sum(1 for v in per_case_bs if v is not None)
 
+    # ── 구조화 정답 exact-match accuracy 집계 (결정론적 정량 채점) ──────────────
+    at_results = [r for r in report.results if r.get("action_type_match") is not None]
+    st_results = [r for r in report.results if r.get("erp_status_match") is not None]
+    report.action_type_total   = len(at_results)
+    report.action_type_match_n = sum(1 for r in at_results if r.get("action_type_match"))
+    report.erp_status_total    = len(st_results)
+    report.erp_status_match_n  = sum(1 for r in st_results if r.get("erp_status_match"))
+    if report.action_type_total:
+        report.action_type_accuracy = round(report.action_type_match_n / report.action_type_total, 4)
+    if report.erp_status_total:
+        report.erp_status_accuracy = round(report.erp_status_match_n / report.erp_status_total, 4)
+
     # Samsung SDS 형식 정적 검사는 judge 실패와 무관하게 final_response가 있으면
     # 모두 채워지므로 results 전체로 집계 (scored가 아님).
     fmt_rule_names  = list(_FORMAT_PATTERNS.keys()) + list(_FORMAT_ANTI_PATTERNS.keys())
@@ -517,6 +555,12 @@ def run_eval(
     )
     print(f"  BERTScore F1      : {bs_str}  "
           f"({report.bertscore_valid_n}/{n} valid, golden 대비 의미 유사도, 0.0~1.0)")
+    print("-" * 60)
+    print("  Structured exact-match accuracy (deterministic, no LLM judge):")
+    at_str = (f"{report.action_type_accuracy*100:.1f}%" if report.action_type_accuracy is not None else "n/a")
+    st_str = (f"{report.erp_status_accuracy*100:.1f}%"  if report.erp_status_accuracy  is not None else "n/a")
+    print(f"    action_type     : {at_str}  ({report.action_type_match_n}/{report.action_type_total} match, vs expected_action_type)")
+    print(f"    erp_status      : {st_str}  ({report.erp_status_match_n}/{report.erp_status_total} match, vs expected_erp_action_status)")
     print("-" * 60)
     print("  Samsung SDS 형식 정적 검사 (결정론적):")
     print(f"    Fully compliant : {report.format_compliant_total}/{n}  "

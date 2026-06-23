@@ -181,10 +181,9 @@ async def run_agent(request: RunRequest) -> RunResponse:
         sent = await send_approval_request_async(
             action=erp_action,
             thread_id=thread_id,
-            server_base_url=get_public_url(),
         )
         if sent:
-            logger.info("[api/run] Slack approval request sent — thread_id=%s", thread_id)
+            logger.info("[api/run] Slack approval request sent - thread_id=%s", thread_id)
         else:
             logger.warning("[api/run] Slack send failed (check SLACK_WEBHOOK_URL)")
 

@@ -25,7 +25,7 @@ class AgentState(TypedDict):
     # 전처리 결과 (LangGraph 진입 전 entry point에서 채워짐)
     # 자연어 이메일을 구조화한 EmailContext의 .model_dump() 결과 — 다음 필드 포함:
     #   sender_name / sender_email / sender_company / recipient / subject / language
-    #   cleaned_body / request_summary
+    #   cleaned_body / request_summary / question_summary
     #   mentions_action / mentions_question
     #   order_ids / item_nos
     #   preprocess_ok / error

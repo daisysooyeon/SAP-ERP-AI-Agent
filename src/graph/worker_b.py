@@ -3,7 +3,7 @@ src/graph/worker_b.py
 Worker B: RAG 검색 + 답변 생성 노드
 
 처리 흐름:
-  ① 쿼리 추출  (LLM) — 이메일에서 핵심 SAP 질문을 3개 표현으로 확장 (Query Expansion)
+  ① 쿼리 추출  (LLM) — 이메일에서 핵심 SAP 질문을 2개 표현으로 확장 (Query Expansion)
   ② Hybrid Retrieval (Dense 0.5 + BM25 0.5) — 쿼리별 top-k 검색 후 중복 제거 병합
   ③ Reranking (bge-reranker-v2-m3) — top-5 재순위화
   ④ 답변 생성  (LLM) — top-5 컨텍스트 기반 RAG 답변
@@ -77,18 +77,16 @@ Extract ONLY the knowledge/inquiry part, then generate multiple search query var
 
 Rules:
 1. Analyze the email and identify the core SAP knowledge question (ignore any ERP action requests).
-2. If a knowledge question exists, set 'has_knowledge_question' to true and generate 3 search query variants:
+2. If a knowledge question exists, set 'has_knowledge_question' to true and generate 2 search query variants:
    - 'query_primary': the most direct restatement of the question
    - 'query_variant_1': same intent, different phrasing or keywords
-   - 'query_variant_2': a broader or more technical reformulation
 3. If the email contains NO knowledge question, set 'has_knowledge_question' to false and leave all queries empty ("").
 
 Output MUST be a valid JSON object:
 {{
   "has_knowledge_question": true or false,
   "query_primary": "...",
-  "query_variant_1": "...",
-  "query_variant_2": "..."
+  "query_variant_1": "..."
 }}
 """
 
@@ -99,7 +97,11 @@ _QUERY_EXTRACTION_PROMPT = ChatPromptTemplate.from_messages([
 
 
 def _extract_rag_queries(user_input: str) -> list[str]:
-    """이메일에서 RAG 검색 쿼리를 최대 3개 추출 (Query Expansion). 질문이 없으면 빈 리스트 반환."""
+    """이메일에서 RAG 검색 쿼리를 최대 2개 추출 (Query Expansion). 질문이 없으면 빈 리스트 반환.
+
+    확장 개수 실험(reports/_expansion_result) 결과: 2개가 3개보다 hit_rate가 같거나 높고
+    (후보풀 22%↓로 리랭크 부하도 감소), 1개는 멀티쿼리 이점을 잃어 더 낮았다 → 2개로 고정.
+    """
     from langchain_core.output_parsers import JsonOutputParser
     try:
         llm = _get_llm()
@@ -110,7 +112,7 @@ def _extract_rag_queries(user_input: str) -> list[str]:
             return []
 
         queries = []
-        for key in ("query_primary", "query_variant_1", "query_variant_2"):
+        for key in ("query_primary", "query_variant_1"):
             q = (result.get(key) or "").strip()
             if q:
                 queries.append(q)
@@ -127,13 +129,13 @@ def _extract_rag_queries(user_input: str) -> list[str]:
 # ---------------------------------------------------------------------------
 
 _ANSWER_SYSTEM = """\
-You are an SAP ERP expert assistant. Answer the user's question based ONLY on the provided context from SAP documentation.
+You are an SAP ERP expert assistant. Answer the user's question using ONLY the provided context from SAP documentation.
 
 Guidelines:
-- Be concise and accurate.
-- If the context does not contain enough information to answer, say: "I could not find sufficient information in the SAP documentation to answer this question."
-- Do NOT make up information not present in the context.
-- Cite the source document when possible (e.g., "According to TS460...").
+- Use ANY relevant information in the context to answer as fully as you can. If the context covers the question only partially, answer the parts that ARE supported and briefly state what the documentation does not specify (e.g., "The documentation explains X but does not give the exact transaction code.").
+- Only reply EXACTLY "I could not find sufficient information in the SAP documentation to answer this question." when the context contains NOTHING relevant to the question. Do not give up just because the answer is incomplete.
+- Do NOT invent facts, figures, transaction codes, or steps that are not present in the context.
+- Be concise and accurate, and cite the source document when possible (e.g., "According to TS460...").
 """
 
 _ANSWER_PROMPT = ChatPromptTemplate.from_messages([
@@ -210,7 +212,7 @@ def worker_b_node(state: AgentState) -> dict:
     if (email_context
             and email_context.get("preprocess_ok")
             and email_context.get("mentions_question") is False):
-        logger.info("[worker_b] Preprocessor: mentions_question=False → RAG 단계 스킵")
+        logger.info("[worker_b] Preprocessor: mentions_question=False → skipping RAG stage")
         return {
             "rag_query":      "",
             "retrieved_docs": [],
@@ -218,15 +220,27 @@ def worker_b_node(state: AgentState) -> dict:
             "error_messages": errors,
         }
 
-    # 전처리가 만든 cleaned_body가 있으면 그것을 쿼리 추출 입력으로 사용 (인사·서명 노이즈
-    # 제거 → 더 정확한 RAG query 추출). 없으면 원본 user_input 그대로.
+    # 쿼리 추출 입력 선택 (우선순위):
+    #   ① question_summary — 전처리가 ERP 액션 노이즈를 제거하고 지식 질문만 정규화한 것.
+    #      BOTH 이메일에서 액션과 섞인 질문을 깔끔하게 분리해 검색 정확도를 높인다(검증: 7건 중 3건 회복).
+    #   ② cleaned_body    — 인사·서명만 제거한 본문 (question_summary가 없을 때).
+    #   ③ user_input      — 전처리 실패 시 원본.
     query_extraction_input = user_input
-    if email_context and email_context.get("preprocess_ok") and email_context.get("cleaned_body"):
-        query_extraction_input = email_context["cleaned_body"]
+    if email_context and email_context.get("preprocess_ok"):
+        query_extraction_input = (
+            email_context.get("question_summary")
+            or email_context.get("cleaned_body")
+            or user_input
+        )
 
-    # ① 쿼리 추출 (Query Expansion: 최대 3개)
+    # ① 쿼리 추출 (Query Expansion: 최대 2개)
+    # 재진입(HITL resume·재시도) 시 이전 실행이 저장한 쿼리를 재사용해 LLM 추출을 생략한다.
+    # 이때 멀티쿼리를 잃지 않도록 rag_queries(리스트)를 우선 복원하고, 없으면 단일 rag_query로 폴백.
+    cached_queries: list[str] = state.get("rag_queries") or []
     cached_query: str = state.get("rag_query", "")
-    if cached_query:
+    if cached_queries:
+        rag_queries = cached_queries
+    elif cached_query:
         rag_queries = [cached_query]
     else:
         rag_queries = _extract_rag_queries(query_extraction_input)

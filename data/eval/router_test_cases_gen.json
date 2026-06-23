@@ -8,7 +8,7 @@
     "qa_question": "How can I access and use the ready-to-use analytical apps in SAP S/4HANA for sales monitoring, and do they support existing ERP authorizations?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0431",
+    "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0142",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, SAP S/4HANA provides ready-to-use analytical apps that form part of the general extensibility concept. These apps support sales monitoring and other business cases through a Virtual Data Model based on Core Data Services.\n\nRegarding your query on authorization support, these analytical apps are designed to support existing ERP authorizations, as well as ERP hierarchies. This means they integrate with your current security setup without requiring separate permission structures.\n\nFor accessing the apps, they are part of the standard SAP S/4HANA user interface and can be used alongside transactional apps, fact sheets, and search functions. The ready-to-use content is available immediately and can be extended as needed.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -20,7 +20,7 @@
     "qa_question": "How do I create a bill of material in SAP ERP and assign the appropriate item categories for it?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0426",
+    "evidence_chunk_id": "TS460_2_EN_Col23_ocr::0120",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nBased on the training material (TS460_2_EN_Col23, Unit 13: Sales Workshop), the process for creating a bill of material and assigning item categories involves the following steps:\n\n- Create the bill of material.\n- Modify the sales document type.\n- Create your own item category group.\n- Create and assign your own item categories.\n- Identify and assign suitable schedule line categories.\n- Generate an automatic purchase requisition.\n- Test the bill of material in the application.\n\nSpecifically for item categories, the workshop instructs you to create your own item category group and then create and assign your own item categories. The source does not provide further configuration details, but these steps outline the required actions.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -32,7 +32,7 @@
     "qa_question": "How do I set up copying control to allow a different ship-to party than the sold-to party when creating a release order against a value contract?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0318",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0330",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nTo allow a different ship-to party than the sold-to party when creating a release order against a value contract, copying control uses requirement 002 (Header - Diff Customer). If multiple ship-to parties are authorized to release for the selected sold-to party, you can choose the relevant one from a list during release order creation.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -44,7 +44,7 @@
     "qa_question": "How does the system handle purchase order generation when a customer order triggers requirements for components from different vendors?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0419",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0423",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nWhen a customer order triggers requirements for components from different vendors, the system transfers those requirements to purchasing at the component level. Because the components come from different vendors, one customer order can generate several purchase orders – one for each vendor.\n\nComponents are obtained from a distributor and are not ordered until the customer places an order. This approach reduces warehouse stock and thus capital tie-up. Customers may also order replacement parts through the same process.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -56,7 +56,7 @@
     "qa_question": "How do I create a release order against a quantity contract, and will the system automatically update the released quantities?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0291",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0299",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nTo create a release order against a quantity contract, you refer to the relevant contract when placing the sales order. The system will automatically update the released quantities in the contract. Additionally, if release orders have already been created for the contract, the system informs you of that fact.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -68,7 +68,7 @@
     "qa_question": "How can I verify which sales offices are permitted for a specific sales area when entering a sales order?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0028",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0045",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nTo verify which sales offices are permitted for a specific sales area, you must refer to the organizational structure configuration. Sales offices can be assigned to multiple sales areas, and when entering a sales order, the sales office used must be permitted for the chosen sales area. This permission is determined solely by the assignment of the sales office to that sales area in the system’s enterprise structure.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -80,7 +80,7 @@
     "qa_question": "How does the system assign a delivery block reason to schedule lines based on the milestone billing plan in a quantity contract?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0291",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0308",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nThe system assigns a delivery block reason to schedule lines based on the milestone billing plan in a quantity contract by referencing the sales contract. Specifically, the delivery block reason is determined from the milestone billing plan and then assigned to the schedule lines of the contract release order. As a result, until the customer pays the required $100 down payment, the contract release order cannot be further processed.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -92,7 +92,7 @@
     "qa_question": "How can I determine which document flow copying controls are considered logical business processes in our SAP system?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0169",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0172",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nTo determine which document flow copying controls are considered logical business processes in your SAP system, you should only configure these controls for logical business processes. For example, a free-of-charge subsequent delivery based on a sales order is appropriate, while an order based on a free-of-charge subsequent delivery is not appropriate.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -104,7 +104,7 @@
     "qa_question": "How can I maintain the material master data specifically for the Sales and Distribution department?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0158",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0172",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding how to maintain material master data for the Sales and Distribution department, we can share the following information based on the available source.\n\nWithin the material master data, you can maintain detailed information such as the description, weight, or tax relevance. Because many different departments (e.g., purchasing, sales, warehousing, or accounting) make use of material master data, the relevant information must be maintained for each of these departments correspondingly. For Sales and Distribution specifically, the system includes a dedicated view for entering department-specific data, such as sales-related parameters.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -116,7 +116,7 @@
     "qa_question": "How do I run the backorder processing report in SAP S/4HANA to identify unconfirmed sales orders?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0270",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0297",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nTo identify unconfirmed sales orders, known as backorders, in SAP S/4HANA, you can use the Backorder Processing report. This report is designed to help you find sales orders that could not be confirmed due to material availability issues, even after adjusting the scope of the availability check.\n\nThe system will display the main reasons for backorders, allowing you to review and take appropriate action. Please refer to the relevant documentation in your training materials for detailed steps on executing this report.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -128,7 +128,7 @@
     "qa_question": "How can I configure the partner determination procedure to copy partner functions from other customer master records, and what is the impact of the determination sequence on the result?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0249",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0255",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nTo configure the partner determination procedure to copy partner functions from other customer master records, you specify both the source of the partner function and the determination sequence. The system then uses this information to create a partner for the sales document based on data from other customer master records.\n\nIt is important to note the determination sequence, as the order in which the system evaluates sources affects which partner is ultimately selected. For example, when you have multiple regular suppliers in different regions, the sequence determines which supplier’s partner function is applied. By properly defining the sequence, you control the logic used to derive the partner.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -140,7 +140,7 @@
     "qa_question": "How does the SAP Fiori interface adapt to different devices, and do I need separate apps for mobile and desktop?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0020",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0023",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nThe SAP Fiori interface is responsive, meaning it automatically adapts to the size and device being used to access it. Whether you are on a mobile or desktop device, the interface adjusts accordingly, so you do not need separate apps for mobile and desktop.\n\nEach application is designed to be simple, covering one user, one use case, and up to three screens per application. Additionally, all apps are built with a coherent structure, using the same language and easily deployable across various landscapes and environments.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -152,7 +152,7 @@
     "qa_question": "How can I use product attributes in the customer master to ensure a specific material is excluded from the material determination substitution process?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0352",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0366",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we can provide the following information based on the source material.\n\nYou can use product attributes in both the material master and customer master records to exclude a particular material from product selection. For instance, materials that have been rejected in the customer master will not be included by the system when it determines a substitution material during the material determination process.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -164,7 +164,7 @@
     "qa_question": "How do I create a new company code in SAP ERP, and what is the minimum number required?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0028",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0032",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\nIn SAP ERP, a company code is used along with a business area to represent a group from a financial accounting perspective. You can create several company codes for each client to manage financial accounting for multiple independent companies simultaneously. At least one company code must be created.\n\nEach company code functions as an independent accounting unit, and multiple company codes can share the same chart of accounts. To create a new company code, you would use the standard SAP configuration tools within the system.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -176,7 +176,7 @@
     "qa_question": "How are the organizational units in Sales and Distribution, such as the sales organization and distribution channel, configured in SAP to ensure they are correctly linked for order fulfillment processes?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0043",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0045",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nIn SAP, the organizational units for Sales and Distribution, such as the sales organization and distribution channel, are configured as part of the enterprise structure. These units are specifically designed to support sales and distribution processes. Other organizational units, like the company code or plant, belong to different areas but are also utilized in these processes.\n\nThe most important organizational units for sales and distribution are outlined in the system to ensure they are correctly linked for order fulfillment. This linkage is established through the configuration of these units within the enterprise structure.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -188,7 +188,7 @@
     "qa_question": "Can value contracts that are not fully released be billed automatically through a billing plan?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0318",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0323",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your question about value contracts and automatic billing via a billing plan: The system does not allow you to automatically bill value contracts that have not been completely released. A billing plan can be used to bill the contract for several dates and partial quantities at once, but only after the contract has been fully released.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -200,7 +200,7 @@
     "qa_question": "How do I cancel a sales order in SAP ERP, and what is the correct procedure for assigning an order reason when canceling?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0094",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0102",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nAccording to the training material (TS460_2_EN_Col23, Unit 4, Lesson: Order Processing – Special Features), the procedure for canceling a sales order requires assigning an order reason. The material states: “In order to cancel an order, you assign an order reason,” and this statement is indicated as true.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -212,7 +212,7 @@
     "qa_question": "How can I access the key performance indicators in the Sales Order Fulfillment app?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0406",
+    "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0122",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we can provide the following information based on the source material.\n\nThe SAP Sales Order Fulfillment app provides role-based access to key performance indicators, along with news feeds and specific tasks. This allows internal sales representatives to view relevant information through a new user experience and working model.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -224,7 +224,7 @@
     "qa_question": "In SAP ERP complaints processing for returned goods, when a customer requests a free replacement instead of a credit memo, what is the correct system procedure to create a subsequent delivery free of charge?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0380",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0392",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nIn SAP ERP complaints processing for returned goods, when a customer requests a free replacement instead of a credit memo, the correct system procedure is to create a subsequent delivery free of charge. This is done instead of creating a credit memo.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -236,7 +236,7 @@
     "qa_question": "How does the SAP system determine the shipping point for a sales order item based on customer master, material master, and customizing settings?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0057",
+    "evidence_chunk_id": "TS460_2_EN_Col23_ocr::0014",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nThe SAP system determines the shipping point for a sales order item by combining data from the customer master, material master, and customizing settings. The delivering plant at the item level serves as the basis for this determination.\n\nFrom the customer master, the system uses the plant and shipping condition. From the material master, it uses the plant and loading group. Customizing settings for the sales document type also influence the determination, including the delivery block, shipping condition, and the determination of shipping point logic.\n\nThese elements are evaluated together to identify the appropriate shipping point for the item.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -248,7 +248,7 @@
     "qa_question": "How can I use the Sales Performance – Plan/Actual app to compare planned versus actual sales data for a specific period?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0431",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0441",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nThe Sales Performance – Plan/Actual app in SAP S/4HANA provides a hybrid view that allows you to effectively compare planned versus actual sales data for a specific period. In this view, you can visualize the difference between plan and actual data in a chart while displaying the detailed data in a table.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -272,7 +272,7 @@
     "qa_question": "In backward scheduling for delivery scheduling, does the system always use the customer's requested delivery date as the relevant delivery date?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0224",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0255",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your question: In backward scheduling for delivery scheduling, the statement \"the requested delivery date from the customer is assumed to be the relevant delivery date\" is true. According to our source, in backward scheduling, the system does use the customer's requested delivery date as the relevant delivery date.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -284,7 +284,7 @@
     "qa_question": "How can I access and use the Sales Performance – Plan/Actual app to compare planned versus actual sales order data in the SAP ERP system?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0431",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0440",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nThe Sales Performance – Plan/Actual app is the correct tool for comparing planned versus actual sales order data. It offers a hybrid view that effectively visualizes the difference between plan and actual figures.\n\nTo use the app, you can access it from the SAP Fiori launchpad. The app is designed for analytics with action: you can jump directly from a data point in the chart to the relevant transaction to investigate or resolve any issues.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -308,7 +308,7 @@
     "qa_question": "How can I create a collective outbound delivery for multiple sales orders that share the same shipping point and delivery date?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0322",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0324",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nTo create a collective outbound delivery for multiple sales orders, the items must share several common characteristics. These include the same shipping point, delivery date, ship-to party, route, and incoterms. When these conditions are met, the system can group the orders into a single outbound delivery.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -320,7 +320,7 @@
     "qa_question": "How does the system automatically determine the general ledger accounts when a billing document is created?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0086",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0091",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we can confirm that when a billing document is created, the general ledger accounts are normally determined automatically. The system posts a debit entry on the customer’s receivables account and a credit entry on the revenue account.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -332,7 +332,7 @@
     "qa_question": "How does the system differentiate between automatically determined free goods (using condition records) and manually entered free goods via item category TANN in SAP ERP?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0392",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0393",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we can provide the following explanation.\n\nIn SAP ERP, the system differentiates between automatically determined free goods and manually entered free goods based on the method of entry and the data source used.\n\nFor automatically determined free goods, the system accesses relevant condition records and then retrieves the free goods master record using the pricing date. This process is standard for item categories such as TAN.\n\nIn contrast, when free goods are entered manually via item category TANN, the system does not refer to condition records. Instead, the free goods are entered directly by the user in the higher-level item and item category fields, without automatic determination from the condition records or master data.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -344,7 +344,7 @@
     "qa_question": "How can I get SAP Fiori app recommendations based on my system usage?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0020",
+    "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0025",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we can provide the following information.\n\nTo get SAP Fiori app recommendations based on your system usage, you can sign in to the SAP Fiori Library. Once signed in, the system will provide recommendations tailored to your usage. You can also learn more about SAP Fiori on the SAP website, or explore the SAP Fiori Lighthouse Scenarios, which are designed to deliver immediate business benefit to SAP S/4HANA customers. Additionally, you may view the SAP Fiori Apps Reference Library in the help portal or see SAP Fiori in action with a free trial.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -356,7 +356,7 @@
     "qa_question": "How does the system decide which output type (e.g., email, fax, print) to use for sending order confirmations to customers?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0151",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0153",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nThe system determines the output type (e.g., email, fax, print) for order confirmations using output master data and control tables. Output master data defines the media through which information is sent to the customer, such as mail, EDI, or fax. Control tables, maintained in Customizing, allow the proposal of output types to be controlled by various data in the sales documents.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1044,7 +1044,7 @@
     "qa_question": "How can I configure the partner determination procedure to automatically assign a forwarding agent in sales documents, and how do I trace the automatic determination of business partners?",
     "expected_action_type": "CHANGE_DATE",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0249",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0257",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have successfully updated the delivery date for Order ID 3538, Item No. 10. Your request to reschedule the delivery by two weeks has been completed as requested.\n\nRegarding your knowledge question on partner determination: To automatically assign a forwarding agent in sales documents, you can configure the partner determination procedure using sources such as the tables for customer hierarchy and contact persons. An analysis function is provided for tracing the automatic determination of business partners in sales documents in greater detail. Additionally, you have the option to use multi‑address handling for address determination in SD documents.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1068,7 +1068,7 @@
     "qa_question": "How can I manually change the partial delivery agreement for a specific sales order in the SAP system?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0270",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0278",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we inform you that the request to assign batch number B-36680 to order ID 40, item 10 requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary manual steps and update you accordingly.\n\nRegarding your question on changing the partial delivery agreement for a specific sales order in the SAP system: according to our training material, you can change the parameters manually when you enter a sales order. This may be necessary if a customer usually prefers complete deliveries (maintained in the business partner master data) but allows a partial delivery for one particular order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1090,7 +1090,7 @@
     "qa_question": "Could you explain how to enter a reason for rejection for items that are not forwarded to a billing document in the credit/debit memo request process?",
     "expected_action_type": "CHANGE_QTY",
     "expected_erp_action_status": "BLOCKED_NO_DATA",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0376",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0379",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding your ERP order request for Order ID 0070000082, Item No 30, to reduce the order quantity by 43 units, the action was blocked as the order or item was not found in the system. We recommend verifying the order details and resubmitting the request.\n\nIn response to your knowledge question about entering a reason for rejection for items not forwarded to a billing document in the credit/debit memo request process: for items not forwarded to a billing document, a corresponding reason for rejection can be entered. The appropriate reasons for rejection (for example, Unreasonable Request) can be maintained in Customizing. Rejected items are not copied to billing documents, although they are still available for evaluation purposes.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1114,7 +1114,7 @@
     "qa_question": "How can I access and use the batch assignment functionality within the SAP Fiori interface to ensure I am following the correct workflow?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0020",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0021",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have processed your request for Order ID 40, Item No 10, to assign batch number B-25915. Please note that this request type requires manual processing by our team and cannot be handled automatically.\n\nRegarding your question on accessing batch assignment functionality in SAP Fiori, we recommend referring to the SAP Fiori user experience. SAP Fiori is designed to provide the best possible experience when interacting with SAP Business Suite, allowing users to access business critical applications on any device without compromises. For detailed workflow guidance, please consult the relevant training materials, such as TS460_1_EN_Col23, which covers navigation with SAP Fiori and key features of the interface.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1138,7 +1138,7 @@
     "qa_question": "Could you explain how to restrict materials in a value contract using product hierarchy or an assortment module?",
     "expected_action_type": "CHANGE_QTY",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0291",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0315",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we are pleased to inform you that your ERP order request (Order ID 40, Item No 10) to change the quantity to 372 units has been completed successfully.\n\nRegarding your question on restricting materials in a value contract: In the standard system, you can restrict materials that can be released by using a product hierarchy (which can be searched generically by entering the first few digits, e.g., 0000101*) or by maintaining a list of valid materials via an assortment module. If both the product hierarchy and the assortment module are maintained in the document, all applicable materials will be considered.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1160,7 +1160,7 @@
     "qa_question": "Could you explain how the system determines the free goods procedure based on sales area, document type, and customer master data?",
     "expected_action_type": "CHANGE_QTY",
     "expected_erp_action_status": "BLOCKED_NO_DATA",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0392",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0405",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we found that the request to reduce the order quantity by 13 units for Order ID 70000166, Item No 10, could not be processed. The action was blocked because the order or item was not found in the system.\n\nRegarding your question about free goods procedures, the system determines the free goods procedure using information from the sales area, the document determination procedure from the sales document type, and the customer determination procedure from the customer master. The procedure then contains a list of the condition types for free goods.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1183,7 +1183,7 @@
     "qa_question": "Could you explain how to use a reason for rejection in a quotation to set an item status to complete, as mentioned in the system documentation?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0341",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0346",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP request for order 5451, item 10, to unblock the delivery: this action type requires manual processing by our team and cannot be handled automatically. We will proceed manually and follow up with you.\n\nIn response to your system documentation question: For quotations, using a reason for rejection is a common way of setting the status of an item to complete. When you enter a reason (such as \"too expensive\" or \"delivery date too late\"), the system also stores valuable information that can be used later.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1207,7 +1207,7 @@
     "qa_question": "How do the control tables and customer/material information in the business partner master data determine the ship-to-party assignment (e.g., from sold-to-party 2300 to ship-to-party 788) for a specific material in an order?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0155",
+    "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0057",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 40, Item No 10, to assign batch number B-75323 to this item, this request type requires manual processing by our team and cannot be handled automatically.\n\nIn response to your knowledge question, the ship-to-party assignment (e.g., from sold-to-party 2300 to ship-to-party 788) for a specific material in an order is determined by control tables and customer/material information in the business partner master data. The control tables, along with customer master data, material master data, and customer/material information, work together to define the output, including the ship-to-party assignment for each item in the order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1229,7 +1229,7 @@
     "qa_question": "How can I activate a delivery block in the sales document type to prevent free-of-charge delivery items from being released without prior review?",
     "expected_action_type": "CHANGE_QTY",
     "expected_erp_action_status": "BLOCKED_NO_DATA",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0201",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0206",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we were unable to process your request to reduce the order quantity by 79 units for Order ID 0070000083, Item No 30. The action was blocked because the order or item was not found in our system. Please verify the order details and resubmit your request.\n\nRegarding your question about activating a delivery block in the sales document type, you can ensure that free-of-charge delivery items are not released without prior review by activating a delivery block in the sales document type. This prevents Delivery Free-of-Charge or Subsequent Delivery Free of Charge transactions from being released for delivery until they have been checked by the relevant employee. If the employee decides that the delivery is appropriate, they can then release it.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1252,7 +1252,7 @@
     "qa_question": "Could you clarify how the Business Partner role and grouping settings in the customer master data affect the batch assignment process in sales orders?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0065",
+    "evidence_chunk_id": "TS460_2_EN_Col23_ocr::0021",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 32, Item No 10, to assign batch number B-69871 to this item, this request type requires manual processing by our team and cannot be handled automatically.\n\nIn response to your knowledge question, the Business Partner role and grouping settings in customer master data affect batch assignment in sales orders through master data synchronization. The BP Role is relevant for sales and distribution and accounting, with specific roles such as FI Customer (FLCU00) and Customer (FLCU01) used for Customer/Vendor Integration. The Account Group setting, along with general data, sales area data, and company code data, determines which data is relevant for sales and distribution versus accounting, thereby influencing how batch assignment processes are configured in sales orders.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1275,7 +1275,7 @@
     "qa_question": "How can I view the incompletion log for this order to ensure all mandatory fields are filled before proceeding with the outbound delivery?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0201",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0209",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding your ERP order request for Order ID 5206, Item No. 10, we would like to inform you that setting the payment terms to Net 60 requires manual processing by our team and cannot be handled automatically. We will process this request accordingly.\n\nIn response to your question about viewing the incompletion log for this order, you can get an overview of the incomplete fields in a document using the incompletion log. Please note that incomplete documents can be saved if the system is customized correspondingly, but depending on which fields are incomplete, the execution of certain follow-up functions, such as the creation of outbound deliveries with reference to a sales order, might not be allowed as long as the document is incomplete.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1298,7 +1298,7 @@
     "qa_question": "Could you clarify how the system determines which data from a previous sales document, such as a quotation, is used as the source for a new sales order?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0151",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0154",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding ERP order 10485, item 40, we confirm that your request to change the shipping method to express courier requires manual processing by our team and cannot be handled automatically. We will proceed accordingly and update you once completed.\n\nRegarding your knowledge question: a previous sales document, such as a quotation, can serve as a data source for a new sales order. The system uses data from that preceding document to propose information in the new order, with the proposal controlled by various data settings in the sales documents, as illustrated in the source material.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1321,7 +1321,7 @@
     "qa_question": "How can I view the current fulfillment status of a specific sales order in the Sales Order Fulfillment app?",
     "expected_action_type": "CHANGE_QTY",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0406",
+    "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0134",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 7395, Item No 10, the action to reduce the order quantity by 116 units has been completed successfully.\n\nIn response to your question about viewing the current fulfillment status of a specific sales order, you can do so in the Sales Order Fulfillment app. According to our training material, the app displays the status of a sales order across key stages, including \"In Order,\" \"In Delivery,\" and \"In Invoice.\" You can also see related delivery and invoice documents, as well as the delivery date and planned invoice information for the order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1344,7 +1344,7 @@
     "qa_question": "Could you provide the correct steps in SAP S/4HANA to create an outbound delivery for this order after the billing process?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0086",
+    "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0040",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding ERP Order ID 3575, Item No. 10, the request to set payment terms to Net 60 requires manual processing by our team and cannot be handled automatically.\n\nRegarding your knowledge question on creating an outbound delivery in SAP S/4HANA after the billing process, based on the provided source, shipping processing supports creating outbound deliveries, picking, packing, and posting the goods issue. Billing is a separate process that supports creating invoices, credit/debit memos, and canceling previously posted billing documents. The steps to create an outbound delivery belong to the shipping processing phase, which typically occurs before billing. For specific step-by-step instructions, please refer to the referenced SAP training material.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1367,7 +1367,7 @@
     "qa_question": "Could you confirm how to check which sales document types are permitted for our specific sales area in the system?",
     "expected_action_type": "CHANGE_QTY",
     "expected_erp_action_status": "BLOCKED_INVALID_QTY",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0115",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0119",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we would like to inform you that your request to reduce the order quantity by 135 units for Order ID 5000652, Item No. 10, could not be processed. The action was blocked because the resulting quantity would be zero or negative.\n\nRegarding your question on how to check which sales document types are permitted for your specific sales area, you can use Customizing to define which sales document types are valid in which sales organizations, distribution channels, and divisions. This allows you to limit the validity of your sales document types for a single sales area.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1390,7 +1390,7 @@
     "qa_question": "Could you clarify how the billing document structure in SAP ERP handles data at the header versus item level, specifically for a multi-line order?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0124",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0129",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 11267, Item No. 10, you requested to assign batch number B-55236. This request type requires manual processing by our team and cannot be handled automatically. We will proceed with manual processing and inform you once completed.\n\nIn response to your question about billing document structure in SAP ERP: A billing document is divided into two levels – header and item. The header level contains data valid for the entire document, such as the payer and billing date. The item level holds data specific to each line item, such as individual details for that item. This separation allows efficient management of both global and line-specific information in a multi-line order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1413,7 +1413,7 @@
     "qa_question": "How can I create an SAP Fiori app to directly access delivery schedule data, similar to the example of a cash position app for the German market?",
     "expected_action_type": "CHANGE_DATE",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0020",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0034",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have successfully processed your request to reschedule the delivery for Order ID 20000075, Item No 10, by two weeks.\n\nRegarding your question about creating an SAP Fiori app to directly access delivery schedule data, we can provide the following guidance based on our reference material. As described in the SAP Fiori documentation, you can create an application that takes users directly to the relevant data with one click from the SAP Fiori launchpad home page. For example, a group cash manager interested in the German market can create an app to go directly to the cash position of the German market. Similarly, you can design an app to navigate directly to your delivery schedule data.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1436,7 +1436,7 @@
     "qa_question": "How can I set the address determination field to 'BBP003 Send goods' for the ship-to party in the partner determination procedure for sales orders?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0249",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0274",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding the ERP action for Order ID 175, Item No 20, we would like to inform you that the request to assign batch number B-41300 to this item is a type that requires manual processing by our team and cannot be handled automatically. Please allow us some time to process this manually.\n\nRegarding your knowledge question, in the partner determination procedure for sales orders, you can set the address determination field to \"BBP003 Send goods\" (mapped to the BP's delivery address) for the ship-to party. When you create a sales order in which the BP functions as a ship-to party, the system determines addresses valid between the current system date and December 31, 9999 for the ship-to party, and proposes those addresses in the sales order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1459,7 +1459,7 @@
     "qa_question": "Could you clarify how the delivering plant is determined in the system when stock is unavailable, and whether this affects the shipping method options?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0028",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0049",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding your ERP order request for Order ID 9665, Item No. 20, we would like to inform you that your request to change the shipping method to express courier requires manual processing by our team and cannot be handled automatically.\n\nIn response to your question about how the delivering plant is determined when stock is unavailable: A plant can be a location for production and material requirements planning, or it may represent one or more material stock locations in close proximity. Each plant is assigned to a unique company code. For a plant to deliver goods to customers, it must be configured as a delivering plant in sales customizing. During the sales process, delivering plants are first used to verify stocks, and later to supply the ordered goods. This determination does not directly affect the shipping method options, as shipping methods are typically defined separately in the system.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1483,7 +1483,7 @@
     "qa_question": "Could you explain how the first character of a schedule line category key determines its usage in the sales process?",
     "expected_action_type": "CHANGE_QTY",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0115",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0142",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we confirm that your request to change the quantity for Order ID 40, Item No. 10 to 212 units has been completed successfully.\n\nRegarding your question on schedule line categories: The schedule line category is identified by a two-character key. The first character of this key indicates the sales process in which the schedule line category is used, helping to determine its control options throughout the sales process.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1505,7 +1505,7 @@
     "qa_question": "How does forward scheduling determine the earliest confirmable delivery date when the material is not yet available in the warehouse?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0224",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0249",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request (Order ID: 0070000095, Item No: 20) to unblock the delivery, we would like to inform you that this request type requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary manual steps.\n\nIn response to your question on forward scheduling: When the material is not yet available in the warehouse, forward scheduling first determines the earliest date on which the material becomes available in the warehouse. This date then serves as the new material availability date. Using this date, the system considers the lead times required for picking and packing, loading, transportation planning, and transit to calculate the earliest confirmable delivery date.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1549,7 +1549,7 @@
     "qa_question": "Could you clarify how the availability check field on the Sales: General/Plant Data tab in material master influences delivery rescheduling for this order?",
     "expected_action_type": "CHANGE_DATE",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0263",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0265",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we confirm that the action to reschedule the delivery by two weeks for Order ID 70000382, Item No. 30 has been completed successfully.\n\nRegarding your question about the availability check field on the Sales: General/Plant Data tab in the material master: This field determines whether and how the availability check is carried out for a material during order processing. Because different materials may have different availability check requirements, the setting here influences the scope of the check. However, the rescheduling action for this specific order was processed independently from that setting, as the delivery date change was applied directly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1595,7 +1595,7 @@
     "qa_question": "In the Business Partner master data, what is the correct category to select for a customer that is a company?",
     "expected_action_type": "CANCEL_ITEM",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0158",
+    "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0058",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have processed your request to cancel order item 5753 / 10. The action was completed successfully.\n\nRegarding your question on Business Partner master data: for a customer that is a company, the correct Business Partner Category to select is \"Organization.\"\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1617,7 +1617,7 @@
     "qa_question": "How can I configure or verify that the copying requirement 001 (sold-to party check) is correctly applied when creating a follow-on document from an existing order?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0185",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0186",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 0070000095, Item No 20, to assign batch number B-54375: this request type requires manual processing by our team and cannot be handled automatically. We will process it accordingly.\n\nIn response to your knowledge question on copying requirement 001 (sold-to party check): copying requirements can be stored at every level in copying control. They contain specific requirements for each business process, and the reference document can only be created if all these requirements have been met. For example, copying requirement 001 at the header level checks whether the sold-to party and the sales are correctly applied when creating a follow-on document from an existing order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1640,7 +1640,7 @@
     "qa_question": "Could you explain how the BOM explosion in sales orders works, specifically how the components are listed on the invoice after delivery?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0419",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0425",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your request for Order ID 6713, Item No. 10, to change the shipping method to express courier, this request type requires manual processing by our team and cannot be handled automatically. We will review and process it accordingly.\n\nIn response to your question about BOM explosion in sales orders: the invoice contains the whole package with the quantity that was delivered, and all the components should be listed in the invoice.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1663,7 +1663,7 @@
     "qa_question": "Could you clarify how the business partner grouping field affects the entry of the business partner number in the system?",
     "expected_action_type": "CHANGE_DATE",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0065",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0081",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have successfully updated the delivery date for order ID 16371, item number 20, as requested.\n\nRegarding your question about the business partner grouping field: The information in the grouping field determines whether and how the business partner number must be entered in the business partner field. When you first create a business partner, you must state the BP category and the grouping. It is not possible to create any other business partner categories, and you cannot alter the business partner category at a later stage.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1685,7 +1685,7 @@
     "qa_question": "Could you also clarify the correct procedure to generate a billing document directly from the sales order for a service item, without requiring a preceding delivery step?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0356",
+    "evidence_chunk_id": "TS460_1_EN_Col23::0360",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we would like to inform you of the following:\n\nRegarding your request for Order ID 70000166, Item No. 10 to set payment terms to Net 60, this type of action requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary steps and follow up with you accordingly.\n\nIn answer to your knowledge question about generating a billing document directly from a sales order for a service item: according to our reference material, service items in a sales order can be invoiced directly—the corresponding billing document is created with reference to the sales order itself, without requiring a preceding delivery step.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1708,7 +1708,7 @@
     "qa_question": "Could you explain how to set up material substitution by assigning a material determination procedure to a sales document type in customizing?",
     "expected_action_type": "OTHER",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0112",
+    "evidence_chunk_id": "TS460_2_EN_Col23::0114",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding ERP order 5872, item 10, your request to assign batch number B-14705 requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary steps and follow up with you accordingly.\n\nRegarding your knowledge question on material substitution: In customizing, you can set up material substitution by assigning the relevant material determination procedure to the sales document type. This allows different functions to be used for different sales document types.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   }
 ]

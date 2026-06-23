@@ -31,21 +31,41 @@ logger = logging.getLogger(__name__)
 QA_LABELS = ("QA_ONLY", "BOTH")
 
 
+def _norm(s: str) -> str:
+    """공백 정규화 — 줄바꿈/연속공백 차이를 무시하고 내용만 비교."""
+    return " ".join((s or "").split())
+
+
 def _match_chunk_id(evidence: str, corpus: list[tuple[str, str]], threshold: float = 0.5) -> str | None:
     """
     evidence 텍스트가 나온 청크의 chunk_id 를 반환. 없으면 None.
-    1순위: evidence 앞 80자 substring 포함, 2순위: 토큰 50% 이상 겹침.
-    (eval_worker_b._chunk_in_docs 와 동일한 매칭 규칙)
+
+    rag_evidence 는 ingest된 청크의 page_content(헤더 `[Source: ...]` 포함)를 그대로
+    복사한 값이므로, 1순위로 *전체 내용 정확 일치*(공백 정규화)로 매칭한다. 이렇게 하면
+    OCR/비OCR 변형본처럼 앞부분(헤더)이 동일한 청크끼리도 본문 차이로 정확히 구분된다.
+    정확 일치가 없을 때만 substring → 토큰 overlap 으로 폴백한다.
+    (헤더는 변형본 구분에 필요한 정보이므로 제거하지 않는다.)
     """
     if not evidence:
         return None
-    probe    = evidence[:80].strip()
+
+    ev_norm = _norm(evidence)
+
+    # 1순위: 전체 내용 정확 일치 (헤더 포함). 변형본 혼동 없이 유일 청크 확정.
+    for chunk_id, content in corpus:
+        if ev_norm and _norm(content) == ev_norm:
+            return chunk_id
+
+    # 2순위: evidence 전체가 청크의 substring (정규화 기준)
+    for chunk_id, content in corpus:
+        if ev_norm and ev_norm in _norm(content):
+            return chunk_id
+
+    # 3순위: 토큰 overlap 폴백
     gt_tokens = set(evidence.lower().split())
     best: str | None = None
     best_overlap = 0.0
     for chunk_id, content in corpus:
-        if probe and probe in content:
-            return chunk_id   # substring 매칭은 즉시 확정
         doc_tokens = set(content.lower().split())
         if gt_tokens and doc_tokens:
             overlap = len(gt_tokens & doc_tokens) / len(gt_tokens)

@@ -64,6 +64,15 @@ class EmailContext(BaseModel):
                     "예: 'Change quantity of item 10 on order 4500023456 to 100 units.'",
     )
 
+    # 지식 질문만 분리·정규화 — RAG(worker_b) 검색 쿼리 입력으로 사용
+    question_summary: str = Field(
+        "",
+        description="이메일에 SAP 지식/방법(how-to/정책/개념) 질문이 있으면, ERP 액션 맥락을 "
+                    "모두 제거하고 하나의 명확하고 자기완결적인 영어 질문으로 재작성. 특정 주문/아이템 "
+                    "번호나 수량 같은 트랜잭션 디테일은 빼고 일반화한다. 지식 질문이 없으면 빈 문자열. "
+                    "예: 'How do I view the incompletion log for a sales order before creating an outbound delivery?'",
+    )
+
     # ── 빠른 라우팅 힌트 ─────────────────────────────────────────────────────
     mentions_action: bool = Field(
         False,
@@ -127,6 +136,19 @@ Field guidance:
         "Change quantity of item 10 on order 4500023456 to 100 units."
         "Reduce quantity of item 20 on order 6105 by 50, and ask about the
          late-delivery penalty policy."
+  • question_summary:
+      If (and only if) the email contains an SAP knowledge / how-to / policy /
+      concept question, restate THAT question as ONE clear, self-contained
+      question in ENGLISH — optimized as a documentation search query. STRIP all
+      transaction specifics (order/item numbers, quantities, dates) and any ERP
+      action context; generalize to the underlying SAP concept. If there is no
+      knowledge question, return an empty string. Examples:
+        Email: "Reduce qty of item 20 on order 6105 by 50. Also, how do I run
+                the backorder processing report to find unconfirmed orders?"
+        question_summary: "How do I run the backorder processing report in SAP
+                S/4HANA to identify unconfirmed sales orders?"
+        Email: "Please update payment terms on order 5206 item 10 to Net 60."
+        question_summary: ""   (pure action, no knowledge question)
   • mentions_action:
       true if the email asks to MODIFY anything in the ERP — change quantity,
       change delivery date, cancel an item, change shipping address, unblock a

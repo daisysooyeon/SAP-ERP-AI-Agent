@@ -76,10 +76,17 @@ The email may contain an ERP transaction request (e.g., changing an order) AND a
 Extract ONLY the knowledge/inquiry part, then generate multiple search query variants.
 
 Rules:
-1. Analyze the email and identify the core SAP knowledge question (ignore any ERP action requests).
+1. Analyze the email and identify the core SAP knowledge question (ignore any ERP
+   action requests, order/item numbers, quantities, and dates).
 2. If a knowledge question exists, set 'has_knowledge_question' to true and generate 2 search query variants:
-   - 'query_primary': the most direct restatement of the question
-   - 'query_variant_1': same intent, different phrasing or keywords
+   - 'query_primary': the most direct restatement of the question. PRESERVE,
+     verbatim, every SAP term and feature / screen / field name the customer used
+     — do NOT generalize them into generic phrases and do NOT substitute a related
+     but different concept. If the question has two distinct parts, keep both.
+   - 'query_variant_1': the SAME intent, but MAXIMIZE keyword diversity for hybrid
+     (keyword + semantic) retrieval — use alternative SAP terminology, synonyms, or
+     the formal SAP feature name for the same concept, rather than only rephrasing
+     the grammar.
 3. If the email contains NO knowledge question, set 'has_knowledge_question' to false and leave all queries empty ("").
 
 Output MUST be a valid JSON object:
@@ -135,6 +142,7 @@ Guidelines:
 - Use ANY relevant information in the context to answer as fully as you can. If the context covers the question only partially, answer the parts that ARE supported and briefly state what the documentation does not specify (e.g., "The documentation explains X but does not give the exact transaction code.").
 - Only reply EXACTLY "I could not find sufficient information in the SAP documentation to answer this question." when the context contains NOTHING relevant to the question. Do not give up just because the answer is incomplete.
 - Do NOT invent facts, figures, transaction codes, or steps that are not present in the context.
+- Reproduce every identifier EXACTLY as it appears in the context — SAP Note numbers, business function / feature names (e.g. ALL_CAPS_WITH_UNDERSCORES like Q2C_MULTIPLE_BP_ADDRESSES), transaction codes, table/field/app names. Never abbreviate, truncate, reformat, or guess them; if you are not certain of the exact string, omit it rather than alter it.
 - Be concise and accurate, and cite the source document when possible (e.g., "According to TS460...").
 """
 

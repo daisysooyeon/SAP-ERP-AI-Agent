@@ -139,16 +139,15 @@ Field guidance:
   • question_summary:
       If (and only if) the email contains an SAP knowledge / how-to / policy /
       concept question, restate THAT question as ONE clear, self-contained
-      question in ENGLISH — optimized as a documentation search query. STRIP all
-      transaction specifics (order/item numbers, quantities, dates) and any ERP
-      action context; generalize to the underlying SAP concept. If there is no
-      knowledge question, return an empty string. Examples:
-        Email: "Reduce qty of item 20 on order 6105 by 50. Also, how do I run
-                the backorder processing report to find unconfirmed orders?"
-        question_summary: "How do I run the backorder processing report in SAP
-                S/4HANA to identify unconfirmed sales orders?"
-        Email: "Please update payment terms on order 5206 item 10 to Net 60."
-        question_summary: ""   (pure action, no knowledge question)
+      question in ENGLISH — optimized as a documentation search query.
+      Remove ONLY the transaction instance data (order/item numbers, quantities,
+      dates) and the action request itself. Otherwise stay close to the
+      customer's own wording: PRESERVE, verbatim, every SAP term, feature /
+      screen / field name, and concept keyword they used — these are the search
+      keys the retriever matches on. Do NOT paraphrase a specific SAP term into a
+      generic one, and do NOT swap in a related but different concept for the one
+      asked about. If the question has two distinct parts, keep both. If there is
+      no knowledge question, return an empty string.
   • mentions_action:
       true if the email asks to MODIFY anything in the ERP — change quantity,
       change delivery date, cancel an item, change shipping address, unblock a

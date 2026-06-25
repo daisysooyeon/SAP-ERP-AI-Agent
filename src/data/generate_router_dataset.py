@@ -338,6 +338,23 @@ _COMMON_WORDS = frozenset((
     "before during over under via per both then than only any our no but"
 ).split())
 
+# 법적 고지/면책 front-matter 보일러플레이트 마커 (저작권 페이지 본문) — 정답 근거로 부적합.
+# 매뉴얼 표준 disclaimer 문구라 교육 본문엔 등장하지 않아 false-positive 위험이 낮다.
+_BOILERPLATE_MARKERS = (
+    "forward-looking statements",
+    "without representation or warranty",
+    "shall not be liable",
+    "is not a commitment, promise, or legal obligation",
+    "these materials are provided by sap",
+    "national product specifications may vary",
+)
+
+# 자가진단 퀴즈/연습문제(O/X) 마커 — 지식 답변이 아닌 평가 문항이라 정답 근거로 부적합.
+_QUIZ_MARKERS = (
+    "determine whether this statement is true or false",
+    "x true x false",
+)
+
 
 def _is_quality_chunk(text: str, min_length: int = 250) -> bool:
     """
@@ -345,7 +362,11 @@ def _is_quality_chunk(text: str, min_length: int = 250) -> bool:
     아래 케이스를 필터링:
       - 너무 짧은 청크 (< min_length 문자)
       - SAP 저작권 URL만 있는 청크 (법적 고지문)
+      - 법적 고지/면책 front-matter 보일러플레이트 (_BOILERPLATE_MARKERS: forward-looking
+        statements / without representation or warranty / shall not be liable 등)
       - 학습 평가 답변/문제 청크 ("Learning Assessment")
+      - 자가진단 O/X 퀴즈 문항 (_QUIZ_MARKERS: "Determine whether this statement is
+        true or false" / "X True X False")
       - 단원 도입부 헤더 ("LESSON OBJECTIVES")
       - TOC 패턴: "UNIT N" all-caps 또는 "Unit N\nM\n© Copyright" 형태
       - OCR garble: 알파벳 비율이 낮거나(숫자·기호 범벅 도표) 1~2글자 토큰이 과다(조각난 인식)
@@ -363,6 +384,13 @@ def _is_quality_chunk(text: str, min_length: int = 250) -> bool:
     if "https://www.sap.com/corporate/en/legal/copyright.html" in text:
         return False
     if "Learning Assessment" in text:
+        return False
+    low = text.lower()
+    # 법적 고지/면책 보일러플레이트 (front-matter 저작권 페이지) — 답변 근거가 될 수 없음
+    if any(p in low for p in _BOILERPLATE_MARKERS):
+        return False
+    # 자가진단 퀴즈/연습문제(O/X) — 평가 문항이라 정답 근거로 부적합
+    if any(p in low for p in _QUIZ_MARKERS):
         return False
     if "LESSON OBJECTIVES" in text:
         return False

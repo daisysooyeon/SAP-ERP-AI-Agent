@@ -165,6 +165,8 @@ def _derive_action_type(action_desc: str | None) -> str:
 
 
 def _derive_erp_status(action_type: str, ev: dict | None, action_desc: str | None) -> str:
+    if action_type == "OTHER":
+        return "MANUAL_REQUIRED"   # 자동 처리 불가 액션 — SUCCESS/PENDING이 되면 안 됨
     if not ev:
         return "BLOCKED_NO_DATA"
     expected_values = ev.get("expected_values") or {}

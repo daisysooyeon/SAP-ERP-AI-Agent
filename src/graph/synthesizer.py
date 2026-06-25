@@ -94,6 +94,9 @@ Thank you.
   (e.g., "according to the SAP TS460 documentation").
 - Be factual — only use information from the provided context. Never invent
   details, dates, or quantities.
+- Preserve any identifier from the RAG Answer EXACTLY — SAP Note numbers, business
+  function / feature names (e.g. Q2C_MULTIPLE_BP_ADDRESSES), transaction codes,
+  field/app names. Copy them verbatim; never abbreviate, truncate, or reword them.
 - Keep the entire email under 220 words.
 
 ═════════════ GREETING NAME ═════════════
@@ -138,6 +141,7 @@ _ERP_STATUS_LABELS = {
     "SUCCESS":                  "ERP update completed successfully.",
     "REJECTED":                 "ERP update was rejected by the approver.",
     "PENDING_APPROVAL":         "ERP update is pending human approval.",
+    "MANUAL_REQUIRED":          "This request type requires manual processing by our team and cannot be handled automatically.",
     "FAILED":                   "ERP update failed due to a system error.",
     "BLOCKED_NO_STOCK":         "Request blocked: insufficient stock.",
     "BLOCKED_INVALID_QTY":      "Request blocked: the resulting quantity would be zero or negative.",

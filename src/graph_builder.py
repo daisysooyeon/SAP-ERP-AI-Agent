@@ -23,10 +23,25 @@ from src.graph.synthesizer import synthesizer_node
 from src.preprocess import preprocess_email
 
 
+def _auto_approve_node(state: AgentState) -> dict:
+    """HITL 비활성(평가 전용) 경로에서 worker_a의 PENDING_APPROVAL을 승인됨(SUCCESS)으로
+    표시한다. 운영의 human_loop과 달리 DB(SQLite) UPDATE는 절대 수행하지 않는다 —
+    '승인되었다고 가정'했을 때의 답장 품질만 측정하기 위함이다.
+    (golden_response도 PENDING_APPROVAL을 'completed successfully'로 렌더하므로 정합)."""
+    if state.get("erp_action_status") == "PENDING_APPROVAL":
+        return {
+            "erp_action_status":       "SUCCESS",
+            "requires_human_approval": False,
+            "human_approved":          True,
+        }
+    return {}
+
+
 def _build_state_graph(*, hitl: bool = True) -> StateGraph:
     """StateGraph 구조만 빌드 (체크포인터 없음) — sync/async 공용.
 
-    hitl=False 이면 human_loop 노드를 추가하지 않고 worker_a → synthesizer 직통.
+    hitl=True  : worker_a → (PENDING_APPROVAL이면) human_loop → synthesizer.
+    hitl=False : 평가 전용 — worker_a → auto_approve(승인 가정, DB 미변경) → synthesizer.
     """
     builder = StateGraph(AgentState)
 
@@ -37,6 +52,8 @@ def _build_state_graph(*, hitl: bool = True) -> StateGraph:
 
     if hitl:
         builder.add_node("human_loop", human_loop_node)
+    else:
+        builder.add_node("auto_approve", _auto_approve_node)
 
     builder.set_entry_point("router")
 
@@ -62,7 +79,9 @@ def _build_state_graph(*, hitl: bool = True) -> StateGraph:
         builder.add_conditional_edges("worker_a", route_after_worker_a)
         builder.add_edge("human_loop", "synthesizer")
     else:
-        builder.add_edge("worker_a", "synthesizer")
+        # 평가 전용: 승인을 가정(PENDING_APPROVAL→SUCCESS, DB 미변경)한 뒤 합성.
+        builder.add_edge("worker_a", "auto_approve")
+        builder.add_edge("auto_approve", "synthesizer")
 
     builder.add_edge("worker_b", "synthesizer")
     builder.add_edge("synthesizer", END)

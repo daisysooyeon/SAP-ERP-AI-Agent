@@ -76,7 +76,7 @@ rag:
   collection_name: "sap_manuals"
   dense_weight: 0.5           # ChromaDB 시맨틱 검색 가중치
   sparse_weight: 0.5          # BM25 키워드 검색 가중치
-  top_k_retrieval: 20         # Retriever 후보 수
+  top_k_retrieval: 8          # Retriever 후보 수 (스윕 결과 8=20과 동일 품질, 리랭크 비용 ↓)
   top_k_rerank: 5             # Reranker 최종 선별 수
   contextual_header: true     # 청크 본문 앞에 [Source: 문서명 | p.N] 헤더를 붙여 임베딩 (재인제스트 필요)
   ocr_enabled: true           # PDF 내 이미지 페이지에 Surya OCR 적용해 별도 OCR 청크 생성 (재인제스트 필요)

@@ -213,7 +213,9 @@ const $ = (id) => document.getElementById(id);
 
 // 백엔드 URL: localStorage 저장/복원
 const urlInput = $("backendUrl");
-urlInput.value = localStorage.getItem("erp_backend_url") || "http://localhost:8000";
+// 같은 출처에서 서빙되면(배포 환경) 그 origin을, file://나 로컬이면 localhost를 기본값으로.
+urlInput.value = localStorage.getItem("erp_backend_url")
+  || (location.protocol.startsWith("http") ? location.origin : "http://localhost:8000");
 urlInput.addEventListener("change", () => {
   localStorage.setItem("erp_backend_url", baseUrl());
   checkHealth();

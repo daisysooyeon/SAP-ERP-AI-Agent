@@ -299,9 +299,13 @@ def _evaluate_case(tc: dict) -> CaseResult:
         try:
             # 운영(worker_a_node)과 동일하게 상대수량을 먼저 절대값으로 환산한 뒤 룰 검사.
             # 이게 빠지면 "reduce by 50" 같은 상대수량 케이스의 재고/INVALID_QTY 룰이 누락된다.
-            block_reason = resolve_quantity(eval_action, cr.validation_result) \
-                or check_business_rules(eval_action, cr.validation_result)
-            cr.actual_status = block_reason if block_reason else "PENDING_APPROVAL"
+            if eval_action.action_type == "OTHER":
+                # worker_a_node와 동일: OTHER는 자동 처리 불가 → 룰 검사 전에 MANUAL_REQUIRED.
+                cr.actual_status = "MANUAL_REQUIRED"
+            else:
+                block_reason = resolve_quantity(eval_action, cr.validation_result) \
+                    or check_business_rules(eval_action, cr.validation_result)
+                cr.actual_status = block_reason if block_reason else "PENDING_APPROVAL"
         except Exception as e:
             cr.actual_status = "ERROR"
             logger.error("[%s] Business rule check exception: %s", cr.id, e)

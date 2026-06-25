@@ -427,6 +427,22 @@ def worker_a_node(state: AgentState) -> dict:
             "error_messages":          errors,
         }
 
+    # ── OTHER 액션은 시스템이 자동 처리할 수 없다 → 수동 처리로 분기 ────────────────
+    # 지원 액션(CHANGE_QTY/CHANGE_DATE/CANCEL_ITEM/CHANGE_ADDR)이 아니므로 검증·OData·
+    # 승인 큐를 태우지 않고 MANUAL_REQUIRED로 종료한다. SUCCESS/PENDING_APPROVAL이 되어
+    # "완료했다"고 답하면 안 되며(golden도 '수동 처리 필요'로 렌더), 불필요한 OData 호출도 막는다.
+    if action.action_type == "OTHER":
+        logger.info("[worker_a] action_type=OTHER — 자동 처리 불가, MANUAL_REQUIRED로 분기.")
+        logger.info("[worker_a] ═══════════════ Worker A END ═══════════════")
+        return {
+            "erp_action":              action.model_dump(),
+            "erp_validation_result":   None,
+            "erp_action_status":       "MANUAL_REQUIRED",
+            "odata_response":          None,
+            "requires_human_approval": False,
+            "error_messages":          errors,
+        }
+
     # ── ② Text-to-SQL validation query ─────────────────────────────────────
     logger.info("[worker_a] ② Running Text-to-SQL validation query …")
     validation_result = run_validation_query(

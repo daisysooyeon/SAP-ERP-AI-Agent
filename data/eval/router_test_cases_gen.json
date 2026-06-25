@@ -196,12 +196,12 @@
     "user_input": "Dear SAP Support Team,\n\nI need to cancel a sales order in our system, but I am unsure about the correct steps. I understand that assigning an order reason is involved, but I am not clear whether this is mandatory for all cancellations or only for specific scenarios. Could you please clarify the exact procedure, including the transaction code and where to enter the order reason? Your guidance would be greatly appreciated.\n\nBest regards,\nJordan Miller",
     "label": "QA_ONLY",
     "erp_evidence": null,
-    "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 4: Sales Order Processing | Lesson: Order Processing – Special Features | Section: Order - Special Features | p.47]\n\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n4. In order to cancel an order, you assign an order reason.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n5. You can only set a billing block in an order.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n39",
+    "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 4: Sales Order Processing | Lesson: Order Processing – Special Features | Section: Order - Special Features | p.46]\n\ndocument type and / or sales organization in the SAP customizing. This functionality is also \navailable for the reason for rejections. When business users reject sales document items, they \nmust select a reason for rejection for each document item. By assigning reasons to specific \nsales document types and sales organizations, you can limit the list of reasons from which \nbusiness users can choose.\nLESSON SUMMARY\nYou should now be able to:\n●",
     "qa_question": "How do I cancel a sales order in SAP ERP, and what is the correct procedure for assigning an order reason when canceling?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_2_EN_Col23::0102",
-    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nAccording to the training material (TS460_2_EN_Col23, Unit 4, Lesson: Order Processing – Special Features), the procedure for canceling a sales order requires assigning an order reason. The material states: “In order to cancel an order, you assign an order reason,” and this statement is indicated as true.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
+    "evidence_chunk_id": "TS460_2_EN_Col23::0099",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nRegarding your question about canceling a sales order in SAP ERP, the system uses a reason for rejection that must be assigned when rejecting sales document items. Business users are required to select a reason for rejection for each document item. The available reasons can be limited by assigning them to specific sales document types and/or sales organizations in SAP Customizing.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_018",
@@ -253,27 +253,27 @@
   },
   {
     "id": "r_022",
-    "user_input": "Dear SAP Support, I was reviewing the TS460 manual and noticed the disclaimer stating that the information is not a commitment to deliver functionality. Could you please advise how I can check within the SAP ERP system whether a specific process described in the manual is actually available in our current system version? I want to ensure we are not relying on features that may not be implemented. Thank you for your assistance.",
+    "user_input": "Dear SAP Support Team, I am currently reviewing the sales order processing module and came across the concept of SAP Business Partner roles. Could you please clarify how the BP role influences the screen sequence and field control during customer master data creation? I understand that central data like name and address is maintained once, but I would like to know how roles affect what fields appear and their order. Thank you for your assistance.",
     "label": "QA_ONLY",
     "erp_evidence": null,
-    "rag_evidence": "[Source: TS460_1_EN_Col23 | p.3]\n\nreason without notice. The information in this document is not a commitment, promise, or legal \nobligation to deliver any material, code, or functionality. All forward-looking statements are subject to \nvarious risks and uncertainties that could cause actual results to differ materially from expectations. \nReaders are cautioned not to place undue reliance on these forward-looking statements, which speak \nonly as of their dates, and they should not be relied upon in making purchasing decisions.\niii",
-    "qa_question": "How can I verify in the SAP ERP system whether a specific process described in the manual is actually available in our current system version?",
+    "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 4: Sales Order Processing | Lesson: Source of Data – Customer Master Data - SAP Business Partner | Section: Source of Data – Concept of Customer Master Data and SAP Business Partner | p.41]\n\ndepend on the particular business process involved. BP roles are used to determine screen \nsequence and field control of the Business Partner master data. You can create a business \npartner with one or more BP roles. Central data, such as name, address, and bank details, \nonly has to be created once.\nBP Customer Integration\nFigure 20: BP Customer Integration\nBusiness Partner is now capable of centrally managing master data for business partners,",
+    "qa_question": "How does the SAP Business Partner (BP) role determine the screen sequence and field control when creating customer master data?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0006",
-    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, the source document provided (TS460_1_EN_Col23, page 3) contains only a standard legal disclaimer and no information regarding how to verify whether a specific process described in a manual is available in your current SAP ERP system version.\n\nWe are therefore unable to provide an answer based solely on the supplied source text. For assistance with verifying process availability, please refer to your system’s transaction code documentation or contact your SAP system administrator.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
+    "evidence_chunk_id": "TS460_2_EN_Col23::0083",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nIn SAP ERP, the Business Partner (BP) role determines the screen sequence and field control of the Business Partner master data. You can create a business partner with one or more BP roles, which control what screens and fields are shown or required during data creation. Central data, such as name, address, and bank details, only has to be created once.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_023",
     "user_input": "Dear SAP Support,\n\nI am reviewing our delivery scheduling process and would like to clarify how backward scheduling determines the relevant delivery date. Specifically, does the system always assume the customer's requested delivery date as the relevant date when using backward scheduling? Understanding this will help us ensure accurate order processing.\n\nThank you for your assistance.\n\nBest regards,\n[Your Name]",
     "label": "QA_ONLY",
     "erp_evidence": null,
-    "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 5: Automatic Data Determination and Scheduling | Lesson: Analyzing the Results of Delivery and Transportation Scheduling | Section: Forward Scheduling | p.107]\n\n3. In backward scheduling, the requested delivery date from the customer is assumed to be \nthe relevant delivery date.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n4. The transportation planning lead time used in delivery scheduling is taken from the \nshipping point.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\n99",
+    "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 5: Automatic Data Determination and Scheduling | Lesson: Analyzing the Results of Automatic Data Determination | Section: Backward Scheduling | p.104]\n\nassumed to be the relevant delivery date. In forward scheduling, the delivery date \nis calculated.\nBackward Scheduling\nBackward scheduling is the first kind of scheduling that is performed for a sales order item. \nThe system first checks if the requested delivery date from the customer can be met. The \nrequested delivery date is the starting point for backward scheduling.\nStarting with the delivery date, the system calculates the other relevant dates (such as the",
     "qa_question": "In backward scheduling for delivery scheduling, does the system always use the customer's requested delivery date as the relevant delivery date?",
     "expected_action_type": null,
     "expected_erp_action_status": null,
-    "evidence_chunk_id": "TS460_1_EN_Col23::0255",
-    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your question: In backward scheduling for delivery scheduling, the statement \"the requested delivery date from the customer is assumed to be the relevant delivery date\" is true. According to our source, in backward scheduling, the system does use the customer's requested delivery date as the relevant delivery date.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
+    "evidence_chunk_id": "TS460_1_EN_Col23::0244",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nAccording to our reference material, in backward scheduling the system uses the customer’s requested delivery date as the starting point. This date is treated as the relevant delivery date from which other dates are calculated backward. The system first checks whether that requested date can be met, but it does serve as the basis for scheduling.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_024",
@@ -647,7 +647,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have processed your request to change the shipping method to express courier for Order ID 40, Item No 10.\n\nPlease note that this type of request requires manual processing by our team and cannot be handled automatically. We have taken the necessary steps to proceed with the modification accordingly.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -669,7 +669,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have determined that the request to assign batch number B-62757 to Order ID 5009, Item No 10, requires manual processing by our team and cannot be handled automatically.\n\nWe will proceed with the necessary manual steps to complete this modification. Please allow us some time to process your request.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -713,7 +713,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we confirm that your request to assign batch number B-66626 to order 2744, item 10, has been received. However, this type of action requires manual processing by our team and cannot be handled automatically.\n\nWe will proceed with the necessary steps and follow up with you once the modification is completed.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -801,7 +801,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have confirmed that your request to assign batch number B-46458 to Order ID 4962, Item No. 10, requires manual processing by our team and cannot be handled automatically through the system.\n\nWe will proceed with the necessary manual steps and follow up with you once the update is completed.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -845,7 +845,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we confirm that your request to assign batch number B-55607 to Order ID 4549, Item No. 10 requires manual processing by our team. This type of request cannot be handled automatically in our system.\n\nOur team will proceed with the manual processing and follow up with you once the update has been completed.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -866,7 +866,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have processed your request to unblock the delivery for order ID 0070000083, item number 30. However, this request type requires manual processing by our team and cannot be handled automatically.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -911,7 +911,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have processed your request to unblock the delivery for Order ID 40, Item No 10. However, this request type requires manual processing by our team and cannot be handled automatically.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -934,7 +934,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have processed your request to unblock the delivery for Order ID 40, Item No 10.\n\nPlease note that this type of request requires manual processing by our team and cannot be handled automatically. We have taken the necessary steps to address your request.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -956,7 +956,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have reviewed your request for Order ID 4199, Item No 10.\n\nThe requested action is to assign batch number B-43082 to this item. However, this request type requires manual processing by our team and cannot be handled automatically.\n\nWe will proceed with the necessary manual steps to address your request. Please allow us some time for processing.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1021,7 +1021,7 @@
     "rag_evidence": null,
     "qa_question": null,
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have checked the modification request for Order ID 6613, Item No 10.\n\nThe requested action to unblock the delivery for this order requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary steps to address your request.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
@@ -1067,7 +1067,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 6: Availability Check | Lesson: Performing an Availability Check – Basics | Section: Complete and Partial Deliveries | p.118]\n\nFigure 72: Partial Delivery Agreement\nYou can change the parameters manually when you enter a sales order. This may be \nnecessary if a customer usually prefers complete deliveries (maintained in the business \npartner master data) but allows a partial delivery for one particular order.\nLESSON SUMMARY\nYou should now be able to:\n●\nPerform an availability check – basics\n110",
     "qa_question": "How can I manually change the partial delivery agreement for a specific sales order in the SAP system?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23::0278",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we inform you that the request to assign batch number B-36680 to order ID 40, item 10 requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary manual steps and update you accordingly.\n\nRegarding your question on changing the partial delivery agreement for a specific sales order in the SAP system: according to our training material, you can change the parameters manually when you enter a sales order. This may be necessary if a customer usually prefers complete deliveries (maintained in the business partner master data) but allows a partial delivery for one particular order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1113,7 +1113,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 1: Navigation with SAP Fiori | Lesson: Identifying Key Features of SAP Fiori | Section: SAP Fiori User Experience | p.13]\n\n●\nDeveloper or programmer\nHas detailed process and system knowledge and deals with the adaptation and extension \nof the existing applications. They usually look after several applications with different UIs.\nSAP Fiori\nYou want to ensure that your users have the best possible experience when interacting with \nSAP Business Suite, and that they can access business critical applications on any device \nwithout compromises. You need a solution that integrates with your existing IT system",
     "qa_question": "How can I access and use the batch assignment functionality within the SAP Fiori interface to ensure I am following the correct workflow?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23::0021",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have processed your request for Order ID 40, Item No 10, to assign batch number B-25915. Please note that this request type requires manual processing by our team and cannot be handled automatically.\n\nRegarding your question on accessing batch assignment functionality in SAP Fiori, we recommend referring to the SAP Fiori user experience. SAP Fiori is designed to provide the best possible experience when interacting with SAP Business Suite, allowing users to access business critical applications on any device without compromises. For detailed workflow guidance, please consult the relevant training materials, such as TS460_1_EN_Col23, which covers navigation with SAP Fiori and key features of the interface.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1182,7 +1182,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 8: Additional Processes in Sales | Section: Presales Documents | p.146]\n\nopen in your system.\nThere are several options available to resolve this situation. When using standard customizing \nsettings, for example, inquiry items are completed by the first reference. For quotations, \nusing a reason for rejection is a common way of setting the status of an item to complete.\nHint:\nWhen you use a reason for rejection (such as too expensive, or delivery date too \nlate), you also store valuable information in the system that can be used to",
     "qa_question": "Could you explain how to use a reason for rejection in a quotation to set an item status to complete, as mentioned in the system documentation?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23::0346",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP request for order 5451, item 10, to unblock the delivery: this action type requires manual processing by our team and cannot be handled automatically. We will proceed manually and follow up with you.\n\nIn response to your system documentation question: For quotations, using a reason for rejection is a common way of setting the status of an item to complete. When you enter a reason (such as \"too expensive\" or \"delivery date too late\"), the system also stores valuable information that can be used later.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1206,7 +1206,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 4: Master Data | Section: Business Partner Master Data | p.70 | OCR]\n\nCondition\nCustomer\nmaster data\nmaster data\nOrder\nSold-to-Party: 2300\n<b>Ship-to-party:</b>\n788\n<b>Item</b>\n<b>Material</b>\nQty\n10\nT-MS100\n20\nT-MS200\n5\n20\nCustomer/material\ninformation .\nΔ\nOutput\nmaster data\nO\n70)\nMaterial\nmaster data\n<b>Control tables</b>",
     "qa_question": "How do the control tables and customer/material information in the business partner master data determine the ship-to-party assignment (e.g., from sold-to-party 2300 to ship-to-party 788) for a specific material in an order?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0057",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 40, Item No 10, to assign batch number B-75323 to this item, this request type requires manual processing by our team and cannot be handled automatically.\n\nIn response to your knowledge question, the ship-to-party assignment (e.g., from sold-to-party 2300 to ship-to-party 788) for a specific material in an order is determined by control tables and customer/material information in the business partner master data. The control tables, along with customer master data, material master data, and customer/material information, work together to define the output, including the ship-to-party assignment for each item in the order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1251,7 +1251,7 @@
     "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 4: Sales Order Processing | Lesson: Source of Data – Customer Master Data - SAP Business Partner | Section: Source of Data – Concept of Customer Master Data and SAP Business Partner | p.41 | OCR]\n\n<b>BP Role and Grouping</b>\n<b>Master Data Synchronization</b>\n<b>Customer Master Data</b>\n<b>Business Partner</b>\nGeneral data\nBP Role:\nBP Role:\nRelevant for\n<b>FI Customer</b>\nCustomer\nsales and\n(FLCU00)\n(FLCU01)\n<b>Customer / Vendor Integration</b>\ndistribution and\naccounting\nSales Area\nCompany\ndata\nCode data\nRelevant for\nsales and\nRelevant for\ndistribution\n<b>Account Group</b>\naccounting",
     "qa_question": "Could you clarify how the Business Partner role and grouping settings in the customer master data affect the batch assignment process in sales orders?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_2_EN_Col23_ocr::0021",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 32, Item No 10, to assign batch number B-69871 to this item, this request type requires manual processing by our team and cannot be handled automatically.\n\nIn response to your knowledge question, the Business Partner role and grouping settings in customer master data affect batch assignment in sales orders through master data synchronization. The BP Role is relevant for sales and distribution and accounting, with specific roles such as FI Customer (FLCU00) and Customer (FLCU01) used for Customer/Vendor Integration. The Account Group setting, along with general data, sales area data, and company code data, determines which data is relevant for sales and distribution versus accounting, thereby influencing how batch assignment processes are configured in sales orders.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1274,7 +1274,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 4: Master Data | Lesson: Explaining Additional Master Data Topics | Section: Incompleteness Check | p.89]\n\nincomplete. However, incomplete documents can be saved if the system is customized \ncorrespondingly. Depending on which fields are incomplete, the execution of certain follow-up \nfunctions (for example, the creation of outbound deliveries with reference to a sales order) \nmight not be allowed as long as the document is incomplete.\nThe user can get an overview of the incomplete fields in a document using the incompletion",
     "qa_question": "How can I view the incompletion log for this order to ensure all mandatory fields are filled before proceeding with the outbound delivery?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23::0209",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding your ERP order request for Order ID 5206, Item No. 10, we would like to inform you that setting the payment terms to Net 60 requires manual processing by our team and cannot be handled automatically. We will process this request accordingly.\n\nIn response to your question about viewing the incompletion log for this order, you can get an overview of the incomplete fields in a document using the incompletion log. Please note that incomplete documents can be saved if the system is customized correspondingly, but depending on which fields are incomplete, the execution of certain follow-up functions, such as the creation of outbound deliveries with reference to a sales order, might not be allowed as long as the document is incomplete.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1297,7 +1297,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 4: Master Data | Section: Source of Data for Sales Documents | p.69]\n\nsettings, the proposal can be controlled by a variety of data in the sales documents)\nNote:\nA previous sales document can also serve as a data source for another sales \ndocument. Example: a quotation can serve as a data source for a sales order.\nThe figure, Origin of Data in Sales Documents, illustrates the different data sources for sales \ndocuments.\n61",
     "qa_question": "Could you clarify how the system determines which data from a previous sales document, such as a quotation, is used as the source for a new sales order?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23::0154",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding ERP order 10485, item 40, we confirm that your request to change the shipping method to express courier requires manual processing by our team and cannot be handled automatically. We will proceed accordingly and update you once completed.\n\nRegarding your knowledge question: a previous sales document, such as a quotation, can serve as a data source for a new sales order. The system uses data from that preceding document to propose information in the new order, with the proposal controlled by various data settings in the sales documents, as illustrated in the source material.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1343,7 +1343,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 3: Overview of Sales Processes | Lesson: Executing SAP S/4HANA Sales Processes | Section: Process Phases | p.40 | OCR]\n\n<b>Shipping processing supports:</b>\n\n    Creating outbound deliveries\n\nMIN\nPicking\nPacking\n•\n\n    Posting the goods issue\n\n\n<b>Billing supports:</b>\nCreating invoices for goods and\n•\nservices\nCreating credit and debit memos\n•\nCanceling previously posted billing\n•\ndocuments\nAutomatically transferring billing\n•\ndocument data to accounting",
     "qa_question": "Could you provide the correct steps in SAP S/4HANA to create an outbound delivery for this order after the billing process?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23_ocr::0040",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding ERP Order ID 3575, Item No. 10, the request to set payment terms to Net 60 requires manual processing by our team and cannot be handled automatically.\n\nRegarding your knowledge question on creating an outbound delivery in SAP S/4HANA after the billing process, based on the provided source, shipping processing supports creating outbound deliveries, picking, packing, and posting the goods issue. Billing is a separate process that supports creating invoices, credit/debit memos, and canceling previously posted billing documents. The steps to create an outbound delivery belong to the shipping processing phase, which typically occurs before billing. For specific step-by-step instructions, please refer to the referenced SAP training material.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1389,7 +1389,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 3: Overview of Sales Processes | Lesson: Shipping Goods | Section: Billing Documents | p.58]\n\nFigure 36: Creating a Billing Document\nBilling Document Structure\nA billing document is divided into two levels: header and item level. The data is distributed \nacross these levels as follows:\n●\nHeader level:\nThe data for the document header is valid for the entire document. This includes, for \nexample, data about the payer and the billing date.\n●\nItem level:\nEach item in the billing document contains its own data. This includes, for example, details",
     "qa_question": "Could you clarify how the billing document structure in SAP ERP handles data at the header versus item level, specifically for a multi-line order?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23::0129",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 11267, Item No. 10, you requested to assign batch number B-55236. This request type requires manual processing by our team and cannot be handled automatically. We will proceed with manual processing and inform you once completed.\n\nIn response to your question about billing document structure in SAP ERP: A billing document is divided into two levels – header and item. The header level contains data valid for the entire document, such as the payer and billing date. The item level holds data specific to each line item, such as individual details for that item. This separation allows efficient management of both global and line-specific information in a multi-line order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1435,7 +1435,7 @@
     "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 9: Partner Functions in SD | Lesson: Configuration of Partner Functions and Partner Function Determination | Section: Configuration of the Partner Determination Procedure | p.118]\n\nIn the partner determination procedure for sales orders, you can set the address \ndetermination field to \"BBP003 Send goods\" (mapped to the BP's delivery address) for the \nship-to party.\nWhen you create a sales order in which the BP functions as a ship-to party, the system \ndetermines addresses valid between the current system date and Dec 31, 9999 for the ship-to \nparty, and proposes the addresses in the sales order.\nDuring the creation of new sales documents and new outbound deliveries without order",
     "qa_question": "How can I set the address determination field to 'BBP003 Send goods' for the ship-to party in the partner determination procedure for sales orders?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_2_EN_Col23::0274",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding the ERP action for Order ID 175, Item No 20, we would like to inform you that the request to assign batch number B-41300 to this item is a type that requires manual processing by our team and cannot be handled automatically. Please allow us some time to process this manually.\n\nRegarding your knowledge question, in the partner determination procedure for sales orders, you can set the address determination field to \"BBP003 Send goods\" (mapped to the BP's delivery address) for the ship-to party. When you create a sales order in which the BP functions as a ship-to party, the system determines addresses valid between the current system date and December 31, 9999 for the ship-to party, and proposes those addresses in the sales order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1458,7 +1458,7 @@
     "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 3: Enterprise Structures in Sales and Distribution | Lesson: Enterprise Structures in Sales and Distribution | Section: Enterprise Structures in Sales and Distribution | p.29]\n\nA plant can either be a location for production and material requirements planning (MRP) or it \nmay simply represent one or more material stock locations in close proximity to one another.\nEach plant is assigned to a unique company code.\nFor a plant to deliver goods to customers, it must be configured appropriately as a delivering \nplant in sales customizing. During the sales process, the delivering plants are first used to \nverify the stocks, and later to supply the goods the customer has ordered.\n21",
     "qa_question": "Could you clarify how the delivering plant is determined in the system when stock is unavailable, and whether this affects the shipping method options?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_2_EN_Col23::0049",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding your ERP order request for Order ID 9665, Item No. 20, we would like to inform you that your request to change the shipping method to express courier requires manual processing by our team and cannot be handled automatically.\n\nIn response to your question about how the delivering plant is determined when stock is unavailable: A plant can be a location for production and material requirements planning, or it may represent one or more material stock locations in close proximity. Each plant is assigned to a unique company code. For a plant to deliver goods to customers, it must be configured as a delivering plant in sales customizing. During the sales process, delivering plants are first used to verify stocks, and later to supply the ordered goods. This determination does not directly affect the shipping method options, as shipping methods are typically defined separately in the system.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1504,7 +1504,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 5: Automatic Data Determination and Scheduling | Lesson: Analyzing the Results of Delivery and Transportation Scheduling | Section: Forward Scheduling | p.105]\n\ncorresponding item will not be confirmed. The system can then attempt to determine a \nconfirmable delivery date using forward scheduling.\nForward Scheduling\nForward scheduling takes into account the same set of lead times required for picking and \npacking, loading, transportation planning and transit. Initially, it determines the earliest date \non which the material is available in the warehouse, which becomes the new material",
     "qa_question": "How does forward scheduling determine the earliest confirmable delivery date when the material is not yet available in the warehouse?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23::0249",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request (Order ID: 0070000095, Item No: 20) to unblock the delivery, we would like to inform you that this request type requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary manual steps.\n\nIn response to your question on forward scheduling: When the material is not yet available in the warehouse, forward scheduling first determines the earliest date on which the material becomes available in the warehouse. This date then serves as the new material availability date. Using this date, the system considers the lead times required for picking and packing, loading, transportation planning, and transit to calculate the earliest confirmable delivery date.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1524,12 +1524,12 @@
         "available_stock": 178639.0
       }
     },
-    "rag_evidence": "[Source: TS460_1_EN_Col23 | p.3]\n\ninaccuracies.\nThese materials are provided by SAP SE or an SAP affiliate company for informational purposes only, \nwithout representation or warranty of any kind, and SAP SE or its affiliated companies shall not be liable \nfor errors or omissions with respect to the materials. The only warranties for SAP SE or SAP affiliate \ncompany products and services are those that are set forth in the express warranty statements",
+    "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 6: Availability Check | Lesson: Performing an Availability Check – Basics | Section: Availability Checks – Example Scenario 1 | p.119]\n\nFor the first scenario, we assume the following situation for a certain material:\n●\nThere are 100 pieces in stock\n●\nPurchase orders exist with quantities of 50 and 60 pieces\n●\nSales orders exist with quantities of 100, 40, and 50 pieces\nNow, we want to see what the result of the availability check will be when a new sales order for \n10 pieces of the material is entered. The system carries out delivery scheduling (backward",
     "qa_question": "Could you advise on how to verify the available stock in the system before updating an order quantity?",
     "expected_action_type": "CHANGE_QTY",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_1_EN_Col23::0003",
-    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we are pleased to inform you that the request to change the quantity to 114 units for Order ID 2248, Item No 10, has been completed successfully.\n\nRegarding your question on verifying available stock before updating an order quantity, we would like to advise that for detailed guidance, you may refer to the relevant training material, such as source TS460_1_EN_Col23, page 3. Please note that these materials are provided for informational purposes only, without representation or warranty of any kind, and SAP SE or its affiliated companies shall not be liable for errors or omissions with respect to the materials.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
+    "evidence_chunk_id": "TS460_1_EN_Col23::0280",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we confirm that your request for order ID 2248, item 10 to change the quantity to 114 units has been completed successfully.\n\nRegarding your question on how to verify available stock before updating an order quantity: the system performs an availability check to calculate the available quantity. For example, if there are 100 pieces in stock, purchase orders for 50 and 60 pieces, and sales orders for 100, 40, and 50 pieces, entering a new sales order for 10 pieces will trigger delivery scheduling and an availability check. This check considers all existing stock and orders to determine if the requested quantity can be delivered. The specific result depends on the exact configuration and current data.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_083",
@@ -1568,12 +1568,12 @@
         "available_stock": 53987.0
       }
     },
-    "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 11: Learning Assessment - Answers | Section: Material Listing and Exclusion | p.162]\n\n6. When you have exclusion in place, your customer can buy anything else which is not on \nthe list for exclusion.\nDetermine whether this statement is true or false.\nX\nTrue\nX\nFalse\nCorrect. Material exclusion is used when you want to ensure that the customer does not \nreceive certain materials that are listed for exclusion.\n154",
+    "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 11: Material Determination, Listing and Exclusion | Lesson: Material Determination | Section: Material Listing and Exclusion | p.158]\n\nMaterial Exclusion\nFigure 98: Material Exclusion\nYou want to ensure that the customer does not receive certain materials. You enter these \nmaterials as a material exclusion. The material exclusion is also controlled with the condition \ntechnique.\nLESSON SUMMARY\nYou should now be able to:\n●\nExplain and use the material listing and exclusion functions\n150",
     "qa_question": "If we set up material exclusion for a customer, does that mean they can purchase any material not on the exclusion list?",
     "expected_action_type": "CHANGE_DATE",
     "expected_erp_action_status": "PENDING_APPROVAL",
-    "evidence_chunk_id": "TS460_2_EN_Col23::0386",
-    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have completed the change of delivery date for Order 3098, Item 20 as requested. The action was processed successfully.\n\nRegarding your knowledge question: The statement that \"when you have exclusion in place, your customer can buy anything else which is not on the list for exclusion\" is false. Material exclusion is used to ensure that the customer does not receive certain materials that are listed for exclusion.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
+    "evidence_chunk_id": "TS460_2_EN_Col23::0379",
+    "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we have successfully updated the delivery date for Order ID 3098, Item No 20, as requested.\n\nRegarding your knowledge question, based on our reference material, material exclusion is used to ensure that a customer does not receive certain materials. Therefore, if you set up a material exclusion for a customer, they will be prevented from purchasing the specific materials you have listed as excluded. This does not affect their ability to purchase any other materials not on that exclusion list.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
   {
     "id": "r_085",
@@ -1616,7 +1616,7 @@
     "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 6: Data Flow | Lesson: Copying Control | Section: Copying Control | p.83]\n\nFigure 50: Copying Requirements\nYou can store copying requirements at every level in copying control. Copying requirements \ncontain the specific requirements for each business process. The reference document can \nonly be created if all these requirements have been met.\nExamples of Copying Requirements\nExamples of copying requirements that have been included in the SAP standard system are:\n●\nHeader level:\nCopying requirement 001 checks, for instance, whether the sold-to party and the sales",
     "qa_question": "How can I configure or verify that the copying requirement 001 (sold-to party check) is correctly applied when creating a follow-on document from an existing order?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_2_EN_Col23::0186",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your ERP order request for Order ID 0070000095, Item No 20, to assign batch number B-54375: this request type requires manual processing by our team and cannot be handled automatically. We will process it accordingly.\n\nIn response to your knowledge question on copying requirement 001 (sold-to party check): copying requirements can be stored at every level in copying control. They contain specific requirements for each business process, and the reference document can only be created if all these requirements have been met. For example, copying requirement 001 at the header level checks whether the sold-to party and the sales are correctly applied when creating a follow-on document from an existing order.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1639,7 +1639,7 @@
     "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 13: Sales Workshop | Lesson: Sales Workshop: Sales-to-Employee Scenario | Section: Workshop: Bill of Material Scenario | p.182]\n\nThe invoice contains the whole package with the quantity that was delivered. All the \ncomponents should be listed in the invoice.\nBOM – Exploding BOM in Sales Orders\nFigure 111: BOM – Exploding BOM in Sales Order\nFigure 112: BOM – Exploding BOM in Sales Order 2\n174",
     "qa_question": "Could you explain how the BOM explosion in sales orders works, specifically how the components are listed on the invoice after delivery?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_2_EN_Col23::0425",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email,\n\nRegarding your request for Order ID 6713, Item No. 10, to change the shipping method to express courier, this request type requires manual processing by our team and cannot be handled automatically. We will review and process it accordingly.\n\nIn response to your question about BOM explosion in sales orders: the invoice contains the whole package with the quantity that was delivered, and all the components should be listed in the invoice.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1684,7 +1684,7 @@
     "rag_evidence": "[Source: TS460_1_EN_Col23 | Unit 8: Additional Processes in Sales | Lesson: Executing Make-to-Order Production | Section: Service Products | p.153]\n\nshipping functions during the process. The service items of sales orders can be invoiced \ndirectly, that means the corresponding billing document is created with reference to the sales \norder.\nLESSON SUMMARY\nYou should now be able to:\n●\nSell service products\n145",
     "qa_question": "Could you also clarify the correct procedure to generate a billing document directly from the sales order for a service item, without requiring a preceding delivery step?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_1_EN_Col23::0360",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, we would like to inform you of the following:\n\nRegarding your request for Order ID 70000166, Item No. 10 to set payment terms to Net 60, this type of action requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary steps and follow up with you accordingly.\n\nIn answer to your knowledge question about generating a billing document directly from a sales order for a service item: according to our reference material, service items in a sales order can be invoiced directly—the corresponding billing document is created with reference to the sales order itself, without requiring a preceding delivery step.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   },
@@ -1707,7 +1707,7 @@
     "rag_evidence": "[Source: TS460_2_EN_Col23 | Unit 5: Controlling Sales Documents | Section: Sales Document Types | p.54]\n\n●\nYou can also set up material substitution. To do this, you assign the relevant material \ndetermination procedure to the sales document type in customizing.\nYou can use different functions for different sales document types. For example, pricing but \nnot inventory updates are needed to create an inquiry.\nSales Document Types\nExamples of Sales Document Types\n46",
     "qa_question": "Could you explain how to set up material substitution by assigning a material determination procedure to a sales document type in customizing?",
     "expected_action_type": "OTHER",
-    "expected_erp_action_status": "PENDING_APPROVAL",
+    "expected_erp_action_status": "MANUAL_REQUIRED",
     "evidence_chunk_id": "TS460_2_EN_Col23::0114",
     "golden_response": "Dear Customer,\n\nHello,\n\nThis is the Samsung SDS Logistics Team.\n\nAfter our internal review of the matter you raised in your email, regarding ERP order 5872, item 10, your request to assign batch number B-14705 requires manual processing by our team and cannot be handled automatically. We will proceed with the necessary steps and follow up with you accordingly.\n\nRegarding your knowledge question on material substitution: In customizing, you can set up material substitution by assigning the relevant material determination procedure to the sales document type. This allows different functions to be used for different sales document types.\n\nPlease feel free to contact us anytime for any related inquiries.\n\nThank you."
   }

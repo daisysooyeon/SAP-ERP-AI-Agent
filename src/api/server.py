@@ -28,7 +28,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 
 from src.api.schemas import ApproveResponse, RunRequest, RunResponse
 from src.preprocess import preprocess_email
@@ -133,6 +133,13 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Endpoints
 # ---------------------------------------------------------------------------
+
+@app.get("/", include_in_schema=False)
+async def index() -> FileResponse:
+    """데모 프론트엔드(web/index.html)를 동일 출처로 서빙 → 단일 배포 링크로 UI+API 제공."""
+    from pathlib import Path
+    return FileResponse(Path(__file__).resolve().parents[2] / "web" / "index.html")
+
 
 @app.get("/api/health")
 async def health() -> dict:

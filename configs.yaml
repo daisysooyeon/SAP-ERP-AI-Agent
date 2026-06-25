@@ -20,7 +20,7 @@ models:
     provider: "openrouter"
     temperature: 0.0
   router:
-    name: "deepseek/deepseek-v4-flash"               # 분류(3-class) — 저비용·강추론 실험
+    name: "openai/gpt-4o-mini"                       # 분류(3-class) — 빠르고 구조화출력 안정 (deepseek-v4-flash는 ~11s 병목+배포 실패로 교체)
     provider: "openrouter"                          # ollama | openrouter
     temperature: 0.0          # 분류 태스크 → 결정론적 출력
   worker_a:
@@ -82,6 +82,7 @@ rag:
   ocr_enabled: true           # PDF 내 이미지 페이지에 Surya OCR 적용해 별도 OCR 청크 생성 (재인제스트 필요)
   rerank_blend_alpha: 0.8     # 리랭크 점수 블렌딩: final=alpha*cross_encoder+(1-alpha)*검색순위. 1.0=순수 리랭커, 낮출수록 검색(dense/BM25) 신호 보존. (hit/ndcg/mrr 동시 스윕 결과 0.8이 전 지표 최적)
   meta_boost_beta: 0.0        # 메타 소프트 부스트: final += beta*(쿼리↔unit/lesson/section 토큰 일치). 0=비활성. (β 스윕으로 튜닝)
+  reranker_model: "BAAI/bge-reranker-base"  # 멀티쿼리 벤치: hit 88.3%(최적) + v2-m3 대비 ~3x 빠름. (MiniLM은 멀티쿼리에서 hit 81.7%로 과손실)
 
 # ── Feature Flags ─────────────────────────────────────────────────────────────
 feature_flags:

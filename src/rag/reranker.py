@@ -56,11 +56,12 @@ def _get_reranker():
 
     # sentence-transformers의 CrossEncoder로 로딩한다.
     # (구 FlagEmbedding은 transformers 5.x에서 is_torch_fx_available 제거로 import 실패)
+    model_name = get_config().rag.reranker_model or _MODEL_NAME
     try:
         from sentence_transformers import CrossEncoder
-        logger.info("[reranker] Loading %s via CrossEncoder …", _MODEL_NAME)
-        _reranker = CrossEncoder(_MODEL_NAME, max_length=512)
-        logger.info("[reranker] %s loaded.", _MODEL_NAME)
+        logger.info("[reranker] Loading %s via CrossEncoder …", model_name)
+        _reranker = CrossEncoder(model_name, max_length=512)
+        logger.info("[reranker] %s loaded.", model_name)
     except Exception as e:
         logger.warning(
             "[reranker] Failed to load CrossEncoder: %s. "

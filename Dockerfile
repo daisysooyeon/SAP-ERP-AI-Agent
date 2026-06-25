@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir --user -r requirements-serve.txt
 # 2) 모델을 이미지에 미리 다운로드(베이크) → 첫 요청 콜드스타트 단축
 #    (빌드가 무거우면 이 RUN을 지우면 됨 — 그 경우 첫 쿼리 때 런타임에 다운로드)
 RUN python -c "from sentence_transformers import SentenceTransformer, CrossEncoder; \
-    SentenceTransformer('BAAI/bge-m3'); CrossEncoder('BAAI/bge-reranker-v2-m3')"
+    SentenceTransformer('BAAI/bge-m3'); CrossEncoder('BAAI/bge-reranker-base')"
 
 # 3) 앱 코드 + 데이터(chroma_db, sap_erp.db는 .dockerignore에서 제외하지 않음)
 COPY --chown=user . .

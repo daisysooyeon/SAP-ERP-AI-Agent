@@ -87,6 +87,7 @@ class RagConfig:
     ocr_enabled:      bool  = True   # PDF 페이지 내 이미지에 Surya OCR 적용 → 별도 OCR 청크 생성
     rerank_blend_alpha: float = 0.8  # 리랭크 점수 블렌딩 가중치: final = alpha*cross_encoder + (1-alpha)*검색순위. 1.0이면 순수 리랭커. (통제 스윕 결과 0.8이 hit/ndcg/mrr 동시 최적)
     meta_boost_beta:    float = 0.0  # 메타데이터 소프트 부스트 가중치: final += beta*(쿼리↔unit/lesson/section 토큰 일치). 0이면 비활성
+    reranker_model:     str   = "BAAI/bge-reranker-base"  # cross-encoder 리랭커 (멀티쿼리 벤치: hit 88.3% 최적, v2-m3 대비 ~3x 빠름)
 
 
 @dataclass
@@ -184,6 +185,7 @@ def _load_from_yaml(path: Path) -> AppConfig:
         ocr_enabled=      bool(r.get("ocr_enabled",      True)),
         rerank_blend_alpha=float(r.get("rerank_blend_alpha", 0.8)),
         meta_boost_beta=float(r.get("meta_boost_beta", 0.0)),
+        reranker_model= r.get("reranker_model", "BAAI/bge-reranker-base"),
     )
 
     # ── feature flags ────────────────────────────────────────────────────────

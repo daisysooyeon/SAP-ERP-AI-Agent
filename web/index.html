@@ -188,25 +188,46 @@
 </div>
 
 <script>
-// ---- 대표 입력 샘플 (data/eval/check/router_test_cases_gen.json: r_001 / r_032 / r_061) ----
+// ---- 데모 기본 샘플: 빠르고(=OData 행 없음) 성능을 잘 보여주는 케이스 선별 ----
+// QA_ONLY(r_001): RAG 출처 인용 답변 / ACTION_ONLY(r_033): 재고부족 자동 차단(검증)
+// BOTH(r_082): 유효 수량변경 → Slack 승인(HITL) + 재고확인 RAG 답변 동시 시연
 const SAMPLES = {
   QA_ONLY:
-`Dear Support Team, I have been reviewing the training material on analytical apps and noticed the reference to ready-to-use content for sales monitoring. Could you please clarify how I can access these analytical apps from the SAP Fiori launchpad? Specifically, I would like to know whether any additional authorizations or integration with BI tools like SAP BusinessObjects is required. Thank you for your assistance.`,
+`Dear Support Team,
 
-  ACTION_ONLY:
-`Subject: Request to Update Shipping Address for Order 17232, Item 70
+I have been reviewing the training material on analytical apps and noticed the reference to ready-to-use content for sales monitoring.
 
-Dear [Recipient Name],
-
-We need to update the shipping address on order 17232 for item number 70. Please change the shipping address to the following: [new address details]. Kindly confirm once the update has been processed.
+Could you please clarify how I can access these analytical apps from the SAP Fiori launchpad? Specifically, I would like to know whether any additional authorizations or integration with BI tools like SAP BusinessObjects is required.
 
 Thank you for your assistance.
 
 Best regards,
-[Your Name]`,
+Daniel Park
+SAP Analytics Team, Meridian Trading`,
+
+  ACTION_ONLY:
+`Dear Support Team,
+
+Please process a quantity change on purchase order 0070000095, item 20, to 30 units.
+
+Kindly confirm once this adjustment has been completed.
+
+Best regards,
+Michael Chen
+Procurement Team, Acme Components`,
 
   BOTH:
-`Dear Team, Please process the cancellation of item 20 (Sales Order 15867) as soon as possible. This is part of a multi-line order, and we are also evaluating how to manage address assignments for future orders. Could you explain how to configure multi-address handling so that each item can have its own shipping address? Understanding this feature would help us avoid unnecessary cancellations. Thank you.`
+`Dear Support Team,
+
+I would like to request a change to Order ID 2248, Item No. 10, by updating the quantity to 114 units.
+
+Additionally, could you advise on the correct procedure to check available stock in the system before making such adjustments? This would help ensure accuracy in future updates.
+
+Thank you for your assistance.
+
+Best regards,
+Sarah Müller
+Order Management, Vertex Industrial`
 };
 
 const $ = (id) => document.getElementById(id);

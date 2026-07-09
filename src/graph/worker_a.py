@@ -5,7 +5,7 @@ Worker A: ERP Transaction Processing Node
 Flow:
   ① extract_erp_action()    — LLM structured output → ERPActionRequest (Pydantic)
   ② run_validation_query()  — Text-to-SQL → SQLite execution → erp_validation_result
-  ③ check_business_rules()  — Stock / delivery-status checks → BLOCKED_* or pass
+  ③ evaluate_rules()        — Stock / delivery-status checks → BLOCKED_* or pass
   ④ call_sap_odata_patch()  — SAP Sandbox OData v4 PATCH (async → asyncio.run wrapper)
   ⑤ set PENDING_APPROVAL    — Signals human_loop that approval is required
   ⑥ (human_loop handles)   — worker_a is responsible only up to ⑤
@@ -26,6 +26,7 @@ from pydantic import ValidationError
 
 from src.api.schemas import ERPActionRequest
 from src.config import get_config
+from src.graph.business_rules import evaluate_rules
 from src.graph.state import AgentState
 from src.tools.text2sql import run_validation_query
 from src.tools.sap_odata_tools import call_sap_odata_patch
@@ -204,88 +205,6 @@ def extract_erp_action(user_input: str, email_context: dict | None = None) -> ER
 
 
 # ---------------------------------------------------------------------------
-# ③ Business Rule Checks
-# ---------------------------------------------------------------------------
-
-# Delivery status codes that block modification
-_BLOCKED_STATUSES = {"C"}  # C = Fully processed / shipped
-
-
-def check_business_rules(action: ERPActionRequest, validation_result: dict | None) -> str | None:
-    """
-    Validate ERP business rules against the DB snapshot.
-
-    Returns:
-        None                          — all checks passed, proceed
-        "BLOCKED_NO_STOCK"            — additional quantity (delta) exceeds available stock
-        "BLOCKED_SHIPPED"            — item already fully shipped (WBSTA = C)
-        "BLOCKED_PARTIALLY_PROCESSED" — cancellation of an item whose goods movement
-                                        already started (WBSTA = B)
-        "BLOCKED_NO_DATA"            — order/item not found in DB
-    """
-    logger.info("[worker_a] ③ Checking business rules …")
-
-    if validation_result is None:
-        logger.warning("[worker_a] No DB record found for order_id=%s item_no=%s",
-                       action.order_id, action.item_no)
-        return "BLOCKED_NO_DATA"
-
-    delivery_status = validation_result.get("delivery_status", "")
-    available_stock = validation_result.get("available_stock") or 0.0
-
-    # Rule 1: Block if item is already fully shipped
-    if delivery_status in _BLOCKED_STATUSES:
-        logger.warning(
-            "[worker_a] BLOCKED_SHIPPED: delivery_status=%s for order=%s item=%s",
-            delivery_status, action.order_id, action.item_no,
-        )
-        return "BLOCKED_SHIPPED"
-
-    # Rule 1b: An item cannot be CANCELLED once goods movement has started.
-    # Full shipment (WBSTA=C) is already caught by Rule 1 (BLOCKED_SHIPPED); here we
-    # additionally block partial processing (WBSTA=B) — but only for cancellations.
-    # Other actions (qty/date) on a partially processed item remain allowed.
-    if action.action_type == "CANCEL_ITEM" and delivery_status == "B":
-        logger.warning(
-            "[worker_a] BLOCKED_PARTIALLY_PROCESSED: cannot cancel partially processed "
-            "item (WBSTA=B) for order=%s item=%s",
-            action.order_id, action.item_no,
-        )
-        return "BLOCKED_PARTIALLY_PROCESSED"
-
-    # Rule 2: For a quantity change, only the ADDITIONAL units (delta) must be covered
-    # by available stock — not the whole new quantity. A decrease frees stock, so its
-    # delta is negative and never blocks. new_quantity is already absolute here
-    # (resolve_quantity normalized any relative "reduce by N"/"increase by N" upstream),
-    # so the delta is computed identically regardless of how the email phrased it.
-    if action.action_type == "CHANGE_QTY" and action.new_quantity is not None:
-        current_qty = validation_result.get("quantity")
-        if current_qty is None:
-            # Current quantity unknown → can't compute the delta. Fall back to the
-            # conservative absolute check so we never under-reserve stock.
-            additional_needed = float(action.new_quantity)
-        else:
-            additional_needed = action.new_quantity - float(current_qty)
-
-        if additional_needed > available_stock:
-            logger.warning(
-                "[worker_a] BLOCKED_NO_STOCK: new_qty=%d current=%s additional_needed=%.2f "
-                "available=%.2f for order=%s item=%s",
-                action.new_quantity, current_qty, additional_needed, available_stock,
-                action.order_id, action.item_no,
-            )
-            return "BLOCKED_NO_STOCK"
-
-    # Rule 3: CHANGE_ADDR — always passes business rules (address validity is human's responsibility)
-    if action.action_type == "CHANGE_ADDR":
-        logger.info("[worker_a] CHANGE_ADDR: forwarding to human approval.")
-        return None
-
-    logger.info("[worker_a] Business rules passed.")
-    return None
-
-
-# ---------------------------------------------------------------------------
 # ③-b Relative quantity resolution
 # ---------------------------------------------------------------------------
 
@@ -296,7 +215,7 @@ def resolve_quantity(action: ERPActionRequest, validation_result: dict | None) -
     then write the result back into action.new_quantity.
 
     Must run AFTER run_validation_query (needs the current quantity) and BEFORE
-    check_business_rules (which validates the absolute new_quantity against stock).
+    evaluate_rules (which validates the absolute new_quantity against stock).
 
     Returns:
         None                   — nothing to resolve, or resolved successfully
@@ -452,9 +371,10 @@ def worker_a_node(state: AgentState) -> dict:
     logger.info("[worker_a] Validation result: %s", validation_result)
 
     # ── ③ Business rule checks ──────────────────────────────────────────────
-    # Resolve relative quantity ("reduce by 50") → absolute, then validate.
+    logger.info("[worker_a] ③ Checking business rules …")
+    # Resolve relative quantity ("reduce by 50") → absolute, then evaluate rules.
     block_reason = resolve_quantity(action, validation_result) \
-        or check_business_rules(action, validation_result)
+        or evaluate_rules(action, validation_result)
 
     if block_reason is not None:
         logger.warning("[worker_a] Blocked: %s", block_reason)

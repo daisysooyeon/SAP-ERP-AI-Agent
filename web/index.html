@@ -189,21 +189,21 @@
 
 <script>
 // ---- 데모 기본 샘플: 빠르고(=OData 행 없음) 성능을 잘 보여주는 케이스 선별 ----
-// QA_ONLY(r_001): RAG 출처 인용 답변 / ACTION_ONLY(r_033): 재고부족 자동 차단(검증)
+// QA_ONLY(r_013): 자재 결정 제외 설정 RAG 출처 인용 답변 / ACTION_ONLY(r_033): 재고부족 자동 차단(검증)
 // BOTH(r_082): 유효 수량변경 → Slack 승인(HITL) + 재고확인 RAG 답변 동시 시연
 const SAMPLES = {
   QA_ONLY:
-`Dear Support Team,
+`Dear SAP Support,
 
-I have been reviewing the training material on analytical apps and noticed the reference to ready-to-use content for sales monitoring.
+I am trying to understand how to leverage product attributes in the customer master to exclude a particular material from the material determination substitution.
 
-Could you please clarify how I can access these analytical apps from the SAP Fiori launchpad? Specifically, I would like to know whether any additional authorizations or integration with BI tools like SAP BusinessObjects is required.
+According to the documentation, materials marked as rejected in the customer master should not be considered by the system during substitution. Could you please clarify the exact steps to set up these attributes so that the exclusion works correctly, especially when material determination is re-run?
 
-Thank you for your assistance.
+Thank you.
 
 Best regards,
-Daniel Park
-SAP Analytics Team, Meridian Trading`,
+Thomas Weber
+Materials Management, Global Supply Co.`,
 
   ACTION_ONLY:
 `Dear Support Team,

@@ -77,7 +77,7 @@
 - **F-03. 매뉴얼 통합 RAG 검색**(`QA_ONLY`)**:** 다양한 사내 규정과 매뉴얼을 통합된 단일 Vector DB에서 탐색하여 지식 기반 답변 생성
 - **F-04. Human-in-the-loop:** DB 업데이트 등 중요한 액션을 수행하기 직전, 담당자의 최종 승인을 거치는 안전망 제공
 - **F-05. 최종 답변 텍스트 자동 생성:** F-02, F-03의 결과를 종합하여 비즈니스 이메일 형식의 답변 초안 자동 생성
-- F-06. PDF/이미지 입력 처리: PDF/이미지 스캔본 OCR에서 텍스트를 추출하여 동일 파이프라인 처리하는 방향으로 확장 가능
+- **F-06. PDF/이미지 입력 처리:** 인제스트 시 PDF 내장 이미지에 Surya OCR을 적용해 별도 OCR 청크로 생성, 동일 RAG 파이프라인(Worker B)에서 검색 대상으로 활용 (`configs.yaml: rag.ocr_enabled`)
 
 -----
 
@@ -94,12 +94,14 @@
 
 - **오케스트레이션:** `LangGraph`
     - 복잡한 워크플로우 제어를 위해 상황에 따른 분기(Routing)와 상태(State) 기억이 필수적이기 때문에 LangChain이 아닌 LangGraph로 선택
-- **LLM Model:**
-    - *의도 분류 라우팅 & Worker A 정보 추출/Worker B 검색 키워드 추출:* `Qwen 2.5 (7B)` 또는 `Llama 3 (8B)` (무료)
-    - *Text-to-SQL*: `Qwen 2.5 Coder` 또는 `gpt-4o-mini` 또는 `Claude 3.5 Haiku`
-    - *최종 답변 합성:* `GPT-4o` 또는 `Claude 3.5 Sonnet` (유료)
+- **LLM Model** (OpenRouter 단일 엔드포인트로 통합 — 실제 설정값은 `configs.yaml` 기준):
+    - *이메일 전처리(Preprocessor):* `gpt-4o-mini` — 발신자/요청 요약/질문 요약/엔티티(주문번호·아이템번호)를 한 번에 구조화 추출해 이후 모든 노드가 재사용
+    - *의도 분류 라우팅 & Worker A 파라미터 추출 / Worker B 검색 키워드 추출:* `gpt-4o-mini`
+    - *Text-to-SQL:* `deepseek/deepseek-chat-v3`
+    - *최종 답변 합성:* `gemini-3.1-flash-lite`
+    - *평가 데이터셋 생성 전용:* `deepseek/deepseek-v4-flash`
     
-    > 추가적인 fine-tuning 없이 few-shot 프롬프팅으로 진행하고자 함
+    > 추가적인 fine-tuning 없이 few-shot 프롬프팅으로 진행
     > 
 - **RAG 스택:**
     - *Vector DB:* `ChromaDB`
@@ -111,6 +113,11 @@
     - 외부 증명용: SAP Business Accelerator Hub 샌드박스 API로 OData 통신
         - 샌드박스 API를 활용해 실제 ERP 필드를 수정하진 않지만 OData를 쐈을 때 성공적으로 처리됐음을 알리는 SAP의 응답을 받을 수 있어 테스트용으로 사용 가능
     - 내부 동기화용: 성공 응답 확인 후 로컬 SQLite DB 직접 업데이트
+    - Slack Interactivity(`/slack/actions`)로 승인/거절 버튼 클릭과 거절 사유 입력 모달을 직접 처리 (Webhook 알림 발송 + 버튼 콜백 수신 양방향)
+- **배포 및 서빙:**
+    - FastAPI가 정적 프론트엔드(`web/index.html`)를 `/` 라우트로 함께 서빙 → 단일 링크로 UI+API 데모 제공
+    - Docker 이미지로 패키징해 Hugging Face Spaces(무료 CPU, 16GB RAM)에 배포, 고정 Space URL을 Slack 콜백 주소로 사용 (로컬 실행 시엔 ngrok으로 대체 가능)
+    - 상세 배포 절차는 `SPACE_SETUP.md` 참고
 
 ### 데이터 소스
 
